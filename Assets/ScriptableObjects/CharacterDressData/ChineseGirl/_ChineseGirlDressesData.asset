@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f2b33c5eb87dd49924f1a0f37a093f, type: 3}
+  m_Name: _ChineseGirlDressesData
+  m_EditorClassIdentifier: 
+  _characterId:
+    id: CGirl
+  _dressData:
+  - {fileID: 11400000, guid: c602c80ad749b284a88a1b8f6dae149c, type: 2}
+  - {fileID: 11400000, guid: d3485d0717853a648aca28226eaa42b6, type: 2}
