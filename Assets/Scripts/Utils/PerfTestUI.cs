@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace Tag
+namespace YondaimeFramework
 {
     public class PerfTestUI : CustomBehaviour
     {

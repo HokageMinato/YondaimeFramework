@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Tag
+namespace YondaimeFramework
 {
 
   public abstract class BaseCharacterDress : CustomBehaviour

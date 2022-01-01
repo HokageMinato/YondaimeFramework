@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace Tag
+namespace YondaimeFramework
 {
     public class TabHandler : CustomBehaviour
     {

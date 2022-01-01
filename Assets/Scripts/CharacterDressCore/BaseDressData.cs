@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 
-namespace Tag
+namespace YondaimeFramework
 {
     public class BaseDressData : ScriptableObject
     {

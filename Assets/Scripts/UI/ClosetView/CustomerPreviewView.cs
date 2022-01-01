@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Tag
+namespace YondaimeFramework
 {
     public class CustomerPreviewView : CustomBehaviour,IDressItemViewClickCallback,IDressItemPurchaseCallbackDependency
     {

@@ -1,5 +1,5 @@
 
-namespace Tag
+namespace YondaimeFramework
 {
     [System.Serializable]
     public struct CustomerType 

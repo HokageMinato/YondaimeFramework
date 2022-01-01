@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tag
+namespace YondaimeFramework
 {
     [CreateAssetMenu(fileName = "CharacterDataSo", menuName = "ClosetSystem/CharacterData", order = 1)]
     public class CustomerCharactersDataSO : ScriptableObject

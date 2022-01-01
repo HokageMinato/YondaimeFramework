@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tag
+namespace YondaimeFramework
 {
     public class CharacterSelectionSubView : CustomBehaviour, ICharacterItemViewCallback
     {

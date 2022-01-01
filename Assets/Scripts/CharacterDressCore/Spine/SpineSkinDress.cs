@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 
-namespace Tag
+namespace YondaimeFramework
 {
 
     [RequireComponent(typeof(SkeletonAnimation))]

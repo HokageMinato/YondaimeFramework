@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tag
+namespace YondaimeFramework
 {
     public abstract class CustomBehaviour : MonoBehaviour
     {
         #region PRIVATE_VARIABLES
-        [SerializeField]private CustomBehaviourLibrary _myLibrary;
+        [SerializeField]private BehaviourLibrary _myLibrary;
         [HideInInspector][SerializeField] public string _id;
         #endregion
 
         #region PUBLIC_VARIABLES
-        public CustomBehaviourLibrary ParentLibrary
+        public BehaviourLibrary ParentLibrary
         {
             get
             {
@@ -28,7 +28,7 @@ namespace Tag
         #endregion
 
         #region PUBLIC_METHODS
-        public void SetLibrary(CustomBehaviourLibrary library) {
+        public void SetLibrary(BehaviourLibrary library) {
             _myLibrary = library;
         }
 

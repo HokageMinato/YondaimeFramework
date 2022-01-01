@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 
-namespace Tag
+namespace YondaimeFramework
 {
     public class DressDisplaySubView : CustomBehaviour, ICharacterItemViewCallback
     {

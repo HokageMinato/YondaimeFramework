@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Tag
+namespace YondaimeFramework
 {
     [CreateAssetMenu(fileName = "DressesDataSo", menuName = "ClosetSystem/ClosetViewDresses", order = 1)]
     public class DressesDataSO : ScriptableObject

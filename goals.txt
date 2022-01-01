@@ -1,0 +1,22 @@
+Goals:
+ Yondaime namespace framework
+ RootLibrary -> Central to Scene
+ SystemLibrary	-> Central to respective System
+ BehavioursLibrary -> Central aspect of System
+ 
+Method extensions required
+ GetSystemLibrary(System Id)
+ GetRootLibrary()
+
+
+ -> Scan only the lib parent to it and not other.
+ -> Seperate library initialization/lookup generation and runtime library refresh
+ -> Central initialization for all libraries
+ -> System init called post library initialization ends.
+ 
+ 
+ SystemBehaviourLibrary shouldhave capacity to traverse recursivly in child libs
+ RootBehaviourLibrary should be able to return all SystemBehaviourLibraries
+ Root should inherit system
+ Root should have a master refresh which updates upon hierarchy change
+ System libs should be manually updated ?...

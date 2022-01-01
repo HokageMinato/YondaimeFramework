@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace Tag
+namespace YondaimeFramework
 {
     public class PerfTest : CustomBehaviour
     {

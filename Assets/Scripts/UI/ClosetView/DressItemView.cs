@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-namespace Tag
+namespace YondaimeFramework
 {
     public class DressItemView : CustomBehaviour
     {

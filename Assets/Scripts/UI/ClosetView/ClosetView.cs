@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Tag
+namespace YondaimeFramework
 {
     public class ClosetView : BaseView,ITabHandlerSwitchCallback
     {

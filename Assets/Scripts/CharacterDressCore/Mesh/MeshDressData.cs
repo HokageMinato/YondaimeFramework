@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Tag
+namespace YondaimeFramework
 {
 
     [CreateAssetMenu(fileName = "MeshDressData", menuName = "ClosetSystem/MeshDressData", order = 1)]

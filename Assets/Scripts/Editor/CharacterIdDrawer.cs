@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Tag
+namespace YondaimeFramework
 {
     [CustomPropertyDrawer(typeof(CharacterId))]
 

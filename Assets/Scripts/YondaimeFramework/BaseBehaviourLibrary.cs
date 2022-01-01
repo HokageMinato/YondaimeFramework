@@ -2,18 +2,16 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tag
+namespace YondaimeFramework
 {
-  
-    public class CustomBehaviourLibrary : CustomBehaviour
+    public abstract class BaseBehaviourLibrary : CustomBehaviour
     {
         #region PUBLIC_VARIABLE
         #endregion
 
         #region PRIVATE_VARIABLES
         [SerializeField] private CustomBehaviour[] _behaviours;
-        [SerializeField] private CustomBehaviourLibrary[] _childLibs;
-
+        [SerializeField] private BaseBehaviourLibrary[] _childLibs;
         private Dictionary<Type, List<CustomBehaviour>> _behaviourLookUp = new Dictionary<Type, List<CustomBehaviour>>();
         #endregion
 
@@ -96,7 +94,7 @@ namespace Tag
         {
 
             List<T> behaviours = GetBehavioursFromLibrary<T>();
-           
+
             for (int i = 0; i < _childLibs.Length; i++)
             {
                 behaviours.AddRange(_childLibs[i].GetBehavioursFromChildLibrary<T>());
@@ -115,20 +113,23 @@ namespace Tag
             return GetBehavioursFromChildLibrary<T>()[0];
         }
 
-      
+
 
 
         [ContextMenu("Scan")]
         public void ScanTypes()
         {
             List<CustomBehaviour> scannedBehaviour = new List<CustomBehaviour>(GetComponentsInChildren<CustomBehaviour>(true));
-            List<CustomBehaviourLibrary> childLibraries = new List<CustomBehaviourLibrary>();
+            List<BehaviourLibrary> childLibraries = new List<BehaviourLibrary>();
+
+            
+
             RemoveRedundantBehaviours();
             AssignScannedBehaviours();
             SetSelfAsActiveLibraryToBehaviours();
             _childLibs = childLibraries.ToArray();
             InitializeLookUp();
-           
+
             Debug.LogWarning($"Library Refreshed, Make sure to decrese instantiation and destroy calls at {gameObject.name}");
 
 
@@ -138,7 +139,7 @@ namespace Tag
                 {
                     if (IsAChildLibrary(scannedBehaviour[i]))
                     {
-                        CustomBehaviourLibrary foundLibrary = scannedBehaviour[i] as CustomBehaviourLibrary;
+                        BehaviourLibrary foundLibrary = scannedBehaviour[i] as BehaviourLibrary;
                         FilterScannedBehavioursByLibrary(foundLibrary);
                         AddToChildLibrares(foundLibrary);
                     }
@@ -148,7 +149,7 @@ namespace Tag
             {
                 for (int i = 0; i < _behaviours.Length; i++)
                 {
-                    _behaviours[i].SetLibrary(this);
+                   // _behaviours[i].SetLibrary(this);
                 }
             }
             void AssignScannedBehaviours()
@@ -157,20 +158,20 @@ namespace Tag
             }
             bool IsAChildLibrary(CustomBehaviour behaviour)
             {
-                return behaviour.GetType().Equals(typeof(CustomBehaviourLibrary)) &&
+                return behaviour.GetType().Equals(typeof(BehaviourLibrary)) &&
                       !behaviour.Equals(this);
             }
-            void FilterScannedBehavioursByLibrary(CustomBehaviourLibrary library)
+            void FilterScannedBehavioursByLibrary(BehaviourLibrary library)
             {
 
-                for (int i = 0; i < library._behaviours.Length; i++)
+              //  for (int i = 0; i < library._behaviours.Length; i++)
                 {
-                    scannedBehaviour.Remove(library._behaviours[i]);
+                //    scannedBehaviour.Remove(library._behaviours[i]);
                 }
             }
-            void AddToChildLibrares(CustomBehaviourLibrary library)
+            void AddToChildLibrares(BehaviourLibrary library)
             {
-                library.SetLibrary(this);
+              //  library.SetLibrary(this);
                 childLibraries.Add(library);
             }
 

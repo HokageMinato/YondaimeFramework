@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace Tag
+namespace YondaimeFramework
 {
    [RequireComponent(typeof(SkinnedMeshRenderer))]
     public class MeshDress : BaseCharacterDress
