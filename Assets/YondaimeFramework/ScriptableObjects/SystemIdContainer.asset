@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: SystemIdContainer
   m_EditorClassIdentifier: 
   systemIds:
+  - Root
   - RestaurantEvent
   - TokenEvent

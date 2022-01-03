@@ -14,25 +14,17 @@ namespace YondaimeFramework
 
         #region PRIVATE_VARIABLES
         //Serialized
-        [SerializeField] public SystemId systemId;
         [SerializeField] private List<CustomBehaviour> _behaviours;
-        [SerializeField] private BehaviourLibrary[] _childLibs;
-        [SerializeField] private bool IsSystemRoot;
-
+        [SerializeField] protected BehaviourLibrary[] _childLibs;
+        
         //NonSerialized
         private Dictionary<Type, CustomBehaviour[]> _behaviourLookUp = new Dictionary<Type, CustomBehaviour[]>();
-
-        //Constatns
-        private const string SCAN_METHOD = "Scan";
         #endregion
 
-        private void Start()
-        {
-            InitializeLookUp();
-        }
+        
 
         #region PUBLIC_METHODS
-        public void InitializeLookUp()
+        public void InitializeLibrary()
         {
             Dictionary<Type, List<CustomBehaviour>> tempLookUp = new Dictionary<Type, List<CustomBehaviour>>();
 
@@ -85,23 +77,37 @@ namespace YondaimeFramework
             {
                 for (int i = 0; i < _childLibs.Length; i++)
                 {
-                    _childLibs[i].InitializeLookUp();
+                    _childLibs[i].InitializeLibrary();
                 }
             }
         }
-
-        public void SetSystemId(SystemId parentSystemId) {
-            systemId = parentSystemId;
-        }
-
+      
         public T GetBehaviourFromLibrary<T>()
         {
-            List<T> b= GetBehavioursFromLibrary<T>();
-            if (b.Count > 0)
-                return b[0];
-            else
-                return default;
+            T behaviour = default;
+            Type reqeuestedType = typeof(T);
 
+            if (_behaviourLookUp.ContainsKey(reqeuestedType) && _behaviourLookUp[reqeuestedType].Length > 0)
+                return (T)(object)_behaviourLookUp[reqeuestedType][0];
+
+            if (reqeuestedType.IsInterface)
+            {
+                foreach (KeyValuePair<Type, CustomBehaviour[]> item in _behaviourLookUp)
+                {
+                    if (item.Value.Length > 0 && 
+                        reqeuestedType.IsAssignableFrom(item.Key)) 
+                    {
+                        return (T)(object)item.Value[0];
+                    }
+                }
+            }
+
+            for (int i = 0; i < _childLibs.Length; i++)
+            {
+                behaviour = _childLibs[i].GetBehaviourFromLibrary<T>();
+            }
+
+            return behaviour;
         }
 
         public List<T> GetBehavioursFromLibrary<T>()
@@ -123,7 +129,7 @@ namespace YondaimeFramework
                 
                 foreach (KeyValuePair<Type, CustomBehaviour[]> item in _behaviourLookUp)
                 {
-                    if (typeof(T).IsAssignableFrom(item.Key))
+                    if (reqeuestedType.IsAssignableFrom(item.Key))
                     {
                         CustomBehaviour[] behavioursInLookUp = item.Value;
                         for (int i = 0; i < behavioursInLookUp.Length; i++)
@@ -147,11 +153,10 @@ namespace YondaimeFramework
 
 
 
-        [ContextMenu(SCAN_METHOD)]
-        public void ScanBehaviours()
+        
+        public virtual void ScanBehaviours()
         {
             _behaviours = new List<CustomBehaviour>(GetComponentsInChildren<CustomBehaviour>(true));
-            SetSystemLibrary();
             ScanChildLibs();
             RemoveRedundantBehavioursRecursive();
             RemoveRedundantChildLibRecursive();
@@ -170,13 +175,7 @@ namespace YondaimeFramework
                 }
                 _childLibs = tempLibs.ToArray();
 
-                if (IsSystemRoot) {
-                    for (int i = 0; i < _childLibs.Length; i++)
-                    {
-                        _childLibs[i].SetSystemId(systemId);
-                    }
-                }
-
+           
                 for (int i = 0; i < _childLibs.Length; i++)
                 {
                     _childLibs[i].ScanBehaviours();
@@ -217,24 +216,10 @@ namespace YondaimeFramework
                      _behaviours[i].SetLibrary(this);
                 }
             }
-            void SetSystemLibrary() {
-                if (IsSystemRoot)
-                {
-                    for (int i = 0; i < _behaviours.Count; i++)
-                    {
-                        _behaviours[i].SetSystemLibrary(this);
-                    }
-                }
-            }
+            
         }
-
 
         
-
-        [ContextMenu(SCAN_METHOD,true)]
-        public bool ScanTypeValidation() {
-            return IsSystemRoot;
-        }
         #endregion
     }
 }
