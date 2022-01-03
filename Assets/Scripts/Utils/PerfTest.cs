@@ -41,7 +41,7 @@ namespace YondaimeFramework
             Stopwatch st = new Stopwatch();
             
             st.Start();
-            List<DressItemView> items = GetComponentsFromChildLibrary<DressItemView>();
+
             time = st.Elapsed.ToString();
             st.Stop();
             st.Reset();
@@ -50,7 +50,7 @@ namespace YondaimeFramework
             GetComponentsFromLibrary<PerfTestUI>()[0]._gcfTest1.text = time;
 
             st.Start();
-            List<CharacterItemView> ls = GetComponentsFromChildLibrary<CharacterItemView>();
+            
             time = st.Elapsed.ToString();
             st.Stop();
             st.Reset();

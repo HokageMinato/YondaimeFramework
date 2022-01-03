@@ -7,7 +7,8 @@ namespace YondaimeFramework
     public abstract class CustomBehaviour : MonoBehaviour
     {
         #region PRIVATE_VARIABLES
-        [SerializeField]private BehaviourLibrary _myLibrary;
+        [SerializeField] private BehaviourLibrary _myLibrary;
+        [SerializeField] private BehaviourLibrary _systemLibrary;
         [HideInInspector][SerializeField] public string _id;
         #endregion
 
@@ -19,6 +20,7 @@ namespace YondaimeFramework
                 return _myLibrary;
             }
         }
+      
         public string Id
         {
             get {
@@ -32,30 +34,30 @@ namespace YondaimeFramework
             _myLibrary = library;
         }
 
+        public void SetSystemLibrary(BehaviourLibrary library) {
+            _systemLibrary = library;
+        }
+
         public void SetCustomId(string customId) {
             _id = customId;
         }
 
         public List<T> GetComponentsFromLibrary<T>() 
         {
-            return _myLibrary.GetBehavioursFromLibrary<T>();
-        }
-
-        public List<T> GetComponentsFromChildLibrary<T>() {
-            return _myLibrary.GetBehavioursFromChildLibrary<T>();
+            return _systemLibrary.GetBehavioursFromLibrary<T>();
         }
 
         public T GetComponentFromLibrary<T>() {
+            return _systemLibrary.GetBehaviourFromLibrary<T>();
+        } 
+        
+        public T GetComponentFromMyLibrary<T>() {
             return _myLibrary.GetBehaviourFromLibrary<T>();
         }
         
-        public T GetComponentFromChildLibrary<T>() {
-            return _myLibrary.GetBehaviourFromLibrary<T>();
-        }
-      
         public virtual void RefreshHierarchy() 
         {
-            ParentLibrary.ScanTypes();
+            ParentLibrary.ScanBehaviours();
         }
 
 

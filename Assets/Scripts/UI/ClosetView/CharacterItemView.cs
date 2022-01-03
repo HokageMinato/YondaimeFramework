@@ -37,7 +37,7 @@ namespace YondaimeFramework
         #endregion
 
         #region UNITY_CALLBACKS
-
+        
         #endregion
 
         #region PUBLIC_FUNCTIONS
@@ -74,7 +74,7 @@ namespace YondaimeFramework
             else
                 GetComponent<Image>().color = Color.white;
         }
-       
+
         #endregion
 
         #region CO-ROUTINES
@@ -85,8 +85,13 @@ namespace YondaimeFramework
 
         #endregion
 
+        
         #region UI_CALLBACKS       
-      
+        [ContextMenu("TestGets")]
+        public void Test() {
+            Debug.Log(GetComponentFromLibrary<CharacterSelectionSubView>() == null);
+            Debug.Log(GetComponentFromMyLibrary<CharacterSelectionSubView>() == null);
+        }
         #endregion
     }
 
