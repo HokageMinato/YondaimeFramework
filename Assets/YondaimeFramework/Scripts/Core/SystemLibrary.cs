@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,16 +8,16 @@ namespace YondaimeFramework
     public sealed class SystemLibrary : BehaviourLibrary
     {
         #region PRIVATE_VARS
-        [SerializeField] private string _systemId;
+        [SerializeField] private SystemId _systemId;
         [SerializeField] private RootLibrary _rootLibrary;
         #endregion
 
         #region PUBLIC_VARS
         public string SystemId
         {
-            get 
+            get
             {
-                return _systemId;
+                return _systemId.id;
             }
         }
         #endregion
@@ -25,7 +25,8 @@ namespace YondaimeFramework
 
         #region PUBLIC_FUNCTIONS
 
-        public void SetRootLibrary(RootLibrary library) {
+        public void SetRootLibrary(RootLibrary library)
+        {
             _rootLibrary = library;
         }
 
@@ -49,7 +50,7 @@ namespace YondaimeFramework
         {
             base.ScanBehaviours();
         }
-    
+
 
         public override void PreRedundantCheck()
         {

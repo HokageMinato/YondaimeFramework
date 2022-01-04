@@ -26,7 +26,8 @@ namespace YondaimeFramework
 
         void Start() {
 
-            SystemLibrary systemLibrary = GetComponentBySystemId("TokenEvent");
+            SystemLibrary systemLibrary = GetComponentBySystemId(FrameworkConstants.IdConstants.TokenEvent);
+            
             testView = systemLibrary.GetComponentsFromLibrary<CharacterSelectionSubView>();
         }
 

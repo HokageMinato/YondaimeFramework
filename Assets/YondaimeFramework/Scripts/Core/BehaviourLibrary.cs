@@ -4,10 +4,6 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-
-
-
-
     public class BehaviourLibrary : CustomBehaviour
     {
 
@@ -54,16 +50,7 @@ namespace YondaimeFramework
             {
                 foreach (KeyValuePair<Type, List<CustomBehaviour>> item in tempLookUp)
                 {
-                    if (!_behaviourLookUp.ContainsKey(item.Key))
-                        _behaviourLookUp.Add(item.Key, new CustomBehaviour[item.Value.Count]);
-
-
-                    int itemsLength = item.Value.Count;
-                    for (int i = 0; i < itemsLength; i++)
-                    {
-                        _behaviourLookUp[item.Key][i] = item.Value[i];
-                    }
-
+                    _behaviourLookUp.Add(item.Key, item.Value.ToArray());
                 }
 
                 if (!FrameworkConstants.IsDebug)

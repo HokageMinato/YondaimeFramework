@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 36910987}
-  _systemLibrary: {fileID: 0}
+  _systemLibrary: {fileID: 1315439167}
   _id: 
   _behaviours:
   - {fileID: 36910987}
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 369312380}
-  _systemLibrary: {fileID: 0}
+  _systemLibrary: {fileID: 485185972}
   _id: 
   _behaviours:
   - {fileID: 369312380}
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 445355536}
-  _systemLibrary: {fileID: 0}
+  _systemLibrary: {fileID: 1315439167}
   _id: 
   _behaviours:
   - {fileID: 445355536}
@@ -523,7 +523,7 @@ MonoBehaviour:
   _id: 
   customerCharacters: {fileID: 0}
   characterItemViews: []
-  testView: {fileID: 0}
+  testView: []
 --- !u!1 &483802317
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,7 +607,8 @@ MonoBehaviour:
   - {fileID: 1312300284}
   _childLibs:
   - {fileID: 369312380}
-  _systemId: TokenEvent
+  _systemId:
+    id: TokenEvent
   _rootLibrary: {fileID: 865692719}
 --- !u!4 &485185973
 Transform:
@@ -763,12 +764,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 865692720}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &532485621
 GameObject:
@@ -816,7 +817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 532485623}
-  _systemLibrary: {fileID: 0}
+  _systemLibrary: {fileID: 485185972}
   _id: 
   _behaviours:
   - {fileID: 532485623}
@@ -882,12 +883,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533263233}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 865692720}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &615876665
 GameObject:
@@ -985,7 +986,7 @@ MonoBehaviour:
   _id: 
   customerCharacters: {fileID: 0}
   characterItemViews: []
-  testView: {fileID: 0}
+  testView: []
 --- !u!1 &672815727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,7 +1037,7 @@ MonoBehaviour:
   customerCharacters: {fileID: 0}
   characterItemViews:
   - {fileID: 0}
-  testView: {fileID: 0}
+  testView: []
 --- !u!1 &688943780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,7 +1121,8 @@ MonoBehaviour:
   _childLibs:
   - {fileID: 485185972}
   - {fileID: 1315439167}
-  hasNonSystemRoots: 0
+  - {fileID: 1859753729}
+  hasNonSystemRoots: 1
 --- !u!4 &865692720
 Transform:
   m_ObjectHideFlags: 0
@@ -1134,8 +1136,12 @@ Transform:
   m_Children:
   - {fileID: 485185973}
   - {fileID: 1315439168}
+  - {fileID: 519420032}
+  - {fileID: 533263236}
+  - {fileID: 1585772025}
+  - {fileID: 1859753731}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &866280796
 GameObject:
@@ -1321,7 +1327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 1024109745}
-  _systemLibrary: {fileID: 0}
+  _systemLibrary: {fileID: 1315439167}
   _id: 
   _behaviours:
   - {fileID: 1024109745}
@@ -1375,7 +1381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 1098716183}
-  _systemLibrary: {fileID: 0}
+  _systemLibrary: {fileID: 1315439167}
   _id: 
   _behaviours:
   - {fileID: 1098716183}
@@ -1518,7 +1524,8 @@ MonoBehaviour:
   - {fileID: 70637932}
   _childLibs:
   - {fileID: 1098716183}
-  _systemId: RestaurantEvent
+  _systemId:
+    id: RestaurantEvent
   _rootLibrary: {fileID: 865692719}
 --- !u!4 &1315439168
 Transform:
@@ -1657,7 +1664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 1476193900}
-  _systemLibrary: {fileID: 0}
+  _systemLibrary: {fileID: 485185972}
   _id: 
   _behaviours:
   - {fileID: 1476193900}
@@ -1770,8 +1777,8 @@ Transform:
   m_LocalPosition: {x: -0.018341536, y: 1.5656291, z: 29.01512}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 865692720}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1607324846
 GameObject:
@@ -1823,7 +1830,7 @@ MonoBehaviour:
   _id: 
   customerCharacters: {fileID: 0}
   characterItemViews: []
-  testView: {fileID: 0}
+  testView: []
 --- !u!1 &1635582381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,7 +1923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 1644361649}
-  _systemLibrary: {fileID: 0}
+  _systemLibrary: {fileID: 485185972}
   _id: 
   _behaviours:
   - {fileID: 1644361649}
@@ -1933,6 +1940,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1692816065}
   - component: {fileID: 1692816066}
+  - component: {fileID: 1692816067}
   m_Layer: 0
   m_Name: Empty -1 (1)
   m_TagString: Untagged
@@ -1972,7 +1980,24 @@ MonoBehaviour:
   _id: 
   customerCharacters: {fileID: 0}
   characterItemViews: []
-  testView: {fileID: 0}
+  testView: []
+--- !u!114 &1692816067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692816064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3914b2527ed224a459dfa034052ab656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myLibrary: {fileID: 0}
+  _systemLibrary: {fileID: 0}
+  _id: 
+  _behaviours: []
+  _childLibs: []
 --- !u!1 &1705503750
 GameObject:
   m_ObjectHideFlags: 0
@@ -2065,7 +2090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 1726656878}
-  _systemLibrary: {fileID: 0}
+  _systemLibrary: {fileID: 1315439167}
   _id: 
   _behaviours:
   - {fileID: 1726656878}
@@ -2118,13 +2143,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 1766192769}
-  _systemLibrary: {fileID: 0}
+  _systemLibrary: {fileID: 485185972}
   _id: 
   _behaviours:
   - {fileID: 1766192769}
   - {fileID: 870235517}
   - {fileID: 688943782}
   _childLibs: []
+--- !u!1 &1859753728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1859753731}
+  - component: {fileID: 1859753730}
+  - component: {fileID: 1859753729}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1859753729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859753728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7500d56b722ab4dbc534c0be51e005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myLibrary: {fileID: 1859753729}
+  _systemLibrary: {fileID: 1859753729}
+  _id: 
+  _behaviours:
+  - {fileID: 1859753730}
+  - {fileID: 1859753729}
+  _childLibs: []
+  _systemId:
+    id: UIManager
+  _rootLibrary: {fileID: 865692719}
+--- !u!114 &1859753730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859753728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbcd892e490b344b9a188445b91c734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myLibrary: {fileID: 1859753729}
+  _systemLibrary: {fileID: 1859753729}
+  _id: 
+--- !u!4 &1859753731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859753728}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 865692720}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1897725454
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,4 +2315,4 @@ MonoBehaviour:
   customerCharacters: {fileID: 0}
   characterItemViews:
   - {fileID: 0}
-  testView: {fileID: 0}
+  testView: []
