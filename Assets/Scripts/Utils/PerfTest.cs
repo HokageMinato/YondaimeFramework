@@ -12,7 +12,7 @@ namespace YondaimeFramework
 
         private void Start()
         {
-            ParentLibrary.InitializeLibrary();
+            MyLibrary.InitializeLibrary();
         }
 
 
@@ -36,7 +36,7 @@ namespace YondaimeFramework
             Debug.Log("Custom GetComponentsFromChildren");
 
             string time;
-            ParentLibrary.InitializeLibrary();
+            MyLibrary.InitializeLibrary();
 
             Stopwatch st = new Stopwatch();
             

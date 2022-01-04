@@ -74,7 +74,7 @@ namespace YondaimeFramework
                 for (int i = 0; i < extraDressItemViewRequired; i++)
                 {
                     _dressItemViews.Add(Instantiate(activePrefab, transform));
-                    _dressItemViews[i].SetLibrary(ParentLibrary);
+                    _dressItemViews[i].SetLibrary(MyLibrary);
                 }
 
             }

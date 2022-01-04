@@ -8,12 +8,15 @@ namespace YondaimeFramework
     {
         #region PRIVATE_VARIABLES
         [SerializeField] private BehaviourLibrary _myLibrary;
-        [SerializeField] private BehaviourLibrary _systemLibrary;
+        [SerializeField] private SystemLibrary _systemLibrary;
+
+        //NA for now
+        //[SerializeField] private RootLibrary _rootLibrary;
         [HideInInspector][SerializeField] public string _id;
         #endregion
 
         #region PUBLIC_VARIABLES
-        public BehaviourLibrary ParentLibrary
+        public BehaviourLibrary MyLibrary
         {
             get
             {
@@ -34,7 +37,7 @@ namespace YondaimeFramework
             _myLibrary = library;
         }
 
-        public void SetSystemLibrary(BehaviourLibrary library) {
+        public void SetLibrary(SystemLibrary library) {
             _systemLibrary = library;
         }
 
@@ -49,15 +52,24 @@ namespace YondaimeFramework
 
         public T GetComponentFromLibrary<T>() {
             return _systemLibrary.GetBehaviourFromLibrary<T>();
-        } 
-        
-        public T GetComponentFromMyLibrary<T>() {
-            return _myLibrary.GetBehaviourFromLibrary<T>();
         }
+
+        public SystemLibrary GetComponentBySystemId(string systemId) {
+            return _systemLibrary.GetSystemBehaviourFromRootLibraryById(systemId);
+        }
+        
+        public List<SystemLibrary> GetComponentsBySystemId(string systemId) {
+            return _systemLibrary.GetSystemBehavioursFromRootLibraryById(systemId);
+        }
+        
+        //NA for now
+        //public T GetComponentFromMyLibrary<T>() {
+          //  return _myLibrary.GetBehaviourFromLibrary<T>();
+        //}
         
         public virtual void RefreshHierarchy() 
         {
-            ParentLibrary.ScanBehaviours();
+            MyLibrary.ScanBehaviours();
         }
 
 

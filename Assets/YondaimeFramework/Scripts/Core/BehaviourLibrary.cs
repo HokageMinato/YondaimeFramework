@@ -4,30 +4,28 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-    [System.Serializable]
-    public struct SystemId {
-        public string id;
-    }
+
+
+
 
     public class BehaviourLibrary : CustomBehaviour
     {
 
         #region PRIVATE_VARIABLES
         //Serialized
-        [SerializeField] private List<CustomBehaviour> _behaviours;
+        [SerializeField] protected List<CustomBehaviour> _behaviours;
         [SerializeField] protected BehaviourLibrary[] _childLibs;
-        
+
         //NonSerialized
         private Dictionary<Type, CustomBehaviour[]> _behaviourLookUp = new Dictionary<Type, CustomBehaviour[]>();
         #endregion
 
-        
+
 
         #region PUBLIC_METHODS
         public void InitializeLibrary()
         {
             Dictionary<Type, List<CustomBehaviour>> tempLookUp = new Dictionary<Type, List<CustomBehaviour>>();
-
             GenerateTempLookUp();
             FillTempLookUp();
             ParseTempToFinalLookup();
@@ -41,7 +39,7 @@ namespace YondaimeFramework
                     Type behaviourType = _behaviours[i].GetType();
                     if (!tempLookUp.ContainsKey(behaviourType))
                     {
-                        tempLookUp.Add(behaviourType,new List<CustomBehaviour>());
+                        tempLookUp.Add(behaviourType, new List<CustomBehaviour>());
                     }
                 }
             }
@@ -56,17 +54,16 @@ namespace YondaimeFramework
             {
                 foreach (KeyValuePair<Type, List<CustomBehaviour>> item in tempLookUp)
                 {
-                    if (_behaviourLookUp.ContainsKey(item.Key))
-                    {
-                        int itemsLength = item.Value.Count;
-                        for (int i = 0; i < itemsLength; i++)
-                        {
-                            _behaviourLookUp[item.Key][i] = item.Value[i];
-                        }
-                    }
-                    else {
+                    if (!_behaviourLookUp.ContainsKey(item.Key))
                         _behaviourLookUp.Add(item.Key, new CustomBehaviour[item.Value.Count]);
+
+
+                    int itemsLength = item.Value.Count;
+                    for (int i = 0; i < itemsLength; i++)
+                    {
+                        _behaviourLookUp[item.Key][i] = item.Value[i];
                     }
+
                 }
 
                 if (!FrameworkConstants.IsDebug)
@@ -81,7 +78,7 @@ namespace YondaimeFramework
                 }
             }
         }
-      
+
         public T GetBehaviourFromLibrary<T>()
         {
             T behaviour = default;
@@ -90,12 +87,14 @@ namespace YondaimeFramework
             if (_behaviourLookUp.ContainsKey(reqeuestedType) && _behaviourLookUp[reqeuestedType].Length > 0)
                 return (T)(object)_behaviourLookUp[reqeuestedType][0];
 
+
+
             if (reqeuestedType.IsInterface)
             {
                 foreach (KeyValuePair<Type, CustomBehaviour[]> item in _behaviourLookUp)
                 {
-                    if (item.Value.Length > 0 && 
-                        reqeuestedType.IsAssignableFrom(item.Key)) 
+                    if (item.Value.Length > 0 &&
+                        reqeuestedType.IsAssignableFrom(item.Key))
                     {
                         return (T)(object)item.Value[0];
                     }
@@ -105,6 +104,7 @@ namespace YondaimeFramework
             for (int i = 0; i < _childLibs.Length; i++)
             {
                 behaviour = _childLibs[i].GetBehaviourFromLibrary<T>();
+
             }
 
             return behaviour;
@@ -126,7 +126,7 @@ namespace YondaimeFramework
 
             if (reqeuestedType.IsInterface)
             {
-                
+
                 foreach (KeyValuePair<Type, CustomBehaviour[]> item in _behaviourLookUp)
                 {
                     if (reqeuestedType.IsAssignableFrom(item.Key))
@@ -140,10 +140,12 @@ namespace YondaimeFramework
                 }
             }
 
+
             if (_childLibs.Length > 0)
             {
                 for (int i = 0; i < _childLibs.Length; i++)
                 {
+
                     behaviours.AddRange(_childLibs[i].GetBehavioursFromLibrary<T>());
                 }
             }
@@ -153,18 +155,20 @@ namespace YondaimeFramework
 
 
 
-        
+
         public virtual void ScanBehaviours()
         {
             _behaviours = new List<CustomBehaviour>(GetComponentsInChildren<CustomBehaviour>(true));
+            PreRedundantCheck();
             ScanChildLibs();
             RemoveRedundantBehavioursRecursive();
             RemoveRedundantChildLibRecursive();
             SetSelfAsActiveLibrary();
-           
 
-            void ScanChildLibs() {
-                
+
+            void ScanChildLibs()
+            {
+
                 List<BehaviourLibrary> tempLibs = new List<BehaviourLibrary>();
                 for (int i = 0; i < _behaviours.Count; i++)
                 {
@@ -175,14 +179,15 @@ namespace YondaimeFramework
                 }
                 _childLibs = tempLibs.ToArray();
 
-           
+
                 for (int i = 0; i < _childLibs.Length; i++)
                 {
                     _childLibs[i].ScanBehaviours();
                 }
 
             }
-            void RemoveRedundantChildLibRecursive() {
+            void RemoveRedundantChildLibRecursive()
+            {
 
                 List<BehaviourLibrary> myLibs = new List<BehaviourLibrary>(_childLibs);
 
@@ -197,7 +202,8 @@ namespace YondaimeFramework
 
                 _childLibs = myLibs.ToArray();
             }
-            void RemoveRedundantBehavioursRecursive() {
+            void RemoveRedundantBehavioursRecursive()
+            {
 
                 for (int i = 0; i < _childLibs.Length; i++)
                 {
@@ -213,13 +219,13 @@ namespace YondaimeFramework
             {
                 for (int i = 0; i < _behaviours.Count; i++)
                 {
-                     _behaviours[i].SetLibrary(this);
+                    _behaviours[i].SetLibrary(this);
                 }
             }
-            
         }
 
-        
+        public virtual void PreRedundantCheck() { }
+
         #endregion
     }
 }

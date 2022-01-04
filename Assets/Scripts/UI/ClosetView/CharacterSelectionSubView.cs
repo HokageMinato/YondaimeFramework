@@ -16,14 +16,25 @@ namespace YondaimeFramework
        
         private DressesDataSO _selectedDressData;
         private Dictionary<DressesDataSO, int> itemViewMap = new Dictionary<DressesDataSO, int>();
+
+
+        public List<CharacterSelectionSubView> testView;
         #endregion
 
 
         #region PUBLIC_FUNCTIONS
+
+        void Start() {
+
+            SystemLibrary systemLibrary = GetComponentBySystemId("TokenEvent");
+            testView = systemLibrary.GetComponentsFromLibrary<CharacterSelectionSubView>();
+        }
+
         public void Init()
         {
             GenerateCharacterItemViews();
             SetView();
+            
         }
 
 

@@ -26,7 +26,7 @@ namespace YondaimeFramework
 
         private void InitViews()
         {
-            ParentLibrary.InitializeLibrary();
+            
 
             for (int i = 0; i < views.Length; i++)
             {

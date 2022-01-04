@@ -90,7 +90,6 @@ namespace YondaimeFramework
         [ContextMenu("TestGets")]
         public void Test() {
             Debug.Log(GetComponentFromLibrary<CharacterSelectionSubView>() == null);
-            Debug.Log(GetComponentFromMyLibrary<CharacterSelectionSubView>() == null);
         }
         #endregion
     }
