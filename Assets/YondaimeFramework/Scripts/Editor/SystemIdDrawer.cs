@@ -3,17 +3,11 @@ using UnityEditor;
 using System.Reflection;
 
 
-
-
-
 namespace YondaimeFramework
 {
-
-
     [CustomPropertyDrawer(typeof(SystemId))]
     public class SystemIdDrawer : PropertyDrawer
     {
-
         #region UNITY_CALLBACKS
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
