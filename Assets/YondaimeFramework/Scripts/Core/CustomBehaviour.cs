@@ -50,22 +50,30 @@ namespace YondaimeFramework
             return _systemLibrary.GetBehavioursFromLibrary<T>();
         }
 
+        public List<T> GetComponentsFromLibrary<T>(string systemId)
+        {
+            return _systemLibrary.GetSystemBehaviourFromRootLibraryById(systemId).GetBehavioursFromLibrary<T>();
+        }
+
+
         public T GetComponentFromLibrary<T>() {
             return _systemLibrary.GetBehaviourFromLibrary<T>();
         }
 
-        public SystemLibrary GetComponentBySystemId(string systemId) {
-            return _systemLibrary.GetSystemBehaviourFromRootLibraryById(systemId);
+        public T GetComponentFromLibrary<T>(string systemId) 
+        {
+           return _systemLibrary.GetSystemBehaviourFromRootLibraryById(systemId).GetBehaviourFromLibrary<T>();
         }
-        
-        public List<SystemLibrary> GetComponentsBySystemId(string systemId) {
-            return _systemLibrary.GetSystemBehavioursFromRootLibraryById(systemId);
-        }
-        
-        //NA for now
-        //public T GetComponentFromMyLibrary<T>() {
-          //  return _myLibrary.GetBehaviourFromLibrary<T>();
+
+        //public SystemLibrary GetComponentBySystemId(string systemId) {
+        //    return _systemLibrary.GetSystemBehaviourFromRootLibraryById(systemId);
         //}
+        
+        //public List<SystemLibrary> GetComponentsBySystemId(string systemId) {
+        //    return _systemLibrary.GetSystemBehavioursFromRootLibraryById(systemId);
+        //}
+        
+        
         
         public virtual void RefreshHierarchy() 
         {
