@@ -65,14 +65,6 @@ namespace YondaimeFramework
            return _systemLibrary.GetSystemBehaviourFromRootLibraryById(systemId).GetBehaviourFromLibrary<T>();
         }
 
-        //public SystemLibrary GetComponentBySystemId(string systemId) {
-        //    return _systemLibrary.GetSystemBehaviourFromRootLibraryById(systemId);
-        //}
-        
-        //public List<SystemLibrary> GetComponentsBySystemId(string systemId) {
-        //    return _systemLibrary.GetSystemBehavioursFromRootLibraryById(systemId);
-        //}
-        
         
         
         public virtual void RefreshHierarchy() 

@@ -20,8 +20,32 @@ namespace YondaimeFramework
                 return _systemId.id;
             }
         }
+        
+        private bool IsSelfInited
+        {
+            get
+            {
+                return _rootLibrary == null;
+            }
+        }
+
         #endregion
 
+        #region UNITY_CALLBACKS
+        private void Awake()
+        {
+            if (IsSelfInited)
+            {
+                FramworkLogger.Log("Self initing" + gameObject.name);
+                
+                for (int i = 0; i < _childLibs.Length; i++)
+                {
+                    _childLibs[i].InitializeLibrary();
+                }
+
+            }
+        }
+        #endregion
 
         #region PUBLIC_FUNCTIONS
 

@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace YondaimeFramework
 {
@@ -19,5 +20,13 @@ namespace YondaimeFramework
             public const string SomeEvent = "SomeEvent";
         }
 
+    }
+
+    public static class FrameworkLogger
+    {
+        public static void Log(object logData)
+        {
+            Debug.Log($"<FWork> {logData}");
+        }
     }
 }
