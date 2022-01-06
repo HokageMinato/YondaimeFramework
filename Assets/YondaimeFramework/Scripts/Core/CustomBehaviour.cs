@@ -12,7 +12,7 @@ namespace YondaimeFramework
 
         //NA for now
         //[SerializeField] private RootLibrary _rootLibrary;
-        [HideInInspector][SerializeField] public string _id;
+        [HideInInspector] [SerializeField] public string _id;
         #endregion
 
         #region PUBLIC_VARIABLES
@@ -23,29 +23,40 @@ namespace YondaimeFramework
                 return _myLibrary;
             }
         }
-      
-        public string Id
+
+        public SystemLibrary MySystemLibrary
         {
             get {
+                return _systemLibrary;
+            }
+        }
+
+        public string Id
+        {
+            get
+            {
                 return _id;
             }
         }
         #endregion
 
         #region PUBLIC_METHODS
-        public void SetLibrary(BehaviourLibrary library) {
+        public void SetLibrary(BehaviourLibrary library)
+        {
             _myLibrary = library;
         }
 
-        public void SetLibrary(SystemLibrary library) {
+        public void SetLibrary(SystemLibrary library)
+        {
             _systemLibrary = library;
         }
 
-        public void SetCustomId(string customId) {
+        public void SetCustomId(string customId)
+        {
             _id = customId;
         }
 
-        public List<T> GetComponentsFromLibrary<T>() 
+        public List<T> GetComponentsFromLibrary<T>()
         {
             return _systemLibrary.GetBehavioursFromLibrary<T>();
         }
@@ -56,24 +67,35 @@ namespace YondaimeFramework
         }
 
 
-        public T GetComponentFromLibrary<T>() {
+        public T GetComponentFromLibrary<T>()
+        {
             return _systemLibrary.GetBehaviourFromLibrary<T>();
         }
 
-        public T GetComponentFromLibrary<T>(string systemId) 
+        public T GetComponentFromLibrary<T>(string systemId)
         {
-           return _systemLibrary.GetSystemBehaviourFromRootLibraryById(systemId).GetBehaviourFromLibrary<T>();
+            return _systemLibrary.GetSystemBehaviourFromRootLibraryById(systemId).GetBehaviourFromLibrary<T>();
         }
 
-        
-        
-        public virtual void RefreshHierarchy() 
+        //public SystemLibrary GetComponentBySystemId(string systemId) {
+        //    return _systemLibrary.GetSystemBehaviourFromRootLibraryById(systemId);
+        //}
+
+        //public List<SystemLibrary> GetComponentsBySystemId(string systemId) {
+        //    return _systemLibrary.GetSystemBehavioursFromRootLibraryById(systemId);
+        //}
+
+
+
+        public virtual void RefreshHierarchy()
         {
             MyLibrary.ScanBehaviours();
+            MyLibrary.InitializeLibrary();
         }
 
 
-        public void DestorySelf() {
+        public void DestorySelf()
+        {
             DestroyImmediate(gameObject);
         }
         #endregion

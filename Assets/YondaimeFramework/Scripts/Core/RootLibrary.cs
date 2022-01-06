@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+#if UNITY_EDITOR
+using UnityEditor.SceneManagement;
+#endif
 
 namespace YondaimeFramework
 {
@@ -24,7 +28,7 @@ namespace YondaimeFramework
 
 
         #region PRIVATE_FUNCTIONS
-
+        
         public void InitializeFramework()
         {
             for (int i = 0; i < _childLibs.Length; i++)
@@ -89,15 +93,11 @@ namespace YondaimeFramework
                 if(FrameworkConstants.IsDebug)
                 foreach (var item in _systemLibsLookUp)
                 {
-                    Debug.Log($"System Library Added with key {item.Key} count {item.Value.Length}");
+                    FrameworkLogger.Log($"System Library Added with key {item.Key} count {item.Value.Length}");
                 }
             }
            
         }
-
-
-
-
 
 
         #endregion
@@ -128,7 +128,7 @@ namespace YondaimeFramework
             if (!hasNonSystemRoots)
                 FilterSystemLibraries();
             SetRootLibraryToSystemLibs();
-
+            SetPresentSceneDirty();
 
             void FilterSystemLibraries()
             {
@@ -161,6 +161,11 @@ namespace YondaimeFramework
                         sysLib?.SetRootLibrary(this);
                     }
 
+            }
+            void SetPresentSceneDirty() {
+                #if UNITY_EDITOR
+                EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+                #endif
             }
         }
 

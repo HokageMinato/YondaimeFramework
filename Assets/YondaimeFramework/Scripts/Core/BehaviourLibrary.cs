@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace YondaimeFramework
+
+ namespace YondaimeFramework
 {
     public class BehaviourLibrary : CustomBehaviour
     {
@@ -16,7 +17,7 @@ namespace YondaimeFramework
         private Dictionary<Type, CustomBehaviour[]> _behaviourLookUp = new Dictionary<Type, CustomBehaviour[]>();
         #endregion
 
-
+        
 
         #region PUBLIC_METHODS
         public void InitializeLibrary()
@@ -50,7 +51,10 @@ namespace YondaimeFramework
             {
                 foreach (KeyValuePair<Type, List<CustomBehaviour>> item in tempLookUp)
                 {
-                    _behaviourLookUp.Add(item.Key, item.Value.ToArray());
+                    if(!_behaviourLookUp.ContainsKey(item.Key))
+                        _behaviourLookUp.Add(item.Key, item.Value.ToArray());
+
+                    _behaviourLookUp[item.Key] = item.Value.ToArray();
                 }
 
                 if (!FrameworkConstants.IsDebug)
@@ -74,7 +78,10 @@ namespace YondaimeFramework
             if (_behaviourLookUp.ContainsKey(reqeuestedType) && _behaviourLookUp[reqeuestedType].Length > 0)
                 return (T)(object)_behaviourLookUp[reqeuestedType][0];
 
-
+            FrameworkLogger.Log($"requested Type {reqeuestedType} {gameObject.name} ");
+            
+            foreach (KeyValuePair<Type, CustomBehaviour[]> item in _behaviourLookUp)
+                FrameworkLogger.Log($"Contains tyeps {item.Key}");
 
             if (reqeuestedType.IsInterface)
             {
@@ -85,7 +92,11 @@ namespace YondaimeFramework
                     {
                         return (T)(object)item.Value[0];
                     }
+
+                    
                 }
+
+                
             }
 
             for (int i = 0; i < _childLibs.Length; i++)
@@ -141,7 +152,15 @@ namespace YondaimeFramework
         }
 
 
+        public void LogLibrary() {
+            string items = "";
+            foreach (var item in _behaviours)
+            {
+                items+=item.GetType()+"\n";
 
+            }
+            FrameworkLogger.Log(items);
+        }
 
         public virtual void ScanBehaviours()
         {
@@ -150,7 +169,7 @@ namespace YondaimeFramework
             ScanChildLibs();
             RemoveRedundantBehavioursRecursive();
             RemoveRedundantChildLibRecursive();
-            SetSelfAsActiveLibrary();
+            SetActiveLibraries();
 
 
             void ScanChildLibs()
@@ -202,11 +221,12 @@ namespace YondaimeFramework
 
 
             }
-            void SetSelfAsActiveLibrary()
+            void SetActiveLibraries()
             {
                 for (int i = 0; i < _behaviours.Count; i++)
                 {
                     _behaviours[i].SetLibrary(this);
+                    _behaviours[i].SetLibrary(MySystemLibrary);
                 }
             }
         }

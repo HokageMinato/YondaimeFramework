@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor.SceneManagement;
+#endif
 
 namespace YondaimeFramework
 {
@@ -10,6 +13,24 @@ namespace YondaimeFramework
         #region PRIVATE_VARS
         [SerializeField] private SystemId _systemId;
         [SerializeField] private RootLibrary _rootLibrary;
+        [SerializeField] private bool IsSelfInited
+        {
+            get {
+               return _rootLibrary == null;
+            }
+        }
+
+        #endregion
+
+        #region UNITY_CALLBACKS
+        private void Awake()
+        {
+            if (IsSelfInited)
+            {
+                FrameworkLogger.Log("Self initing" + gameObject.name);
+                InitializeLibrary();
+            }
+        }
         #endregion
 
         #region PUBLIC_VARS
@@ -20,29 +41,8 @@ namespace YondaimeFramework
                 return _systemId.id;
             }
         }
-
-        private bool IsSelfInited
-        {
-            get
-            {
-                return _rootLibrary == null;
-            }
-        }
-
         #endregion
 
-        #region UNITY_Callbaxc
-        private void Awake()
-        {
-            if (IsSelfInited)
-            {
-                FrameworkLogger.Log("Self initing" + gameObject.name);
-                InitializeLibrary();
-            }
-        }
-
-
-        #endregion
 
         #region PUBLIC_FUNCTIONS
 
@@ -70,6 +70,9 @@ namespace YondaimeFramework
         public override void ScanBehaviours()
         {
             base.ScanBehaviours();
+            SetPresentSceneDirty();
+
+            
         }
 
 
@@ -85,7 +88,12 @@ namespace YondaimeFramework
                 _behaviours[i].SetLibrary(this);
             }
         }
-
+        void SetPresentSceneDirty()
+        {
+            #if UNITY_EDITOR
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            #endif
+        }
         #endregion
     }
 }
