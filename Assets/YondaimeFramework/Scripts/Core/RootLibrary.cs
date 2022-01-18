@@ -16,7 +16,7 @@ namespace YondaimeFramework
 
 
         #region PRIVATE_VARS
-        private Dictionary<string, SystemLibrary[]> _systemLibsLookUp = new Dictionary<string, SystemLibrary[]>();
+        private Dictionary<string, SceneLibrary[]> _systemLibsLookUp = new Dictionary<string, SceneLibrary[]>();
         #endregion
 
         #region UNITY_CALLBACKS
@@ -27,23 +27,26 @@ namespace YondaimeFramework
         #endregion
 
 
-        #region PRIVATE_FUNCTIONS
+        #region PRIVATE_METHODS
         
         public void InitializeFramework()
         {
-            for (int i = 0; i < _childLibs.Length; i++)
-            {
-                _childLibs[i].InitializeLibrary();
-            }
-
-            Dictionary<string, List<SystemLibrary>> tempLibsLookUp = new Dictionary<string, List<SystemLibrary>>();
+            Dictionary<string, List<SceneLibrary>> tempLibsLookUp = new Dictionary<string, List<SceneLibrary>>();
+            InitializeChildLibraries();
             InitializeLookUp();
             ParseTempLookUpToMasterLookup();
+            InvokeFillReferences();
             LogSystemLibraries();
 
 
 
-
+            void InitializeChildLibraries() 
+            {
+                for (int i = 0; i < _childLibs.Length; i++)
+                {
+                    _childLibs[i].InitializeLibrary();
+                }
+            }
             void InitializeLookUp()
             {
                 if (hasNonSystemRoots)
@@ -53,7 +56,7 @@ namespace YondaimeFramework
             }
             void ParseTempLookUpToMasterLookup()
             {
-                foreach (KeyValuePair<string, List<SystemLibrary>> item in tempLibsLookUp)
+                foreach (KeyValuePair<string, List<SceneLibrary>> item in tempLibsLookUp)
                 {
                     _systemLibsLookUp.Add(item.Key, item.Value.ToArray());
                 }
@@ -62,7 +65,7 @@ namespace YondaimeFramework
             {
                 for (int i = 0; i < _childLibs.Length; i++)
                 {
-                    SystemLibrary lib = (SystemLibrary)_childLibs[i];
+                    SceneLibrary lib = (SceneLibrary)_childLibs[i];
                     string id = lib.SystemId;
                     AddToTempLookUp(lib, id);
                 }
@@ -71,7 +74,7 @@ namespace YondaimeFramework
             {
                 for (int i = 0; i < _childLibs.Length; i++)
                 {
-                    SystemLibrary lib = _childLibs[i] as SystemLibrary;
+                    SceneLibrary lib = _childLibs[i] as SceneLibrary;
                     if (lib)
                     {
                         string id = lib.SystemId;
@@ -79,11 +82,11 @@ namespace YondaimeFramework
                     }
                 }
             }
-            void AddToTempLookUp(SystemLibrary lib, string id)
+            void AddToTempLookUp(SceneLibrary lib, string id)
             {
                 if (!tempLibsLookUp.ContainsKey(id))
                 {
-                    tempLibsLookUp.Add(id, new List<SystemLibrary>());
+                    tempLibsLookUp.Add(id, new List<SceneLibrary>());
                 }
 
                 tempLibsLookUp[id].Add(lib);
@@ -102,19 +105,16 @@ namespace YondaimeFramework
 
         #endregion
 
-        #region PUBLIC_FUNCTIONS
+        #region PUBLIC_METHODS
 
-
-
-
-        public SystemLibrary GetSystemBehaviourById(string systemId)
+        public SceneLibrary GetSystemBehaviourById(string systemId)
         {
             return GetSystemBehavioursById(systemId)[0];
         }
 
-        public List<SystemLibrary> GetSystemBehavioursById(string systemId)
+        public List<SceneLibrary> GetSystemBehavioursById(string systemId)
         {
-            List<SystemLibrary> requestedLibrary = new List<SystemLibrary>();
+            List<SceneLibrary> requestedLibrary = new List<SceneLibrary>();
             requestedLibrary.AddRange(_systemLibsLookUp[systemId]);
             return requestedLibrary;
         }
@@ -139,7 +139,7 @@ namespace YondaimeFramework
 
                 for (int i = 0; i < systemLibraries.Count;)
                 {
-                    if (!(systemLibraries[i] is SystemLibrary))
+                    if (!(systemLibraries[i] is SceneLibrary))
                         systemLibraries.RemoveAt(i);
                     else
                         i++;
@@ -152,12 +152,12 @@ namespace YondaimeFramework
                 if (!hasNonSystemRoots)
                     for (int i = 0; i < _childLibs.Length; i++)
                     {
-                        ((SystemLibrary)_childLibs[i]).SetRootLibrary(this);
+                        ((SceneLibrary)_childLibs[i]).SetRootLibrary(this);
                     }
                 else
                     for (int i = 0; i < _childLibs.Length; i++)
                     {
-                        SystemLibrary sysLib = _childLibs[i] as SystemLibrary;
+                        SceneLibrary sysLib = _childLibs[i] as SceneLibrary;
                         sysLib?.SetRootLibrary(this);
                     }
 
@@ -172,6 +172,7 @@ namespace YondaimeFramework
 
         #endregion
 
+        
 
     }
 }

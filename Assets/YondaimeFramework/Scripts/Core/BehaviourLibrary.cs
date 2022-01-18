@@ -27,6 +27,7 @@ using UnityEngine;
             FillTempLookUp();
             ParseTempToFinalLookup();
             InitChildLibraries();
+            
 
             void GenerateTempLookUp()
             {
@@ -57,9 +58,6 @@ using UnityEngine;
                     _behaviourLookUp[item.Key] = item.Value.ToArray();
                 }
 
-                if (!FrameworkConstants.IsDebug)
-                    _behaviours = null;
-
             }
             void InitChildLibraries()
             {
@@ -69,6 +67,8 @@ using UnityEngine;
                 }
             }
         }
+
+
 
         public T GetBehaviourFromLibrary<T>()
         {
@@ -232,6 +232,33 @@ using UnityEngine;
         }
 
         public virtual void PreRedundantCheck() { }
+
+        public void InvokeFillReferences() 
+        {
+            for (int i = 0; i < _behaviours.Count; i++)
+            {
+                _behaviours[i].FillReferences();
+            }
+            
+            for (int i = 0; i < _childLibs.Length; i++)
+            {
+                _childLibs[i].InvokeFillReferences();
+            }
+        }
+
+        public void InvokeInit() {
+
+            for (int i = 0; i < _behaviours.Count; i++)
+            {
+                _behaviours[i].Init();
+            }
+
+            for (int i = 0; i < _childLibs.Length; i++)
+            {
+                _childLibs[i].InvokeInit();
+            }
+
+        }
 
         #endregion
     }

@@ -19,11 +19,11 @@ namespace Tag
 
         #endregion
 
-        #region PUBLIC_FUNCTIONS
+        #region PUBLIC_METHODS
 
         #endregion
 
-        #region PRIVATE_FUNCTIONS
+        #region PRIVATE_METHODS
 
         #endregion
 

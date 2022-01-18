@@ -4,7 +4,7 @@ using UnityEngine;
 namespace YondaimeFramework
 {
     [Serializable]
-    public struct SystemId
+    public struct SceneId
     {
         public string id;
     }

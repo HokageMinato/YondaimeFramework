@@ -5,8 +5,8 @@ using System.Reflection;
 
 namespace YondaimeFramework
 {
-    [CustomPropertyDrawer(typeof(SystemId))]
-    public class SystemIdDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(SceneId))]
+    public class SceneIdDrawer : PropertyDrawer
     {
         #region UNITY_CALLBACKS
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -21,7 +21,7 @@ namespace YondaimeFramework
 
                 string[] choices = systemIds;
                 int index = ArrayUtility.IndexOf(choices, property.FindPropertyRelative("id").stringValue);
-                index = EditorGUI.Popup(rect2, "SystemId", index, choices);
+                index = EditorGUI.Popup(rect2, "SceneId", index, choices);
 
                 if (index != -1)
                     property.FindPropertyRelative("id").stringValue = choices[index];

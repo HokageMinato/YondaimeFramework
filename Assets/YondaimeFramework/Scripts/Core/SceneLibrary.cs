@@ -8,10 +8,10 @@ using UnityEditor.SceneManagement;
 
 namespace YondaimeFramework
 {
-    public sealed class SystemLibrary : BehaviourLibrary
+    public sealed class SceneLibrary : BehaviourLibrary
     {
         #region PRIVATE_VARS
-        [SerializeField] private SystemId _systemId;
+        [SerializeField] private SceneId _systemId;
         [SerializeField] private RootLibrary _rootLibrary;
         [SerializeField] private bool IsSelfInited
         {
@@ -29,6 +29,8 @@ namespace YondaimeFramework
             {
                 FrameworkLogger.Log("Self initing" + gameObject.name);
                 InitializeLibrary();
+                InvokeFillReferences();
+                InvokeInit();
             }
         }
         #endregion
@@ -44,19 +46,19 @@ namespace YondaimeFramework
         #endregion
 
 
-        #region PUBLIC_FUNCTIONS
+        #region PUBLIC_METHODS
 
         public void SetRootLibrary(RootLibrary library)
         {
             _rootLibrary = library;
         }
 
-        public SystemLibrary GetSystemBehaviourFromRootLibraryById(string systemId)
+        public SceneLibrary GetSystemBehaviourFromRootLibraryById(string systemId)
         {
             return _rootLibrary.GetSystemBehaviourById(systemId);
         }
 
-        public List<SystemLibrary> GetSystemBehavioursFromRootLibraryById(string systemId)
+        public List<SceneLibrary> GetSystemBehavioursFromRootLibraryById(string systemId)
         {
             return _rootLibrary.GetSystemBehavioursById(systemId);
         }
@@ -71,8 +73,6 @@ namespace YondaimeFramework
         {
             base.ScanBehaviours();
             SetPresentSceneDirty();
-
-            
         }
 
 
@@ -91,7 +91,8 @@ namespace YondaimeFramework
         void SetPresentSceneDirty()
         {
             #if UNITY_EDITOR
-            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            if (!Application.isPlaying)
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
             #endif
         }
         #endregion
