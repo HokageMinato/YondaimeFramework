@@ -8,171 +8,92 @@ using UnityEditor.SceneManagement;
 
 namespace YondaimeFramework
 {
-    public sealed class RootLibrary : BehaviourLibrary
+    
+    public sealed class RootLibrary : CustomBehaviour
     {
-        #region PUBLIC_VARS
-        [SerializeField] bool hasNonSystemRoots;
-        #endregion
-
 
         #region PRIVATE_VARS
-        private Dictionary<string, SceneLibrary[]> _systemLibsLookUp = new Dictionary<string, SceneLibrary[]>();
+        private Dictionary<string, SceneLibrary> _sceneLibLookUp = new Dictionary<string, SceneLibrary>();
+        //public List<SceneLibrary> _sceneLibs = new List<SceneLibrary>();
+        public static RootLibrary Instance;
         #endregion
 
         #region UNITY_CALLBACKS
-        private void Awake()
+        private void OnEnable()
         {
+            GenerateSingleton();
             InitializeFramework();
         }
         #endregion
 
 
         #region PRIVATE_METHODS
-        
-        public void InitializeFramework()
+        private void GenerateSingleton() 
         {
-            Dictionary<string, List<SceneLibrary>> tempLibsLookUp = new Dictionary<string, List<SceneLibrary>>();
-            InitializeChildLibraries();
-            InitializeLookUp();
-            ParseTempLookUpToMasterLookup();
-            InvokeFillReferences();
-            LogSystemLibraries();
-
-
-
-            void InitializeChildLibraries() 
+            if (Instance == null)
             {
-                for (int i = 0; i < _childLibs.Length; i++)
-                {
-                    _childLibs[i].InitializeLibrary();
-                }
+                Instance = this;
+                DontDestroyOnLoad(this);
             }
-            void InitializeLookUp()
-            {
-                if (hasNonSystemRoots)
-                    InitializeLookUpFiltered();
-                else
-                    InitializeLookUpDirectly();
+            else {
+                DestorySelf();
             }
-            void ParseTempLookUpToMasterLookup()
-            {
-                foreach (KeyValuePair<string, List<SceneLibrary>> item in tempLibsLookUp)
-                {
-                    _systemLibsLookUp.Add(item.Key, item.Value.ToArray());
-                }
-            }
-            void InitializeLookUpDirectly()
-            {
-                for (int i = 0; i < _childLibs.Length; i++)
-                {
-                    SceneLibrary lib = (SceneLibrary)_childLibs[i];
-                    string id = lib.SystemId;
-                    AddToTempLookUp(lib, id);
-                }
-            }
-            void InitializeLookUpFiltered()
-            {
-                for (int i = 0; i < _childLibs.Length; i++)
-                {
-                    SceneLibrary lib = _childLibs[i] as SceneLibrary;
-                    if (lib)
-                    {
-                        string id = lib.SystemId;
-                        AddToTempLookUp(lib, id);
-                    }
-                }
-            }
-            void AddToTempLookUp(SceneLibrary lib, string id)
-            {
-                if (!tempLibsLookUp.ContainsKey(id))
-                {
-                    tempLibsLookUp.Add(id, new List<SceneLibrary>());
-                }
-
-                tempLibsLookUp[id].Add(lib);
-            }
-            void LogSystemLibraries()
-            {
-                if(FrameworkConstants.IsDebug)
-                foreach (var item in _systemLibsLookUp)
-                {
-                    FrameworkLogger.Log($"System Library Added with key {item.Key} count {item.Value.Length}");
-                }
-            }
-           
         }
-
-
         #endregion
 
         #region PUBLIC_METHODS
 
-        public SceneLibrary GetSystemBehaviourById(string systemId)
+        public void InitializeFramework()
         {
-            return GetSystemBehavioursById(systemId)[0];
-        }
+          //  InitializeLookUp();
+            LogSystemLibraries();
 
-        public List<SceneLibrary> GetSystemBehavioursById(string systemId)
-        {
-            List<SceneLibrary> requestedLibrary = new List<SceneLibrary>();
-            requestedLibrary.AddRange(_systemLibsLookUp[systemId]);
-            return requestedLibrary;
-        }
-
-
-        [ContextMenu("Refresh Root")]
-        public override void ScanBehaviours()
-        {
-            base.ScanBehaviours();
-
-            if (!hasNonSystemRoots)
-                FilterSystemLibraries();
-            SetRootLibraryToSystemLibs();
-            SetPresentSceneDirty();
-
-            void FilterSystemLibraries()
+            //void InitializeLookUp()
+            //{
+            //    for (int i = 0; i < _sceneLibs.Count; i++)
+            //    {
+            //        SceneLibrary lib = _sceneLibs[i];
+            //        _sceneLibLookUp.Add(lib.Id, lib);
+                    
+            //    }
+            //}
+            
+            void LogSystemLibraries()
             {
-
-                //For now scan only system libs and put them in child libs
-                // Extend this to have all libraries upon requirement.
-                List<BehaviourLibrary> systemLibraries = new List<BehaviourLibrary>(_childLibs);
-
-                for (int i = 0; i < systemLibraries.Count;)
-                {
-                    if (!(systemLibraries[i] is SceneLibrary))
-                        systemLibraries.RemoveAt(i);
-                    else
-                        i++;
-                }
-
-                _childLibs = systemLibraries.ToArray();
-            }
-            void SetRootLibraryToSystemLibs()
-            {
-                if (!hasNonSystemRoots)
-                    for (int i = 0; i < _childLibs.Length; i++)
+                if (FrameworkConstants.IsDebug)
+                    foreach (var item in _sceneLibLookUp)
                     {
-                        ((SceneLibrary)_childLibs[i]).SetRootLibrary(this);
+                        FrameworkLogger.Log($"System Library Added with key {item.Key} count {item.Value}");
                     }
-                else
-                    for (int i = 0; i < _childLibs.Length; i++)
-                    {
-                        SceneLibrary sysLib = _childLibs[i] as SceneLibrary;
-                        sysLib?.SetRootLibrary(this);
-                    }
+            }
 
-            }
-            void SetPresentSceneDirty() {
-                #if UNITY_EDITOR
-                EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
-                #endif
-            }
         }
 
 
+        public SceneLibrary GetSceneLibraryById(string systemId)
+        {
+            return _sceneLibLookUp[systemId];
+        }
+
+
+        public void AddSceneLibrary(SceneLibrary newSceneLibrary) 
+        {
+           // _sceneLibs.Add(newSceneLibrary);
+            _sceneLibLookUp.Add(newSceneLibrary.SystemId, newSceneLibrary);
+        }
+
+        public void RemoveFromLibrary(string sceneId) {
+
+            //for (int i = 0; i < _sceneLibs.Count;)
+            //{
+            //    if (_sceneLibs[i].SystemId == sceneId)
+            //        _sceneLibs.RemoveAt(i);
+            //    else
+            //        i++;
+            //}
+
+            _sceneLibLookUp.Remove(sceneId);
+        }
         #endregion
-
-        
-
     }
 }

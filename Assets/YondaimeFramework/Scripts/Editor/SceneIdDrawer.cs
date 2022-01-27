@@ -33,7 +33,7 @@ namespace YondaimeFramework
 
         private static string[] GetId()
         {
-            FieldInfo[] infos = typeof(FrameworkConstants.IdConstants).GetFields();
+            FieldInfo[] infos = typeof(SceneIDs).GetFields();
             string[] ids = new string[infos.Length];
 
             for (int i = 0; i < infos.Length; i++)

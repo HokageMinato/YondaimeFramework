@@ -6,22 +6,19 @@ using YondaimeFramework;
 public class Car : CustomBehaviour
 {
 
-    public override void FillReferences()
+    private void Start()
     {
-        Debug.Log($"Filling references {gameObject.name}");
-    }
+        // Debug.Log($"{GetComponentFromLibraryById<Car>("Buggati").gameObject.name} -- {gameObject.name}" );
+        // Debug.Log($"{GetComponentFromLibraryById<SportsCar>("Buggati").gameObject.name} -- {gameObject.name}" );
+        
+      //  Debug.Log($"{GetComponentFromOtherSceneLibrary<SportsCar>(SceneIDs.Scene1).gameObject.name} -- {gameObject.name}" );
+       // Debug.Log($"{GetComponentFromOtherSceneLibraryById<Car>("Ferrari",SceneIDs.Scene1).gameObject.name} -- {gameObject.name}" );
 
-    public override void Init()
-    {
-        Debug.Log($"Initting {gameObject.name}");
     }
 
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && gameObject.tag == "Finish") {
-            DestorySelf();
-            RefreshHierarchy();
-        }
+        
     }
 }

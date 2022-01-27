@@ -8,8 +8,8 @@ namespace YondaimeFramework
     {
         #region PRIVATE_VARIABLES
         [SerializeField] private BehaviourLibrary _myLibrary;
-        [SerializeField] private SceneLibrary _systemLibrary;
-        [HideInInspector] [SerializeField] public string _id;
+        [SerializeField] private SceneLibrary _sceneLibrary;
+        [SerializeField] public string _id;
         #endregion
 
         #region PUBLIC_VARIABLES
@@ -24,7 +24,7 @@ namespace YondaimeFramework
         public SceneLibrary MySystemLibrary
         {
             get {
-                return _systemLibrary;
+                return _sceneLibrary;
             }
         }
 
@@ -45,46 +45,49 @@ namespace YondaimeFramework
 
         public void SetLibrary(SceneLibrary library)
         {
-            _systemLibrary = library;
-        }
-
-        public void SetCustomId(string customId)
-        {
-            _id = customId;
+            _sceneLibrary = library;
         }
 
 
         public T GetComponentFromLibrary<T>()
         {
-            return _systemLibrary.GetBehaviourFromLibrary<T>();
+            return _sceneLibrary.GetBehaviourFromLibrary<T>();
         }
         public List<T> GetComponentsFromLibrary<T>()
         {
-            return _systemLibrary.GetBehavioursFromLibrary<T>();
+            return _sceneLibrary.GetBehavioursFromLibrary<T>();
         }
 
-        public T FindComponentFromLibrary<T>(string systemId)
+        public T GetComponentFromLibraryById<T>(string behaviourId)
         {
-            return _systemLibrary.GetSystemBehaviourFromRootLibraryById(systemId).GetBehaviourFromLibrary<T>();
-        }
-        public List<T> FindComponentsFromLibrary<T>(string systemId)
-        {
-            return _systemLibrary.GetSystemBehaviourFromRootLibraryById(systemId).GetBehavioursFromLibrary<T>();
+            return _sceneLibrary.GetBehaviourFromLibraryById<T>(behaviourId);
         }
 
+        public T GetComponentFromOtherSceneLibrary<T>(string sceneId)
+        {
+            return _sceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibrary<T>();
+        }
+        
+        public T GetComponentFromOtherSceneLibraryById<T>(string behaviourId,string sceneId)
+        {
+            return _sceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId);
+        }
+
+        public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
+        {
+            return _sceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehavioursFromLibrary<T>();
+        }
+
+        
+        
 
         public virtual void RefreshHierarchy()
         {
             MyLibrary.ScanBehaviours();
             MyLibrary.InitializeLibrary();
-            MyLibrary.InvokeFillReferences();
-            MyLibrary.InvokeInit();
         }
 
-        public virtual void FillReferences() {}
-
-        public virtual void Init() {}
-
+       
         public void DestorySelf()
         {
             DestroyImmediate(gameObject);

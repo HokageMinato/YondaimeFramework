@@ -13,25 +13,19 @@ namespace YondaimeFramework
         #region PRIVATE_VARS
         [SerializeField] private SceneId _systemId;
         [SerializeField] private RootLibrary _rootLibrary;
-        [SerializeField] private bool IsSelfInited
-        {
-            get {
-               return _rootLibrary == null;
-            }
-        }
-
         #endregion
 
         #region UNITY_CALLBACKS
-        private void Awake()
+        private void OnEnable()
         {
-            if (IsSelfInited)
-            {
-                FrameworkLogger.Log("Self initing" + gameObject.name);
-                InitializeLibrary();
-                InvokeFillReferences();
-                InvokeInit();
-            }
+            FrameworkLogger.Log($"Init Scenen library {_systemId.id}");
+            InitializeLibrary();
+            RegisterSelfInRootLibrary();
+        }
+
+        private void OnDestroy()
+        {
+            DeregisterSelfFromRootLibrary();
         }
         #endregion
 
@@ -53,20 +47,34 @@ namespace YondaimeFramework
             _rootLibrary = library;
         }
 
-        public SceneLibrary GetSystemBehaviourFromRootLibraryById(string systemId)
+        public new T GetBehaviourFromLibrary<T>() 
         {
-            return _rootLibrary.GetSystemBehaviourById(systemId);
+            return base.GetBehaviourFromLibrary<T>();
         }
 
-        public List<SceneLibrary> GetSystemBehavioursFromRootLibraryById(string systemId)
+        public new List<T> GetBehavioursFromLibrary<T>()
         {
-            return _rootLibrary.GetSystemBehavioursById(systemId);
+            //to protect direct access to GetBehaviour via myLib reference in CustomBehaviour
+            return base.GetBehavioursFromLibrary<T>();
         }
 
-        #endregion
+        public new T GetBehaviourFromLibraryById<T>(string behaviourId)
+        {
+            //to protect direct access to GetBehaviour via myLib reference in CustomBehaviour
+            return base.GetBehaviourFromLibraryById<T>(behaviourId);
+        }
+       
+        public SceneLibrary GetSceneLibraryFromRootLibraryById(string systemId)
+        {
+            return _rootLibrary.GetSceneLibraryById(systemId);
+        }
 
 
-        #region UI_CALLBACKS       
+
+        public override void PreRedundantCheck()
+        {
+            SetSystemLibrary();
+        }
 
         [ContextMenu("Scan")]
         public override void ScanBehaviours()
@@ -75,26 +83,37 @@ namespace YondaimeFramework
             SetPresentSceneDirty();
         }
 
+        #endregion
 
-        public override void PreRedundantCheck()
-        {
-            SetSystemLibrary();
-        }
 
-        void SetSystemLibrary()
+        #region PRIVATE_METHODS      
+        private void SetSystemLibrary()
         {
             for (int i = 0; i < _behaviours.Count; i++)
             {
                 _behaviours[i].SetLibrary(this);
             }
         }
-        void SetPresentSceneDirty()
+        private void SetPresentSceneDirty()
         {
             #if UNITY_EDITOR
             if (!Application.isPlaying)
                 EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
             #endif
         }
+
+        private void RegisterSelfInRootLibrary() 
+        {
+            _rootLibrary = RootLibrary.Instance;
+            _rootLibrary.AddSceneLibrary(this);
+        }
+        
+        private void DeregisterSelfFromRootLibrary() 
+        {
+            _rootLibrary.RemoveFromLibrary(SystemId);
+        }
+
+
         #endregion
     }
 }

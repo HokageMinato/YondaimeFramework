@@ -13,11 +13,12 @@ namespace YondaimeFramework
     {
         public const bool IsDebug = true;
 
-        public class IdConstants
-        {
-            public const string UIElements = "UIElements";
-        }
+    }
 
+    public class SceneIDs
+    {
+        public const string Scene1 = "Scene1";
+        public const string Scene2 = "Scene2";
     }
 
     public static class FrameworkLogger {
