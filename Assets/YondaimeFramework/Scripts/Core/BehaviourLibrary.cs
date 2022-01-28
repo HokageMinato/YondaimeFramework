@@ -77,7 +77,6 @@ using UnityEngine;
 
         protected T GetBehaviourFromLibrary<T>()
         {
-            T behaviour = default;
             Type reqeuestedType = typeof(T);
 
             if (_behaviourLookUp.ContainsKey(reqeuestedType) && _behaviourLookUp[reqeuestedType].Length > 0)
@@ -98,10 +97,12 @@ using UnityEngine;
 
             for (int i = 0; i < _childLibs.Length; i++)
             {
-                behaviour = _childLibs[i].GetBehaviourFromLibrary<T>();
+                T behaviour =_childLibs[i].GetBehaviourFromLibrary<T>();
+                if (behaviour != null)
+                    return behaviour;
             }
 
-            return behaviour;
+            return default;
         }
 
         protected T GetBehaviourFromLibraryById<T>(string behaviourId) 
@@ -110,7 +111,14 @@ using UnityEngine;
 
             if (_idLookup.ContainsKey(id))
                 return (T)(object)_idLookup[id];
-            
+
+            for (int i = 0; i < _childLibs.Length; i++)
+            {
+                T behaviour = _childLibs[i].GetBehaviourFromLibraryById<T>(behaviourId);
+                if (behaviour != null)
+                    return behaviour;
+            }
+
             return default;
         }
 

@@ -7,10 +7,21 @@ Anatomy:
  BehavioursLibrary -> Central To System Aspect.
 
 Improvements:
- > Rename SystemLibrary to SceneLibrary.
+ > [DONE] Rename SystemLibrary to SceneLibrary. 
 
- > RootLibrary resides in DontDestoryOnLoad and is updated sceneLibrary upon
+ > [DONE]RootLibrary resides in DontDestoryOnLoad and is updated sceneLibrary upon
 	loading and unloading of scene.
 	
- > Add FindBehaviour-s<T>() to CustomBehaviour which scans from RootLibrary and finds 
+ > [DONE] Add FindBehaviour-s<T>() to CustomBehaviour which scans from RootLibrary and finds 
 	everthing related from its system libraries.
+	
+ > [DONE]GetComponentByID in sceneLibrary and a dictionary which maintains stuff mapped to ID
+ 
+ 
+ > Scriptable Objects layers named custom scriptable, with property drawer list to filled with types to filter.
+   Each filter removes items not preset in drawer list. drawer items would be types.
+   
+ > Ids from several instances of containers combined, showing all of them together in drawer.
+   ronarsha203197
+   
+   
