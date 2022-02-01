@@ -48,6 +48,15 @@ namespace YondaimeFramework
             _sceneLibrary = library;
         }
 
+        public T GetComponentFromMyGameObject<T>() 
+        {
+            return _sceneLibrary.GetBehaviourOfGameObject<T>(gameObject);
+        }
+
+        public List<T> GetComponentsFromMyGameObject<T>() 
+        {
+            return _sceneLibrary.GetBehavioursOfGameObject<T>(gameObject);
+        }
 
         public T GetComponentFromLibrary<T>()
         {
@@ -78,8 +87,6 @@ namespace YondaimeFramework
             return _sceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehavioursFromLibrary<T>();
         }
 
-        
-        
 
         public virtual void RefreshHierarchy()
         {

@@ -63,7 +63,15 @@ namespace YondaimeFramework
             //to protect direct access to GetBehaviour via myLib reference in CustomBehaviour
             return base.GetBehaviourFromLibraryById<T>(behaviourId);
         }
-       
+
+        public new T GetBehaviourOfGameObject<T>(GameObject requesteeObject) {
+            return base.GetBehaviourOfGameObject<T>(requesteeObject);
+        }
+
+        public new List<T> GetBehavioursOfGameObject<T>(GameObject requesteeGameObject) {
+            return base.GetBehavioursOfGameObject<T>(requesteeGameObject);
+        }
+
         public SceneLibrary GetSceneLibraryFromRootLibraryById(string systemId)
         {
             return _rootLibrary.GetSceneLibraryById(systemId);

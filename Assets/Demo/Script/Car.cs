@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using YondaimeFramework;
 
-public class Car : CustomBehaviour
+public class Car : CustomBehaviour,ICar
 {
 
     private void Start()
@@ -13,6 +13,10 @@ public class Car : CustomBehaviour
         
       //  Debug.Log($"{GetComponentFromOtherSceneLibrary<SportsCar>(SceneIDs.Scene1).gameObject.name} -- {gameObject.name}" );
        // Debug.Log($"{GetComponentFromOtherSceneLibraryById<Car>("Ferrari",SceneIDs.Scene1).gameObject.name} -- {gameObject.name}" );
+       
+         Debug.Log($"{GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}" );
+
+        
 
     }
 

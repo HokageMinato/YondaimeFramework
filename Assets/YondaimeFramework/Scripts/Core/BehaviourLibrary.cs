@@ -105,6 +105,52 @@ using UnityEngine;
             return default;
         }
 
+        protected T GetBehaviourOfGameObject<T>(GameObject requesteeObject) 
+        {
+            Type reqeuestedType = typeof(T);
+
+            if (_behaviourLookUp.ContainsKey(reqeuestedType) && _behaviourLookUp[reqeuestedType].Length > 0)
+            {
+                CustomBehaviour[] behaviours = _behaviourLookUp[reqeuestedType];
+
+                for (int i = 0; i < behaviours.Length; i++)
+                {
+                    if (behaviours[i].gameObject.Equals(requesteeObject)) {
+                        return (T)(object)behaviours[i];
+                    }
+                }
+            }
+
+
+            if (reqeuestedType.IsInterface)
+            {
+                foreach (KeyValuePair<Type, CustomBehaviour[]> item in _behaviourLookUp)
+                {
+                    if (item.Value.Length > 0 && reqeuestedType.IsAssignableFrom(item.Key))
+                    {
+                        CustomBehaviour[] behaviours = item.Value;
+                        for (int i = 0; i < behaviours.Length; i++)
+                        {
+                            if (behaviours[i].gameObject.Equals(requesteeObject))
+                            {
+                                return (T)(object)behaviours[i];
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < _childLibs.Length; i++)
+            {
+                T behaviour = _childLibs[i].GetBehaviourOfGameObject<T>(requesteeObject);
+                if (behaviour != null)
+                    return behaviour;
+            }
+
+            return default;
+
+        }
+
         protected T GetBehaviourFromLibraryById<T>(string behaviourId) 
         {
             string id = behaviourId + typeof(T).ToString();
@@ -164,6 +210,50 @@ using UnityEngine;
 
             return behaviours;
         }
+
+        protected List<T> GetBehavioursOfGameObject<T>(GameObject requesteeGameObject)
+        {
+            Type reqeuestedType = typeof(T);
+            List<T> behaviours = new List<T>();
+
+            if (_behaviourLookUp.ContainsKey(reqeuestedType))
+            {
+                CustomBehaviour[] behavioursInLookUp = _behaviourLookUp[reqeuestedType];
+                for (int i = 0; i < behavioursInLookUp.Length && behavioursInLookUp[i].gameObject.Equals(requesteeGameObject); i++)
+                {
+                    behaviours.Add((T)(object)behavioursInLookUp[i]);
+                }
+            }
+
+            if (reqeuestedType.IsInterface)
+            {
+
+                foreach (KeyValuePair<Type, CustomBehaviour[]> item in _behaviourLookUp)
+                {
+                    if (reqeuestedType.IsAssignableFrom(item.Key))
+                    {
+                        CustomBehaviour[] behavioursInLookUp = item.Value;
+                        for (int i = 0; i < behavioursInLookUp.Length && behavioursInLookUp[i].gameObject.Equals(requesteeGameObject); i++)
+                        {
+                            behaviours.Add((T)(object)behavioursInLookUp[i]);
+                        }
+                    }
+                }
+            }
+
+
+            if (_childLibs.Length > 0)
+            {
+                for (int i = 0; i < _childLibs.Length; i++)
+                {
+                    behaviours.AddRange(_childLibs[i].GetBehavioursFromLibrary<T>());
+                }
+            }
+
+            return behaviours;
+        }
+
+
 
         
         public void LogLibrary() {
