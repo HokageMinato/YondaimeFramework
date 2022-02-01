@@ -58,10 +58,20 @@ using UnityEngine;
             void ParseTempToFinalLookup()
             {
                 foreach (KeyValuePair<Type, List<CustomBehaviour>> item in tempLookUp)
+                {
+                    if (!_behaviourLookUp.ContainsKey(item.Key))
                         _behaviourLookUp.Add(item.Key, item.Value.ToArray());
-    
+                    else
+                        _behaviourLookUp[item.Key] = item.Value.ToArray();
+                }
+
                 foreach (KeyValuePair<string, CustomBehaviour> item in tempLookUpId)
+                {
+                    if (!_idLookup.ContainsKey(item.Key))
                         _idLookup.Add(item.Key, item.Value);
+                    else
+                        _idLookup[item.Key] = item.Value;
+                }
 
             }
             void InitChildLibraries()
