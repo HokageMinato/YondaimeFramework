@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\YondaimeFramework\Scripts\Editor\SceneIdDrawer.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\Editor\ComponentIdDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

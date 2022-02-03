@@ -62,6 +62,8 @@
     <Compile Include="Assets\Demo\Script\CarHandler.cs" />
     <Compile Include="Assets\Demo\Script\SportsCar.cs" />
     <Compile Include="Assets\Demo\Script\SceneChanger.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\ComponentId\ComponentIdSources.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\ComponentId\ComponentIdSourceSO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

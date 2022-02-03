@@ -9,7 +9,7 @@ namespace YondaimeFramework
         #region PRIVATE_VARIABLES
         [SerializeField] private BehaviourLibrary _myLibrary;
         [SerializeField] private SceneLibrary _sceneLibrary;
-        [SerializeField] public string _id;
+        [SerializeField] public ComponentId _id;
         #endregion
 
         #region PUBLIC_VARIABLES
@@ -32,7 +32,7 @@ namespace YondaimeFramework
         {
             get
             {
-                return _id;
+                return _id.id;
             }
         }
         #endregion

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-using System.Reflection;
-
+using UnityEngine.SceneManagement;
 
 namespace YondaimeFramework
 {
@@ -33,12 +32,12 @@ namespace YondaimeFramework
 
         private static string[] GetId()
         {
-            FieldInfo[] infos = typeof(SceneIDs).GetFields();
-            string[] ids = new string[infos.Length];
+            int sceneCount = SceneManager.sceneCountInBuildSettings;
+            string[] ids = new string[sceneCount];
 
-            for (int i = 0; i < infos.Length; i++)
+            for (int i = 0; i < sceneCount; i++)
             {
-                ids[i] = infos[i].Name;
+                ids[i] = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
             }
 
             return ids;
