@@ -36,7 +36,7 @@ using UnityEngine;
                 {
                     CustomBehaviour currentBehaviour = _behaviours[i];
                     Type currentBehaviourType = currentBehaviour.GetType();
-                    string currentBehaviourId = currentBehaviour.Id;
+                    string currentBehaviourId = currentBehaviour.ObjectId;
                     
                     if (!tempLookUp.ContainsKey(currentBehaviourType))
                     {

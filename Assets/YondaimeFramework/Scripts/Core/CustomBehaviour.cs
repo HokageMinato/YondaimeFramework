@@ -9,7 +9,7 @@ namespace YondaimeFramework
         #region PRIVATE_VARIABLES
         [SerializeField] private BehaviourLibrary _myLibrary;
         [SerializeField] private SceneLibrary _sceneLibrary;
-        [SerializeField] public ComponentId _id;
+        [SerializeField] public ComponentId _objectId;
         #endregion
 
         #region PUBLIC_VARIABLES
@@ -28,11 +28,11 @@ namespace YondaimeFramework
             }
         }
 
-        public string Id
+        public string ObjectId
         {
             get
             {
-                return _id.id;
+                return _objectId.id;
             }
         }
         #endregion
@@ -94,7 +94,12 @@ namespace YondaimeFramework
             MyLibrary.InitializeLibrary();
         }
 
-       
+
+        public void SetObjectId(string objectId) 
+        {
+            _objectId.id = objectId;
+        }
+
         public void DestorySelf()
         {
             DestroyImmediate(gameObject);

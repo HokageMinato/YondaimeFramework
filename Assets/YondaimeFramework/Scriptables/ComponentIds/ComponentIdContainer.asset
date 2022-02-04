@@ -17,5 +17,8 @@ MonoBehaviour:
     _showIds: 1
     sourceSos: {fileID: 11400000, guid: 509787caa3d63514bb6c7675a244d349, type: 2}
   - _systemName: PlayerTypes
-    _showIds: 0
+    _showIds: 1
     sourceSos: {fileID: 11400000, guid: 2f695a7176aab86409042048eb748615, type: 2}
+  - _systemName: Cars
+    _showIds: 1
+    sourceSos: {fileID: 11400000, guid: 161689c60fb6c4e468c239e761a97d58, type: 2}
