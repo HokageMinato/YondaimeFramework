@@ -4,7 +4,7 @@ using UnityEngine;
 using YondaimeFramework;
 
 [CreateAssetMenu(fileName = "ComponentIdContainer" , menuName = "YondaimeFramework/ComponentIdContainer")]
-public class ComponentIdSourceSO : ScriptableObject
+public class SystemIdDataSO : ScriptableObject
 {
 	[SerializeField] private string[] ids;
 

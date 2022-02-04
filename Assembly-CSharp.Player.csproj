@@ -54,16 +54,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\YondaimeFramework\Scripts\Core\RootLibrary.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\ComponentId\CentalIdsDataSO.cs" />
     <Compile Include="Assets\YondaimeFramework\Scripts\Core\CustomBehaviour.cs" />
     <Compile Include="Assets\YondaimeFramework\Scripts\Core\BehaviourLibrary.cs" />
     <Compile Include="Assets\YondaimeFramework\Scripts\Core\SceneLibrary.cs" />
     <Compile Include="Assets\YondaimeFramework\Scripts\Core\FrameworkConstants.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\ComponentId\SystemIdDataSO.cs" />
     <Compile Include="Assets\Demo\Script\Car.cs" />
     <Compile Include="Assets\Demo\Script\CarHandler.cs" />
     <Compile Include="Assets\Demo\Script\SportsCar.cs" />
     <Compile Include="Assets\Demo\Script\SceneChanger.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\ComponentId\ComponentIdSources.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\ComponentId\ComponentIdSourceSO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -9,7 +9,7 @@ namespace YondaimeFramework
         #region PRIVATE_VARIABLES
         [SerializeField] private BehaviourLibrary _myLibrary;
         [SerializeField] private SceneLibrary _sceneLibrary;
-        [SerializeField] public ComponentId _objectId;
+        [HideInInspector][SerializeField] public string _objectId;
         #endregion
 
         #region PUBLIC_VARIABLES
@@ -32,7 +32,7 @@ namespace YondaimeFramework
         {
             get
             {
-                return _objectId.id;
+                return _objectId;
             }
         }
         #endregion
@@ -97,7 +97,7 @@ namespace YondaimeFramework
 
         public void SetObjectId(string objectId) 
         {
-            _objectId.id = objectId;
+            _objectId = objectId;
         }
 
         public void DestorySelf()

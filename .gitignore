@@ -58,7 +58,7 @@
 # Builds
 *.apk
 *.aab
-#*.unitypackage
+*.unitypackage
 
 # Crashlytics generated file
 /*/crashlytics-build.properties
@@ -76,3 +76,7 @@
 /*/[Aa]ssets/StreamingAssets
 .vsconfig
 remote_config_data
+ACS Unity/ServerData
+ACS Unity/DevServerData
+SorryParchisi-Unity/.idea
+Library/

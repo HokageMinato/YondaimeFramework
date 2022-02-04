@@ -4,13 +4,6 @@ using UnityEngine;
 namespace YondaimeFramework
 {
 
-    //-----------------{Component Id}---------------------------------
-    [Serializable]
-    public struct ComponentId
-    {
-        public string id;
-    }
-
     //-----------------{Scene Id}---------------------------------
     [Serializable]
     public struct SceneId

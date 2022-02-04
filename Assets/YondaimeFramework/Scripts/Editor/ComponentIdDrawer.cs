@@ -1,49 +1,113 @@
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.SceneManagement;
-
+using YondaimeFramework;
 
 namespace YondaimeFramework
 {
-    [CustomPropertyDrawer(typeof(ComponentId))]
-    public class ComponentIdDrawer : PropertyDrawer
+    [CustomEditor(typeof(CustomBehaviour),editorForChildClasses:true)]
+    [CanEditMultipleObjects]
+    public class ComponentIdDrawer : Editor
     {
-        #region UNITY_CALLBACKS
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        private const string SET_OBJECT_ID= "Set Object Id";
+        private const string CHANGE_OBJECT_ID= "Change Object Id";
+
+
+        public override void OnInspectorGUI()
         {
-            EditorGUI.BeginProperty(position, label, property);
-            string[] systemIds = GetId();
-            
-            if (systemIds != null)
+
+            CentalIdsDataSO idSources=null;
+            CustomBehaviour targetBehaviour = target as CustomBehaviour; 
+            string targetObjectId = targetBehaviour.ObjectId;
+
+            base.OnInspectorGUI();
+
+            if (IsIdSourceNull())
             {
-                float h = position.height / 2;
-                Rect rect2 = new Rect(position.x, position.y + h, position.width, h);
-
-                string[] choices = systemIds;
-                int index = ArrayUtility.IndexOf(choices, property.FindPropertyRelative("id").stringValue);
-                index = EditorGUI.Popup(rect2, "CompId", index, choices);
-
-                if (index != -1)
-                    property.FindPropertyRelative("id").stringValue = choices[index];
+                LoadIdSource();
             }
 
+            if (IsIdSourceNull())
+            {
+                ShowWarningLabel();
+                   return;
+            }
 
-            EditorGUI.EndProperty();
+            DrawIdLabel();
+
+            if (DrawObjectIdButton())
+                DrawMenu();
+
+
+            #region LOCAL_FUNCTIONS
+
+            void DrawMenu()
+            {
+                GenericMenu menu = new GenericMenu();
+                FillMenu(menu);
+                menu.ShowAsContext();
+            }
+
+            void OnIdSelected(object id)
+            {
+                targetBehaviour.SetObjectId((string)id);
+                EditorUtility.SetDirty(targetBehaviour.gameObject);
+            }
+
+            void FillMenu(GenericMenu targetMenu)
+            {
+                SystemIdsData[] systemIdData = idSources.SystemIdsData;
+                for (int i = 0; i < systemIdData.Length; i++)
+                {
+                    AddSystemIdSubMenu(targetMenu, systemIdData[i]);
+                }
+            }
+
+            void AddSystemIdSubMenu(GenericMenu targetMenu, SystemIdsData idData)
+            {
+                string systemId = idData.SystemId;
+                string[] componentIds = idData.GetIds();
+
+                for (int i = 0; i < componentIds.Length; i++)
+                {
+                    string choiceId = componentIds[i];
+                    bool isPresentItemSelected = IsEmpty(targetObjectId) && targetObjectId.Equals(choiceId);
+                    targetMenu.AddItem(new GUIContent($"{systemId}/{choiceId}"), isPresentItemSelected, OnIdSelected, choiceId);
+                }
+            }
+
+            bool DrawObjectIdButton()
+            {
+                string buttonString = IsEmpty(targetObjectId) ? SET_OBJECT_ID : CHANGE_OBJECT_ID;
+                return GUILayout.Button(buttonString);
+            }
+
+            void DrawIdLabel()
+            {
+                if (!IsEmpty(targetObjectId))
+                    EditorGUILayout.LabelField("Object Id:",targetObjectId);
+            }
+
+            void ShowWarningLabel() 
+            {
+                EditorGUILayout.LabelField("Id Source Empty Or Not Found");
+            }
+
+            void LoadIdSource()
+            {
+                idSources = AssetDatabase.LoadAssetAtPath<CentalIdsDataSO>("Assets/YondaimeFramework/Scriptables/ComponentIds/ComponentIdContainer.asset");
+            }
+
+            bool IsIdSourceNull()
+            {
+                return idSources == null;
+            }
+
+            bool IsEmpty(string id)
+            {
+                return string.IsNullOrEmpty(id) || string.IsNullOrWhiteSpace(id);
+            }
+
+            #endregion
         }
-
-        private static string[] GetId()
-        {
-            const string Path = "Assets/YondaimeFramework/Scriptables/ComponentIds/ComponentIdContainer.asset";
-            ComponentIdSources componentIdSources = AssetDatabase.LoadAssetAtPath<ComponentIdSources>(Path);
-            return componentIdSources.GetIds();
-        }
-
-
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return base.GetPropertyHeight(property, label) * 2;
-        }
-
-        #endregion
     }
 }
