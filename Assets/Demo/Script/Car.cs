@@ -10,9 +10,10 @@ using System;
 
 public class Car : CustomBehaviour,ICar
 {
+
     public int maxItr;
     public Car[] othercars;
-    
+    public ComponentId idToSearch;
 
     
     private void Start()
@@ -28,8 +29,8 @@ public class Car : CustomBehaviour,ICar
 
         //Car c = GetComponentFromLibraryById<Car>("Buggati");
         //c?.SetObjectId("Lamborghini");
-        if(ObjectId == "Ferrari")
-        Debug.Log($"{GetComponentFromLibraryById<Car>("Ferrari") == null}");
+
+        Debug.Log(GetComponentFromLibraryById<Car>(idToSearch)==null);
     }
 
     
@@ -42,7 +43,7 @@ public class Car : CustomBehaviour,ICar
         st.Start();
         for (double i = 0; i < maxItr; i++)
         {
-            GetComponentFromLibraryById<Car>("Ferrari");
+            GetComponentFromLibraryById<Car>(idToSearch);
 
         }
         st.Stop();
@@ -53,7 +54,7 @@ public class Car : CustomBehaviour,ICar
         st.Start();
         for (double i = 0; i < maxItr; i++)
         {
-            GameObject.FindGameObjectWithTag("Finish");
+            GameObject.FindGameObjectsWithTag("Finish");
         }
         st.Stop();
 

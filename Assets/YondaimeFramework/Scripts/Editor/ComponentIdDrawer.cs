@@ -1,130 +1,134 @@
 using UnityEngine;
 using UnityEditor;
 using YondaimeFramework;
+using System.Collections.Generic;
 
 namespace YondaimeFramework
 {
-    [CustomEditor(typeof(CustomBehaviour),editorForChildClasses:true)]
-    [CanEditMultipleObjects]
-    public class ComponentIdDrawer : Editor
+    [CustomPropertyDrawer(typeof(ComponentId))]
+    public class ComponentIdDrawer : PropertyDrawer
     {
-        private const string SET_OBJECT_ID = "Set Object Id";
-        private const string CHANGE_OBJECT_ID = "Change Object Id";
+        CentalIdsDataSO idSources = null;
+        
 
-
-        public override void OnInspectorGUI()
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            CentalIdsDataSO idSources=null;
-            CustomBehaviour targetBehaviour = target as CustomBehaviour; 
-            string targetObjectId = targetBehaviour.ObjectId;
 
-            GUILayout.BeginHorizontal();
+            EditorGUI.BeginProperty(position, label, property);
+            
             if (IsIdSourceNull())
             {
                 LoadIdSource();
             }
 
-            if (IsIdSourceNull())
+            if (IsIdSourceNull()) 
             {
-                ShowWarningLabel();
-                   return;
+                EditorGUI.LabelField(position, new GUIContent("No Id Source Present,Create or Check Path"));
+                return;
             }
 
-            DrawIdLabel();
+            GUIContent labelToDisplay = new GUIContent(property.name);
+            GUIContent[] menu;
+            ComponentId[] idChoices;
+             
+            FillChoiceMenu();
 
-            if (DrawObjectIdButton())
-                DrawMenu();
+            string presentStringIdValue = GetPresentStringIdValueFromTargetProperty();
+            
+            int oldIndex = GetIndexBasedOf(presentStringIdValue); 
 
-            GUILayout.EndHorizontal();
+            int newIndex = EditorGUI.Popup(position,labelToDisplay, oldIndex,menu);
+
+            if (newIndex != -1)
+                SetPresentStringIdValueToTargetProperty(idChoices[newIndex].stringId, idChoices[newIndex].objBt);
+            
+
+            EditorGUI.EndProperty();
 
 
-            base.OnInspectorGUI();
 
-            #region LOCAL_FUNCTIONS
-
-            void DrawMenu()
-            {
-                GenericMenu menu = new GenericMenu();
-                FillMenu(menu);
-                menu.ShowAsContext();
-            }
-
-            void OnIdSelected(object id)
-            {
-                targetBehaviour.SetObjectId((string)id);
-                EditorUtility.SetDirty(targetBehaviour.gameObject);
-            }
-
-            void RemoveId(object id) 
-            {
-                targetBehaviour.SetObjectId(string.Empty);
-            }
-
-            void FillMenu(GenericMenu targetMenu)
-            {
-                SystemIdsData[] systemIdData = idSources.SystemIdsData;
-                
-                AddNoneOption(targetMenu);
-
-                for (int i = 0; i < systemIdData.Length; i++)
-                {
-                    AddSystemIdSubMenu(targetMenu, systemIdData[i]);
-                }
-            }
-
-            void AddNoneOption(GenericMenu targetMenu)
-            {
-                string choiceId = CentalIdsDataSO.None;
-                bool isPresentItemSelected = IsEmpty(targetObjectId);
-                targetMenu.AddItem(new GUIContent($"{choiceId}"), isPresentItemSelected, RemoveId, choiceId);
-            }
-
-            void AddSystemIdSubMenu(GenericMenu targetMenu, SystemIdsData idData)
-            {
-                string systemId = idData.SystemId;
-                string[] componentIds = idData.GetIds();
-
-                for (int i = 0; i < componentIds.Length; i++)
-                {
-                    string choiceId = componentIds[i];
-                    bool isPresentItemSelected = !IsEmpty(targetObjectId) && targetObjectId.Equals(choiceId);
-                    targetMenu.AddItem(new GUIContent($"{systemId}/{choiceId}"), isPresentItemSelected, OnIdSelected, choiceId);
-                }
-            }
-
-            bool DrawObjectIdButton()
-            {
-                string buttonString = IsEmpty(targetObjectId) ? SET_OBJECT_ID : CHANGE_OBJECT_ID;
-                return GUILayout.Button(buttonString);
-            }
-
-            void DrawIdLabel()
-            {
-                if (!IsEmpty(targetObjectId))
-                    EditorGUILayout.LabelField("Object Id:",targetObjectId);
-            }
-
-            void ShowWarningLabel() 
-            {
-                EditorGUILayout.LabelField("Id Source Empty Or Not Found");
-            }
-
-            void LoadIdSource()
-            {
-                idSources = AssetDatabase.LoadAssetAtPath<CentalIdsDataSO>("Assets/YondaimeFramework/Scriptables/ComponentIds/ComponentIdContainer.asset");
-            }
+            #region FUNCTION_DECLARATIONS
 
             bool IsIdSourceNull()
             {
                 return idSources == null;
             }
-
-            bool IsEmpty(string id)
+           
+            void LoadIdSource()
             {
-                return string.IsNullOrEmpty(id) || string.IsNullOrWhiteSpace(id);
+                idSources = AssetDatabase.LoadAssetAtPath<CentalIdsDataSO>("Assets/YondaimeFramework/Scriptables/ComponentIds/ComponentIdContainer.asset");
             }
 
+            void FillChoiceMenu()
+            {
+                SystemIdsData[] systemIdData = idSources.SystemIdsData;
+                List<GUIContent> contentList = new List<GUIContent>();
+                List<ComponentId> choices = new List<ComponentId>();
+
+                AddNoneOption(contentList,choices);
+
+                for (int i = 0; i < systemIdData.Length; i++)
+                {
+                    AddSystemIdSubMenu(contentList, choices,systemIdData[i]);
+                }
+
+                menu = contentList.ToArray();
+                idChoices = choices.ToArray();
+            }
+
+            void AddNoneOption(List<GUIContent> contentList,List<ComponentId> actualValuesList)
+            {
+                string choiceId = ComponentId.NoneStr;
+                contentList.Add(new GUIContent(choiceId));
+                actualValuesList.Add(new ComponentId
+                {
+                    stringId = "None",
+                    objBt = -1
+                });
+            }
+
+            void AddSystemIdSubMenu(List<GUIContent> contentList, List<ComponentId> choiceList, SystemIdsData idData)
+            {
+                string systemId = idData.SystemId;
+                ComponentIdSRC[] componentIds = idData.GetIds();
+
+                for (int i = 0; i < componentIds.Length; i++)
+                {
+                    string choiceId = componentIds[i].stringIdVal;
+                    contentList.Add(new GUIContent($"{systemId}/{choiceId}"));
+                    choiceList.Add(new ComponentId(componentIds[i]));
+                }
+            }
+            
+            int GetIndexBasedOf(string presentValue) 
+            {
+                
+                for (int i = 0; i < idChoices.Length; i++)
+                {
+                    if (idChoices[i].stringId == presentValue)
+                    {
+                        return i;
+                    }
+                }
+
+                return ComponentId.None;
+            }
+
+            string GetPresentStringIdValueFromTargetProperty() 
+            {
+                return property.FindPropertyRelative(ComponentId.StringIdPropertyName).stringValue;
+            }
+            
+            void SetPresentStringIdValueToTargetProperty(string value,int idVal) 
+            {
+                property.FindPropertyRelative(ComponentId.StringIdPropertyName).stringValue=value;
+                property.FindPropertyRelative(ComponentId.IntIdValName).intValue = idVal;
+            }
             #endregion
+
         }
+
+
+
     }
 }

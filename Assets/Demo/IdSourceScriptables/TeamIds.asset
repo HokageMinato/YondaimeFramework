@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: TeamIds
   m_EditorClassIdentifier: 
   ids:
-  - Green
-  - Blue
-  - Black
+  - stringIdVal: Green
+    intValue: 291225893
+  - stringIdVal: Yellow
+    intValue: -676795991
+  - stringIdVal: Blue
+    intValue: 1040475530

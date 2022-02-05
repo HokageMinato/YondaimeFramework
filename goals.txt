@@ -30,19 +30,18 @@ Improvements:
  
  > Horizontal layout display for editor buttons [DONE]
  
- > Optimized GetComponentFromGameObject by assigning indexes to objects. //Near Performance to GetComponentAchieved, Still needs work
+ > Optimized GetComponentFromGameObject by assigning indexes to objects. [DONE]
  
- > GetComponentByID, using string ids with type and concating takes too much load, Find a better way
+ > GetComponentByID, [DONE]
  
  > Add proper Exceptions for [Library not assigned] [Library not initialized] [Nulls Present in Library, require refresh]
 
  > locking of resource when queried during hierarchy change, or hierarchy change during query.
  
- 
- > ComponentId Seperate drawer which takes all	of id sources and displayes for parameter;
+ > ComponentId Seperate drawer which takes all	of id sources and displayes for parameter; [DONE]
 	byte packed with str id, stored in component, hidden, used only when queried;
 	
+ > Performance Optimization, preallocate List space during generation in Get methods
+ 
+ > See if Serialized class instances can anyhow added to this, just for fun
 	
-8267 <Custom Unity> 1440 //concat + compate
-890 <Custom Unity> 1292  // dict[dict[type]]
-584 <Custom Unity> 1301  // search in array

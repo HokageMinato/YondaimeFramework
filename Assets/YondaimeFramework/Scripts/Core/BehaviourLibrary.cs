@@ -163,14 +163,14 @@ using Debug = UnityEngine.Debug;
         }
 
         
-        protected T GetBehaviourFromLibraryById<T>(string behaviourId) where T : class
+        protected T GetBehaviourFromLibraryById<T>(ComponentId behaviourId) where T : class
         {
             Type requestedType = typeof(T);
             CustomBehaviour[] lst = _behaviourLookup[requestedType];
 
             for (int i = 0; i < lst.Length; i++)
             {
-                if (lst[i].ObjectId == behaviourId)
+                if (lst[i].id.objBt == behaviourId.objBt)
                     return (T)(object)lst[i];
             }
 
@@ -196,6 +196,7 @@ using Debug = UnityEngine.Debug;
                 {
                     behaviours.Add((T)(object)behavioursInLookUp[i]);
                 }
+
             }
 
             if (_interfaceLookup.ContainsKey(reqeuestedType))

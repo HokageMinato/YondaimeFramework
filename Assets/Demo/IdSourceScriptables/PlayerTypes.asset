@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: PlayerTypes
   m_EditorClassIdentifier: 
   ids:
-  - Local
-  - Network
+  - stringIdVal: Local
+    intValue: 4
+  - stringIdVal: Network
+    intValue: 34

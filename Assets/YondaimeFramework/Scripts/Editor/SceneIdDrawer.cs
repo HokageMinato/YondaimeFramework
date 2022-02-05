@@ -22,6 +22,8 @@ namespace YondaimeFramework
                 int index = ArrayUtility.IndexOf(choices, property.FindPropertyRelative("id").stringValue);
                 index = EditorGUI.Popup(rect2, "SceneId", index, choices);
 
+
+              
                 if (index != -1)
                     property.FindPropertyRelative("id").stringValue = choices[index];
             }

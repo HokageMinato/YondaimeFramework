@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Cars
   m_EditorClassIdentifier: 
   ids:
-  - Buggati
-  - Ferrari
-  - Lamborghini
+  - stringIdVal: Buggati
+    intValue: 0
+  - stringIdVal: Lamborghini
+    intValue: 1
+  - stringIdVal: Audi
+    intValue: 56

@@ -35,7 +35,7 @@ namespace YondaimeFramework
             }
         }
 
-        public byte obIdByte;
+        public ComponentId id;
         public string ObjectId
         {
             get
@@ -93,17 +93,17 @@ namespace YondaimeFramework
             return _sceneLibrary.GetBehavioursFromLibrary<T>();
         }
 
-        public T GetComponentFromLibraryById<T>(string behaviourId) where T: class
+        public T GetComponentFromLibraryById<T>(ComponentId behaviourId) where T: CustomBehaviour
         {
             return _sceneLibrary.GetBehaviourFromLibraryById<T>(behaviourId);
         }
 
-        public T GetComponentFromOtherSceneLibrary<T>(string sceneId) where T: class
+        public T GetComponentFromOtherSceneLibrary<T>(string sceneId) where T: CustomBehaviour
         {
             return _sceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibrary<T>();
         }
         
-        public T GetComponentFromOtherSceneLibraryById<T>(string behaviourId,string sceneId) where T:class
+        public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId,string sceneId) where T: CustomBehaviour
         {
             return _sceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId);
         }
