@@ -6,26 +6,30 @@ using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 using System;
 
+
+
 public class Car : CustomBehaviour,ICar
 {
     public int maxItr;
     public Car[] othercars;
+    
 
     
     private void Start()
     {
         //Debug.Log($"{GetComponentFromLibraryById<Car>("Buggati").gameObject.name} -- {gameObject.name}" );
         //Debug.Log($"{GetComponentFromLibraryById<SportsCar>("Buggati").gameObject.name} -- {gameObject.name}" );
-        
+
         //Debug.Log($"{GetComponentFromOtherSceneLibrary<SportsCar>(SceneIDs.Scene1).gameObject.name} -- {gameObject.name}" );
-       // Debug.Log($"{GetComponentFromOtherSceneLibraryById<Car>("Ferrari",SceneIDs.Scene1).gameObject.name} -- {gameObject.name}" );
-        
+        // Debug.Log($"{GetComponentFromOtherSceneLibraryById<Car>("Ferrari",SceneIDs.Scene1).gameObject.name} -- {gameObject.name}" );
+
         //Debug.Log($"{GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}" );
         //Debug.Log($"{GetComponentFromMyGameObject<SportsCar>() == null} -- {gameObject.name}" );
-        
+
         //Car c = GetComponentFromLibraryById<Car>("Buggati");
         //c?.SetObjectId("Lamborghini");
-
+        if(ObjectId == "Ferrari")
+        Debug.Log($"{GetComponentFromLibraryById<Car>("Ferrari") == null}");
     }
 
     
@@ -38,7 +42,8 @@ public class Car : CustomBehaviour,ICar
         st.Start();
         for (double i = 0; i < maxItr; i++)
         {
-            GetComponentFromLibraryById<ICar>("Ferrai");
+            GetComponentFromLibraryById<Car>("Ferrari");
+
         }
         st.Stop();
         res = st.ElapsedMilliseconds.ToString();

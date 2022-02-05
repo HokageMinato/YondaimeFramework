@@ -58,7 +58,7 @@ namespace YondaimeFramework
             return base.GetBehavioursFromLibrary<T>();
         }
 
-        public new T GetBehaviourFromLibraryById<T>(string behaviourId)
+        public new T GetBehaviourFromLibraryById<T>(string behaviourId) where T:class
         {
             //to protect direct access to GetBehaviour via myLib reference in CustomBehaviour
             return base.GetBehaviourFromLibraryById<T>(behaviourId);

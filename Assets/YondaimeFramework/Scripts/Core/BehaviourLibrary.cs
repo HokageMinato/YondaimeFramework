@@ -17,8 +17,6 @@ using Debug = UnityEngine.Debug;
         //NonSerialized
         private Dictionary<Type, CustomBehaviour[]> _behaviourLookup = new Dictionary<Type, CustomBehaviour[]>();
         private Dictionary<Type, CustomBehaviour[]> _interfaceLookup = new Dictionary<Type, CustomBehaviour[]>();
-        private Dictionary<string, CustomBehaviour> _idLookup = new Dictionary<string, CustomBehaviour>();
-        
         #endregion
 
         
@@ -27,7 +25,6 @@ using Debug = UnityEngine.Debug;
         public void InitializeLibrary()
         {
             Dictionary<Type, List<CustomBehaviour>> tempLookup = new Dictionary<Type, List<CustomBehaviour>>();
-            Dictionary<string, CustomBehaviour> tempLookUpId = new Dictionary<string, CustomBehaviour>();
             GenerateTempLookUps();
             MoveTempToFinalLookup();
             FillInterfaceLookup();
@@ -40,25 +37,12 @@ using Debug = UnityEngine.Debug;
                 {
                     CustomBehaviour currentBehaviour = _behaviours[i];
                     currentBehaviour.RefreshGOInstanceId();
-
                     Type currentBehaviourType = currentBehaviour.GetType();
-                    string currentBehaviourId = currentBehaviour.ObjectId;
-                    
                     if (!tempLookup.ContainsKey(currentBehaviourType))
                     {
                         tempLookup.Add(currentBehaviourType, new List<CustomBehaviour>());
                     }
-
                     tempLookup[currentBehaviourType].Add(_behaviours[i]);
-
-                    if (!IsCustomId(currentBehaviourId))
-                        continue;
-
-                    currentBehaviourId += currentBehaviourType.ToString();
-                    if (!tempLookUpId.ContainsKey(currentBehaviourId)) 
-                    {
-                        tempLookUpId.Add(currentBehaviourId, currentBehaviour);
-                    }
                 }
             }
             void MoveTempToFinalLookup()
@@ -71,13 +55,7 @@ using Debug = UnityEngine.Debug;
                         _behaviourLookup[item.Key] = item.Value.ToArray();
                 }
 
-                foreach (KeyValuePair<string, CustomBehaviour> item in tempLookUpId)
-                {
-                    if (!_idLookup.ContainsKey(item.Key))
-                        _idLookup.Add(item.Key, item.Value);
-                    else
-                        _idLookup[item.Key] = item.Value;
-                }
+                
                 tempLookup.Clear();
             }
             void FillInterfaceLookup() 
@@ -88,7 +66,6 @@ using Debug = UnityEngine.Debug;
                    Type[] interfaces = item.Key.GetInterfaces();
                     for (int i = 0; i < interfaces.Length; i++)
                     {
-                        Debug.Log($"Added interface type {interfaces[i]}");
                         if(!tempLookup.ContainsKey(interfaces[i]))
                             tempLookup.Add(interfaces[i], new List<CustomBehaviour>());
 
@@ -185,12 +162,17 @@ using Debug = UnityEngine.Debug;
 
         }
 
-        protected T GetBehaviourFromLibraryById<T>(string behaviourId) 
+        
+        protected T GetBehaviourFromLibraryById<T>(string behaviourId) where T : class
         {
-            string id = behaviourId;// + typeof(T).ToString();
+            Type requestedType = typeof(T);
+            CustomBehaviour[] lst = _behaviourLookup[requestedType];
 
-            if (_idLookup.ContainsKey(id))
-                return (T)(object)_idLookup[id];
+            for (int i = 0; i < lst.Length; i++)
+            {
+                if (lst[i].ObjectId == behaviourId)
+                    return (T)(object)lst[i];
+            }
 
             for (int i = 0; i < _childLibs.Length; i++)
             {
@@ -351,10 +333,11 @@ using Debug = UnityEngine.Debug;
 
         public virtual void PreRedundantCheck() { }
 
-        private bool IsCustomId(string behaviourId) 
+        private bool IsCustomId(byte behaviourId) 
         {
-            return (!string.IsNullOrEmpty(behaviourId) &&
-                            !string.IsNullOrWhiteSpace(behaviourId)) ;
+            return behaviourId > 0;
+            //return (!string.IsNullOrEmpty(behaviourId) &&
+            //                !string.IsNullOrWhiteSpace(behaviourId)) ;
         }
         #endregion
     }

@@ -1,0 +1,202 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.3f1 (76626098c1c4) revision 7758432'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 19043.1415; Version 2009; 64bit' Language: 'en' Physical Memory: 8139 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+D:\Installs\UnityInstalls\2020.3.3f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/Minato/Documents/YFramework
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+55520
+Successfully changed project path to: C:/Users/Minato/Documents/YFramework
+C:/Users/Minato/Documents/YFramework
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 39.86 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.3f1 (76626098c1c4)
+[Subsystems] Discovering subsystems at path D:/Installs/UnityInstalls/2020.3.3f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/Minato/Documents/YFramework/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 650M (ID=0xfd1)
+    Vendor:   
+    VRAM:     2017 MB
+    Driver:   21.21.13.7654
+Initialize mono
+Mono path[0] = 'D:/Installs/UnityInstalls/2020.3.3f1/Editor/Data/Managed'
+Mono path[1] = 'D:/Installs/UnityInstalls/2020.3.3f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'D:/Installs/UnityInstalls/2020.3.3f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56136
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: D:/Installs/UnityInstalls/2020.3.3f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001695 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 41.08 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.425 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.001004 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.187 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 0.29 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1123 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.0 MB.
+System memory in use after: 57.1 MB.
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 1564.
+Total: 2.161000 ms (FindLiveObjects: 0.162200 ms CreateObjectMapping: 0.066800 ms MarkObjects: 1.851500 ms  DeleteObjects: 0.079100 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/UIManager.cs
+  artifactKey: Guid(9cbcd892e490b344b9a188445b91c734) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UIManager.cs using Guid(9cbcd892e490b344b9a188445b91c734) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1033e6f513749b990fbe669cb5b16b5a') in 0.047244 seconds
+  Import took 0.050509 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000931 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.140 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.28 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1116 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 56.9 MB.
+System memory in use after: 57.0 MB.
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1566.
+Total: 2.038000 ms (FindLiveObjects: 0.160500 ms CreateObjectMapping: 0.063000 ms MarkObjects: 1.789100 ms  DeleteObjects: 0.024100 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 20.825095 seconds.
+  path: Assets/YondaimeFramework/Scripts/Editor/SystemIdDrawer.cs
+  artifactKey: Guid(9cf13bb135b9a8f4ea7d0a2873e68f03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework/Scripts/Editor/SystemIdDrawer.cs using Guid(9cf13bb135b9a8f4ea7d0a2873e68f03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a4d54a0e110a631e1ab3455b95a0e69') in 0.012088 seconds
+  Import took 0.014590 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001080 seconds.
+  path: Assets/YondaimeFramework/Scripts/Editor/SystemIdDrawer.cs
+  artifactKey: Guid(9cf13bb135b9a8f4ea7d0a2873e68f03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework/Scripts/Editor/SystemIdDrawer.cs using Guid(9cf13bb135b9a8f4ea7d0a2873e68f03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a4d54a0e110a631e1ab3455b95a0e69') in 0.003654 seconds
+  Import took 0.006239 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 61.940868 seconds.
+  path: Assets/YondaimeFramework/Scripts/Core/SystemLibrary.cs
+  artifactKey: Guid(de7500d56b722ab4dbc534c0be51e005) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework/Scripts/Core/SystemLibrary.cs using Guid(de7500d56b722ab4dbc534c0be51e005) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f76f36f18d039de3171ac1a18f9e546') in 0.008595 seconds
+  Import took 0.011342 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.002791 seconds.
+  path: Assets/YondaimeFramework/Scripts/Editor
+  artifactKey: Guid(2c0fa0850cc39e9468544d73dc854b58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework/Scripts/Editor using Guid(2c0fa0850cc39e9468544d73dc854b58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66399d475b7765025ef270dbbba33364') in 0.009069 seconds
+  Import took 0.011674 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.065615 seconds.
+  path: Assets/YondaimeFramework/Scripts/Core/CustomBehaviour.cs
+  artifactKey: Guid(0628a3b0c75e8a247bac9d99f763394d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework/Scripts/Core/CustomBehaviour.cs using Guid(0628a3b0c75e8a247bac9d99f763394d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b6ed0e0785c2d092a3a378122e3444ab') in 0.020384 seconds
+  Import took 0.025419 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.006171 seconds.
+  path: Assets/YondaimeFramework/Scripts
+  artifactKey: Guid(8021950ab3fc88541a5de260d7f270dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework/Scripts using Guid(8021950ab3fc88541a5de260d7f270dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c17cd34a897551285f077879bc750121') in 0.016463 seconds
+  Import took 0.020802 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.063297 seconds.
+  path: Assets/YondaimeFramework/Scripts/Core/BehaviourLibrary.cs
+  artifactKey: Guid(3914b2527ed224a459dfa034052ab656) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework/Scripts/Core/BehaviourLibrary.cs using Guid(3914b2527ed224a459dfa034052ab656) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '861cc6d1bbc97a798f39b4e200cd3500') in 0.007586 seconds
+  Import took 0.010054 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.004995 seconds.
+  path: Assets/YondaimeFramework
+  artifactKey: Guid(2128904082c2afe46950c6a215fa2721) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework using Guid(2128904082c2afe46950c6a215fa2721) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5fc23d39e8ba148472451dd61d227d2') in 0.007667 seconds
+  Import took 0.010141 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.004866 seconds.
+  path: Assets/YondaimeFramework/Scripts/Core
+  artifactKey: Guid(c7513ec23b5770c47a4f23d17f687062) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework/Scripts/Core using Guid(c7513ec23b5770c47a4f23d17f687062) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e01aae47b4ed9ac2229713691a9efee0') in 0.007269 seconds
+  Import took 0.009692 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.007619 seconds.
+  path: Assets/YondaimeFramework/Scripts/Core/ActiveRootInstance.cs
+  artifactKey: Guid(8c6a49d57d9b10e40a8827b5a9d41818) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework/Scripts/Core/ActiveRootInstance.cs using Guid(8c6a49d57d9b10e40a8827b5a9d41818) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a9b9d519b4a5009535d80b063c04d61') in 0.007271 seconds
+  Import took 0.009893 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.007509 seconds.
+  path: Assets/YondaimeFramework/Scripts/Core/RootLibrary.cs
+  artifactKey: Guid(96fc43b8d65fb8547bcbb94ac62d9cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework/Scripts/Core/RootLibrary.cs using Guid(96fc43b8d65fb8547bcbb94ac62d9cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '120fc1f1369d21369783c16bfc82a037') in 0.007379 seconds
+  Import took 0.010004 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014287 seconds.
+  path: Assets/YondaimeFramework/Scripts/Core/FrameworkConstants.cs
+  artifactKey: Guid(b87a8aecdd1778140a5325e1801ae107) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework/Scripts/Core/FrameworkConstants.cs using Guid(b87a8aecdd1778140a5325e1801ae107) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c7966ee321e22a96b6a5172258251a4') in 0.007313 seconds
+  Import took 0.009946 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

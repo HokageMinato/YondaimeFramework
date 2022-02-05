@@ -2,34 +2,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CreateAssetMenu(fileName = "ComponentIdSource", menuName = "YondaimeFramework/ComponentIdSource")]
-public class CentalIdsDataSO : ScriptableObject
+namespace YondaimeFramework
 {
-    public const string None = "None";
-    [SerializeField] private SystemIdsData[] idsData;
-   
-    public SystemIdsData[] SystemIdsData
+    [CreateAssetMenu(fileName = "ComponentIdSource", menuName = "YondaimeFramework/ComponentIdSource")]
+    public class CentalIdsDataSO : ScriptableObject
     {
-        get 
+        public const string None = "None";
+        [SerializeField] private SystemIdsData[] idsData;
+
+        public SystemIdsData[] SystemIdsData
         {
-            return idsData;   
+            get
+            {
+                return idsData;
+            }
         }
+
     }
-     
-}
 
-[System.Serializable]
-public class SystemIdsData
-{
-
-    [SerializeField] string _systemName;
-    [SerializeField] SystemIdDataSO sourceSos;
-
-    public string SystemId => _systemName;
-    public string[] GetIds()
+    [System.Serializable]
+    public class SystemIdsData
     {
-        return sourceSos.GetIds();
-    }
 
-    
+        [SerializeField] string _systemName;
+        [SerializeField] SystemIdDataSO sourceSos;
+
+        public string SystemId => _systemName;
+        public string[] GetIds()
+        {
+            return sourceSos.GetIds();
+        }
+
+
+    }
 }

@@ -37,3 +37,12 @@ Improvements:
  > Add proper Exceptions for [Library not assigned] [Library not initialized] [Nulls Present in Library, require refresh]
 
  > locking of resource when queried during hierarchy change, or hierarchy change during query.
+ 
+ 
+ > ComponentId Seperate drawer which takes all	of id sources and displayes for parameter;
+	byte packed with str id, stored in component, hidden, used only when queried;
+	
+	
+8267 <Custom Unity> 1440 //concat + compate
+890 <Custom Unity> 1292  // dict[dict[type]]
+584 <Custom Unity> 1301  // search in array

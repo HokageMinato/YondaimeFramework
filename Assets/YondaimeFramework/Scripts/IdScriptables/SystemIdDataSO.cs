@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using YondaimeFramework;
 
-[CreateAssetMenu(fileName = "ComponentIdContainer" , menuName = "YondaimeFramework/ComponentIdContainer")]
-public class SystemIdDataSO : ScriptableObject
+namespace YondaimeFramework
 {
-	[SerializeField] private string[] ids;
-
-	public string[] GetIds() 
+	[CreateAssetMenu(fileName = "ComponentIdContainer", menuName = "YondaimeFramework/ComponentIdContainer")]
+	public class SystemIdDataSO : ScriptableObject
 	{
-		return ids;
+		[SerializeField] private string[] ids;
+
+		public string[] GetIds()
+		{
+			return ids;
+		}
 	}
+
+	
 }

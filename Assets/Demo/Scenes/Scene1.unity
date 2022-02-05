@@ -169,6 +169,7 @@ MonoBehaviour:
   _myLibrary: {fileID: 1611601339}
   _sceneLibrary: {fileID: 1611601339}
   _objectId: Local
+  obIdByte: 0
   maxItr: 0
   othercars: []
 --- !u!1 &971765935
@@ -183,7 +184,7 @@ GameObject:
   - component: {fileID: 971765937}
   m_Layer: 0
   m_Name: FerrariCar (1)
-  m_TagString: Finish
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -217,6 +218,7 @@ MonoBehaviour:
   _myLibrary: {fileID: 1611601339}
   _sceneLibrary: {fileID: 1611601339}
   _objectId: Network
+  obIdByte: 0
   maxItr: 0
   othercars: []
 --- !u!1 &1068034631
@@ -267,6 +269,7 @@ MonoBehaviour:
   _myLibrary: {fileID: 0}
   _sceneLibrary: {fileID: 0}
   _objectId: 
+  obIdByte: 0
 --- !u!114 &1068034634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +328,7 @@ MonoBehaviour:
   _myLibrary: {fileID: 1611601339}
   _sceneLibrary: {fileID: 1611601339}
   _objectId: 
+  obIdByte: 0
   maxItr: 0
   othercars: []
 --- !u!1 &1209833926
@@ -373,6 +377,7 @@ MonoBehaviour:
   _myLibrary: {fileID: 1611601339}
   _sceneLibrary: {fileID: 1611601339}
   _objectId: 
+  obIdByte: 0
   maxItr: 0
   othercars: []
 --- !u!1 &1218977491
@@ -421,6 +426,7 @@ MonoBehaviour:
   _myLibrary: {fileID: 1611601339}
   _sceneLibrary: {fileID: 1611601339}
   _objectId: 
+  obIdByte: 0
   maxItr: 0
   othercars: []
 --- !u!1 &1611601338
@@ -455,6 +461,7 @@ MonoBehaviour:
   _myLibrary: {fileID: 1611601339}
   _sceneLibrary: {fileID: 1611601339}
   _objectId: 
+  obIdByte: 0
   _behaviours:
   - {fileID: 1611601339}
   - {fileID: 1218977493}
@@ -503,7 +510,7 @@ GameObject:
   - component: {fileID: 1722874144}
   m_Layer: 0
   m_Name: FerrariCar (2)
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -536,7 +543,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 1611601339}
   _sceneLibrary: {fileID: 1611601339}
-  _objectId: Ferrari
+  _objectId: Buggati
+  obIdByte: 200
   maxItr: 9999999
   othercars: []
 --- !u!114 &1722874144
@@ -554,6 +562,7 @@ MonoBehaviour:
   _myLibrary: {fileID: 1611601339}
   _sceneLibrary: {fileID: 1611601339}
   _objectId: 
+  obIdByte: 0
   maxItr: 0
   othercars: []
 --- !u!1 &1859766720
@@ -602,6 +611,7 @@ MonoBehaviour:
   _myLibrary: {fileID: 1611601339}
   _sceneLibrary: {fileID: 1611601339}
   _objectId: 
+  obIdByte: 0
   maxItr: 0
   othercars: []
 --- !u!1 &2047958946
