@@ -64,12 +64,12 @@ namespace YondaimeFramework
             return base.GetBehaviourFromLibraryById<T>(behaviourId);
         }
 
-        public new T GetBehaviourOfGameObject<T>(GameObject requesteeObject) {
-            return base.GetBehaviourOfGameObject<T>(requesteeObject);
+        public new T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId) {
+            return base.GetBehaviourOfGameObject<T>(requesteeGameObjectInstanceId);
         }
 
-        public new List<T> GetBehavioursOfGameObject<T>(GameObject requesteeGameObject) {
-            return base.GetBehavioursOfGameObject<T>(requesteeGameObject);
+        public new List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId) {
+            return base.GetBehavioursOfGameObject<T>(requesteeGameObjectInstanceId);
         }
 
         public SceneLibrary GetSceneLibraryFromRootLibraryById(string systemId)

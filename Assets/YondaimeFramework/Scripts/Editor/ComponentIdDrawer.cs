@@ -8,19 +8,17 @@ namespace YondaimeFramework
     [CanEditMultipleObjects]
     public class ComponentIdDrawer : Editor
     {
-        private const string SET_OBJECT_ID= "Set Object Id";
-        private const string CHANGE_OBJECT_ID= "Change Object Id";
+        private const string SET_OBJECT_ID = "Set Object Id";
+        private const string CHANGE_OBJECT_ID = "Change Object Id";
 
 
         public override void OnInspectorGUI()
         {
-
             CentalIdsDataSO idSources=null;
             CustomBehaviour targetBehaviour = target as CustomBehaviour; 
             string targetObjectId = targetBehaviour.ObjectId;
 
-            base.OnInspectorGUI();
-
+            GUILayout.BeginHorizontal();
             if (IsIdSourceNull())
             {
                 LoadIdSource();
@@ -37,6 +35,10 @@ namespace YondaimeFramework
             if (DrawObjectIdButton())
                 DrawMenu();
 
+            GUILayout.EndHorizontal();
+
+
+            base.OnInspectorGUI();
 
             #region LOCAL_FUNCTIONS
 
@@ -53,13 +55,28 @@ namespace YondaimeFramework
                 EditorUtility.SetDirty(targetBehaviour.gameObject);
             }
 
+            void RemoveId(object id) 
+            {
+                targetBehaviour.SetObjectId(string.Empty);
+            }
+
             void FillMenu(GenericMenu targetMenu)
             {
                 SystemIdsData[] systemIdData = idSources.SystemIdsData;
+                
+                AddNoneOption(targetMenu);
+
                 for (int i = 0; i < systemIdData.Length; i++)
                 {
                     AddSystemIdSubMenu(targetMenu, systemIdData[i]);
                 }
+            }
+
+            void AddNoneOption(GenericMenu targetMenu)
+            {
+                string choiceId = CentalIdsDataSO.None;
+                bool isPresentItemSelected = IsEmpty(targetObjectId);
+                targetMenu.AddItem(new GUIContent($"{choiceId}"), isPresentItemSelected, RemoveId, choiceId);
             }
 
             void AddSystemIdSubMenu(GenericMenu targetMenu, SystemIdsData idData)
@@ -70,7 +87,7 @@ namespace YondaimeFramework
                 for (int i = 0; i < componentIds.Length; i++)
                 {
                     string choiceId = componentIds[i];
-                    bool isPresentItemSelected = IsEmpty(targetObjectId) && targetObjectId.Equals(choiceId);
+                    bool isPresentItemSelected = !IsEmpty(targetObjectId) && targetObjectId.Equals(choiceId);
                     targetMenu.AddItem(new GUIContent($"{systemId}/{choiceId}"), isPresentItemSelected, OnIdSelected, choiceId);
                 }
             }

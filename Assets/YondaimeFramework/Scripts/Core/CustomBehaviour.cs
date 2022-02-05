@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 namespace YondaimeFramework
 {
     public abstract class CustomBehaviour : MonoBehaviour
     {
         #region PRIVATE_VARIABLES
-        [SerializeField] private BehaviourLibrary _myLibrary;
-        [SerializeField] private SceneLibrary _sceneLibrary;
-        [HideInInspector][SerializeField] public string _objectId;
+        [HideInInspector] [SerializeField] private BehaviourLibrary _myLibrary;
+        [HideInInspector] [SerializeField] private SceneLibrary _sceneLibrary;
+        [HideInInspector] [SerializeField] public string _objectId;
+
+        private int _insId;
+
         #endregion
 
         #region PUBLIC_VARIABLES
+        public int GOInstanceId { get { return _insId; } }
+
         public BehaviourLibrary MyLibrary
         {
             get
@@ -38,6 +45,11 @@ namespace YondaimeFramework
         #endregion
 
         #region PUBLIC_METHODS
+        public void RefreshGOInstanceId() 
+        {
+            _insId = gameObject.GetInstanceID();
+        }
+
         public void SetLibrary(BehaviourLibrary library)
         {
             _myLibrary = library;
@@ -50,18 +62,31 @@ namespace YondaimeFramework
 
         public T GetComponentFromMyGameObject<T>() 
         {
-            return _sceneLibrary.GetBehaviourOfGameObject<T>(gameObject);
+            int instanceId = gameObject.GetInstanceID();
+            return _sceneLibrary.GetBehaviourOfGameObject<T>(instanceId);
         }
 
         public List<T> GetComponentsFromMyGameObject<T>() 
         {
-            return _sceneLibrary.GetBehavioursOfGameObject<T>(gameObject);
+            int instanceId = gameObject.GetInstanceID();
+            return _sceneLibrary.GetBehavioursOfGameObject<T>(instanceId);
         }
 
+        /// <summary>
+        /// FindObjectOfType Performance Alternative
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public T GetComponentFromLibrary<T>()
         {
             return _sceneLibrary.GetBehaviourFromLibrary<T>();
         }
+
+        /// <summary>
+        /// FindObjectsOfType Performance Alternative to 
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>List<typeparamref name="T"/> of Requested BehaviourType </returns>
         public List<T> GetComponentsFromLibrary<T>()
         {
             return _sceneLibrary.GetBehavioursFromLibrary<T>();
@@ -90,8 +115,14 @@ namespace YondaimeFramework
 
         public virtual void RefreshHierarchy()
         {
+            Stopwatch st = new Stopwatch();
+            st.Start();
             MyLibrary.ScanBehaviours();
             MyLibrary.InitializeLibrary();
+            st.Stop();
+
+            Debug.Log(st.ElapsedMilliseconds);
+            
         }
 
 

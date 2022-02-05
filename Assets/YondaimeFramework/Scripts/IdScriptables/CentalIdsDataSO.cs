@@ -5,6 +5,7 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "ComponentIdSource", menuName = "YondaimeFramework/ComponentIdSource")]
 public class CentalIdsDataSO : ScriptableObject
 {
+    public const string None = "None";
     [SerializeField] private SystemIdsData[] idsData;
    
     public SystemIdsData[] SystemIdsData

@@ -22,6 +22,18 @@ Improvements:
    Each filter removes items not preset in drawer list. drawer items would be types.
    
  > Ids from several instances of containers combined, showing all of them together in drawer.
+   
    ronarsha203197
+   vpadia179@gmail.com
    
-   
+ > None option for ID [DONE]
+ 
+ > Horizontal layout display for editor buttons [DONE]
+ 
+ > Optimized GetComponentFromGameObject by assigning indexes to objects. //Near Performance to GetComponentAchieved, Still needs work
+ 
+ > GetComponentByID, using string ids with type and concating takes too much load, Find a better way
+ 
+ > Add proper Exceptions for [Library not assigned] [Library not initialized] [Nulls Present in Library, require refresh]
+
+ > locking of resource when queried during hierarchy change, or hierarchy change during query.

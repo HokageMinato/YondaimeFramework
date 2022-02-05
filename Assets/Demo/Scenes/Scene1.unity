@@ -147,12 +147,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641718}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1611601340}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &641720
 MonoBehaviour:
@@ -166,9 +166,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 0}
-  _sceneLibrary: {fileID: 0}
+  _myLibrary: {fileID: 1611601339}
+  _sceneLibrary: {fileID: 1611601339}
   _objectId: Local
+  maxItr: 0
+  othercars: []
 --- !u!1 &971765935
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +183,7 @@ GameObject:
   - component: {fileID: 971765937}
   m_Layer: 0
   m_Name: FerrariCar (1)
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -212,9 +214,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 0}
-  _sceneLibrary: {fileID: 0}
-  _objectId: 
+  _myLibrary: {fileID: 1611601339}
+  _sceneLibrary: {fileID: 1611601339}
+  _objectId: Network
+  maxItr: 0
+  othercars: []
 --- !u!1 &1068034631
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +308,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1611601340}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1134883243
 MonoBehaviour:
@@ -318,9 +322,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 0}
-  _sceneLibrary: {fileID: 0}
+  _myLibrary: {fileID: 1611601339}
+  _sceneLibrary: {fileID: 1611601339}
   _objectId: 
+  maxItr: 0
+  othercars: []
 --- !u!1 &1209833926
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,9 +370,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 0}
-  _sceneLibrary: {fileID: 0}
+  _myLibrary: {fileID: 1611601339}
+  _sceneLibrary: {fileID: 1611601339}
   _objectId: 
+  maxItr: 0
+  othercars: []
 --- !u!1 &1218977491
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +421,8 @@ MonoBehaviour:
   _myLibrary: {fileID: 1611601339}
   _sceneLibrary: {fileID: 1611601339}
   _objectId: 
+  maxItr: 0
+  othercars: []
 --- !u!1 &1611601338
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,10 +460,11 @@ MonoBehaviour:
   - {fileID: 1218977493}
   - {fileID: 971765937}
   - {fileID: 1722874143}
+  - {fileID: 1722874144}
   - {fileID: 1859766722}
   - {fileID: 1209833928}
-  - {fileID: 641720}
   - {fileID: 1134883243}
+  - {fileID: 641720}
   _childLibs: []
   _systemId:
     id: Scene1
@@ -474,8 +485,8 @@ Transform:
   - {fileID: 1722874142}
   - {fileID: 1859766721}
   - {fileID: 1209833927}
-  - {fileID: 641719}
   - {fileID: 1134883242}
+  - {fileID: 641719}
   m_Father: {fileID: 1068034632}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -489,6 +500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1722874142}
   - component: {fileID: 1722874143}
+  - component: {fileID: 1722874144}
   m_Layer: 0
   m_Name: FerrariCar (2)
   m_TagString: Untagged
@@ -522,9 +534,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 0}
-  _sceneLibrary: {fileID: 0}
+  _myLibrary: {fileID: 1611601339}
+  _sceneLibrary: {fileID: 1611601339}
   _objectId: Ferrari
+  maxItr: 9999999
+  othercars: []
+--- !u!114 &1722874144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722874141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f7fe965b4d82e46aaade4376c1ff88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myLibrary: {fileID: 1611601339}
+  _sceneLibrary: {fileID: 1611601339}
+  _objectId: 
+  maxItr: 0
+  othercars: []
 --- !u!1 &1859766720
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,9 +599,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 0}
-  _sceneLibrary: {fileID: 0}
-  _objectId: Buggati
+  _myLibrary: {fileID: 1611601339}
+  _sceneLibrary: {fileID: 1611601339}
+  _objectId: 
+  maxItr: 0
+  othercars: []
 --- !u!1 &2047958946
 GameObject:
   m_ObjectHideFlags: 0
