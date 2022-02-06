@@ -14,21 +14,18 @@ public class Car : CustomBehaviour,ICar
     public int maxItr;
     public Car[] othercars;
     public ComponentId idToSearch;
+    private const string tid = "Finish";
 
     
     private void Start()
     {
-        //Debug.Log($"{GetComponentFromLibraryById<Car>("Buggati").gameObject.name} -- {gameObject.name}" );
-        //Debug.Log($"{GetComponentFromLibraryById<SportsCar>("Buggati").gameObject.name} -- {gameObject.name}" );
-
-        //Debug.Log($"{GetComponentFromOtherSceneLibrary<SportsCar>(SceneIDs.Scene1).gameObject.name} -- {gameObject.name}" );
-        // Debug.Log($"{GetComponentFromOtherSceneLibraryById<Car>("Ferrari",SceneIDs.Scene1).gameObject.name} -- {gameObject.name}" );
-
-        //Debug.Log($"{GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}" );
-        //Debug.Log($"{GetComponentFromMyGameObject<SportsCar>() == null} -- {gameObject.name}" );
-
-        //Car c = GetComponentFromLibraryById<Car>("Buggati");
-        //c?.SetObjectId("Lamborghini");
+        //Debug.Log("===============================");
+        //Debug.Log($"{GetComponentFromLibrary<SportsCar>() == null} -- {gameObject.name}");
+        //Debug.Log($"{GetComponentFromLibraryById<SportsCar>(idToSearch) == null} -- {gameObject.name}");
+        //Debug.Log($"{GetComponentFromMyGameObject<SportsCar>() == null} -- {gameObject.name}");
+        //Debug.Log($"{GetComponentsFromLibrary<Car>()?.Count} -- {gameObject.name}" );
+        //Debug.Log($"{GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}");
+        //Debug.Log("===============================");
 
         Debug.Log(GetComponentFromLibraryById<Car>(idToSearch)==null);
     }
@@ -43,8 +40,7 @@ public class Car : CustomBehaviour,ICar
         st.Start();
         for (double i = 0; i < maxItr; i++)
         {
-            GetComponentFromLibraryById<Car>(idToSearch);
-
+            GetComponentsFromLibrary<SportsCar>();
         }
         st.Stop();
         res = st.ElapsedMilliseconds.ToString();
@@ -54,7 +50,7 @@ public class Car : CustomBehaviour,ICar
         st.Start();
         for (double i = 0; i < maxItr; i++)
         {
-            GameObject.FindGameObjectsWithTag("Finish");
+            FindObjectsOfType<SportsCar>();
         }
         st.Stop();
 
@@ -64,10 +60,11 @@ public class Car : CustomBehaviour,ICar
 
     }
 
-    [ContextMenu("Print")]
+    [ContextMenu("Test2")]
     public void Check()
     {
-        RefreshHierarchy();
+       
+
     }
 }
 

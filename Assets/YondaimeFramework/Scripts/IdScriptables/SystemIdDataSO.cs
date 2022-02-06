@@ -15,13 +15,13 @@ namespace YondaimeFramework
 			return ids;
 		}
 
-        public void OnValidate()
-        {
-            for (int i = 0; i < ids.Length; i++)
-            {
-				ids[i].intValue = Animator.StringToHash(ids[i].stringIdVal);
-		    }
-        }
+    //    public void OnValidate()
+    //    {
+    //        for (int i = 0; i < ids.Length; i++)
+    //        {
+				//ids[i].intValue = Animator.StringToHash(ids[i].stringIdVal);
+		  //  }
+    //    }
     }
 
 	

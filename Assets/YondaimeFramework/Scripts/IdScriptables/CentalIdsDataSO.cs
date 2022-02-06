@@ -18,6 +18,26 @@ namespace YondaimeFramework
             }
         }
 
+        [ContextMenu("Assign")]
+        public void AssignId() 
+        {
+            int c = 0;
+            for (int i = 0; i < idsData.Length; i++)
+            {
+                var data = idsData[i];
+                var idData = data.GetIds();
+
+                for (int j = 0; j < idData.Length; j++)
+                {
+                    idData[j].intValue = c;
+                    c++;
+                }
+                data.SetDirty();
+            }
+
+            EditorUtility.SetDirty(this);
+        }
+
     }
 
     [System.Serializable]
@@ -63,6 +83,9 @@ namespace YondaimeFramework
             return sourceSos.GetIds();
         }
 
-
+        public void SetDirty() 
+        {
+            EditorUtility.SetDirty(sourceSos);
+        }
     }
 }

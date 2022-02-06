@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
- namespace YondaimeFramework
+namespace YondaimeFramework
 {
     public class BehaviourLibrary : CustomBehaviour
     {
@@ -15,21 +15,24 @@ using Debug = UnityEngine.Debug;
         [SerializeField] protected BehaviourLibrary[] _childLibs;
 
         //NonSerialized
-        private Dictionary<Type, CustomBehaviour[]> _behaviourLookup = new Dictionary<Type, CustomBehaviour[]>();
-        private Dictionary<Type, CustomBehaviour[]> _interfaceLookup = new Dictionary<Type, CustomBehaviour[]>();
+        // private Dictionary<Type, CustomBehaviour[]> _behaviourLookup = new Dictionary<Type, CustomBehaviour[]>();
+
+        private Dictionary<Type, int> _typeToIntLookup = new Dictionary<Type, int>();
+        private CustomBehaviour[][] _highPerformanceLookUp;
+
         #endregion
 
-        
+
 
         #region PUBLIC_METHODS
         public void InitializeLibrary()
         {
             Dictionary<Type, List<CustomBehaviour>> tempLookup = new Dictionary<Type, List<CustomBehaviour>>();
             GenerateTempLookUps();
-            MoveTempToFinalLookup();
             FillInterfaceLookup();
+            MoveTempToFinalLookup();
             InitChildLibraries();
-            
+
 
             void GenerateTempLookUps()
             {
@@ -37,6 +40,7 @@ using Debug = UnityEngine.Debug;
                 {
                     CustomBehaviour currentBehaviour = _behaviours[i];
                     currentBehaviour.RefreshGOInstanceId();
+
                     Type currentBehaviourType = currentBehaviour.GetType();
                     if (!tempLookup.ContainsKey(currentBehaviourType))
                     {
@@ -45,43 +49,55 @@ using Debug = UnityEngine.Debug;
                     tempLookup[currentBehaviourType].Add(_behaviours[i]);
                 }
             }
-            void MoveTempToFinalLookup()
-            {
-                foreach (KeyValuePair<Type, List<CustomBehaviour>> item in tempLookup)
-                {
-                    if (!_behaviourLookup.ContainsKey(item.Key))
-                        _behaviourLookup.Add(item.Key, item.Value.ToArray());
-                    else
-                        _behaviourLookup[item.Key] = item.Value.ToArray();
-                }
 
-                
-                tempLookup.Clear();
-            }
-            void FillInterfaceLookup() 
+            void FillInterfaceLookup()
             {
-                
-                foreach (var item in _behaviourLookup)
+
+                Dictionary<Type, List<CustomBehaviour>> temp = new Dictionary<Type, List<CustomBehaviour>>();
+
+                foreach (var item in tempLookup)
                 {
-                   Type[] interfaces = item.Key.GetInterfaces();
+                    Type[] interfaces = item.Key.GetInterfaces();
                     for (int i = 0; i < interfaces.Length; i++)
                     {
-                        if(!tempLookup.ContainsKey(interfaces[i]))
+                        if (!temp.ContainsKey(interfaces[i]))
+                            temp.Add(interfaces[i], new List<CustomBehaviour>());
+
+                        temp[interfaces[i]].AddRange(item.Value);
+                    }
+                }
+
+                foreach (var item in temp)
+                {
+                    Type[] interfaces = item.Key.GetInterfaces();
+                    for (int i = 0; i < interfaces.Length; i++)
+                    {
+                        if (!tempLookup.ContainsKey(interfaces[i]))
                             tempLookup.Add(interfaces[i], new List<CustomBehaviour>());
 
                         tempLookup[interfaces[i]].AddRange(item.Value);
                     }
                 }
+            }
 
+            void MoveTempToFinalLookup()
+            {
+                int counterAsLookUpKey = 0;
+                _highPerformanceLookUp = new CustomBehaviour[tempLookup.Count][];
 
                 foreach (KeyValuePair<Type, List<CustomBehaviour>> item in tempLookup)
                 {
-                    if (!_interfaceLookup.ContainsKey(item.Key))
-                        _interfaceLookup.Add(item.Key, item.Value.ToArray());
-                    else
-                        _interfaceLookup[item.Key] = item.Value.ToArray();
+                    if (!_typeToIntLookup.ContainsKey(item.Key))
+                    {
+                        _typeToIntLookup.Add(item.Key, counterAsLookUpKey);
+                    }
+
+                    _highPerformanceLookUp[counterAsLookUpKey] = item.Value.ToArray();
+                    counterAsLookUpKey++;
                 }
 
+
+                tempLookup.Clear();
             }
             void InitChildLibraries()
             {
@@ -90,27 +106,20 @@ using Debug = UnityEngine.Debug;
                     _childLibs[i].InitializeLibrary();
                 }
             }
-          
+
         }
 
 
-        
         protected T GetBehaviourFromLibrary<T>()
         {
             Type reqeuestedType = typeof(T);
 
-            if (_behaviourLookup.ContainsKey(reqeuestedType))
-                return (T)(object)_behaviourLookup[reqeuestedType][0];
-
-
-            if (_interfaceLookup.ContainsKey(reqeuestedType))
-            {
-                return (T)(object)_interfaceLookup[reqeuestedType][0];
-            }
+            if (_typeToIntLookup.ContainsKey(reqeuestedType))
+                return (T)(object)_highPerformanceLookUp[_typeToIntLookup[reqeuestedType]][0];
 
             for (int i = 0; i < _childLibs.Length; i++)
             {
-                T behaviour =_childLibs[i].GetBehaviourFromLibrary<T>();
+                T behaviour = _childLibs[i].GetBehaviourFromLibrary<T>();
                 if (behaviour != null)
                     return behaviour;
             }
@@ -118,60 +127,19 @@ using Debug = UnityEngine.Debug;
             return default;
         }
 
-        protected T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId) 
-        {
-            Type reqeuestedType = typeof(T);
-
-            if (_behaviourLookup.ContainsKey(reqeuestedType))
-            {
-                CustomBehaviour[] behaviours = _behaviourLookup[reqeuestedType];
-
-                for (int i = 0; i < behaviours.Length; i++)
-                {
-                    if (behaviours[i].GOInstanceId == requesteeGameObjectInstanceId) {
-                        return (T)(object)behaviours[i];
-                    }
-                }
-            }
-
-
-            if (_interfaceLookup.ContainsKey(reqeuestedType))
-            {
-                CustomBehaviour[] behaviours = _interfaceLookup[reqeuestedType];
-
-                for (int i = 0; i < behaviours.Length; i++)
-                {
-                    if (behaviours[i].GOInstanceId == requesteeGameObjectInstanceId)
-                    {
-                        return (T)(object)behaviours[i];
-                    }
-                }
-            }
-
-            for (int i = 0; i < _childLibs.Length; i++)
-            {
-                T behaviour = _childLibs[i].GetBehaviourOfGameObject<T>(requesteeGameObjectInstanceId);
-                if (behaviour != null)
-                    return behaviour;
-            }
-
-            return default;
-
-
-            
-
-        }
-
-        
         protected T GetBehaviourFromLibraryById<T>(ComponentId behaviourId) where T : class
         {
             Type requestedType = typeof(T);
-            CustomBehaviour[] lst = _behaviourLookup[requestedType];
 
-            for (int i = 0; i < lst.Length; i++)
+            if (_typeToIntLookup.ContainsKey(requestedType))
             {
-                if (lst[i].id.objBt == behaviourId.objBt)
-                    return (T)(object)lst[i];
+                CustomBehaviour[] lst = _highPerformanceLookUp[_typeToIntLookup[requestedType]];
+
+                for (int i = 0; i < lst.Length; i++)
+                {
+                    if (lst[i].id.objBt == behaviourId.objBt)
+                        return (T)(object)lst[i];
+                }
             }
 
             for (int i = 0; i < _childLibs.Length; i++)
@@ -184,14 +152,46 @@ using Debug = UnityEngine.Debug;
             return default;
         }
 
+        protected T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId)
+        {
+            Type reqeuestedType = typeof(T);
+
+            if (_typeToIntLookup.ContainsKey(reqeuestedType))
+            {
+                CustomBehaviour[] behaviours = _highPerformanceLookUp[_typeToIntLookup[reqeuestedType]];
+
+                for (int i = 0; i < behaviours.Length; i++)
+                {
+                    if (behaviours[i].GOInstanceId == requesteeGameObjectInstanceId)
+                    {
+                        return (T)(object)behaviours[i];
+                    }
+                }
+            }
+
+
+            for (int i = 0; i < _childLibs.Length; i++)
+            {
+                T behaviour = _childLibs[i].GetBehaviourOfGameObject<T>(requesteeGameObjectInstanceId);
+                if (behaviour != null)
+                    return behaviour;
+            }
+
+            return default;
+
+
+
+
+        }
+
         protected List<T> GetBehavioursFromLibrary<T>()
         {
             Type reqeuestedType = typeof(T);
             List<T> behaviours = new List<T>();
 
-            if (_behaviourLookup.ContainsKey(reqeuestedType))
+            if (_typeToIntLookup.ContainsKey(reqeuestedType))
             {
-                CustomBehaviour[] behavioursInLookUp = _behaviourLookup[reqeuestedType];
+                CustomBehaviour[] behavioursInLookUp = _highPerformanceLookUp[_typeToIntLookup[reqeuestedType]];
                 for (int i = 0; i < behavioursInLookUp.Length; i++)
                 {
                     behaviours.Add((T)(object)behavioursInLookUp[i]);
@@ -199,21 +199,13 @@ using Debug = UnityEngine.Debug;
 
             }
 
-            if (_interfaceLookup.ContainsKey(reqeuestedType))
+
+
+            for (int i = 0; i < _childLibs.Length; i++)
             {
-                CustomBehaviour[] behavioursInLookUp = _interfaceLookup[reqeuestedType];
-                for (int i = 0; i < behavioursInLookUp.Length; i++)
-                {
-                    behaviours.Add((T)(object)behavioursInLookUp[i]);
-                }
+                behaviours.AddRange(_childLibs[i].GetBehavioursFromLibrary<T>());
             }
 
-
-           for (int i = 0; i < _childLibs.Length; i++)
-           {
-               behaviours.AddRange(_childLibs[i].GetBehavioursFromLibrary<T>());
-           }
-            
             return behaviours;
         }
 
@@ -222,42 +214,33 @@ using Debug = UnityEngine.Debug;
             Type reqeuestedType = typeof(T);
             List<T> behaviours = new List<T>();
 
-            if (_behaviourLookup.ContainsKey(reqeuestedType))
+            if (_typeToIntLookup.ContainsKey(reqeuestedType))
             {
-                CustomBehaviour[] behavioursInLookUp = _behaviourLookup[reqeuestedType];
-                for (int i = 0; i < behavioursInLookUp.Length && behavioursInLookUp[i].GOInstanceId ==  requesteeGameObjectInstanceId; i++)
+                CustomBehaviour[] behavioursInLookUp = _highPerformanceLookUp[_typeToIntLookup[reqeuestedType]];
+                for (int i = 0; i < behavioursInLookUp.Length && behavioursInLookUp[i].GOInstanceId == requesteeGameObjectInstanceId; i++)
                 {
                     behaviours.Add((T)(object)behavioursInLookUp[i]);
                 }
             }
-
-            if (_interfaceLookup.ContainsKey(reqeuestedType))
-            {
-                CustomBehaviour[] behavioursInLookUp = _interfaceLookup[reqeuestedType];
-                for (int i = 0; i < behavioursInLookUp.Length; i++)
-                {
-                    behaviours.Add((T)(object)behavioursInLookUp[i]);
-                }
-            }
-
 
             for (int i = 0; i < _childLibs.Length; i++)
             {
-                    behaviours.AddRange(_childLibs[i].GetBehavioursFromLibrary<T>());
+                behaviours.AddRange(_childLibs[i].GetBehavioursFromLibrary<T>());
             }
-            
+
 
             return behaviours;
         }
 
 
 
-        
-        public void LogLibrary() {
+
+        public void LogLibrary()
+        {
             string items = "";
             foreach (var item in _behaviours)
             {
-                items+=item.GetType()+"\n";
+                items += item.GetType() + "\n";
 
             }
             FrameworkLogger.Log(items);
@@ -334,7 +317,7 @@ using Debug = UnityEngine.Debug;
 
         public virtual void PreRedundantCheck() { }
 
-        private bool IsCustomId(byte behaviourId) 
+        private bool IsCustomId(byte behaviourId)
         {
             return behaviourId > 0;
             //return (!string.IsNullOrEmpty(behaviourId) &&
@@ -343,3 +326,4 @@ using Debug = UnityEngine.Debug;
         #endregion
     }
 };
+

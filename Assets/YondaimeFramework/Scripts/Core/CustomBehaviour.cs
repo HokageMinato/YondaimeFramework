@@ -116,14 +116,8 @@ namespace YondaimeFramework
 
         public virtual void RefreshHierarchy()
         {
-            Stopwatch st = new Stopwatch();
-            st.Start();
             MyLibrary.ScanBehaviours();
             MyLibrary.InitializeLibrary();
-            st.Stop();
-
-            Debug.Log(st.ElapsedMilliseconds);
-            
         }
 
 

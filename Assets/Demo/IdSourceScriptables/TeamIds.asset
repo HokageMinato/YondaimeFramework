@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ids:
   - stringIdVal: Green
-    intValue: 291225893
+    intValue: 5
   - stringIdVal: Yellow
-    intValue: -676795991
+    intValue: 6
   - stringIdVal: Blue
-    intValue: 1040475530
+    intValue: 7

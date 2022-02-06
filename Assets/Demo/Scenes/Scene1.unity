@@ -225,7 +225,7 @@ MonoBehaviour:
   _objectId: Network
   id:
     stringId: Audi
-    objBt: 1697201568
+    objBt: 2
   maxItr: 0
   othercars: []
   idToSearch:
@@ -341,7 +341,7 @@ MonoBehaviour:
   _sceneLibrary: {fileID: 1611601339}
   _objectId: 
   id:
-    stringId: 
+    stringId: Buggati
     objBt: 0
   maxItr: 0
   othercars: []
@@ -396,7 +396,7 @@ MonoBehaviour:
   _objectId: 
   id:
     stringId: Buggati
-    objBt: -1361279070
+    objBt: 0
   maxItr: 0
   othercars: []
   idToSearch:
@@ -575,12 +575,12 @@ MonoBehaviour:
   _objectId: Buggati
   id:
     stringId: Buggati
-    objBt: -1361279070
-  maxItr: 99999
+    objBt: 0
+  maxItr: 999999
   othercars: []
   idToSearch:
     stringId: Buggati
-    objBt: -1361279070
+    objBt: 0
 --- !u!114 &1722874144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,8 +651,8 @@ MonoBehaviour:
   _sceneLibrary: {fileID: 1611601339}
   _objectId: 
   id:
-    stringId: 
-    objBt: 0
+    stringId: Network
+    objBt: 4
   maxItr: 15
   othercars: []
   idToSearch:
