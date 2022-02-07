@@ -14,9 +14,7 @@ namespace YondaimeFramework
         [SerializeField] protected List<CustomBehaviour> _behaviours;
         [SerializeField] protected BehaviourLibrary[] _childLibs;
 
-        //NonSerialized
-        // private Dictionary<Type, CustomBehaviour[]> _behaviourLookup = new Dictionary<Type, CustomBehaviour[]>();
-
+        
         private Dictionary<Type, int> _typeToIntLookup = new Dictionary<Type, int>();
         private CustomBehaviour[][] _highPerformanceLookUp;
 

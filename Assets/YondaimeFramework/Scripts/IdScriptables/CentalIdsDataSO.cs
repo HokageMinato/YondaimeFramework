@@ -34,8 +34,9 @@ namespace YondaimeFramework
                 }
                 data.SetDirty();
             }
-
-            EditorUtility.SetDirty(this);
+            #if UNITY_EDITOR
+             EditorUtility.SetDirty(this);
+            #endif
         }
 
     }
@@ -43,24 +44,29 @@ namespace YondaimeFramework
     [System.Serializable]
     public struct ComponentId 
     {
+        #if UNITY_EDITOR
         public string stringId;
-        public int objBt;
-
-        //Make sure these are same or editor will throw out errors
         public const string StringIdPropertyName = "stringId";
         public const string IntIdValName = "objBt";
         public const int None = -1;
         public const string NoneStr = "None";
+        #endif
 
-        
+
+        public int objBt;
+        //Make sure these are same or editor will throw out errors
+
+        #if UNITY_EDITOR
         public ComponentId(ComponentIdSRC source) 
         {
             stringId = source.stringIdVal;
             objBt = source.intValue;
         }
+       #endif
 
     }
 
+    
     [System.Serializable]
     public struct ComponentIdSRC 
     {
@@ -68,6 +74,9 @@ namespace YondaimeFramework
         public int intValue;
 
     }
+    
+
+
 
 
     [System.Serializable]
@@ -76,16 +85,22 @@ namespace YondaimeFramework
 
         [SerializeField] string _systemName;
         [SerializeField] SystemIdDataSO sourceSos;
-
         public string SystemId => _systemName;
+
+       
         public ComponentIdSRC[] GetIds()
         {
             return sourceSos.GetIds();
         }
 
-        public void SetDirty() 
+      
+        public void SetDirty()
         {
+#if UNITY_EDITOR
             EditorUtility.SetDirty(sourceSos);
+#endif
         }
+
+
     }
 }

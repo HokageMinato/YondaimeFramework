@@ -19,3 +19,5 @@ MonoBehaviour:
     sourceSos: {fileID: 11400000, guid: 2f695a7176aab86409042048eb748615, type: 2}
   - _systemName: Player TeamId
     sourceSos: {fileID: 11400000, guid: 509787caa3d63514bb6c7675a244d349, type: 2}
+  - _systemName: Player TeamId
+    sourceSos: {fileID: 11400000, guid: 509787caa3d63514bb6c7675a244d349, type: 2}
