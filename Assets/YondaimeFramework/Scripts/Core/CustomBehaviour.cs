@@ -11,15 +11,13 @@ namespace YondaimeFramework
         #region PRIVATE_VARIABLES
         [HideInInspector] [SerializeField] private BehaviourLibrary _myLibrary;
         [HideInInspector] [SerializeField] private SceneLibrary _sceneLibrary;
-        [HideInInspector] [SerializeField] public string _objectId;
-
+       
         private int _insId;
-
         #endregion
 
         #region PUBLIC_VARIABLES
         public int GOInstanceId { get { return _insId; } }
-
+       
         public BehaviourLibrary MyLibrary
         {
             get
@@ -35,18 +33,12 @@ namespace YondaimeFramework
             }
         }
 
+
         public ComponentId id;
-        public string ObjectId
-        {
-            get
-            {
-                return _objectId;
-            }
-        }
         #endregion
 
         #region PUBLIC_METHODS
-        public void RefreshGOInstanceId() 
+        public void RefreshIds() 
         {
             _insId = gameObject.GetInstanceID();
         }
@@ -93,9 +85,9 @@ namespace YondaimeFramework
             return _sceneLibrary.GetBehavioursFromLibrary<T>();
         }
 
-        public T GetComponentFromLibraryById<T>(ComponentId behaviourId) where T: CustomBehaviour
+        public T GetComponentFromLibraryById<T>(ComponentId behaviourId) 
         {
-            return _sceneLibrary.GetBehaviourFromLibraryById<T>(behaviourId);
+            return _sceneLibrary.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
         }
 
         public T GetComponentFromOtherSceneLibrary<T>(string sceneId) where T: CustomBehaviour
@@ -105,7 +97,7 @@ namespace YondaimeFramework
         
         public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId,string sceneId) where T: CustomBehaviour
         {
-            return _sceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId);
+            return _sceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId.objBt);
         }
 
         public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
@@ -121,10 +113,6 @@ namespace YondaimeFramework
         }
 
 
-        public void SetObjectId(string objectId) 
-        {
-            _objectId = objectId;
-        }
 
         public void DestorySelf()
         {

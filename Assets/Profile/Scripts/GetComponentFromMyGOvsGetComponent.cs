@@ -4,8 +4,7 @@ using UnityEngine;
 using YondaimeFramework;
 using System.Diagnostics;
 
-namespace Tag
-{
+
     public class GetComponentFromMyGOvsGetComponent : CustomBehaviour, IProfileComponent
     {
         private string classResult;
@@ -83,4 +82,3 @@ namespace Tag
 
         }
     }
-}

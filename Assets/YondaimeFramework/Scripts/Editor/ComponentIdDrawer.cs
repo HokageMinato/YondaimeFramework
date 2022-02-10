@@ -42,6 +42,7 @@ namespace YondaimeFramework
             if (newIndex != -1)
                 SetPresentStringIdValueToTargetProperty(idChoices[newIndex].stringId, idChoices[newIndex].objBt);
             
+            
 
             EditorGUI.EndProperty();
 
@@ -83,7 +84,7 @@ namespace YondaimeFramework
                 actualValuesList.Add(new ComponentId
                 {
                     stringId = "None",
-                    objBt = -1
+                    objBt = ComponentId.None
                 });
             }
 

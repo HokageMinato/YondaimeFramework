@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
-namespace YondaimeFramework
+ namespace YondaimeFramework
 {
     public class BehaviourLibrary : CustomBehaviour
     {
@@ -14,10 +14,9 @@ namespace YondaimeFramework
         [SerializeField] protected List<CustomBehaviour> _behaviours;
         [SerializeField] protected BehaviourLibrary[] _childLibs;
 
-        
-        private Dictionary<Type, int> _typeToIntLookup = new Dictionary<Type, int>();
-        private CustomBehaviour[][] _highPerformanceLookUp;
-
+        //NonSerialized
+        private Dictionary<Type, CustomBehaviour[]> _behaviourLookup = new Dictionary<Type, CustomBehaviour[]>();
+        //private Dictionary<Type, CustomBehaviour[]> _interfaceLookup = new Dictionary<Type, CustomBehaviour[]>();
         #endregion
 
 
@@ -37,7 +36,7 @@ namespace YondaimeFramework
                 for (int i = 0; i < _behaviours.Count; i++)
                 {
                     CustomBehaviour currentBehaviour = _behaviours[i];
-                    currentBehaviour.RefreshGOInstanceId();
+                    currentBehaviour.RefreshIds();
 
                     Type currentBehaviourType = currentBehaviour.GetType();
                     if (!tempLookup.ContainsKey(currentBehaviourType))
@@ -59,43 +58,32 @@ namespace YondaimeFramework
                     for (int i = 0; i < interfaces.Length; i++)
                     {
                         if (!temp.ContainsKey(interfaces[i]))
-                            temp.Add(interfaces[i], new List<CustomBehaviour>());
-
-                        temp[interfaces[i]].AddRange(item.Value);
+                        {
+                            temp.Add(interfaces[i], item.Value);
+                        }
+                        else
+                            temp[interfaces[i]].AddRange(item.Value);
                     }
                 }
 
-                foreach (var item in temp)
+                foreach (KeyValuePair<Type, List<CustomBehaviour>> item in temp)
                 {
-                    Type[] interfaces = item.Key.GetInterfaces();
-                    for (int i = 0; i < interfaces.Length; i++)
-                    {
-                        if (!tempLookup.ContainsKey(interfaces[i]))
-                            tempLookup.Add(interfaces[i], new List<CustomBehaviour>());
+                    if (!tempLookup.ContainsKey(item.Key))
+                        tempLookup.Add(item.Key, new List<CustomBehaviour>());
 
-                        tempLookup[interfaces[i]].AddRange(item.Value);
-                    }
+                    tempLookup[item.Key].AddRange(item.Value);
+
                 }
             }
 
             void MoveTempToFinalLookup()
             {
-                int counterAsLookUpKey = 0;
-                _highPerformanceLookUp = new CustomBehaviour[tempLookup.Count][];
 
                 foreach (KeyValuePair<Type, List<CustomBehaviour>> item in tempLookup)
                 {
-                    if (!_typeToIntLookup.ContainsKey(item.Key))
-                    {
-                        _typeToIntLookup.Add(item.Key, counterAsLookUpKey);
-                    }
-
-                    _highPerformanceLookUp[counterAsLookUpKey] = item.Value.ToArray();
-                    counterAsLookUpKey++;
+                        _behaviourLookup.Add(item.Key, item.Value.ToArray());
                 }
-
-
-                tempLookup.Clear();
+               
             }
             void InitChildLibraries()
             {
@@ -108,16 +96,17 @@ namespace YondaimeFramework
         }
 
 
+
         protected T GetBehaviourFromLibrary<T>()
         {
             Type reqeuestedType = typeof(T);
 
-            if (_typeToIntLookup.ContainsKey(reqeuestedType))
-                return (T)(object)_highPerformanceLookUp[_typeToIntLookup[reqeuestedType]][0];
+            if (_behaviourLookup.ContainsKey(reqeuestedType))
+                return (T)(object)_behaviourLookup[reqeuestedType][0];
 
             for (int i = 0; i < _childLibs.Length; i++)
             {
-                T behaviour = _childLibs[i].GetBehaviourFromLibrary<T>();
+                T behaviour =_childLibs[i].GetBehaviourFromLibrary<T>();
                 if (behaviour != null)
                     return behaviour;
             }
@@ -125,19 +114,48 @@ namespace YondaimeFramework
             return default;
         }
 
-        protected T GetBehaviourFromLibraryById<T>(ComponentId behaviourId) where T : class
+        protected T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId) 
+        {
+            Type reqeuestedType = typeof(T);
+
+            if (_behaviourLookup.ContainsKey(reqeuestedType))
+            {
+                CustomBehaviour[] behaviours = _behaviourLookup[reqeuestedType];
+
+                for (int i = 0; i < behaviours.Length; i++)
+                {
+                    if (behaviours[i].GOInstanceId == requesteeGameObjectInstanceId) {
+                        return (T)(object)behaviours[i];
+                    }
+                }
+            }
+
+   
+            for (int i = 0; i < _childLibs.Length; i++)
+            {
+                T behaviour = _childLibs[i].GetBehaviourOfGameObject<T>(requesteeGameObjectInstanceId);
+                if (behaviour != null)
+                    return behaviour;
+            }
+
+            return default;
+
+
+            
+
+        }
+
+        
+        protected T GetBehaviourFromLibraryById<T>(int behaviourId) 
         {
             Type requestedType = typeof(T);
+            CustomBehaviour[] lst = _behaviourLookup[requestedType];
+            
 
-            if (_typeToIntLookup.ContainsKey(requestedType))
+            for (int i = 0; i < lst.Length; i++)
             {
-                CustomBehaviour[] lst = _highPerformanceLookUp[_typeToIntLookup[requestedType]];
-
-                for (int i = 0; i < lst.Length; i++)
-                {
-                    if (lst[i].id.objBt == behaviourId.objBt)
-                        return (T)(object)lst[i];
-                }
+                if (lst[i].id.objBt == behaviourId)
+                    return (T)(object)lst[i];
             }
 
             for (int i = 0; i < _childLibs.Length; i++)
@@ -150,60 +168,28 @@ namespace YondaimeFramework
             return default;
         }
 
-        protected T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId)
-        {
-            Type reqeuestedType = typeof(T);
-
-            if (_typeToIntLookup.ContainsKey(reqeuestedType))
-            {
-                CustomBehaviour[] behaviours = _highPerformanceLookUp[_typeToIntLookup[reqeuestedType]];
-
-                for (int i = 0; i < behaviours.Length; i++)
-                {
-                    if (behaviours[i].GOInstanceId == requesteeGameObjectInstanceId)
-                    {
-                        return (T)(object)behaviours[i];
-                    }
-                }
-            }
-
-
-            for (int i = 0; i < _childLibs.Length; i++)
-            {
-                T behaviour = _childLibs[i].GetBehaviourOfGameObject<T>(requesteeGameObjectInstanceId);
-                if (behaviour != null)
-                    return behaviour;
-            }
-
-            return default;
-
-
-
-
-        }
-
         protected List<T> GetBehavioursFromLibrary<T>()
         {
             Type reqeuestedType = typeof(T);
             List<T> behaviours = new List<T>();
 
-            if (_typeToIntLookup.ContainsKey(reqeuestedType))
+            if (_behaviourLookup.ContainsKey(reqeuestedType))
             {
-                CustomBehaviour[] behavioursInLookUp = _highPerformanceLookUp[_typeToIntLookup[reqeuestedType]];
+                CustomBehaviour[] behavioursInLookUp = _behaviourLookup[reqeuestedType];
                 for (int i = 0; i < behavioursInLookUp.Length; i++)
                 {
                     behaviours.Add((T)(object)behavioursInLookUp[i]);
                 }
-
             }
 
+       
 
 
-            for (int i = 0; i < _childLibs.Length; i++)
-            {
-                behaviours.AddRange(_childLibs[i].GetBehavioursFromLibrary<T>());
-            }
-
+           for (int i = 0; i < _childLibs.Length; i++)
+           {
+               behaviours.AddRange(_childLibs[i].GetBehavioursFromLibrary<T>());
+           }
+            
             return behaviours;
         }
 
@@ -212,33 +198,35 @@ namespace YondaimeFramework
             Type reqeuestedType = typeof(T);
             List<T> behaviours = new List<T>();
 
-            if (_typeToIntLookup.ContainsKey(reqeuestedType))
+            if (_behaviourLookup.ContainsKey(reqeuestedType))
             {
-                CustomBehaviour[] behavioursInLookUp = _highPerformanceLookUp[_typeToIntLookup[reqeuestedType]];
-                for (int i = 0; i < behavioursInLookUp.Length && behavioursInLookUp[i].GOInstanceId == requesteeGameObjectInstanceId; i++)
+                CustomBehaviour[] behavioursInLookUp = _behaviourLookup[reqeuestedType];
+                for (int i = 0; i < behavioursInLookUp.Length && behavioursInLookUp[i].GOInstanceId ==  requesteeGameObjectInstanceId; i++)
                 {
                     behaviours.Add((T)(object)behavioursInLookUp[i]);
                 }
             }
 
+          
+
+
             for (int i = 0; i < _childLibs.Length; i++)
             {
-                behaviours.AddRange(_childLibs[i].GetBehavioursFromLibrary<T>());
+                    behaviours.AddRange(_childLibs[i].GetBehavioursFromLibrary<T>());
             }
-
+            
 
             return behaviours;
         }
 
 
 
-
-        public void LogLibrary()
-        {
+        
+        public void LogLibrary() {
             string items = "";
             foreach (var item in _behaviours)
             {
-                items += item.GetType() + "\n";
+                items+=item.GetType()+"\n";
 
             }
             FrameworkLogger.Log(items);
@@ -315,7 +303,7 @@ namespace YondaimeFramework
 
         public virtual void PreRedundantCheck() { }
 
-        private bool IsCustomId(byte behaviourId)
+        private bool IsCustomId(byte behaviourId) 
         {
             return behaviourId > 0;
             //return (!string.IsNullOrEmpty(behaviourId) &&
@@ -324,4 +312,3 @@ namespace YondaimeFramework
         #endregion
     }
 };
-

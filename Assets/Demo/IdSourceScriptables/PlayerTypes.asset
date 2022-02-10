@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ids:
   - stringIdVal: Local
-    intValue: 3
-  - stringIdVal: Network
     intValue: 4
+  - stringIdVal: Network
+    intValue: 5

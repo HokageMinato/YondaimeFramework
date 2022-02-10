@@ -21,7 +21,7 @@ namespace YondaimeFramework
         [ContextMenu("Assign")]
         public void AssignId() 
         {
-            int c = 0;
+            int c = 1;
             for (int i = 0; i < idsData.Length; i++)
             {
                 var data = idsData[i];
@@ -42,17 +42,16 @@ namespace YondaimeFramework
     }
 
     [System.Serializable]
-    public struct ComponentId 
+    public class ComponentId 
     {
         #if UNITY_EDITOR
         public string stringId;
         public const string StringIdPropertyName = "stringId";
         public const string IntIdValName = "objBt";
-        public const int None = -1;
         public const string NoneStr = "None";
         #endif
 
-
+        public const int None = 0;
         public int objBt;
         //Make sure these are same or editor will throw out errors
 
@@ -62,6 +61,9 @@ namespace YondaimeFramework
             stringId = source.stringIdVal;
             objBt = source.intValue;
         }
+
+        public ComponentId() { }
+
        #endif
 
     }

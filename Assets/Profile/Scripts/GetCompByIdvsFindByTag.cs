@@ -4,8 +4,7 @@ using UnityEngine;
 using YondaimeFramework;
 using System.Diagnostics;
 
-namespace Tag
-{
+
     public class GetCompByIdvsFindByTag : CustomBehaviour,IProfileComponent
     {
         private string classResult;
@@ -62,4 +61,3 @@ namespace Tag
             intefaceResult = ($"NA <C U> N/A");
         }
     }
-}

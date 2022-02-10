@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using YondaimeFramework;
 using System.Diagnostics;
-
-namespace Tag
-{
-    public class GetComponentsFromGOvsGetComponents : CustomBehaviour
+  public class GetComponentsFromGOvsGetComponents : CustomBehaviour,IProfileComponent
     {
 
         private string classResult;
@@ -85,4 +82,3 @@ namespace Tag
 
 
     }
-}

@@ -5,9 +5,7 @@ using YondaimeFramework;
 using System;
 using System.Diagnostics;
 
-namespace Tag
-{
-    public class GetComponentLibVsFindObject : CustomBehaviour, IProfileComponent
+ public class GetComponentLibVsFindObject : CustomBehaviour, IProfileComponent
     {
         private string classResult;
         private string intefaceResult;
@@ -78,4 +76,4 @@ namespace Tag
            
         }
     }
-}
+

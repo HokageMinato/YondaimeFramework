@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ids:
   - stringIdVal: Buggati
-    intValue: 0
-  - stringIdVal: Lamborghini
     intValue: 1
-  - stringIdVal: Audi
+  - stringIdVal: Lamborghini
     intValue: 2
+  - stringIdVal: Audi
+    intValue: 3

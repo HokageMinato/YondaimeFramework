@@ -2,31 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using YondaimeFramework;
+using UnityEngine;
 
-namespace Tag
-{
-    public class ProfileView : CustomBehaviour
+ public class ProfileView : CustomBehaviour
     {
+        [SerializeField] Image overlayImage;
         public Text Result1;
         public Text Result2;
+        
 
         private IProfileComponent profileComponent;
 
-        public void Awake()
+        public void Start()
         {
             profileComponent = GetComponentFromMyGameObject<IProfileComponent>();
         }
 
         public void OnTestClass() 
         {
+            overlayImage.gameObject.SetActive(true);
+        
             profileComponent.TestClass();
             Result1.text = profileComponent.GetClassResult();
-        }
+
+            overlayImage.gameObject.SetActive(false);
+        }  
 
         public void OnTestInterface() 
         {
+            overlayImage.gameObject.SetActive(true);
             profileComponent.TestInterface();
             Result2.text = profileComponent.GetInterfaceResult();
+            overlayImage.gameObject.SetActive(false);
+        }
+
+        public void ResetResults() 
+        {
+          Result1.text = "Result:";
+          Result2.text = "Result:";
         }
 
     }
@@ -40,4 +53,4 @@ namespace Tag
         public void TestInterface();
 
     }
-}
+
