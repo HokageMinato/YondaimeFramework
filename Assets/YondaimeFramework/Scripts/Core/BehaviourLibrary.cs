@@ -16,7 +16,7 @@ using Debug = UnityEngine.Debug;
 
         //NonSerialized
         private Dictionary<Type, CustomBehaviour[]> _behaviourLookup = new Dictionary<Type, CustomBehaviour[]>();
-        //private Dictionary<Type, CustomBehaviour[]> _interfaceLookup = new Dictionary<Type, CustomBehaviour[]>();
+        private Dictionary<int, CustomBehaviour> _idLookup = new Dictionary<int, CustomBehaviour>();
         #endregion
 
 
@@ -27,6 +27,7 @@ using Debug = UnityEngine.Debug;
             Dictionary<Type, List<CustomBehaviour>> tempLookup = new Dictionary<Type, List<CustomBehaviour>>();
             GenerateTempLookUps();
             FillInterfaceLookup();
+            FillIdLookup();
             MoveTempToFinalLookup();
             InitChildLibraries();
 
@@ -52,7 +53,7 @@ using Debug = UnityEngine.Debug;
 
                 Dictionary<Type, List<CustomBehaviour>> temp = new Dictionary<Type, List<CustomBehaviour>>();
 
-                foreach (var item in tempLookup)
+                foreach (KeyValuePair<Type, List<CustomBehaviour>> item in tempLookup)
                 {
                     Type[] interfaces = item.Key.GetInterfaces();
                     for (int i = 0; i < interfaces.Length; i++)
@@ -73,6 +74,24 @@ using Debug = UnityEngine.Debug;
 
                     tempLookup[item.Key].AddRange(item.Value);
 
+                }
+            }
+
+            void FillIdLookup()
+            {
+                foreach (KeyValuePair<Type, List<CustomBehaviour>> item in tempLookup)
+                {
+                    for (int i = 0; i < item.Value.Count; i++)
+                    {
+
+                        if (_idLookup.ContainsKey(item.Value[i].id.objBt))
+                            continue;
+
+                        if (item.Value[i].id.objBt != ComponentId.None)
+                            _idLookup.Add(item.Value[i].id.objBt, item.Value[i]);
+
+                        
+                    }
                 }
             }
 
@@ -148,14 +167,11 @@ using Debug = UnityEngine.Debug;
         
         protected T GetBehaviourFromLibraryById<T>(int behaviourId) 
         {
-            Type requestedType = typeof(T);
-            CustomBehaviour[] lst = _behaviourLookup[requestedType];
             
-
-            for (int i = 0; i < lst.Length; i++)
+            if (_idLookup.ContainsKey(behaviourId) 
+                && _idLookup[behaviourId] is T) 
             {
-                if (lst[i].id.objBt == behaviourId)
-                    return (T)(object)lst[i];
+                return (T)(object)_idLookup[behaviourId];
             }
 
             for (int i = 0; i < _childLibs.Length; i++)
