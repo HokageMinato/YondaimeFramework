@@ -116,7 +116,7 @@ using Debug = UnityEngine.Debug;
 
 
 
-        protected T GetBehaviourFromLibrary<T>()
+        public T GetBehaviourFromLibrary<T>()
         {
             Type reqeuestedType = typeof(T);
 
@@ -133,7 +133,7 @@ using Debug = UnityEngine.Debug;
             return default;
         }
 
-        protected T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId) 
+        public T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId) 
         {
             Type reqeuestedType = typeof(T);
 
@@ -165,7 +165,7 @@ using Debug = UnityEngine.Debug;
         }
 
         
-        protected T GetBehaviourFromLibraryById<T>(int behaviourId) 
+        public T GetBehaviourFromLibraryById<T>(int behaviourId) 
         {
             
             if (_idLookup.ContainsKey(behaviourId) 
@@ -184,7 +184,7 @@ using Debug = UnityEngine.Debug;
             return default;
         }
 
-        protected List<T> GetBehavioursFromLibrary<T>()
+        public List<T> GetBehavioursFromLibrary<T>()
         {
             Type reqeuestedType = typeof(T);
             List<T> behaviours = new List<T>();
@@ -198,18 +198,20 @@ using Debug = UnityEngine.Debug;
                 }
             }
 
-       
-
-
            for (int i = 0; i < _childLibs.Length; i++)
            {
-               behaviours.AddRange(_childLibs[i].GetBehavioursFromLibrary<T>());
+                List<T> childVals = _childLibs[i].GetBehavioursFromLibrary<T>();
+                
+                for (int j = 0; j < childVals.Count; j++)
+                {
+                    behaviours.Add(childVals[j]);
+                }
            }
             
             return behaviours;
         }
 
-        protected List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
+        public List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
             Type reqeuestedType = typeof(T);
             List<T> behaviours = new List<T>();
@@ -223,12 +225,13 @@ using Debug = UnityEngine.Debug;
                 }
             }
 
-          
+            if (behaviours.Count > 0)
+                return behaviours;
 
 
             for (int i = 0; i < _childLibs.Length; i++)
             {
-                    behaviours.AddRange(_childLibs[i].GetBehavioursFromLibrary<T>());
+               behaviours.AddRange(_childLibs[i].GetBehavioursOfGameObject<T>(requesteeGameObjectInstanceId));
             }
             
 

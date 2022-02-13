@@ -47,31 +47,6 @@ namespace YondaimeFramework
             _rootLibrary = library;
         }
 
-        public new T GetBehaviourFromLibrary<T>() 
-        {
-            return base.GetBehaviourFromLibrary<T>();
-        }
-
-        public new List<T> GetBehavioursFromLibrary<T>()
-        {
-            //to protect direct access to GetBehaviour via myLib reference in CustomBehaviour
-            return base.GetBehavioursFromLibrary<T>();
-        }
-
-        public new T GetBehaviourFromLibraryById<T>(int behaviourId) 
-        {
-            //to protect direct access to GetBehaviour via myLib reference in CustomBehaviour
-            return base.GetBehaviourFromLibraryById<T>(behaviourId);
-        }
-
-        public new T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId) {
-            return base.GetBehaviourOfGameObject<T>(requesteeGameObjectInstanceId);
-        }
-
-        public new List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId) {
-            return base.GetBehavioursOfGameObject<T>(requesteeGameObjectInstanceId);
-        }
-
         public SceneLibrary GetSceneLibraryFromRootLibraryById(string systemId)
         {
             return _rootLibrary.GetSceneLibraryById(systemId);
