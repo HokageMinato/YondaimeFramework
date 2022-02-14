@@ -123,58 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &641718
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 641719}
-  - component: {fileID: 641720}
-  m_Layer: 0
-  m_Name: FerrariCar (5)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &641719
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641718}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19170529, y: -2.661391, z: 2.2586498}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 349952634}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &641720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
-  othercars: []
-  idToSearch:
-    stringId: None
-    objBt: 0
 --- !u!1 &25709022
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,11 +453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3fbf5a1c1380e409e63a747aa39721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
 --- !u!114 &280721867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,14 +465,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b22a88d71f007a4c9567519e73d4867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
-  overlayImage: {fileID: 325178372}
-  Result1: {fileID: 377722306}
-  Result2: {fileID: 25709024}
 --- !u!1 &291495210
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,6 +835,88 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325178370}
   m_CullTransparentMesh: 1
+--- !u!1 &344413087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 344413088}
+  - component: {fileID: 344413089}
+  - component: {fileID: 344413090}
+  m_Layer: 0
+  m_Name: Buggati Super Sport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &344413088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344413087}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1966898855}
+  m_Father: {fileID: 349952634}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &344413089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344413087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f7fe965b4d82e46aaade4376c1ff88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myLibrary: {fileID: 344413090}
+  _sceneLibrary: {fileID: 349952633}
+  id:
+    stringId: Buggati
+    objBt: 1
+    ulid: 0
+    _goInsId: 0
+  othercars: []
+  idToSearch:
+    stringId: None
+    objBt: 0
+    ulid: 0
+    _goInsId: 0
+--- !u!114 &344413090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344413087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3914b2527ed224a459dfa034052ab656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myLibrary: {fileID: 344413090}
+  _sceneLibrary: {fileID: 349952633}
+  id:
+    stringId: None
+    objBt: 0
+    ulid: 0
+    _goInsId: 0
+  _behaviours:
+  - {fileID: 344413089}
+  - {fileID: 344413090}
+  - {fileID: 1966898856}
+  _childLibs: []
 --- !u!1 &349952632
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,28 +951,14 @@ MonoBehaviour:
   id:
     stringId: None
     objBt: 0
+    ulid: 0
+    _goInsId: 0
   _behaviours:
   - {fileID: 349952633}
   - {fileID: 1218977493}
-  - {fileID: 971765937}
-  - {fileID: 1722874143}
-  - {fileID: 1722874144}
-  - {fileID: 1859766722}
-  - {fileID: 1209833928}
-  - {fileID: 1134883243}
-  - {fileID: 641720}
-  - {fileID: 579974557}
-  - {fileID: 579974556}
-  - {fileID: 280721867}
-  - {fileID: 280721866}
-  - {fileID: 915894495}
-  - {fileID: 915894494}
-  - {fileID: 1783096948}
-  - {fileID: 1783096947}
-  - {fileID: 654345711}
-  - {fileID: 654345710}
-  - {fileID: 473186650}
-  _childLibs: []
+  - {fileID: 0}
+  _childLibs:
+  - {fileID: 344413090}
   _systemId:
     id: Scene1
   _rootLibrary: {fileID: 0}
@@ -971,13 +974,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1218977492}
-  - {fileID: 971765936}
-  - {fileID: 1722874142}
-  - {fileID: 1859766721}
-  - {fileID: 1209833927}
-  - {fileID: 1134883242}
-  - {fileID: 641719}
   - {fileID: 1630499388}
+  - {fileID: 344413088}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1361,13 +1359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 271c39c5866b12842ad260cc7a4003d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
-  iterationField: {fileID: 473186647}
-  iterationCount: 0
 --- !u!1 &502284247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,11 +1797,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6197fab8cccfc4f889b6fb97404290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
 --- !u!114 &579974557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1823,14 +1809,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b22a88d71f007a4c9567519e73d4867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
-  overlayImage: {fileID: 325178372}
-  Result1: {fileID: 626465414}
-  Result2: {fileID: 1037738224}
 --- !u!1 &613627276
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,11 +2137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b611a6b6ce1ce4faa599ed33a8d359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
 --- !u!114 &654345711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2173,17 +2146,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 654345706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b22a88d71f007a4c9567519e73d4867, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
-  overlayImage: {fileID: 325178372}
-  Result1: {fileID: 85682047}
-  Result2: {fileID: 805411304}
 --- !u!1 &654980518
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,15 +3048,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98280108d7843bb4c9d400a7f3546cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
-  targetObject: {fileID: 0}
-  idToSearch:
-    stringId: Buggati
-    objBt: 1
 --- !u!114 &915894495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3104,66 +3060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b22a88d71f007a4c9567519e73d4867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
-  overlayImage: {fileID: 325178372}
-  Result1: {fileID: 662604233}
-  Result2: {fileID: 523435156}
---- !u!1 &971765935
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 971765936}
-  - component: {fileID: 971765937}
-  m_Layer: 0
-  m_Name: FerrariCar (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &971765936
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 971765935}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19170529, y: -2.661391, z: 2.2586498}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 349952634}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &971765937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 971765935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
-  othercars: []
-  idToSearch:
-    stringId: None
-    objBt: 0
 --- !u!1 &1024331753
 GameObject:
   m_ObjectHideFlags: 0
@@ -3369,6 +3265,8 @@ MonoBehaviour:
   id:
     stringId: None
     objBt: 0
+    ulid: 0
+    _goInsId: 0
 --- !u!114 &1068034634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3537,58 +3435,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111618004}
   m_CullTransparentMesh: 1
---- !u!1 &1134883241
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1134883242}
-  - component: {fileID: 1134883243}
-  m_Layer: 0
-  m_Name: FerrariCar (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1134883242
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134883241}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19170529, y: -2.661391, z: 2.2586498}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 349952634}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1134883243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134883241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
-  othercars: []
-  idToSearch:
-    stringId: None
-    objBt: 0
 --- !u!1 &1142720659
 GameObject:
   m_ObjectHideFlags: 0
@@ -3826,58 +3672,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205074087}
   m_CullTransparentMesh: 1
---- !u!1 &1209833926
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1209833927}
-  - component: {fileID: 1209833928}
-  m_Layer: 0
-  m_Name: FerrariCar (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1209833927
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1209833926}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19170529, y: -2.661391, z: 2.2586498}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 349952634}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1209833928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1209833926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
-  othercars: []
-  idToSearch:
-    stringId: None
-    objBt: 0
 --- !u!1 &1214428290
 GameObject:
   m_ObjectHideFlags: 0
@@ -4003,12 +3797,16 @@ MonoBehaviour:
   _myLibrary: {fileID: 349952633}
   _sceneLibrary: {fileID: 349952633}
   id:
-    stringId: None
-    objBt: 0
+    stringId: Buggati
+    objBt: 1
+    ulid: 0
+    _goInsId: 0
   othercars: []
   idToSearch:
-    stringId: Lamborghini
-    objBt: 2
+    stringId: Buggati
+    objBt: 1
+    ulid: 0
+    _goInsId: 0
 --- !u!1 &1260351005
 GameObject:
   m_ObjectHideFlags: 0
@@ -4580,7 +4378,7 @@ RectTransform:
   m_Children:
   - {fileID: 291495211}
   m_Father: {fileID: 349952634}
-  m_RootOrder: 7
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4799,80 +4597,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682238221}
   m_CullTransparentMesh: 1
---- !u!1 &1722874141
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1722874142}
-  - component: {fileID: 1722874143}
-  - component: {fileID: 1722874144}
-  m_Layer: 0
-  m_Name: FerrariCar (2)
-  m_TagString: Finish
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1722874142
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722874141}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19170529, y: -2.661391, z: 2.2586498}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 349952634}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1722874143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722874141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: Lamborghini
-    objBt: 2
-  othercars: []
-  idToSearch:
-    stringId: Buggati
-    objBt: 1
---- !u!114 &1722874144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722874141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1f7fe965b4d82e46aaade4376c1ff88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: Buggati
-    objBt: 1
-  othercars: []
-  idToSearch:
-    stringId: Lamborghini
-    objBt: 2
 --- !u!1 &1747858513
 GameObject:
   m_ObjectHideFlags: 0
@@ -5045,11 +4769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f2e3cd02ff8a542904cba4405c0bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
 --- !u!114 &1783096948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5062,14 +4781,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b22a88d71f007a4c9567519e73d4867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
-  overlayImage: {fileID: 325178372}
-  Result1: {fileID: 1214428292}
-  Result2: {fileID: 1205074089}
 --- !u!1 &1857831322
 GameObject:
   m_ObjectHideFlags: 0
@@ -5149,58 +4860,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857831322}
   m_CullTransparentMesh: 1
---- !u!1 &1859766720
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1859766721}
-  - component: {fileID: 1859766722}
-  m_Layer: 0
-  m_Name: FerrariCar (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1859766721
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859766720}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19170529, y: -2.661391, z: 2.2586498}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 349952634}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1859766722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859766720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _sceneLibrary: {fileID: 349952633}
-  id:
-    stringId: None
-    objBt: 0
-  othercars: []
-  idToSearch:
-    stringId: None
-    objBt: 0
 --- !u!1 &1876457102
 GameObject:
   m_ObjectHideFlags: 0
@@ -5436,6 +5095,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961355223}
   m_CullTransparentMesh: 1
+--- !u!1 &1966898854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1966898855}
+  - component: {fileID: 1966898856}
+  m_Layer: 0
+  m_Name: Buggati Truck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1966898855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966898854}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 344413088}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1966898856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966898854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881886598026f544989e5ce07d085049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myLibrary: {fileID: 344413090}
+  _sceneLibrary: {fileID: 349952633}
+  id:
+    stringId: Buggati
+    objBt: 1
+    ulid: 0
+    _goInsId: 0
 --- !u!1 &2018721162
 GameObject:
   m_ObjectHideFlags: 0

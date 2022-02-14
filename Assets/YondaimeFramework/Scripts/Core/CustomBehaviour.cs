@@ -12,12 +12,12 @@ namespace YondaimeFramework
         [HideInInspector] [SerializeField] private BehaviourLibrary _myLibrary;
         [HideInInspector] [SerializeField] private SceneLibrary _sceneLibrary;
        
-        private int _insId;
+       
         #endregion
 
         #region PUBLIC_VARIABLES
-        public int GOInstanceId { get { return _insId; } }
-       
+        public int GOInstanceId { get { return id._goInsId; } }
+
         public BehaviourLibrary MyLibrary
         {
             get
@@ -40,7 +40,7 @@ namespace YondaimeFramework
         #region PUBLIC_METHODS
         public void RefreshIds() 
         {
-            _insId = gameObject.GetInstanceID();
+           id._goInsId = gameObject.GetInstanceID();
         }
 
         public void SetLibrary(BehaviourLibrary library)
@@ -61,8 +61,10 @@ namespace YondaimeFramework
 
         public List<T> GetComponentsFromMyGameObject<T>() 
         {
+            List<T> behaviours = new List<T>();
             int instanceId = gameObject.GetInstanceID();
-            return _sceneLibrary.GetBehavioursOfGameObject<T>(instanceId);
+            _sceneLibrary.GetBehavioursOfGameObject<T>(instanceId,behaviours);
+            return behaviours;
         }
 
         /// <summary>
@@ -82,7 +84,9 @@ namespace YondaimeFramework
         /// <returns>List<typeparamref name="T"/> of Requested BehaviourType </returns>
         public List<T> GetComponentsFromLibrary<T>()
         {
-            return _sceneLibrary.GetBehavioursFromLibrary<T>();
+            List<T> behaviours = new List<T>();
+            _sceneLibrary.GetBehavioursFromLibrary<T>(behaviours);
+            return behaviours;
         }
 
         public T GetComponentFromLibraryById<T>(ComponentId behaviourId) 
@@ -90,19 +94,21 @@ namespace YondaimeFramework
             return _sceneLibrary.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
         }
 
-        public T GetComponentFromOtherSceneLibrary<T>(string sceneId) where T: CustomBehaviour
+        public T GetComponentFromOtherSceneLibrary<T>(string sceneId) 
         {
             return _sceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibrary<T>();
         }
         
-        public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId,string sceneId) where T: CustomBehaviour
+        public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId,string sceneId) 
         {
             return _sceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId.objBt);
         }
 
         public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
         {
-            return _sceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehavioursFromLibrary<T>();
+            List<T> behaviours = new List<T>();
+             _sceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehavioursFromLibrary<T>(behaviours);
+            return behaviours;
         }
 
 
@@ -117,6 +123,11 @@ namespace YondaimeFramework
         public void DestorySelf()
         {
             DestroyImmediate(gameObject);
+        }
+
+        public static int GenerateHashCode(string val)
+        {
+            return val.GetHashCode() * 92821;  // PRIME = 92821 or another prime number.
         }
         #endregion
 

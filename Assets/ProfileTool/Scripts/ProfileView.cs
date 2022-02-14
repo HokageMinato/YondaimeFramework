@@ -30,7 +30,9 @@ using UnityEngine;
         public void OnTestInterface() 
         {
             overlayImage.gameObject.SetActive(true);
-            profileComponent.TestInterface();
+        
+        profileComponent.TestInterface();
+        
             Result2.text = profileComponent.GetInterfaceResult();
             overlayImage.gameObject.SetActive(false);
         }
