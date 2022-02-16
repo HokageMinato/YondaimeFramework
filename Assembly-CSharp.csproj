@@ -57,23 +57,23 @@
     <Compile Include="Assets\YondaimeFramework\Scripts\IdScriptables\CentalIdsDataSO.cs" />
     <Compile Include="Assets\Demo\Script\Truck.cs" />
     <Compile Include="Assets\YondaimeFramework\Scripts\Core\CustomBehaviour.cs" />
+    <Compile Include="Assets\ProfileTool\Scripts\DictVsLookup.cs" />
+    <Compile Include="Assets\ProfileTool\Scripts\GetComponentsFromLibvsFindObjectsOfType.cs" />
     <Compile Include="Assets\YondaimeFramework\Scripts\Core\BehaviourLibrary.cs" />
+    <Compile Include="Assets\ProfileTool\Scripts\GetComponentsFromGOvsGetComponents.cs" />
+    <Compile Include="Assets\ProfileTool\Scripts\TestIterationCountHolder.cs" />
     <Compile Include="Assets\YondaimeFramework\Scripts\Core\SceneLibrary.cs" />
     <Compile Include="Assets\YondaimeFramework\Scripts\Core\FrameworkConstants.cs" />
+    <Compile Include="Assets\ProfileTool\Scripts\GetCompByIdvsFindByTag.cs" />
     <Compile Include="Assets\YondaimeFramework\Scripts\IdScriptables\SystemIdDataSO.cs" />
+    <Compile Include="Assets\ProfileTool\Scripts\GetComponentFromMyGOvsGetComponent.cs" />
+    <Compile Include="Assets\ProfileTool\Scripts\ProfileView.cs" />
     <Compile Include="Assets\Demo\Script\Car.cs" />
     <Compile Include="Assets\Demo\Script\CarHandler.cs" />
     <Compile Include="Assets\Demo\Script\SportsCar.cs" />
-    <Compile Include="Assets\Demo\Script\SceneChanger.cs" />
-    <Compile Include="Assets\ProfileTool\Scripts\ProfileView.cs" />
-    <Compile Include="Assets\ProfileTool\Scripts\GetComponentFromMyGOvsGetComponent.cs" />
-    <Compile Include="Assets\ProfileTool\Scripts\TestIterationCountHolder.cs" />
-    <Compile Include="Assets\ProfileTool\Scripts\GetComponentsFromGOvsGetComponents.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\GetComponentLibVsFindObject.cs" />
-    <Compile Include="Assets\ProfileTool\Scripts\GetCompByIdvsFindByTag.cs" />
-    <Compile Include="Assets\ProfileTool\Scripts\GetComponentsFromLibvsFindObjectsOfType.cs" />
+    <Compile Include="Assets\Demo\Script\SceneChanger.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\MemoryVsListProfile.cs" />
-    <Compile Include="Assets\ProfileTool\Scripts\DictVsLookup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

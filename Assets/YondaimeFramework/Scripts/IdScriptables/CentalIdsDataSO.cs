@@ -53,11 +53,10 @@ namespace YondaimeFramework
 
         public const int None = 0;
         public int objBt;
-        public int ulid;
         public int _goInsId;
         //Make sure these are same or editor will throw out errors
 
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         public ComponentId(ComponentIdSRC source) 
         {
             stringId = source.stringIdVal;
@@ -65,8 +64,7 @@ namespace YondaimeFramework
         }
 
         public ComponentId() { }
-
-       #endif
+        #endif
 
     }
 

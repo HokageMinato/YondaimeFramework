@@ -203,6 +203,7 @@ using UnityEngine;
                     return behaviour;
             }
 
+
             return default;
         }
 
@@ -213,6 +214,8 @@ using UnityEngine;
             if (_behaviourLookup.ContainsKey(reqeuestedType))
             {
                 CustomBehaviour[] behavioursInLookUp = _behaviourLookup[reqeuestedType];
+                behaviourListToBeFilled.Capacity += behavioursInLookUp.Length;
+
                 for (int i = 0; i < behavioursInLookUp.Length; i++)
                 {
                     behaviourListToBeFilled.Add((T)(object)behavioursInLookUp[i]);
@@ -232,6 +235,8 @@ using UnityEngine;
             if (_behaviourLookup.ContainsKey(reqeuestedType))
             {
                 CustomBehaviour[] behavioursInLookUp = _behaviourLookup[reqeuestedType];
+                behaviourListToBeFilled.Capacity += behavioursInLookUp.Length;
+
                 for (int i = 0; i < behavioursInLookUp.Length && behavioursInLookUp[i].GOInstanceId ==  requesteeGameObjectInstanceId; i++)
                 {
                     behaviourListToBeFilled.Add((T)(object)behavioursInLookUp[i]);

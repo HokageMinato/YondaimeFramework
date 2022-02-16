@@ -1,5 +1,7 @@
+using UnityEngine;
 using YondaimeFramework;
 using Debug = UnityEngine.Debug;
+using System.Collections.Generic;
 
 public class Car : CustomBehaviour, ICar
 {
@@ -24,13 +26,34 @@ public class Car : CustomBehaviour, ICar
 
     }
 
-    
+
+    [ContextMenu("Test")]
+    public void Test()
+    {
+
+        List<int> list = new List<int>(10);
+        Debug.Log(list.Capacity);
+
+        
+
+       for (int i = 0; i < 21; i++)
+        {
+            list.Add(i);
+
+        }
+        Debug.Log(list.Capacity);
+        //Debug.Log(list[4]);
+
+
+    }
+
+
 }
 
 
 
- 
-  
+
+
 
 
 public class SceneIDs 

@@ -15,7 +15,22 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Miscellaneous Files",
       "ColorIndex": -1
+    },
+    "3e59dea2-4ba4-4b9a-b038-5a393b01b0a4": {
+      "ProjectGuid": "3e59dea2-4ba4-4b9a-b038-5a393b01b0a4",
+      "DisplayName": "ClassLibrary1",
+      "ColorIndex": 2
+    },
+    "b450cfbe-8c52-4141-98d4-e149fe70d67b": {
+      "ProjectGuid": "b450cfbe-8c52-4141-98d4-e149fe70d67b",
+      "DisplayName": "ClassLib",
+      "ColorIndex": 3
+    },
+    "344a2b46-9bf2-4119-8aa7-315310a44e6f": {
+      "ProjectGuid": "344a2b46-9bf2-4119-8aa7-315310a44e6f",
+      "DisplayName": "YondaimeClassLibrary",
+      "ColorIndex": 4
     }
   },
-  "NextColorIndex": 2
+  "NextColorIndex": 5
 }

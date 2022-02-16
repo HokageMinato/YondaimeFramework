@@ -14,7 +14,6 @@ namespace YondaimeFramework
 
         #region PRIVATE_VARS
         private Dictionary<string, SceneLibrary> _sceneLibLookUp = new Dictionary<string, SceneLibrary>();
-        //public List<SceneLibrary> _sceneLibs = new List<SceneLibrary>();
         public static RootLibrary Instance;
         #endregion
 
@@ -22,7 +21,6 @@ namespace YondaimeFramework
         private void OnEnable()
         {
             GenerateSingleton();
-            InitializeFramework();
         }
         #endregion
 
@@ -36,38 +34,13 @@ namespace YondaimeFramework
                 DontDestroyOnLoad(this);
             }
             else {
+                RaiseException();
                 DestorySelf();
             }
         }
         #endregion
 
         #region PUBLIC_METHODS
-
-        public void InitializeFramework()
-        {
-          //  InitializeLookUp();
-            LogSystemLibraries();
-
-            //void InitializeLookUp()
-            //{
-            //    for (int i = 0; i < _sceneLibs.Count; i++)
-            //    {
-            //        SceneLibrary lib = _sceneLibs[i];
-            //        _sceneLibLookUp.Add(lib.Id, lib);
-                    
-            //    }
-            //}
-            
-            void LogSystemLibraries()
-            {
-                if (FrameworkConstants.IsDebug)
-                    foreach (var item in _sceneLibLookUp)
-                    {
-                        FrameworkLogger.Log($"System Library Added with key {item.Key} count {item.Value}");
-                    }
-            }
-
-        }
 
 
         public SceneLibrary GetSceneLibraryById(string systemId)
@@ -78,21 +51,20 @@ namespace YondaimeFramework
 
         public void AddSceneLibrary(SceneLibrary newSceneLibrary) 
         {
-           // _sceneLibs.Add(newSceneLibrary);
             _sceneLibLookUp.Add(newSceneLibrary.SystemId, newSceneLibrary);
         }
 
         public void RemoveFromLibrary(string sceneId) {
 
-            //for (int i = 0; i < _sceneLibs.Count;)
-            //{
-            //    if (_sceneLibs[i].SystemId == sceneId)
-            //        _sceneLibs.RemoveAt(i);
-            //    else
-            //        i++;
-            //}
-
             _sceneLibLookUp.Remove(sceneId);
+        }
+        #endregion
+
+
+        #region PRIVATE_METHODS
+        private void RaiseException() 
+        {
+            throw new Exception("A Root library already exists, There must be only one Root Library througout unity project");
         }
         #endregion
     }

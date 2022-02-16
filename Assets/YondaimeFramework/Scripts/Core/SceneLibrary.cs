@@ -42,11 +42,6 @@ namespace YondaimeFramework
 
         #region PUBLIC_METHODS
 
-        public void SetRootLibrary(RootLibrary library)
-        {
-            _rootLibrary = library;
-        }
-
         public SceneLibrary GetSceneLibraryFromRootLibraryById(string systemId)
         {
             return _rootLibrary.GetSceneLibraryById(systemId);
@@ -86,6 +81,8 @@ namespace YondaimeFramework
 
         private void RegisterSelfInRootLibrary() 
         {
+
+            RootLibraryNonExistanceCheck();
             _rootLibrary = RootLibrary.Instance;
             _rootLibrary.AddSceneLibrary(this);
         }
@@ -95,7 +92,11 @@ namespace YondaimeFramework
             _rootLibrary.RemoveFromLibrary(SystemId);
         }
 
-
+        private void RootLibraryNonExistanceCheck() 
+        {
+            if (RootLibrary.Instance == null)
+                throw new Exception("RootLibrary instance not found, either create one or check script execution order for Root Library to execute before scene library");
+        }
         #endregion
     }
 }

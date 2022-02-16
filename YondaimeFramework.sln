@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32002.185
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{2020F1F4-3FD5-31C8-3C8F-53B484E88CAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{8034D36A-82D7-72DE-B212-A1BEECCD484C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YondaimeFramework", "..\YondaimeDll\YondaimeFramework\YondaimeFramework.csproj", "{BEB683B1-9225-45B8-9D9B-12609B59E006}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,8 +23,15 @@ Global
 		{8034D36A-82D7-72DE-B212-A1BEECCD484C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8034D36A-82D7-72DE-B212-A1BEECCD484C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8034D36A-82D7-72DE-B212-A1BEECCD484C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEB683B1-9225-45B8-9D9B-12609B59E006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB683B1-9225-45B8-9D9B-12609B59E006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB683B1-9225-45B8-9D9B-12609B59E006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB683B1-9225-45B8-9D9B-12609B59E006}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A50E4AE0-0191-4A94-8E60-C4CEB9623E36}
 	EndGlobalSection
 EndGlobal
