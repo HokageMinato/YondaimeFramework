@@ -1,11 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
 using YondaimeFramework;
-using UnityEngine;
-using System.Diagnostics;
 using Debug = UnityEngine.Debug;
-using System;
-using Random = UnityEngine.Random;
 
 public class Car : CustomBehaviour, ICar
 {

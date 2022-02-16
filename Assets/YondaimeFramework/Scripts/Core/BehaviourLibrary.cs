@@ -323,7 +323,7 @@ using UnityEngine;
                 for (int i = 0; i < _behaviours.Count; i++)
                 {
                     _behaviours[i].SetLibrary(this);
-                    _behaviours[i].SetLibrary(MySystemLibrary);
+                    _behaviours[i].SetLibrary(MySceneLibrary);
                 }
             }
         }
