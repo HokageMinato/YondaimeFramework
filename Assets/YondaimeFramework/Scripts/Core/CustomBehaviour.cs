@@ -23,8 +23,6 @@ namespace YondaimeFramework
             }
         }
 
-       
-
         public SceneLibrary MySceneLibrary
         {
             get {
@@ -163,6 +161,10 @@ namespace YondaimeFramework
             return val.GetHashCode() * 92821;  // PRIME = 92821 or another prime number.
         }
 
+        public void SetComponentIdExplicity(ComponentId newId) 
+        { 
+            id = newId;
+        }
         #endregion
 
         #region PRIVATE_METHODS

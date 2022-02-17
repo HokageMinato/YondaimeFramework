@@ -91,7 +91,7 @@ namespace YondaimeFramework
             void AddSystemIdSubMenu(List<GUIContent> contentList, List<ComponentId> choiceList, SystemIdsData idData)
             {
                 string systemId = idData.SystemId;
-                ComponentIdSRC[] componentIds = idData.GetIds();
+                ComponentIdSRC[] componentIds = idData.GetIdSRCs();
 
                 for (int i = 0; i < componentIds.Length; i++)
                 {

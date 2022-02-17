@@ -23,7 +23,7 @@ public class Car : CustomBehaviour, ICar
         //Debug.Log($"{GetComponentsFromLibrary<Car>()?.Count} -- {gameObject.name}" );
         //Debug.Log($"{GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}");
         //Debug.Log("===============================");
-
+        SetComponentIdExplicity(idToSearch);
     }
 
 

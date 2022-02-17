@@ -17,3 +17,10 @@ MonoBehaviour:
     intValue: 4
   - stringIdVal: Network
     intValue: 5
+  idParsed:
+  - stringId: Local
+    objBt: 4
+    _goInsId: 0
+  - stringId: Network
+    objBt: 5
+    _goInsId: 0

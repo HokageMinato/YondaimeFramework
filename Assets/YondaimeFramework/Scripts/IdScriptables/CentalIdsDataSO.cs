@@ -25,13 +25,18 @@ namespace YondaimeFramework
             for (int i = 0; i < idsData.Length; i++)
             {
                 var data = idsData[i];
+                var idSRCData = data.GetIdSRCs();
                 var idData = data.GetIds();
+                idData = new ComponentId[idSRCData.Length];
 
-                for (int j = 0; j < idData.Length; j++)
+                for (int j = 0; j < idSRCData.Length; j++)
                 {
-                    idData[j].intValue = c;
+                    idSRCData[j].intValue = c;
+                    idData[j] = new ComponentId(idSRCData[j]);
                     c++;
                 }
+
+                data.SetParsedValues(idData);
                 data.SetDirty();
             }
             #if UNITY_EDITOR
@@ -44,19 +49,18 @@ namespace YondaimeFramework
     [System.Serializable]
     public class ComponentId 
     {
-        #if UNITY_EDITOR
-        public string stringId;
-        public const string StringIdPropertyName = "stringId";
-        public const string IntIdValName = "objBt";
-        public const string NoneStr = "None";
-        #endif
-
         public const int None = 0;
         public int objBt;
         public int _goInsId;
         //Make sure these are same or editor will throw out errors
 
-        #if UNITY_EDITOR
+
+        //#if UNITY_EDITOR
+        public string stringId;
+        public const string StringIdPropertyName = "stringId";
+        public const string IntIdValName = "objBt";
+        public const string NoneStr = "None";
+       
         public ComponentId(ComponentIdSRC source) 
         {
             stringId = source.stringIdVal;
@@ -64,7 +68,7 @@ namespace YondaimeFramework
         }
 
         public ComponentId() { }
-        #endif
+        //#endif
 
     }
 
@@ -90,17 +94,28 @@ namespace YondaimeFramework
         public string SystemId => _systemName;
 
        
-        public ComponentIdSRC[] GetIds()
+        public ComponentIdSRC[] GetIdSRCs()
+        {
+            return sourceSos.GetIdSRCs();
+        }
+
+
+        public ComponentId[] GetIds() 
         {
             return sourceSos.GetIds();
         }
 
+
+        public void SetParsedValues(ComponentId[] parsedIds) 
+        {
+            sourceSos.SetParsedValues(parsedIds);
+        }
       
         public void SetDirty()
         {
-#if UNITY_EDITOR
+            #if UNITY_EDITOR
             EditorUtility.SetDirty(sourceSos);
-#endif
+            #endif
         }
 
 

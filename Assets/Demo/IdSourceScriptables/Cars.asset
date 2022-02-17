@@ -19,3 +19,13 @@ MonoBehaviour:
     intValue: 2
   - stringIdVal: Audi
     intValue: 3
+  idParsed:
+  - stringId: Buggati
+    objBt: 1
+    _goInsId: 0
+  - stringId: Lamborghini
+    objBt: 2
+    _goInsId: 0
+  - stringId: Audi
+    objBt: 3
+    _goInsId: 0

@@ -9,10 +9,21 @@ namespace YondaimeFramework
 	public class SystemIdDataSO : ScriptableObject
 	{
 		[SerializeField] private ComponentIdSRC[] ids;
+		[SerializeField] private ComponentId[] idParsed;
 
-		public ComponentIdSRC[] GetIds()
+		public ComponentIdSRC[] GetIdSRCs()
 		{
 			return ids;
+		}
+
+		public ComponentId[] GetIds() 
+		{
+			return idParsed;
+		}
+
+		public void SetParsedValues(ComponentId[] parsed) 
+		{
+			idParsed = parsed;
 		}
 
     }
