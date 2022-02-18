@@ -22,6 +22,10 @@ Improvements:
 
  > [DONE] ComponentId Seperate comparision and display value
  
+ > An override of BehaviourLibrary where active and inactive objects are seperated acc to position, left from midde inactive right from middle active
+   or different lookups for active inactive and return combined incase of all queried;
+   Extra methods in CustomBehaviour with inactiveObjects support. 
+ 
  > Performance Optimization, preallocate List count during generation in GetComponent(s) methods
  
  > Add proper Exceptions for [Library not assigned] [Library not initialized] [Nulls Present in Library, require refresh]
