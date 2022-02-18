@@ -26,12 +26,18 @@ Improvements:
    or different lookups for active inactive and return combined incase of all queried;
    Extra methods in CustomBehaviour with inactiveObjects support. 
  
- > Performance Optimization, preallocate List count during generation in GetComponent(s) methods
+ > Add an exception for "No Parsed Id in current scriptable, Please click assign from container from container SO"
+ 
+ > Decorator based Init with order for maintaining initializations; [Init,Order='']
+ 
+ > Check if _lookUp.Clear is really required in library intializations
+ 
+ > Performance Optimization, preallocate List count during generation in GetComponent(s) methods in SceneLibrary to Preallocate list during method call
  
  > Add proper Exceptions for [Library not assigned] [Library not initialized] [Nulls Present in Library, require refresh]
 
- > locking of resource when queried during hierarchy change, or hierarchy change during query.
+ > [NR][For Now]locking of resource when queried during hierarchy change, or hierarchy change during query.
  
- > See if Serialized class instances can anyhow added to this, just for fun
+ > See if Serialized class instances can anyhow be added to this, just for fun
 	
 	

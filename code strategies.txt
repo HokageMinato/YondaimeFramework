@@ -1,0 +1,3 @@
+Views should have actions for inversions,
+	Each button/action a view performs should be an action instead of direct refs to scripts.
+	Buttons with internal script ref are okay but shouldnt point to out of scope scripts.
