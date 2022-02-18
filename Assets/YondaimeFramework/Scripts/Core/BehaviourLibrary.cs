@@ -23,7 +23,9 @@ using UnityEngine;
         #region PUBLIC_METHODS
         public void InitializeLibrary()
         {
-           
+            _behaviourLookup.Clear();
+            _idLookup.Clear();
+
             Dictionary<Type, List<CustomBehaviour>> tempLookup = new Dictionary<Type, List<CustomBehaviour>>();
             GenerateTempLookUps();
             FillInterfaceLookup();
@@ -93,7 +95,7 @@ using UnityEngine;
                     {
                         int id = items[i].id.objBt;
 
-                        if (items[i].id.objBt != ComponentId.None)
+                        if (id != ComponentId.None)
                         {
                             if(!temp.ContainsKey(id))
                                 temp.Add(id, new List<CustomBehaviour>());
