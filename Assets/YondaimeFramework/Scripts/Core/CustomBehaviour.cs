@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 namespace YondaimeFramework
 {

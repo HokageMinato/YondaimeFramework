@@ -39,5 +39,17 @@ Improvements:
  > [NR][For Now]locking of resource when queried during hierarchy change, or hierarchy change during query.
  
  > See if Serialized class instances can anyhow be added to this, just for fun
-	
-	
+ 
+ > ================ {FEATURE NOTE } ===================
+   => Interface:
+		-> A ComponentLibrary interface
+
+   => Primary architecture:	
+		-> Keep scenelibrary inheriting behaviourLibrary, but make behaviourLibrary implement ComponentLibrary
+		-> Similarly make PooledLibrary implement ComponentLibrary
+
+   => Create a CustomPooledBehaviour extending CustomBehaviour
+		-> Add two methods GetPooled<T>() and PoolSelf();
+		-> those two will call PooledLibrary's GetPooled<T>() and Pool(T behv)
+		-> Add a virtual cleanup() method in CustomPooledBehaviour to perform custom cleanup (if any required)
+   ====================={ END }========================
