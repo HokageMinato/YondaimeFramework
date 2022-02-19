@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/ProfileTool/Scenes/FrameworkProfileScene.unity
     guid: e669a5ffe9c147a47bd1e031d19b45d8

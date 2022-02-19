@@ -7,7 +7,7 @@ public class Car : CustomBehaviour, ICar
 {
 
     public Car[] othercars;
-    public ComponentId idToSearch;
+    public RuntimeIdContainer carIds;
     private const string tid = "Finish";
     public int itr;
 
@@ -23,7 +23,8 @@ public class Car : CustomBehaviour, ICar
         //Debug.Log($"{GetComponentsFromLibrary<Car>()?.Count} -- {gameObject.name}" );
         //Debug.Log($"{GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}");
         //Debug.Log("===============================");
-        SetComponentIdExplicity(idToSearch);
+
+        Debug.Log(carIds.GetIds() == null);
     }
 
 

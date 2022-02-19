@@ -44,9 +44,18 @@ Improvements:
    => Interface:
 		-> A ComponentLibrary interface
 
+   => Working:
+		-> All methods will work as they are supposed to be.
+		-> Every GComponent method variant will have a boolean for including pooled object list.
+		-> GetComponent variants will return every instance,(including pooled) when queried
+		-> In library, two HPerformanceList will be present, One to hold pooled, one to hold inUse components.
+		-> We will not depend on gameobjects' activeStatus state, but on last method called i.e. Pooled or depooled.
+		-> 'Including pooled' ticked on will just pull everything from both list while decluding pool will only pool from active list.
+
    => Primary architecture:	
 		-> Keep scenelibrary inheriting behaviourLibrary, but make behaviourLibrary implement ComponentLibrary
 		-> Similarly make PooledLibrary implement ComponentLibrary
+		-> GetComponent alternatives should have an WithActive counterparts, which scans both lists and returns them
 
    => Create a CustomPooledBehaviour extending CustomBehaviour
 		-> Add two methods GetPooled<T>() and PoolSelf();
