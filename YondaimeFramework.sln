@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YondaimeFramework", "..\YondaimeDll\YondaimeFramework\YondaimeFramework.csproj", "{BEB683B1-9225-45B8-9D9B-12609B59E006}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YondaimeDll Editor", "..\YondaimeDll\YondaimeDll Editor\YondaimeDll Editor.csproj", "{8D4D975E-17F1-4418-ACF7-59FEB584BF05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{BEB683B1-9225-45B8-9D9B-12609B59E006}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEB683B1-9225-45B8-9D9B-12609B59E006}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEB683B1-9225-45B8-9D9B-12609B59E006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D4D975E-17F1-4418-ACF7-59FEB584BF05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D4D975E-17F1-4418-ACF7-59FEB584BF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D4D975E-17F1-4418-ACF7-59FEB584BF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D4D975E-17F1-4418-ACF7-59FEB584BF05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
