@@ -5,8 +5,10 @@ using YondaimeFramework;
 
 namespace YondaimeFramework.EditorHandles
 {
-	[CreateAssetMenu(fileName = "EditorSystemIdData", menuName = "YondaimeFramework/EditorSystemIdData")]
-	public class EditorSystemIdDataSO : ScriptableObject
+	[CreateAssetMenu(fileName = "EditorIdContainer", menuName = "YondaimeFramework/Editor" +
+		"IdContainer" +
+		"")]
+	public class EditorIdContainer : ScriptableObject
 	{
 		[SerializeField] private ComponentIdSRC[] ids;
 		[SerializeField] private RuntimeIdContainer runtimeIdContainer;

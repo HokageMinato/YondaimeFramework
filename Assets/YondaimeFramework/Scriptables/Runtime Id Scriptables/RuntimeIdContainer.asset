@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fec65646390cdc499996fbd13e10198, type: 3}
-  m_Name: _CentralIdsDataSO
+  m_Script: {fileID: 11500000, guid: 5663b6b6d3b72ba4e9102b63470dcc08, type: 3}
+  m_Name: RuntimeIdContainer
   m_EditorClassIdentifier: 
-  idsData:
-  - _systemName: Some
-    sourceSos: {fileID: 11400000, guid: cea417ab3dff74446a19fe94dbee19a8, type: 2}
+  _ids: []

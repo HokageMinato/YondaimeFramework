@@ -898,11 +898,11 @@ MonoBehaviour:
   _myLibrary: {fileID: 344413090}
   _sceneLibrary: {fileID: 349952633}
   id:
-    objBt: 1
+    objBt: 0
     _goInsId: 0
-    stringId: Buggati
+    stringId: None
   othercars: []
-  carIds: {fileID: 11400000, guid: 22ec3d93286496f4d9fc55a529df49a1, type: 2}
+  carIds: {fileID: 11400000, guid: 2277556c9e67bbb469d77574525cc410, type: 2}
   itr: 0
 --- !u!114 &344413090
 MonoBehaviour:
@@ -3815,11 +3815,11 @@ MonoBehaviour:
   _myLibrary: {fileID: 349952633}
   _sceneLibrary: {fileID: 349952633}
   id:
-    objBt: 1
+    objBt: 0
     _goInsId: 0
-    stringId: Buggati
+    stringId: None
   othercars: []
-  carIds: {fileID: 11400000, guid: 22ec3d93286496f4d9fc55a529df49a1, type: 2}
+  carIds: {fileID: 11400000, guid: 2277556c9e67bbb469d77574525cc410, type: 2}
   itr: 0
 --- !u!1 &1260351005
 GameObject:

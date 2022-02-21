@@ -69,7 +69,7 @@ namespace YondaimeFramework.EditorHandles
     {
 
         [SerializeField] string _systemName;
-        [SerializeField] EditorSystemIdDataSO sourceSos;
+        [SerializeField] EditorIdContainer sourceSos;
         public string SystemId => _systemName;
 
        
