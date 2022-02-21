@@ -458,7 +458,7 @@ MonoBehaviour:
   id:
     objBt: 0
     _goInsId: 0
-    stringId: 
+    stringId: None
 --- !u!114 &280721867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,7 +476,7 @@ MonoBehaviour:
   id:
     objBt: 0
     _goInsId: 0
-    stringId: 
+    stringId: None
   overlayImage: {fileID: 0}
   Result1: {fileID: 0}
   Result2: {fileID: 0}
