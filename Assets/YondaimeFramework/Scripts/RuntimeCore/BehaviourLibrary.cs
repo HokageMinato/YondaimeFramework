@@ -28,7 +28,6 @@ using UnityEngine;
         #endregion
 
 
-
         #region PUBLIC_METHODS
         public void InitializeLibrary()
         {
@@ -36,12 +35,21 @@ using UnityEngine;
             _idLookup.Clear();
 
             Dictionary<Type, List<CustomBehaviour>> tempLookup = new Dictionary<Type, List<CustomBehaviour>>();
+            CheckForEmptyBehaviours();
             GenerateTempLookUps();
             FillInterfaceLookup();
             FillIdLookup();
             MoveTempToFinalLookup();
             InitChildLibraries();
 
+            void CheckForEmptyBehaviours() 
+            {
+                for (int i = 0; i < _behaviours.Count; i++)
+                {
+                    if (_behaviours[i] == null)
+                        throw new Exception("Null object detected,Make sure to Scan library after making all scene edits");
+                }
+            }
 
             void GenerateTempLookUps()
             {

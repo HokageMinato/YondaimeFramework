@@ -23,6 +23,7 @@ namespace YondaimeFramework.EditorHandles
 			runtimeIdContainer?.SetIds(GenerateRuntimeIds());
 		}
 
+		
 		[ContextMenu("GenerateRuntimeIds")]
 		public ComponentId[] GenerateRuntimeIds() 
 		{
@@ -37,6 +38,8 @@ namespace YondaimeFramework.EditorHandles
 	
 		}
 
+
+		
 
     }
 

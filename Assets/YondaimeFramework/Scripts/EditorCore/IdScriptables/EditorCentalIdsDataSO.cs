@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
-
+using System.Collections.Generic;
+using System;
 
 namespace YondaimeFramework.EditorHandles
 {
@@ -17,28 +18,50 @@ namespace YondaimeFramework.EditorHandles
         }
 
         [ContextMenu("Assign")]
-        public void AssignId() 
+        public void AssignId()
         {
-            int c = 1;
+            SearchForDuplicates();
+
             for (int i = 0; i < idsData.Length; i++)
             {
                 var data = idsData[i];
                 var idSRCData = data.GetIdSRCs();
-                
+
                 for (int j = 0; j < idSRCData.Length; j++)
                 {
-                    idSRCData[j].intValue = c;
-                    c++;
+                    if(idSRCData[j].intValue == ComponentId.None)
+                        idSRCData[j].intValue = Animator.StringToHash(idSRCData[j].stringIdVal);
                 }
 
                 data.UpdateRuntimeIdValues();
                 data.SetDirty();
             }
-            
+
             EditorUtility.SetDirty(this);
-            
+
         }
 
+        private void SearchForDuplicates()
+        {
+            HashSet<string> idv = new HashSet<string>();
+
+            for (int i = 0; i < idsData.Length; i++)
+            {
+               
+                for (int j = 0; j < idsData[i].GetIdSRCs().Length; j++)
+                {
+                    string stringIdValue = idsData[i].GetIdSRCs()[j].stringIdVal;
+
+                    if (idv.Contains(stringIdValue))
+                    {
+                        throw new Exception($"Duplicate Id entry ({stringIdValue}) found at {idsData[i].SystemId}");
+                    }
+
+                    idv.Add(stringIdValue);
+                }                
+
+            }
+        }
     }
 
     
@@ -82,6 +105,8 @@ namespace YondaimeFramework.EditorHandles
         {
             sourceSos.UpdateRuntimeValues();
         }
+
+        
 
         public void SetDirty()
         {

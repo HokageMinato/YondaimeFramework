@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ids:
   - stringIdVal: some
-    intValue: 1
+    intValue: -154215346
   - stringIdVal: some1
-    intValue: 2
+    intValue: 307121660
   runtimeIdContainer: {fileID: 11400000, guid: 2277556c9e67bbb469d77574525cc410, type: 2}
