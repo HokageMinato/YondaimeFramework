@@ -1,30 +1,54 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using YondaimeFramework;
 
 namespace YondaimeFramework.EditorHandles
 {
-	[CreateAssetMenu(fileName = "EditorIdContainer", menuName = "YondaimeFramework/Editor" +
-		"IdContainer" +
-		"")]
+	[CreateAssetMenu(fileName = "EditorIdContainer", menuName = "YondaimeFramework/EditorIdContainer")]
 	public class EditorIdContainer : ScriptableObject
 	{
 		[SerializeField] private ComponentIdSRC[] ids;
-		[SerializeField] private RuntimeIdContainer runtimeIdContainer;
+		[SerializeField] private RuntimeIdContainer[] myRuntimeIdContainers;
 
 		public ComponentIdSRC[] GetIdSRCs()
 		{
 			return ids;
 		}
 
+
+		[ContextMenu("UpdateRuntimeIds")]
 		public void UpdateRuntimeValues() 
-		{ 
-			runtimeIdContainer?.SetIds(GenerateRuntimeIds());
+		{
+			CheckForDuplicates();
+
+			foreach (var id in myRuntimeIdContainers) 
+			{
+				if (id != null)
+				{
+					id.SetIds(GenerateRuntimeIds());
+					EditorUtility.SetDirty(id);
+				}
+				else 
+				{
+					throw new System.Exception($"Null RuntimeIdContainer entry in {name} editorIdContainer");
+				}
+			}	
+			
+			
 		}
 
+		private void CheckForDuplicates() 
+		{
+			HashSet<string> duplicates = new HashSet<string>();
+            foreach (var item in ids)
+            {
+				if (duplicates.Contains(item.stringIdVal))
+					throw new System.Exception($"Duplicate id entry {item.stringIdVal} detected");	
+
+				duplicates.Add(item.stringIdVal);
+            }
+		}
 		
-		[ContextMenu("GenerateRuntimeIds")]
 		public ComponentId[] GenerateRuntimeIds() 
 		{
 			List<ComponentId> componentId = new List<ComponentId>();

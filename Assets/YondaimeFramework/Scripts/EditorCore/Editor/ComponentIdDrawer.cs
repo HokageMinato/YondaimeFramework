@@ -23,7 +23,6 @@ namespace YondaimeFramework.EditorHandles
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            Debug.Log(position);
             EditorGUI.BeginProperty(position, label, property);
             
             if (IsIdSourceNull())

@@ -5,34 +5,34 @@ using UnityEngine;
 namespace YondaimeFramework.EditorHandles
 {
 
-    [CustomEditor(typeof(RuntimeIdContainer))]
-    public class RuntimeIdInspectorDisplay : Editor
-    {
+    //[CustomEditor(typeof(RuntimeIdContainer))]
+    //public class RuntimeIdInspectorDisplay : Editor
+    //{
 
-        public override void OnInspectorGUI()
-        {
+    //    public override void OnInspectorGUI()
+    //    {
 
-            base.OnInspectorGUI();
+    //        base.OnInspectorGUI();
 
-            RuntimeIdContainer runtimeIdContainer = (RuntimeIdContainer)target;
-            ComponentId[] ids = runtimeIdContainer.GetIds();
-               DrawTitle();
-                DrawIds(ids);
-        }
+    //        RuntimeIdContainer runtimeIdContainer = (RuntimeIdContainer)target;
+    //        ComponentId[] ids = runtimeIdContainer.GetIds();
+    //        DrawTitle();
+    //        DrawIds(ids);
+    //    }
 
-        private static void DrawTitle()
-        {
-            EditorGUILayout.LabelField($"Available ids:");
-        }
-        
-        
+    //    private static void DrawTitle()
+    //    {
+    //        EditorGUILayout.LabelField($"Available ids:");
+    //    }
 
-        private static void DrawIds(ComponentId[] ids)
-        {
-            for (int i = 0; i < ids.Length; i++)
-            {
-                EditorGUILayout.LabelField($"Id : {ids[i].stringId}", $"Hash : {ids[i].objBt}");
-            }
-        }
-    }
+
+
+    //    private static void DrawIds(ComponentId[] ids)
+    //    {
+    //        for (int i = 0; i < ids.Length; i++)
+    //        {
+    //            EditorGUILayout.LabelField($"Id : {ids[i].stringId}", $"Hash : {ids[i].objBt}");
+    //        }
+    //    }
+    //}
 }

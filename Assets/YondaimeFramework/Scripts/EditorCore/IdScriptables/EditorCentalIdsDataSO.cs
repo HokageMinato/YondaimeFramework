@@ -29,8 +29,7 @@ namespace YondaimeFramework.EditorHandles
 
                 for (int j = 0; j < idSRCData.Length; j++)
                 {
-                    if(idSRCData[j].intValue == ComponentId.None)
-                        idSRCData[j].intValue = Animator.StringToHash(idSRCData[j].stringIdVal);
+                    idSRCData[j].intValue = Animator.StringToHash(idSRCData[j].stringIdVal);
                 }
 
                 data.UpdateRuntimeIdValues();
@@ -38,7 +37,8 @@ namespace YondaimeFramework.EditorHandles
             }
 
             EditorUtility.SetDirty(this);
-
+            AssetDatabase.Refresh();
+            AssetDatabase.SaveAssets();
         }
 
         private void SearchForDuplicates()
@@ -71,7 +71,7 @@ namespace YondaimeFramework.EditorHandles
     public class ComponentIdSRC 
     {
         public string stringIdVal;
-        public int intValue;
+        [HideInInspector]public int intValue;
 
         public ComponentId ParseToRuntimeId() 
         {
