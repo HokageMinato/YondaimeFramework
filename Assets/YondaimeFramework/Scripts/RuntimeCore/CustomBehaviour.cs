@@ -6,11 +6,14 @@ using Random = UnityEngine.Random;
 
 namespace YondaimeFramework
 {
+    
+
     public abstract class CustomBehaviour : MonoBehaviour
     {
         #region PRIVATE_VARIABLES
         [HideInInspector][SerializeField] private BehaviourLibrary _myLibrary;
         [HideInInspector][SerializeField] private SceneLibrary _sceneLibrary;
+        [SerializeField] private PooledBehaviourLibrary _pooledLibrary;
         #endregion
 
         #region PUBLIC_VARIABLES
@@ -33,6 +36,16 @@ namespace YondaimeFramework
             }
         }
 
+        public PooledBehaviourLibrary LibraryPool
+        {
+            get
+            {
+                return _pooledLibrary;
+            }
+        }
+        
+        public bool PoolState;
+
         public ComponentId id;
         #endregion
 
@@ -52,6 +65,10 @@ namespace YondaimeFramework
             _sceneLibrary = library;
         }
 
+        public void SetLibrary(PooledBehaviourLibrary libraryPool)
+        {
+            _pooledLibrary = libraryPool;
+        }
 
         /// <summary>
         /// GetComponent<T> Performance Alternative
@@ -193,4 +210,5 @@ namespace YondaimeFramework
         #endregion
 
     }
+
 }

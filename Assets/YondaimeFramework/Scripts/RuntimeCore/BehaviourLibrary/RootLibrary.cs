@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace YondaimeFramework
 {
-    
     public sealed class RootLibrary : CustomBehaviour
     {
 
@@ -31,7 +30,7 @@ namespace YondaimeFramework
                 DontDestroyOnLoad(this);
             }
             else {
-                RaiseException();
+                RaiseMultipleLibException();
                 DestorySelf();
             }
         }
@@ -59,7 +58,7 @@ namespace YondaimeFramework
 
 
         #region PRIVATE_METHODS
-        private void RaiseException() 
+        private void RaiseMultipleLibException() 
         {
             throw new Exception("A Root library already exists, There must be only one Root Library througout unity project");
         }

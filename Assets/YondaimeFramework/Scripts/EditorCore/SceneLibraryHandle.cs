@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using YondaimeFramework;
 using UnityEngine;
 using UnityEditor.SceneManagement;
@@ -15,10 +14,12 @@ namespace YondaimeFramework.EditorHandles
         [ContextMenu("Scan")]
         public void ScanBehaviours() 
         {
-            sceneLibrary= FindObjectOfType<SceneLibrary>();
+            sceneLibrary = FindObjectOfType<SceneLibrary>();
             sceneLibrary.ScanBehaviours();
             SetSceneDirty();
-        }
+        } 
+        
+       
 
         public void SetSceneDirty()
         {
@@ -28,4 +29,3 @@ namespace YondaimeFramework.EditorHandles
          
     }
 }
-#endif
