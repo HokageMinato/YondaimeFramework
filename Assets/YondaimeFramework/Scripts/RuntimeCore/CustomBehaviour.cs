@@ -44,7 +44,7 @@ namespace YondaimeFramework
             }
         }
         
-        public bool PoolState;
+        public int PoolState;
 
         public ComponentId id;
         #endregion

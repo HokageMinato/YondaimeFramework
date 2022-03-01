@@ -5,11 +5,17 @@ using System;
 namespace YondaimeFramework
 {
 
-    
+    public static class PoolConstants 
+    {
+        public const int Active = 0;
+        public const int Pooled = 1;
+    }
+
 
     public class PooledBehaviourLibrary : BehaviourLibrary
     {
-        
+
+       
 
         private Dictionary<Type, PerformancePool<CustomBehaviour>> _behaviourLookup = new Dictionary<Type, PerformancePool<CustomBehaviour>>();
         private Dictionary<int, CustomBehaviour[]> _idLookup = new Dictionary<int, CustomBehaviour[]>();
@@ -48,7 +54,7 @@ namespace YondaimeFramework
                         tempLookup.Add(currentBehaviourType, new PerformancePool<CustomBehaviour>());
                     }
 
-                    if (_behaviours[i].PoolState == active)
+                    if (_behaviours[i].PoolState == PoolConstants.Active)
                         tempLookup[currentBehaviourType].AddAsDePooledState(_behaviours[i]);
                     else
                         tempLookup[currentBehaviourType].AddAsPooledState(_behaviours[i]);
@@ -91,7 +97,7 @@ namespace YondaimeFramework
 
                 foreach (KeyValuePair<Type, PerformancePool<CustomBehaviour>> item in tempLookup)
                 {
-                    List<CustomBehaviour> items = item.Value.ToList();
+                    List<CustomBehaviour> items = item.Value.GetAll();
                     int totalItems = items.Count;
 
 
@@ -138,7 +144,7 @@ namespace YondaimeFramework
             Type reqeuestedType = typeof(T);
 
             if (_behaviourLookup.ContainsKey(reqeuestedType))
-                return (T)(object)_behaviourLookup[reqeuestedType][0][0];
+                return (T)(object)_behaviourLookup[reqeuestedType][0][PoolConstants.Active];
 
             for (int i = 0; i < _childLibs.Length; i++)
             {
@@ -156,9 +162,9 @@ namespace YondaimeFramework
 
             if (_behaviourLookup.ContainsKey(reqeuestedType))
             {
-                CustomBehaviour[] behaviours = _behaviourLookup[reqeuestedType][0];
+                List<CustomBehaviour> behaviours = _behaviourLookup[reqeuestedType].activeObjects;
 
-                for (int i = 0; i < behaviours.Length; i++)
+                for (int i = 0; i < behaviours.Count; i++)
                 {
                     if (behaviours[i].GOInstanceId == requesteeGameObjectInstanceId)
                     {
@@ -204,10 +210,9 @@ namespace YondaimeFramework
 
     public class PerformancePool<T>
     {
-        //public List<T> inActiveObjects = new List<T>();
-        //public List<T> activeObjects = new List<T>();
-        public const int Active = 0;
-        public const int Pooled = 1;
+        public List<T> inActiveObjects = new List<T>();
+        public List<T> activeObjects = new List<T>();
+        
 
         public List<List<T>> objects = new List<List<T>>(); 
 
@@ -221,43 +226,43 @@ namespace YondaimeFramework
 
         public void AddAsDePooledState(T behaviour) 
         { 
-            objects[Active].Add(behaviour);
+            objects[PoolConstants.Active].Add(behaviour);
         }
         
         public void AddAsPooledState(T behaviour) 
         { 
-            objects[Pooled].Add(behaviour);
+            objects[PoolConstants.Pooled].Add(behaviour);
         }
 
         public void AddRange(PerformancePool<T> otherPool) 
         { 
-            objects[Active].AddRange(otherPool.objects[Active]);
-            objects[Pooled].AddRange(otherPool.objects[Pooled]);
+            objects[PoolConstants.Active].AddRange(otherPool.objects[PoolConstants.Active]);
+            objects[PoolConstants.Pooled].AddRange(otherPool.objects[PoolConstants.Pooled]);
         }
 
         public void Pool(T behaviour)
         {
-            objects[Pooled].Add(behaviour);
+            objects[PoolConstants.Pooled].Add(behaviour);
         }
 
         public T GetPooled()
         {
-            int objectCount = objects[Pooled].Count;
+            int objectCount = objects[PoolConstants.Pooled].Count;
 
             if (objectCount <= 0)
                 return default;
 
-            T ob = objects[Pooled][objectCount - 1];
-            objects[Pooled].RemoveAt(objectCount - 1);
+            T ob = objects[PoolConstants.Pooled][objectCount - 1];
+            objects[PoolConstants.Pooled].RemoveAt(objectCount - 1);
             return ob;
         }
 
-        public List<T> ToList() 
+        public List<T> GetAll() 
         { 
-            List<T> list = new List<T>(objects[Pooled].Count);
-            list.Capacity += objects[Active].Count;
-            list.AddRange(objects[Active]);
-            list.AddRange(objects[Pooled]);
+            List<T> list = new List<T>(objects[PoolConstants.Pooled].Count);
+            list.Capacity += objects[PoolConstants.Active].Count;
+            list.AddRange(objects[PoolConstants.Active]);
+            list.AddRange(objects[PoolConstants.Pooled]);
             return list;    
         }
     

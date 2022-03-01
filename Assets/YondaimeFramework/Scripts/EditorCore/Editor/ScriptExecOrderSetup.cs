@@ -14,9 +14,9 @@ namespace YondaimeFramework.EditorHandles
         {
             if (!IsOrderSetForThisSession())
             {
-                SetExecOrderOf(GetMonoSciptOf("SceneLibrary"), -50);
-                SetExecOrderOf(GetMonoSciptOf("RootLibrary"), -20);
-
+                SetExecOrderOf(GetMonoSciptOf("RootLibrary"), -50);
+                SetExecOrderOf(GetMonoSciptOf("SceneLibrary"), -20);
+               
                 SetOrderSetForThisSession();
             }
         }

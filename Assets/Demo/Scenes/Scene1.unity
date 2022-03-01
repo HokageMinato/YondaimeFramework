@@ -895,8 +895,6 @@ MonoBehaviour:
   _behaviours:
   - {fileID: 349952633}
   - {fileID: 1218977493}
-  - {fileID: 0}
-  - {fileID: 0}
   _childLibs:
   - {fileID: 1630499389}
   _systemId:

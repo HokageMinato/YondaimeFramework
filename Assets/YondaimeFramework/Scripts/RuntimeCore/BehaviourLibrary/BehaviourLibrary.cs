@@ -97,12 +97,6 @@ using UnityEngine;
 
         public virtual void PreRedundantCheck() { }
 
-        private bool IsCustomId(byte behaviourId) 
-        {
-            return behaviourId > 0;
-            //return (!string.IsNullOrEmpty(behaviourId) &&
-            //                !string.IsNullOrWhiteSpace(behaviourId)) ;
-        }
         #endregion
     }
 };
