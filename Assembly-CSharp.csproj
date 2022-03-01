@@ -53,20 +53,26 @@
     <UnityVersion>2020.3.3f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\YondaimeFramework\Scripts\Core\RootLibrary.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\IdScriptables\CentalIdsDataSO.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCore\BehaviourLibrary\RootLibrary.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\EditorCore\IdScriptables\EditorIdContainer.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\EditorCore\SceneLibraryHandle.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\EditorCore\IdScriptables\EditorCentalIdsDataSO.cs" />
     <Compile Include="Assets\Demo\Script\Truck.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\Core\CustomBehaviour.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCore\BehaviourLibrary\StandardBehaviourLibrary.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCore\CustomBehaviour.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\DictVsLookup.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCore\RuntimeIdContainer.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\GetComponentsFromLibvsFindObjectsOfType.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\Core\BehaviourLibrary.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCore\BehaviourLibrary\BehaviourLibrary.cs" />
+    <Compile Include="Assets\Demo\Script\ActiveInactiveGoSeperationExp.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\GetComponentsFromGOvsGetComponents.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\TestIterationCountHolder.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\Core\SceneLibrary.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\Core\FrameworkConstants.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCore\BehaviourLibrary\SceneLibrary.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCore\FrameworkConstants.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCore\BehaviourLibrary\PooledBehaviourLibrary.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\GetCompByIdvsFindByTag.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\IdScriptables\SystemIdDataSO.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\GetComponentFromMyGOvsGetComponent.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCore\ComponentId.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\ProfileView.cs" />
     <Compile Include="Assets\Demo\Script\Car.cs" />
     <Compile Include="Assets\Demo\Script\CarHandler.cs" />

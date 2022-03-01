@@ -53,9 +53,11 @@
     <UnityVersion>2020.3.3f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\YondaimeFramework\Scripts\Editor\SceneIdDrawer.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\Editor\ComponentIdDrawer.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\Editor\MenuItemDrawer.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\EditorCore\Editor\SceneIdDrawer.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\EditorCore\Editor\ScriptExecOrderSetup.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\EditorCore\Editor\ComponentIdDrawer.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\EditorCore\Editor\RuntimeIdInspectorDisplay.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\EditorCore\Editor\MenuItemDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
