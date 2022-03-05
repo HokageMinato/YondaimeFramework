@@ -18,6 +18,11 @@
 		-> We will not depend on gameobjects' activeStatus state, but on last method called i.e. Pooled or depooled.
 		-> 'Including pooled' parameter on will just pull everything from both list while decluding pool will only pool from active list.
 		
+=> Revamp scan to use 2 GetComponentsInChildren, 
+	1 for BehaviourLibrary
+	1 for PooledLibrary
+	Make BehaviourLibrary PooledLibrary and SceneLibrary different scripts, no matter how much code repeats.
+	Seperate components by comparing behaviour lib references from behaviour libs
 		
 		
 		
