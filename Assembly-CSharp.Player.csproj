@@ -53,18 +53,26 @@
     <UnityVersion>2020.3.3f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\YondaimeFramework\Scripts\Core\RootLibrary.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\IdScriptables\CentalIdsDataSO.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\Core\CustomBehaviour.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCoreOld\BehaviourLibrary\RootLibrary.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\EditorCore\IdScriptables\EditorIdContainer.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\EditorCore\SceneLibraryHandle.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\EditorCore\IdScriptables\EditorCentalIdsDataSO.cs" />
+    <Compile Include="Assets\Demo\Script\Truck.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCoreOld\BehaviourLibrary\StandardBehaviourLibrary.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCoreOld\CustomBehaviour.cs" />
+    <Compile Include="Assets\ProfileTool\Scripts\DictVsLookup.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCoreOld\RuntimeIdContainer.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\GetComponentsFromLibvsFindObjectsOfType.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\Core\BehaviourLibrary.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCoreOld\BehaviourLibrary\BehaviourLibraryOld.cs" />
+    <Compile Include="Assets\Demo\Script\ActiveInactiveGoSeperationExp.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\GetComponentsFromGOvsGetComponents.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\TestIterationCountHolder.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\Core\SceneLibrary.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\Core\FrameworkConstants.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCoreOld\BehaviourLibrary\SceneLibraryOld.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCoreOld\FrameworkConstants.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCoreOld\BehaviourLibrary\PooledBehaviourLibrary.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\GetCompByIdvsFindByTag.cs" />
-    <Compile Include="Assets\YondaimeFramework\Scripts\IdScriptables\SystemIdDataSO.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\GetComponentFromMyGOvsGetComponent.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCoreOld\ComponentId.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\ProfileView.cs" />
     <Compile Include="Assets\Demo\Script\Car.cs" />
     <Compile Include="Assets\Demo\Script\CarHandler.cs" />
@@ -72,11 +80,16 @@
     <Compile Include="Assets\ProfileTool\Scripts\GetComponentLibVsFindObject.cs" />
     <Compile Include="Assets\Demo\Script\SceneChanger.cs" />
     <Compile Include="Assets\ProfileTool\Scripts\MemoryVsListProfile.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCore\BehaviourLibrary.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCore\PooledLibrary.cs" />
+    <Compile Include="Assets\YondaimeFramework\Scripts\RuntimeCore\SceneLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\System.Buffers.dll" />
      <None Include="Assets\System.Runtime.CompilerServices.Unsafe.dll" />
      <None Include="Assets\System.Memory.dll" />
+     <None Include="Assets\YondaimeFramework\TODOs 1.txt" />
+     <None Include="Assets\YondaimeFramework\TODOs.txt" />
     <Reference Include="UnityEngine">
       <HintPath>D:\Installs\Unity Installs\2020.3.3f1\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\Variations\il2cpp\Managed\UnityEngine.dll</HintPath>
     </Reference>
@@ -281,14 +294,14 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Memory">
-      <HintPath>Assets\System.Memory.dll</HintPath>
+    <Reference Include="System.Buffers">
+      <HintPath>Assets\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>Assets\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
-    <Reference Include="System.Buffers">
-      <HintPath>Assets\System.Buffers.dll</HintPath>
+    <Reference Include="System.Memory">
+      <HintPath>Assets\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:\Installs\Unity Installs\2020.3.3f1\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>

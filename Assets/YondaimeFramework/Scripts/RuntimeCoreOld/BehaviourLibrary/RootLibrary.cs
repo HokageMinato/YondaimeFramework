@@ -9,7 +9,7 @@ namespace YondaimeFramework
     {
 
         #region PRIVATE_VARS
-        private Dictionary<string, SceneLibrary> _sceneLibLookUp = new Dictionary<string, SceneLibrary>();
+        private Dictionary<string, SceneLibraryOld> _sceneLibLookUp = new Dictionary<string, SceneLibraryOld>();
         public static RootLibrary Instance;
         #endregion
 
@@ -39,13 +39,13 @@ namespace YondaimeFramework
         #region PUBLIC_METHODS
 
 
-        public SceneLibrary GetSceneLibraryById(string systemId)
+        public SceneLibraryOld GetSceneLibraryById(string systemId)
         {
             return _sceneLibLookUp[systemId];
         }
 
 
-        public void AddSceneLibrary(SceneLibrary newSceneLibrary) 
+        public void AddSceneLibrary(SceneLibraryOld newSceneLibrary) 
         {
             _sceneLibLookUp.Add(newSceneLibrary.SystemId, newSceneLibrary);
         }

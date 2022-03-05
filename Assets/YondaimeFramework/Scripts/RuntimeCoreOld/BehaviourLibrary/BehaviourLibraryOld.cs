@@ -7,13 +7,13 @@ using UnityEngine;
 {
 
     
-    public abstract class BehaviourLibrary : CustomBehaviour
+    public abstract class BehaviourLibraryOld : CustomBehaviour
     {
 
         #region PRIVATE_VARIABLES
         //Serialized
         [SerializeField] protected List<CustomBehaviour> _behaviours;
-        [SerializeField] protected BehaviourLibrary[] _childLibs;
+        [SerializeField] protected BehaviourLibraryOld[] _childLibs;
 
         public abstract void InitializeLibrary();
         public abstract T GetBehaviourFromLibrary<T>();
@@ -36,12 +36,12 @@ using UnityEngine;
             void ScanChildLibs()
             {
 
-                List<BehaviourLibrary> tempLibs = new List<BehaviourLibrary>();
+                List<BehaviourLibraryOld> tempLibs = new List<BehaviourLibraryOld>();
                 for (int i = 0; i < _behaviours.Count; i++)
                 {
-                    if (_behaviours[i] is BehaviourLibrary && !_behaviours[i].Equals(this))
+                    if (_behaviours[i] is BehaviourLibraryOld && !_behaviours[i].Equals(this))
                     {
-                        tempLibs.Add((BehaviourLibrary)_behaviours[i]);
+                        tempLibs.Add((BehaviourLibraryOld)_behaviours[i]);
                     }
                 }
                 _childLibs = tempLibs.ToArray();
@@ -56,7 +56,7 @@ using UnityEngine;
             void RemoveRedundantChildLibRecursive()
             {
 
-                List<BehaviourLibrary> myLibs = new List<BehaviourLibrary>(_childLibs);
+                List<BehaviourLibraryOld> myLibs = new List<BehaviourLibraryOld>(_childLibs);
 
                 for (int i = 0; i < _childLibs.Length; i++)
                 {

@@ -11,15 +11,16 @@ namespace YondaimeFramework
     public abstract class CustomBehaviour : MonoBehaviour
     {
         #region PRIVATE_VARIABLES
-        [HideInInspector][SerializeField] private BehaviourLibrary _myLibrary;
-        [HideInInspector][SerializeField] private SceneLibrary _sceneLibrary;
+        [HideInInspector][SerializeField] private BehaviourLibraryOld _myLibrary;
+        [SerializeField] private BehaviourLibrary _myLibraryy;
+        [HideInInspector][SerializeField] private SceneLibraryOld _sceneLibrary;
         [SerializeField] private PooledBehaviourLibrary _pooledLibrary;
         #endregion
 
         #region PUBLIC_VARIABLES
         public int GOInstanceId { get { return id._goInsId; } }
 
-        public BehaviourLibrary MyLibrary
+        public BehaviourLibraryOld MyLibrary
         {
             get
             {
@@ -28,7 +29,7 @@ namespace YondaimeFramework
             }
         }
 
-        public SceneLibrary MySceneLibrary
+        public SceneLibraryOld MySceneLibrary
         {
             get {
                 CheckForSystemLibNull();
@@ -55,12 +56,17 @@ namespace YondaimeFramework
            id._goInsId = gameObject.GetInstanceID();
         }
 
-        public void SetLibrary(BehaviourLibrary library)
+        public void SetLibrary(BehaviourLibraryOld library)
         {
             _myLibrary = library;
         }
 
-        public void SetLibrary(SceneLibrary library)
+        public void SetLibrary(BehaviourLibrary library) 
+        {
+            _myLibraryy = library;
+        }
+
+        public void SetLibrary(SceneLibraryOld library)
         {
             _sceneLibrary = library;
         }

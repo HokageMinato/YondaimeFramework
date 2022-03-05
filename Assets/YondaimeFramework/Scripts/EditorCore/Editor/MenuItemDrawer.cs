@@ -26,7 +26,7 @@ namespace YondaimeFramework.EditorHandles
             const string LOAD_PATH = "Assets/YondaimeFramework/Templates/SceneLibrary.prefab";
             const string LIB_ASSET_NAME = "SceneLibrary";
 
-            Generate<SceneLibrary>(LOAD_PATH, LIB_ASSET_NAME);
+            Generate<SceneLibraryOld>(LOAD_PATH, LIB_ASSET_NAME);
         }
 
         [MenuItem(("YondaimeFramework/Create/CentralIdContainer"))]

@@ -4,18 +4,20 @@ using UnityEditor.SceneManagement;
 
 namespace YondaimeFramework.EditorHandles
 {
-    [RequireComponent(typeof(SceneLibrary))]
+    [RequireComponent(typeof(SceneLibraryOld))]
     public class SceneLibraryHandle : MonoBehaviour
     {
-        [SerializeField] SceneLibrary sceneLibrary;
+        [SerializeField] SceneLibraryOld sceneLibrary;
+        [SerializeField] SceneLibrary sceneLibraryNew;
 
         
 
         [ContextMenu("Scan")]
         public void ScanBehaviours() 
         {
-            sceneLibrary = FindObjectOfType<SceneLibrary>();
+            sceneLibrary = FindObjectOfType<SceneLibraryOld>();
             sceneLibrary.ScanBehaviours();
+            sceneLibraryNew.ScanBehaviours();
             SetSceneDirty();
         } 
         

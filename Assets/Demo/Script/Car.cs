@@ -1,7 +1,8 @@
 using UnityEngine;
 using YondaimeFramework;
 using Debug = UnityEngine.Debug;
-using System.Collections.Generic;
+using System.Diagnostics;
+
 
 public class Car : CustomBehaviour, ICar
 {
@@ -10,6 +11,8 @@ public class Car : CustomBehaviour, ICar
     public RuntimeIdContainer carIds;
     private const string tid = "Finish";
     public int itr;
+    public Transform other;
+    public SceneLibrary lib;
 
     private void Start()
     {
@@ -24,7 +27,6 @@ public class Car : CustomBehaviour, ICar
         //Debug.Log($"{GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}");
         //Debug.Log("===============================");
 
-        Debug.Log(carIds.GetIds() == null);
     }
 
 
@@ -32,18 +34,16 @@ public class Car : CustomBehaviour, ICar
     public void Test()
     {
 
-        List<int> list = new List<int>(10);
-        Debug.Log(list.Capacity);
+        Stopwatch st = new Stopwatch();
 
-        
+        st.Start();
 
-       for (int i = 0; i < 21; i++)
+        for (int i = 0; i < itr; i++)
         {
-            list.Add(i);
-
+            lib.ScanBehaviours();
         }
-        Debug.Log(list.Capacity);
-        //Debug.Log(list[4]);
+        st.Stop();
+        Debug.Log(st.ElapsedMilliseconds);
 
 
     }

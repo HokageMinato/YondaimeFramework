@@ -12,7 +12,7 @@ namespace YondaimeFramework
     }
 
 
-    public class PooledBehaviourLibrary : BehaviourLibrary
+    public class PooledBehaviourLibrary : BehaviourLibraryOld
     {
 
        

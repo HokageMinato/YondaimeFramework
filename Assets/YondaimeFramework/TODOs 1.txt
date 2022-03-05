@@ -1,0 +1,5 @@
+Benchmark old refresh
+
+	81 4     -   1
+   100 54    -   1
+ 10000 509   -   12

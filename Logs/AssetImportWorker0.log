@@ -1,551 +1,320 @@
 Using pre-set license
 Built from '2020.3/staging' branch; Version is '2020.3.3f1 (76626098c1c4) revision 7758432'; Using compiler version '192528614'; Build Type 'Release'
-OS: 'Windows 10 Pro; OS build 19043.1526; Version 2009; 64bit' Language: 'en' Physical Memory: 16328 MB
+OS: 'Windows 10 Pro; OS build 19043.1023; Version 2009; 64bit' Language: 'en' Physical Memory: 24499 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
 
  COMMAND LINE ARGUMENTS:
-C:\Program Files\Unity\Hub\Editor\2020.3.3f1\Editor\Unity.exe
+D:\Installs\Unity Installs\2020.3.3f1\Unity\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker0
 -projectPath
-C:/Users/A-30/Documents/Repositories/YondaimeFramework
+D:/Minato/Documents/YondaimeFramework
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50199
-Successfully changed project path to: C:/Users/A-30/Documents/Repositories/YondaimeFramework
-C:/Users/A-30/Documents/Repositories/YondaimeFramework
+64742
+Successfully changed project path to: D:/Minato/Documents/YondaimeFramework
+D:/Minato/Documents/YondaimeFramework
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 16.42 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 21.94 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.3f1 (76626098c1c4)
-[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.3f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/A-30/Documents/Repositories/YondaimeFramework/Assets
+[Subsystems] Discovering subsystems at path D:/Installs/Unity Installs/2020.3.3f1/Unity/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Minato/Documents/YondaimeFramework/Assets
 GfxDevice: creating device client; threaded=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce GTX 1050 Ti (ID=0x1c82)
+    Renderer: NVIDIA GeForce GTX 1080 (ID=0x1b80)
     Vendor:   
-    VRAM:     4018 MB
+    VRAM:     8079 MB
     Driver:   27.21.14.5671
 Initialize mono
-Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.3f1/Editor/Data/Managed'
-Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.3f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
-Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.3f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56932
+Mono path[0] = 'D:/Installs/Unity Installs/2020.3.3f1/Unity/Editor/Data/Managed'
+Mono path[1] = 'D:/Installs/Unity Installs/2020.3.3f1/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'D:/Installs/Unity Installs/2020.3.3f1/Unity/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56508
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.3f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001341 seconds.
+Register platform support module: D:/Installs/Unity Installs/2020.3.3f1/Unity/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.000946 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 16.41 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 22.39 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.180 seconds
+- Completed reload, in  1.370 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.000415 seconds.
+Registered in 0.001199 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.24 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.35 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
+Refresh completed but there are assets queued up for importing. Check for code that modifies assets which gets called after OnPostProcessAllAssets. Additional details in Log file
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+YondaimeFramework.EditorHandles.ScriptExecOrderSetup:SetExecOrderOf (UnityEditor.MonoScript,int) (at Assets/YondaimeFramework/Scripts/EditorCore/Editor/ScriptExecOrderSetup.cs:42)
+YondaimeFramework.EditorHandles.ScriptExecOrderSetup:.cctor () (at Assets/YondaimeFramework/Scripts/EditorCore/Editor/ScriptExecOrderSetup.cs:17)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/YondaimeFramework/Scripts/EditorCore/Editor/ScriptExecOrderSetup.cs line 42]
+
+Assets queued for import after Refresh completed:
+	Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs
+RefreshInfo: StopAssetImportingV2(NoUpdateAssetOptions) scanfilter: 
+RefreshProfiler: Total: 0.000ms
+Assertion failed on expression: 'm_Ptr'
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+YondaimeFramework.EditorHandles.ScriptExecOrderSetup:SetExecOrderOf (UnityEditor.MonoScript,int) (at Assets/YondaimeFramework/Scripts/EditorCore/Editor/ScriptExecOrderSetup.cs:42)
+YondaimeFramework.EditorHandles.ScriptExecOrderSetup:.cctor () (at Assets/YondaimeFramework/Scripts/EditorCore/Editor/ScriptExecOrderSetup.cs:17)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/YondaimeFramework/Scripts/EditorCore/Editor/ScriptExecOrderSetup.cs line 42]
+
+Refresh completed but there are assets queued up for importing. Check for code that modifies assets which gets called after OnPostProcessAllAssets. Additional details in Log file
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+YondaimeFramework.EditorHandles.ScriptExecOrderSetup:SetExecOrderOf (UnityEditor.MonoScript,int) (at Assets/YondaimeFramework/Scripts/EditorCore/Editor/ScriptExecOrderSetup.cs:42)
+YondaimeFramework.EditorHandles.ScriptExecOrderSetup:.cctor () (at Assets/YondaimeFramework/Scripts/EditorCore/Editor/ScriptExecOrderSetup.cs:18)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/YondaimeFramework/Scripts/EditorCore/Editor/ScriptExecOrderSetup.cs line 42]
+
+Assets queued for import after Refresh completed:
+	Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs
+	Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs
+RefreshInfo: StopAssetImportingV2(NoUpdateAssetOptions) scanfilter: 
+RefreshProfiler: Total: 0.000ms
+Assertion failed on expression: 'm_Ptr'
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+YondaimeFramework.EditorHandles.ScriptExecOrderSetup:SetExecOrderOf (UnityEditor.MonoScript,int) (at Assets/YondaimeFramework/Scripts/EditorCore/Editor/ScriptExecOrderSetup.cs:42)
+YondaimeFramework.EditorHandles.ScriptExecOrderSetup:.cctor () (at Assets/YondaimeFramework/Scripts/EditorCore/Editor/ScriptExecOrderSetup.cs:18)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+[Assets/YondaimeFramework/Scripts/EditorCore/Editor/ScriptExecOrderSetup.cs line 42]
+
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.494 seconds
+- Completed reload, in  0.790 seconds
 Platform modules already initialized, skipping
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
-Refreshing native plugins compatible for Editor in 0.24 ms, found 0 plugins.
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 0.20 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1145 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 57.6 MB.
-System memory in use after: 57.7 MB.
+Unloading 1154 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 58.1 MB.
+System memory in use after: 58.1 MB.
 
-Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 1586.
-Total: 1.443600 ms (FindLiveObjects: 0.137200 ms CreateObjectMapping: 0.031800 ms MarkObjects: 1.228100 ms  DeleteObjects: 0.045600 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset
-  artifactKey: Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset using Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '531d945964bf624999747a3fea0fba37') in 0.022280 seconds
-  Import took 0.023924 seconds .
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 1592.
+Total: 1.519700 ms (FindLiveObjects: 0.115900 ms CreateObjectMapping: 0.032200 ms MarkObjects: 1.312500 ms  DeleteObjects: 0.058300 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 51.449440 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset
-  artifactKey: Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset using Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3244a241fcb19b7010035b2204fa84b') in 0.003671 seconds
-  Import took 0.005371 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000199 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset
-  artifactKey: Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset using Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3244a241fcb19b7010035b2204fa84b') in 0.002302 seconds
-  Import took 0.003298 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.462847 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset
-  artifactKey: Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset using Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '85c35062c950304d60baa9a1d61dbac0') in 0.002478 seconds
-  Import took 0.004124 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000492 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset
-  artifactKey: Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset using Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '85c35062c950304d60baa9a1d61dbac0') in 0.002087 seconds
-  Import took 0.003176 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.518851 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset
-  artifactKey: Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset using Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '78938691a25e92d8d952741f335a82d1') in 0.002451 seconds
-  Import took 0.004129 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 75.481932 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset
-  artifactKey: Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset using Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7771010ca2f94652f21c3b7bd85019a') in 0.002328 seconds
-  Import took 0.004069 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.004987 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset
-  artifactKey: Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset using Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e3f51798c539199c29d74ed30ad86cc') in 0.002011 seconds
-  Import took 0.003201 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.018409 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset
-  artifactKey: Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset using Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e3f51798c539199c29d74ed30ad86cc') in 0.003379 seconds
-  Import took 0.004901 seconds .
+  path: Assets/Demo/Scenes/Scene1.unity
+  artifactKey: Guid(156d017442bdd5f42bbf1d01c1932a05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/Scenes/Scene1.unity using Guid(156d017442bdd5f42bbf1d01c1932a05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f1897c73a8d2e8770bd91c9f415444d') in 0.009619 seconds
+  Import took 0.011401 seconds .
 
 ========================================================================
 Received Prepare
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
 Registering precompiled user dll's ...
-Registered in 0.000387 seconds.
+Registered in 0.001141 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.23 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.20 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.488 seconds
+- Completed reload, in  0.656 seconds
 Platform modules already initialized, skipping
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
 Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.15 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.19 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1142 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 57.5 MB.
-System memory in use after: 57.6 MB.
+Unloading 1149 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.9 MB.
+System memory in use after: 58.0 MB.
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1589.
-Total: 1.459000 ms (FindLiveObjects: 0.093900 ms CreateObjectMapping: 0.028400 ms MarkObjects: 1.324100 ms  DeleteObjects: 0.011900 ms)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1595.
+Total: 1.360200 ms (FindLiveObjects: 0.125600 ms CreateObjectMapping: 0.029300 ms MarkObjects: 1.193000 ms  DeleteObjects: 0.011700 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
 ========================================================================
 Received Prepare
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
 Registering precompiled user dll's ...
-Registered in 0.000383 seconds.
+Registered in 0.001231 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.23 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.20 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.487 seconds
+- Completed reload, in  0.637 seconds
 Platform modules already initialized, skipping
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
 Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.15 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.19 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1142 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 57.5 MB.
-System memory in use after: 57.6 MB.
+Unloading 1149 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.9 MB.
+System memory in use after: 58.0 MB.
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1592.
-Total: 1.424000 ms (FindLiveObjects: 0.096200 ms CreateObjectMapping: 0.028900 ms MarkObjects: 1.288200 ms  DeleteObjects: 0.009900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
-========================================================================
-Received Import Request.
-  Time since last request: 90.135748 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset
-  artifactKey: Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset using Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e8e3dd2e89caa4e36adc292afc16ab6') in 0.009702 seconds
-  Import took 0.011766 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000139 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset
-  artifactKey: Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset using Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd0ebdcd50c6a9046129b45f7ad76dde') in 0.002496 seconds
-  Import took 0.003684 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.000419 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.22 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.501 seconds
-Platform modules already initialized, skipping
-Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.17 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1142 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 57.5 MB.
-System memory in use after: 57.6 MB.
-
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1595.
-Total: 1.423400 ms (FindLiveObjects: 0.116100 ms CreateObjectMapping: 0.031200 ms MarkObjects: 1.265900 ms  DeleteObjects: 0.009600 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
-========================================================================
-Received Import Request.
-  Time since last request: 208.385105 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset
-  artifactKey: Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset using Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '171710effe42504f663b3eadb4ec3fcd') in 0.009914 seconds
-  Import took 0.012178 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.455309 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset
-  artifactKey: Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset using Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c709caea8b78ccb6d1284b00d886d0d') in 0.003255 seconds
-  Import took 0.005015 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 21.332094 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset
-  artifactKey: Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset using Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a876447f67918cb6fc728e895b74b087') in 0.002465 seconds
-  Import took 0.004018 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000087 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset
-  artifactKey: Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset using Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e73e786505590571678ffffea293666e') in 0.041953 seconds
-  Import took 0.043308 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.000383 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.22 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.501 seconds
-Platform modules already initialized, skipping
-Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.17 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1142 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 57.6 MB.
-System memory in use after: 57.7 MB.
-
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1598.
-Total: 1.502600 ms (FindLiveObjects: 0.095300 ms CreateObjectMapping: 0.029800 ms MarkObjects: 1.365000 ms  DeleteObjects: 0.011700 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
-========================================================================
-Received Import Request.
-  Time since last request: 58.299619 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset
-  artifactKey: Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset using Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a13cb38d3cdcfbf42322c260bf1872d1') in 0.009182 seconds
-  Import took 0.010851 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.000639 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.23 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.510 seconds
-Platform modules already initialized, skipping
-Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.18 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1142 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 57.6 MB.
-System memory in use after: 57.7 MB.
-
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1601.
-Total: 1.476300 ms (FindLiveObjects: 0.115100 ms CreateObjectMapping: 0.028900 ms MarkObjects: 1.321500 ms  DeleteObjects: 0.010300 ms)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1598.
+Total: 1.550200 ms (FindLiveObjects: 0.127900 ms CreateObjectMapping: 0.040800 ms MarkObjects: 1.361700 ms  DeleteObjects: 0.018300 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
 ========================================================================
 Received Prepare
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
 Registering precompiled user dll's ...
-Registered in 0.000418 seconds.
+Registered in 0.001084 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.23 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.20 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.505 seconds
+- Completed reload, in  0.711 seconds
 Platform modules already initialized, skipping
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
 Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.16 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.20 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1142 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 57.6 MB.
-System memory in use after: 57.7 MB.
+Unloading 1149 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.9 MB.
+System memory in use after: 58.0 MB.
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1604.
-Total: 1.505600 ms (FindLiveObjects: 0.166300 ms CreateObjectMapping: 0.044400 ms MarkObjects: 1.282500 ms  DeleteObjects: 0.011700 ms)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1601.
+Total: 1.579500 ms (FindLiveObjects: 0.110200 ms CreateObjectMapping: 0.030300 ms MarkObjects: 1.424100 ms  DeleteObjects: 0.013700 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
 ========================================================================
 Received Prepare
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
 Registering precompiled user dll's ...
-Registered in 0.000414 seconds.
+Registered in 0.001096 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.23 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.21 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.521 seconds
+- Completed reload, in  0.652 seconds
 Platform modules already initialized, skipping
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
 Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.18 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.20 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1142 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 57.6 MB.
-System memory in use after: 57.7 MB.
+Unloading 1149 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.9 MB.
+System memory in use after: 58.0 MB.
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1607.
-Total: 1.484800 ms (FindLiveObjects: 0.104500 ms CreateObjectMapping: 0.028500 ms MarkObjects: 1.339500 ms  DeleteObjects: 0.011300 ms)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1604.
+Total: 1.445000 ms (FindLiveObjects: 0.121700 ms CreateObjectMapping: 0.035000 ms MarkObjects: 1.274000 ms  DeleteObjects: 0.013300 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Prepare
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
+Registering precompiled user dll's ...
+Registered in 0.001178 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.21 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.650 seconds
+Platform modules already initialized, skipping
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.19 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1149 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.9 MB.
+System memory in use after: 58.0 MB.
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1607.
+Total: 1.399000 ms (FindLiveObjects: 0.118500 ms CreateObjectMapping: 0.040200 ms MarkObjects: 1.227500 ms  DeleteObjects: 0.012200 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
 ========================================================================
 Received Import Request.
-  Time since last request: 3009.654243 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset
-  artifactKey: Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset using Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b31c1eec78943fbb1d4e7c36cfceb7c') in 0.011664 seconds
-  Import took 0.013532 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 16.557460 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset
-  artifactKey: Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset using Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef39c19049fb385dda6d933eb87e747b') in 0.006072 seconds
-  Import took 0.007958 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.649881 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset
-  artifactKey: Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset using Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd635fca040bb8da14b1979aaf9b251be') in 0.002404 seconds
-  Import took 0.004006 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000738 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset
-  artifactKey: Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer 1.asset using Guid(fd2acbcc00bc0e74995b0a26990744df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd635fca040bb8da14b1979aaf9b251be') in 0.001985 seconds
-  Import took 0.002990 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 96.295900 seconds.
-  path: Assets/YondaimeFramework/Scripts/EditorCore/Editor/RuntimeIdInspectorDisplay.cs
-  artifactKey: Guid(dc1a1a6522729e944a2ba56f77b38d6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scripts/EditorCore/Editor/RuntimeIdInspectorDisplay.cs using Guid(dc1a1a6522729e944a2ba56f77b38d6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2690a20334b7a9a9b1fd4501d5be48f3') in 0.008745 seconds
-  Import took 0.010511 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.011513 seconds.
-  path: Assets/YondaimeFramework/Scripts/EditorCore/Editor/RuntimeIdInspectorDisplay.cs
-  artifactKey: Guid(dc1a1a6522729e944a2ba56f77b38d6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scripts/EditorCore/Editor/RuntimeIdInspectorDisplay.cs using Guid(dc1a1a6522729e944a2ba56f77b38d6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2690a20334b7a9a9b1fd4501d5be48f3') in 0.001828 seconds
-  Import took 0.003142 seconds .
+  Time since last request: 403.577630 seconds.
+  path: Assets/YondaimeFramework/TODOs 1.txt
+  artifactKey: Guid(194b7c1770da2684c93e00080b6b0b2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/YondaimeFramework/TODOs 1.txt using Guid(194b7c1770da2684c93e00080b6b0b2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ef4972e841efc71164965866cf6c7cf') in 0.045777 seconds
+  Import took 0.047557 seconds .
 
 ========================================================================
 Received Prepare
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
 Registering precompiled user dll's ...
-Registered in 0.000406 seconds.
+Registered in 0.001163 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.23 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.20 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.501 seconds
+- Completed reload, in  0.661 seconds
 Platform modules already initialized, skipping
+Script is not up to date after domain reload: guid(96fc43b8d65fb8547bcbb94ac62d9cb8) path("Assets/YondaimeFramework/Scripts/RuntimeCoreOld/BehaviourLibrary/RootLibrary.cs") state(2)
+Script is not up to date after domain reload: guid(d9eeeb168218dc745a72a90a3eded195) path("Assets/YondaimeFramework/Scripts/RuntimeCore/SceneLibrary.cs") state(2)
 Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.14 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.19 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1142 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 57.6 MB.
-System memory in use after: 57.7 MB.
+Unloading 1149 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.9 MB.
+System memory in use after: 58.0 MB.
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1610.
-Total: 1.384100 ms (FindLiveObjects: 0.103800 ms CreateObjectMapping: 0.030700 ms MarkObjects: 1.239200 ms  DeleteObjects: 0.009700 ms)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1610.
+Total: 1.416700 ms (FindLiveObjects: 0.114700 ms CreateObjectMapping: 0.031900 ms MarkObjects: 1.257000 ms  DeleteObjects: 0.012300 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
-========================================================================
-Received Import Request.
-  Time since last request: 13.578015 seconds.
-  path: Assets/YondaimeFramework/Scripts/EditorCore/Editor/RuntimeIdInspectorDisplay.cs
-  artifactKey: Guid(dc1a1a6522729e944a2ba56f77b38d6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scripts/EditorCore/Editor/RuntimeIdInspectorDisplay.cs using Guid(dc1a1a6522729e944a2ba56f77b38d6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5c14035265fce1cdc7541e5ee2b9d054') in 0.003704 seconds
-  Import took 0.005111 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.000380 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.23 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.522 seconds
-Platform modules already initialized, skipping
-Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.16 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1142 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 57.6 MB.
-System memory in use after: 57.7 MB.
-
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1613.
-Total: 1.439100 ms (FindLiveObjects: 0.099500 ms CreateObjectMapping: 0.029100 ms MarkObjects: 1.298900 ms  DeleteObjects: 0.010600 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
-========================================================================
-Received Import Request.
-  Time since last request: 22.080763 seconds.
-  path: Assets/YondaimeFramework/Scripts/EditorCore/Editor/RuntimeIdInspectorDisplay.cs
-  artifactKey: Guid(dc1a1a6522729e944a2ba56f77b38d6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scripts/EditorCore/Editor/RuntimeIdInspectorDisplay.cs using Guid(dc1a1a6522729e944a2ba56f77b38d6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3539f5c348f8e30e9f55860d790b80ce') in 0.003490 seconds
-  Import took 0.004893 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.000381 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.23 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.510 seconds
-Platform modules already initialized, skipping
-Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.15 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1142 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 57.6 MB.
-System memory in use after: 57.7 MB.
-
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1616.
-Total: 1.641700 ms (FindLiveObjects: 0.256600 ms CreateObjectMapping: 0.069500 ms MarkObjects: 1.304500 ms  DeleteObjects: 0.010400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
-========================================================================
-Received Import Request.
-  Time since last request: 36.008378 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset
-  artifactKey: Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Runtime Id Scriptables/RuntimeIdContainer.asset using Guid(2277556c9e67bbb469d77574525cc410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4d7d9e04fe0bd0f4bf1c08f6726bc31') in 0.009254 seconds
-  Import took 0.010970 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2177.866454 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset
-  artifactKey: Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/EditorIdContainer.asset using Guid(cea417ab3dff74446a19fe94dbee19a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b51852bf2d0c0221e821afb7ff399832') in 0.003674 seconds
-  Import took 0.005509 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 19.422979 seconds.
-  path: Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/_CentralIdsDataSO.asset
-  artifactKey: Guid(8477b1182f561f0449594f034ac4b996) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/_CentralIdsDataSO.asset using Guid(8477b1182f561f0449594f034ac4b996) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '43d2b2e8702551ebf10a677816b6a775') in 0.006037 seconds
-  Import took 0.007889 seconds .
-
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file

@@ -6,6 +6,7 @@ using UnityEngine;
 
  public class ProfileView : CustomBehaviour
     {
+
         [SerializeField] Image overlayImage;
         public Text Result1;
         public Text Result2;

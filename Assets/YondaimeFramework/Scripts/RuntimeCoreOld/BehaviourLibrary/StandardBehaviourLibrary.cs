@@ -4,7 +4,7 @@ using System;
 
 namespace YondaimeFramework
 {
-    public class StandardBehaviourLibrary : BehaviourLibrary
+    public class StandardBehaviourLibrary : BehaviourLibraryOld
     {
         //NonSerialized
         private Dictionary<Type, CustomBehaviour[]> _behaviourLookup = new Dictionary<Type, CustomBehaviour[]>();

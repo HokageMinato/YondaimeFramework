@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-    public sealed class SceneLibrary : BehaviourLibrary
+    public sealed class SceneLibraryOld : BehaviourLibraryOld
     {
         #region PRIVATE_VARS
         [SerializeField] private SceneId _systemId;
@@ -282,7 +282,7 @@ namespace YondaimeFramework
 
         }
 
-        public SceneLibrary GetSceneLibraryFromRootLibraryById(string systemId)
+        public SceneLibraryOld GetSceneLibraryFromRootLibraryById(string systemId)
         {
             return _rootLibrary.GetSceneLibraryById(systemId);
         }
