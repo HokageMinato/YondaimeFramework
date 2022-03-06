@@ -40,7 +40,25 @@ public class Car : CustomBehaviour, ICar
 
         for (int i = 0; i < itr; i++)
         {
-            lib.ScanBehaviours();
+            lib.GenerateBehaviourLibrary();
+        }
+        st.Stop();
+        Debug.Log(st.ElapsedMilliseconds);
+
+
+    }
+    
+    [ContextMenu("Test2")]
+    public void Test2()
+    {
+
+        Stopwatch st = new Stopwatch();
+
+        st.Start();
+
+        for (int i = 0; i < itr; i++)
+        {
+            RefreshHierarchy();
         }
         st.Stop();
         Debug.Log(st.ElapsedMilliseconds);

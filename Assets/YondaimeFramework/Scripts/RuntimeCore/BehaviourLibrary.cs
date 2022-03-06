@@ -15,7 +15,6 @@ namespace YondaimeFramework
 
 		[SerializeField] protected List<CustomBehaviour> _behaviours;
 		[SerializeField] protected List<BehaviourLibrary> _childLibs;
-		[SerializeField] protected PooledLibrary[] _childPooledLibs;
 
 
 		
@@ -30,11 +29,29 @@ namespace YondaimeFramework
 			_childLibs.Add(behaviour);
 		}
 
-        internal void SetTag()
+        public void InitLibrary()
         {
 			gameObject.tag = COMPONENT_TAG;
 			_behaviours.Clear();
 			_childLibs.Clear();
 		}
+
+		public Transform FindLibParentTransform() 
+		{
+			Transform t = transform.parent;
+
+			while (t != null && t != transform && !t.CompareTag(COMPONENT_TAG))
+			{
+
+				t = t.parent;
+			}
+
+
+			if (t == null)
+				return null;
+
+			return t;
+		}
+
 	}
 }

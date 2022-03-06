@@ -1,13 +1,15 @@
+TODO:
+
+	-> Binary serialized dictionaries during runtime for better load times
+	-> Remove nested libraries for standard behaviour since single get component handles stuff pretty well
+	-> Native binary Serialization callbacks
+	-> Pooler library structure remains intact
+
 => Create a CustomPooledBehaviour extending CustomBehaviour (4h)
 		-> Add two methods GetPooled<T>() and PoolSelf();
 		-> those two will call PooledLibrary's GetPooled<T>() and Pool(T behv)
 		-> Add a virtual cleanup() method in CustomPooledBehaviour to perform custom cleanup (if any required) 
 		
-=>  Introduce Library interface instead of chaining all libraries to behaviour libray		
-		-> Primary architecture:	
-		-> Keep scenelibrary inheriting behaviourLibrary, but make behaviourLibrary implement ComponentLibrary
-		-> Similarly make PooledLibrary implement ComponentLibrary
-		-> GetComponent alternatives should have an WithActive counterparts, which scans both lists and returns them
 
 
 => Pooled Behaviour Library Working:
@@ -17,20 +19,5 @@
 		-> In library, two HPerformanceList will be present, One to hold pooled, one to hold inUse components.
 		-> We will not depend on gameobjects' activeStatus state, but on last method called i.e. Pooled or depooled.
 		-> 'Including pooled' parameter on will just pull everything from both list while decluding pool will only pool from active list.
+		-> GetComponent alternatives should have an WithActive counterparts, which scans both lists and returns them
 		
-=> Revamp scan to use 2 GetComponentsInChildren, 
-	1 for BehaviourLibrary
-	1 for PooledLibrary
-	Make BehaviourLibrary PooledLibrary and SceneLibrary different scripts, no matter how much code repeats.
-	Seperate components by comparing behaviour lib references from behaviour libs
-		
-		
-		
-		
-
-[YondaimeFramework] Create a CustomPooledBehaviour extending CustomBehaviour (4h) Ronak Machchhar Ronak M.Schedule…
-[YondaimeFramework] Architecture Changes to create ComponentLibrary interface (8h) Ronak Machchhar Ronak M.Schedule…
-[Yondaime Framework] Pooled behaviour library (16h) Ronak Machchhar Ronak M.Schedule…
-[Yondaime Framework] Introduce Library interface instead of chaining all libraries to behaviour libray (12h) Ronak Machchhar Ronak M.Schedule…
-[Yondaime Framework] Refactor Scan behaviours and remove redundant libs via iteration approach to removal via iteration (4h) Ronak Machchhar Ronak M.Schedule…
-[Yondaime Framword] PathString inside editor id container to create hierarchal menu during runtime ID assignment Ronak Machchhar 

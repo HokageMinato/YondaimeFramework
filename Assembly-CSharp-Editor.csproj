@@ -291,14 +291,20 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>D:\Installs\Unity Installs\2020.3.3f1\Unity\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Buffers">
-      <HintPath>Assets\System.Buffers.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\YondaimeFramework\Dependencies\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>Assets\Plugins\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>Assets\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>Assets\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory">
-      <HintPath>Assets\System.Memory.dll</HintPath>
+      <HintPath>Assets\Plugins\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>Assets\Plugins\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
@@ -686,6 +692,14 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{2020F1F4-3FD5-31C8-3C8F-53B484E88CAE}</Project>
       <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="MessagePack.csproj">
+      <Project>{EF090B9C-30E2-3D29-3EA3-C12DF43E8876}</Project>
+      <Name>MessagePack</Name>
+    </ProjectReference>
+    <ProjectReference Include="MessagePack.Annotations.csproj">
+      <Project>{2A822BF3-CB7D-E9E0-F0BE-4E5362618F34}</Project>
+      <Name>MessagePack.Annotations</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -17,7 +17,7 @@ namespace YondaimeFramework.EditorHandles
         {
             sceneLibrary = FindObjectOfType<SceneLibraryOld>();
             sceneLibrary.ScanBehaviours();
-            sceneLibraryNew.ScanBehaviours();
+            sceneLibraryNew.GenerateBehaviourLibrary();
             SetSceneDirty();
         } 
         

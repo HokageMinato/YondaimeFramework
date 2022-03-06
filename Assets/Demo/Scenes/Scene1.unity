@@ -166,14 +166,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 383738082}
   _myLibraryy: {fileID: 383738080}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 14968
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -223,14 +224,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 1843215940}
   _myLibraryy: {fileID: 1843215938}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 14974
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -270,12 +272,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 349952633}
   _myLibraryy: {fileID: 0}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: 0
-    _goInsId: 0
+    _goInsId: 14980
     stringId: None
   _behaviours:
   - {fileID: 349952633}
@@ -284,25 +287,8 @@ MonoBehaviour:
   - {fileID: 1889220470}
   - {fileID: 2126974522}
   - {fileID: 1091781511}
-  - {fileID: 383738081}
-  - {fileID: 416535713}
-  - {fileID: 24847680}
-  - {fileID: 1561925741}
-  - {fileID: 449948365}
-  - {fileID: 951982475}
-  - {fileID: 1843215939}
-  - {fileID: 251739647}
-  - {fileID: 987587164}
-  - {fileID: 1816935765}
-  - {fileID: 456062071}
-  - {fileID: 1352256587}
-  - {fileID: 593246677}
-  - {fileID: 847236122}
-  - {fileID: 1149300524}
-  - {fileID: 1941080136}
-  - {fileID: 1623344540}
-  - {fileID: 1250919976}
-  _childLibs: []
+  _childLibs:
+  - {fileID: 383738082}
   _systemId:
     id: 
   _rootLibrary: {fileID: 0}
@@ -361,6 +347,7 @@ MonoBehaviour:
   - {fileID: 1889220470}
   - {fileID: 2126974522}
   - {fileID: 1091781511}
+  data: 84d969596f6e6461696d654672616d65776f726b2e5363656e654c6962726172794f6c642c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c01d94b4361722c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c17d94c494361722c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c17d972596f6e6461696d654672616d65776f726b2e5374616e646172644265686176696f75724c6962726172792c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c03
 --- !u!1 &383738078
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +359,7 @@ GameObject:
   - component: {fileID: 383738079}
   - component: {fileID: 383738080}
   - component: {fileID: 383738081}
+  - component: {fileID: 383738082}
   m_Layer: 0
   m_Name: Lib lv2
   m_TagString: libTag
@@ -414,6 +402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviours:
   - {fileID: 383738081}
+  - {fileID: 383738082}
   - {fileID: 416535713}
   - {fileID: 24847680}
   - {fileID: 1561925741}
@@ -422,7 +411,6 @@ MonoBehaviour:
   _childLibs:
   - {fileID: 1843215938}
   - {fileID: 593246676}
-  _childPooledLibs: []
 --- !u!114 &383738081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,20 +423,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 383738082}
   _myLibraryy: {fileID: 383738080}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
-    objBt: 0
-    _goInsId: 0
+    objBt: -899593636
+    _goInsId: 14990
     stringId: None
   othercars: []
   carIds: {fileID: 0}
   itr: 0
   other: {fileID: 0}
   lib: {fileID: 0}
+--- !u!114 &383738082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383738078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8e3a252d999464387a824cc8c95b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myLibrary: {fileID: 383738082}
+  _myLibraryy: {fileID: 383738080}
+  _mySceneLibraryy: {fileID: 349952636}
+  _sceneLibrary: {fileID: 349952633}
+  _pooledLibrary: {fileID: 0}
+  PoolState: 0
+  id:
+    objBt: 0
+    _goInsId: 14990
+    stringId: None
+  _behaviours:
+  - {fileID: 383738081}
+  - {fileID: 383738082}
+  - {fileID: 416535713}
+  - {fileID: 24847680}
+  - {fileID: 1561925741}
+  - {fileID: 449948365}
+  - {fileID: 951982475}
+  _childLibs:
+  - {fileID: 1843215940}
+  - {fileID: 593246678}
 --- !u!1 &416535711
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,14 +514,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 383738082}
   _myLibraryy: {fileID: 383738080}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 14998
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -549,14 +572,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 383738082}
   _myLibraryy: {fileID: 383738080}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15004
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -606,14 +630,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 1843215940}
   _myLibraryy: {fileID: 1843215938}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15010
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -631,6 +656,7 @@ GameObject:
   - component: {fileID: 593246675}
   - component: {fileID: 593246676}
   - component: {fileID: 593246677}
+  - component: {fileID: 593246678}
   m_Layer: 0
   m_Name: Lib lv3 (1)
   m_TagString: libTag
@@ -671,13 +697,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviours:
   - {fileID: 593246677}
+  - {fileID: 593246678}
   - {fileID: 847236122}
   - {fileID: 1149300524}
   - {fileID: 1941080136}
   - {fileID: 1623344540}
   - {fileID: 1250919976}
   _childLibs: []
-  _childPooledLibs: []
 --- !u!114 &593246677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,20 +716,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 593246678}
   _myLibraryy: {fileID: 593246676}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15016
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
   lib: {fileID: 0}
+--- !u!114 &593246678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593246674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8e3a252d999464387a824cc8c95b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myLibrary: {fileID: 593246678}
+  _myLibraryy: {fileID: 593246676}
+  _mySceneLibraryy: {fileID: 349952636}
+  _sceneLibrary: {fileID: 349952633}
+  _pooledLibrary: {fileID: 0}
+  PoolState: 0
+  id:
+    objBt: 0
+    _goInsId: 15016
+    stringId: 
+  _behaviours:
+  - {fileID: 593246677}
+  - {fileID: 593246678}
+  - {fileID: 847236122}
+  - {fileID: 1149300524}
+  - {fileID: 1941080136}
+  - {fileID: 1623344540}
+  - {fileID: 1250919976}
+  _childLibs: []
 --- !u!1 &671792881
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,14 +857,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 593246678}
   _myLibraryy: {fileID: 593246676}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15032
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -870,14 +929,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 383738082}
   _myLibraryy: {fileID: 383738080}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15038
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -927,14 +987,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 1843215940}
   _myLibraryy: {fileID: 1843215938}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15044
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -986,12 +1047,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 349952633}
   _myLibraryy: {fileID: 0}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15050
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -1027,14 +1089,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 593246678}
   _myLibraryy: {fileID: 593246676}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15056
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -1100,16 +1163,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 349952633}
   _myLibraryy: {fileID: 0}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15062
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
-  itr: 509
+  itr: 100000
   other: {fileID: 349952634}
   lib: {fileID: 349952636}
 --- !u!1 &1250919974
@@ -1155,14 +1219,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 593246678}
   _myLibraryy: {fileID: 593246676}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15068
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -1212,14 +1277,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 1843215940}
   _myLibraryy: {fileID: 1843215938}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15074
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -1269,14 +1335,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 383738082}
   _myLibraryy: {fileID: 383738080}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15080
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -1312,14 +1379,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 593246678}
   _myLibraryy: {fileID: 593246676}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15086
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -1383,14 +1451,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 1843215940}
   _myLibraryy: {fileID: 1843215938}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15092
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -1408,6 +1477,7 @@ GameObject:
   - component: {fileID: 1843215937}
   - component: {fileID: 1843215938}
   - component: {fileID: 1843215939}
+  - component: {fileID: 1843215940}
   m_Layer: 0
   m_Name: Lib lv3
   m_TagString: libTag
@@ -1448,13 +1518,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviours:
   - {fileID: 1843215939}
+  - {fileID: 1843215940}
   - {fileID: 251739647}
   - {fileID: 987587164}
   - {fileID: 1816935765}
   - {fileID: 456062071}
   - {fileID: 1352256587}
   _childLibs: []
-  _childPooledLibs: []
 --- !u!114 &1843215939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1467,20 +1537,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 1843215940}
   _myLibraryy: {fileID: 1843215938}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15098
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
   lib: {fileID: 0}
+--- !u!114 &1843215940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843215936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8e3a252d999464387a824cc8c95b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myLibrary: {fileID: 1843215940}
+  _myLibraryy: {fileID: 1843215938}
+  _mySceneLibraryy: {fileID: 349952636}
+  _sceneLibrary: {fileID: 349952633}
+  _pooledLibrary: {fileID: 0}
+  PoolState: 0
+  id:
+    objBt: 0
+    _goInsId: 15098
+    stringId: 
+  _behaviours:
+  - {fileID: 1843215939}
+  - {fileID: 1843215940}
+  - {fileID: 251739647}
+  - {fileID: 987587164}
+  - {fileID: 1816935765}
+  - {fileID: 456062071}
+  - {fileID: 1352256587}
+  _childLibs: []
 --- !u!1 &1889220468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,12 +1628,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 349952633}
   _myLibraryy: {fileID: 0}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15106
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -1567,14 +1670,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
+  _myLibrary: {fileID: 593246678}
   _myLibraryy: {fileID: 593246676}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15112
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -1640,12 +1744,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 349952633}
   _myLibraryy: {fileID: 0}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15118
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -1780,12 +1885,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 349952633}
   _myLibraryy: {fileID: 0}
+  _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 0
+    _goInsId: 15132
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
@@ -1837,6 +1943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _myLibrary: {fileID: 0}
   _myLibraryy: {fileID: 0}
+  _mySceneLibraryy: {fileID: 0}
   _sceneLibrary: {fileID: 0}
   _pooledLibrary: {fileID: 0}
   PoolState: 0

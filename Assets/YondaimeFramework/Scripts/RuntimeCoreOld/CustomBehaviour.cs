@@ -13,6 +13,7 @@ namespace YondaimeFramework
         #region PRIVATE_VARIABLES
         [HideInInspector][SerializeField] private BehaviourLibraryOld _myLibrary;
         [SerializeField] private BehaviourLibrary _myLibraryy;
+        [SerializeField] private SceneLibrary _mySceneLibraryy;
         [HideInInspector][SerializeField] private SceneLibraryOld _sceneLibrary;
         [SerializeField] private PooledBehaviourLibrary _pooledLibrary;
         #endregion
@@ -64,6 +65,11 @@ namespace YondaimeFramework
         public void SetLibrary(BehaviourLibrary library) 
         {
             _myLibraryy = library;
+        }
+
+        public void SetLibrary(SceneLibrary sceneLibrary) 
+        {
+            _mySceneLibraryy = sceneLibrary;
         }
 
         public void SetLibrary(SceneLibraryOld library)
@@ -190,6 +196,24 @@ namespace YondaimeFramework
         { 
             id = newId;
         }
+
+
+        public Transform FindLibParentTransform() 
+        {
+            Transform t = transform;
+
+            while (t != null && !t.CompareTag(BehaviourLibrary.COMPONENT_TAG))
+            {
+                t = t.parent;
+            }
+
+            if (t == null)
+                return null;
+
+            
+            return t;
+        }
+
         #endregion
 
         #region PRIVATE_METHODS
