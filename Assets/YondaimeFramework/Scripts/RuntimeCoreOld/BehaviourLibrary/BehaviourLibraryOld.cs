@@ -87,7 +87,7 @@ using UnityEngine;
                 for (int i = 0; i < _behaviours.Count; i++)
                 {
                     _behaviours[i].SetLibrary(this);
-                    _behaviours[i].SetLibrary(MySceneLibrary);
+                    _behaviours[i].SetLibrary(MySceneLibraryOld);
                     
                     if(this is PooledBehaviourLibrary);
                         _behaviours[i].SetLibrary(this as PooledBehaviourLibrary);

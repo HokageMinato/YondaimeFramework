@@ -12,10 +12,11 @@ public class Car : CustomBehaviour, ICar
     private const string tid = "Finish";
     public int itr;
     public Transform other;
-    public SceneLibrary sceneLibrary;
+    
 
     private void Start()
     {
+       
         //Debug.Log("===============================");
         //Debug.Log($"{GetComponentFromLibrary<SportsCar>() == null} -- {gameObject.name}");
         //Debug.Log($"{GetComponentFromLibraryById<SportsCar>(idToSearch)?.gameObject.name} -- {gameObject.name}");
@@ -34,16 +35,14 @@ public class Car : CustomBehaviour, ICar
     public void Test()
     {
 
-        List<Car> cars = new List<Car>();
 
-       
 
         Stopwatch st = new Stopwatch();
 
         st.Start();
         for (int i = 0; i < itr; i++)
         {
-            sceneLibrary.lib.CleanReferencesFor<Car>();
+            MySceneLibrary.lib.GetBehavioursFromLibrary<Car>();
         }
 
         st.Stop();
@@ -62,7 +61,7 @@ public class Car : CustomBehaviour, ICar
 
         for (int i = 0; i < itr; i++)
         {
-            RefreshHierarchyOld();
+            MySceneLibrary.lib.GetBehavioursFromLibrary2<Car>();
         }
         st.Stop();
         Debug.Log(st.ElapsedMilliseconds);

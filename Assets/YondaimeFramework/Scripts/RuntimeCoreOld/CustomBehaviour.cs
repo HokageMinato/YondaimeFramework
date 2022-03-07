@@ -31,11 +31,19 @@ namespace YondaimeFramework
         
         
 
-        public SceneLibraryOld MySceneLibrary
+        public SceneLibraryOld MySceneLibraryOld
         {
             get {
                 CheckForSystemLibNull();
                 return _sceneLibrary;
+            }
+        }
+        
+        public SceneLibrary MySceneLibrary
+        {
+            get {
+                
+                return _mySceneLibraryy;
             }
         }
 
@@ -88,7 +96,7 @@ namespace YondaimeFramework
         public T GetComponentFromMyGameObject<T>() 
         {
             int instanceId = gameObject.GetInstanceID();
-            return MySceneLibrary.GetBehaviourOfGameObject<T>(instanceId);
+            return MySceneLibraryOld.GetBehaviourOfGameObject<T>(instanceId);
         }
 
         /// <summary>
@@ -101,7 +109,7 @@ namespace YondaimeFramework
         {
             List<T> behaviours = new List<T>();
             int instanceId = gameObject.GetInstanceID();
-            MySceneLibrary.GetBehavioursOfGameObject<T>(instanceId,behaviours);
+            MySceneLibraryOld.GetBehavioursOfGameObject<T>(instanceId,behaviours);
             return behaviours;
         }
 
@@ -112,7 +120,7 @@ namespace YondaimeFramework
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public T GetComponentFromLibrary<T>()
         {
-            return MySceneLibrary.GetBehaviourFromLibrary<T>();
+            return MySceneLibraryOld.GetBehaviourFromLibrary<T>();
         }
 
         /// <summary>
@@ -123,7 +131,7 @@ namespace YondaimeFramework
         public List<T> GetComponentsFromLibrary<T>()
         {
             List<T> behaviours = new List<T>();
-            MySceneLibrary.GetBehavioursFromLibrary<T>(behaviours);
+            MySceneLibraryOld.GetBehavioursFromLibrary<T>(behaviours);
             return behaviours;
         }
 
@@ -134,7 +142,7 @@ namespace YondaimeFramework
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public T GetComponentFromLibraryById<T>(ComponentId behaviourId) 
         {
-            return MySceneLibrary.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
+            return MySceneLibraryOld.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
         }
 
 
@@ -145,7 +153,7 @@ namespace YondaimeFramework
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public T GetComponentFromOtherSceneLibrary<T>(string sceneId) 
         {
-            return MySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibrary<T>();
+            return MySceneLibraryOld.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibrary<T>();
         }
 
 
@@ -156,7 +164,7 @@ namespace YondaimeFramework
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId,string sceneId) 
         {
-            return MySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId.objBt);
+            return MySceneLibraryOld.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId.objBt);
         }
 
 
@@ -168,7 +176,7 @@ namespace YondaimeFramework
         public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
         {
             List<T> behaviours = new List<T>();
-             MySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehavioursFromLibrary<T>(behaviours);
+             MySceneLibraryOld.GetSceneLibraryFromRootLibraryById(sceneId).GetBehavioursFromLibrary<T>(behaviours);
             return behaviours;
         }
 

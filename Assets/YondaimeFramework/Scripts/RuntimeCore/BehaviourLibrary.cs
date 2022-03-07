@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -249,9 +247,37 @@ namespace YondaimeFramework
 
         }
 
+
         #endregion
 
+        #region GETTERS
+        public T[] GetBehavioursFromLibrary<T>() 
+        {
+            Type reqeuestedType = typeof(T);
+            CustomBehaviour[] behv = _behaviourLookup[reqeuestedType];
+            int lookupLength = behv.Length;
 
+            T[] obCount = new T[lookupLength];
+
+            for (int i = 0; i < lookupLength; i++)
+            {
+                obCount[i] = (T)(object)behv[i];
+            }
+
+            return obCount;
+        }
+        
+        public T[] GetBehavioursFromLibrary2<T>() 
+        {
+            Type reqeuestedType = typeof(T);
+            Converter<CustomBehaviour, T> converter = (item) =>
+            {
+                return (T)(object)item;
+            };
+
+            return Array.ConvertAll(_behaviourLookup[reqeuestedType], converter);
+        }
+        #endregion
 
         #region INTERNAL_WORKERS
 
@@ -259,6 +285,8 @@ namespace YondaimeFramework
         {
             CustomBehaviour[] oldComponents = _behaviourLookup[t];
             CustomBehaviour[] components = new CustomBehaviour[oldComponents.Length + 1];
+
+
 
             int oldCount = oldComponents.Length;
 
@@ -312,7 +340,8 @@ namespace YondaimeFramework
             {
                 components[i] = oldComponents[i];
             }
-
+            
+            
             int k = 0;
             for (int j = i; j < components.Length; j++)
             {
@@ -351,6 +380,8 @@ namespace YondaimeFramework
 
         private void AddListInternal<T>(List<T> customBehaviour, Type t)
         {
+            
+
             CustomBehaviour[] components = new CustomBehaviour[customBehaviour.Count];
             for (int i = 0; i < customBehaviour.Count; i++)
             {
