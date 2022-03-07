@@ -8,10 +8,14 @@ namespace YondaimeFramework
 {
     public class BehaviourLibrary 
     {
+
+        #region LOOKUPS
         private Dictionary<Type,CustomBehaviour[]> _behaviourLookup = new Dictionary<Type, CustomBehaviour[]>();
         private Dictionary<int,CustomBehaviour[]> _idLookup = new Dictionary<int, CustomBehaviour[]>();
+        #endregion
 
 
+        #region INITIALIZERS
         public void GenerateLibrary(CustomBehaviour[] behaviours)
         {
             _behaviourLookup.Clear();
@@ -135,35 +139,42 @@ namespace YondaimeFramework
             }
             Debug.Log(val);
         }
+        #endregion
 
-        public void AddBehaviour<T>(T newBehaviour) 
+
+        #region HANDLES
+
+        public void AddBehaviour<T>(T newBehaviour)
         {
             Type t = typeof(T);
             if (_behaviourLookup.ContainsKey(t))
             {
-                
-                CustomBehaviour[] oldComponents = _behaviourLookup[t];
-                CustomBehaviour[] components = new CustomBehaviour[oldComponents.Length + 1];
+                AppendBehaviour(newBehaviour, t);
 
-                int oldCount = oldComponents.Length;
-                
-                for (int i = 0; i < oldCount; i++)
-                {
-                    components[i] = oldComponents[i];
-                }
-                
-                Debug.Log($"{oldComponents.Length} {components.Length}  {oldCount}");
-
-                components[oldCount] = (CustomBehaviour)(object)newBehaviour;
-                _behaviourLookup[t] = components;
-                
             }
-            else 
+            else
             {
-                _behaviourLookup.Add(t, new CustomBehaviour[] { (CustomBehaviour)(object)newBehaviour });            
+                _behaviourLookup.Add(t, new CustomBehaviour[] { (CustomBehaviour)(object)newBehaviour });
             }
-        } 
-        
+
+
+            Type[] itypes = t.GetInterfaces();
+            for (int i = 0; i < itypes.Length; i++)
+            {
+                t = itypes[i];
+                if (_behaviourLookup.ContainsKey(t))
+                {
+                    AppendBehaviour(newBehaviour, t);
+                }
+                else
+                {
+                    _behaviourLookup.Add(t, new CustomBehaviour[] { (CustomBehaviour)(object)newBehaviour });
+                }
+
+
+            }
+        }
+
         public void AddBehaviours<T>(List<T> customBehaviour) 
         {
             Type t = typeof(T);
@@ -238,10 +249,28 @@ namespace YondaimeFramework
 
         }
 
+        #endregion
+
 
 
         #region INTERNAL_WORKERS
-       
+
+        private void AppendBehaviour<T>(T newBehaviour, Type t)
+        {
+            CustomBehaviour[] oldComponents = _behaviourLookup[t];
+            CustomBehaviour[] components = new CustomBehaviour[oldComponents.Length + 1];
+
+            int oldCount = oldComponents.Length;
+
+            for (int i = 0; i < oldCount; i++)
+            {
+                components[i] = oldComponents[i];
+            }
+
+            components[oldCount] = (CustomBehaviour)(object)newBehaviour;
+            _behaviourLookup[t] = components;
+        }
+
         private void CleanReferencesFor(Type t)
         {
 
