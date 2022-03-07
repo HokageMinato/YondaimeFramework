@@ -11,8 +11,7 @@ namespace YondaimeFramework
     public abstract class CustomBehaviour : MonoBehaviour
     {
         #region PRIVATE_VARIABLES
-        [HideInInspector][SerializeField] private BehaviourLibraryOld _myLibrary;
-        [SerializeField] private BehaviourLibrary _myLibraryy;
+        [HideInInspector][SerializeField] private BehaviourLibraryOld _myLibraryOld;
         [SerializeField] private SceneLibrary _mySceneLibraryy;
         [HideInInspector][SerializeField] private SceneLibraryOld _sceneLibrary;
         [SerializeField] private PooledBehaviourLibrary _pooledLibrary;
@@ -21,14 +20,16 @@ namespace YondaimeFramework
         #region PUBLIC_VARIABLES
         public int GOInstanceId { get { return id._goInsId; } }
 
-        public BehaviourLibraryOld MyLibrary
+        public BehaviourLibraryOld MyLibraryOld
         {
             get
             {
                 CheckForMyLibNull();
-                return _myLibrary;
+                return _myLibraryOld;
             }
-        }
+        } 
+        
+        
 
         public SceneLibraryOld MySceneLibrary
         {
@@ -59,13 +60,10 @@ namespace YondaimeFramework
 
         public void SetLibrary(BehaviourLibraryOld library)
         {
-            _myLibrary = library;
+            _myLibraryOld = library;
         }
 
-        public void SetLibrary(BehaviourLibrary library) 
-        {
-            _myLibraryy = library;
-        }
+        
 
         public void SetLibrary(SceneLibrary sceneLibrary) 
         {
@@ -175,12 +173,13 @@ namespace YondaimeFramework
         }
 
 
-        public virtual void RefreshHierarchy()
+        public virtual void RefreshHierarchyOld()
         {
-            MyLibrary.ScanBehaviours();
-            MyLibrary.InitializeLibrary();
+            MyLibraryOld.ScanBehaviours();
+            MyLibraryOld.InitializeLibrary();
         }
 
+       
 
         public void DestorySelf()
         {
@@ -198,21 +197,7 @@ namespace YondaimeFramework
         }
 
 
-        public Transform FindLibParentTransform() 
-        {
-            Transform t = transform;
-
-            while (t != null && !t.CompareTag(BehaviourLibrary.COMPONENT_TAG))
-            {
-                t = t.parent;
-            }
-
-            if (t == null)
-                return null;
-
-            
-            return t;
-        }
+       
 
         #endregion
 
@@ -228,10 +213,12 @@ namespace YondaimeFramework
 
         private void CheckForMyLibNull()
         {
-            if (_myLibrary == null)
+            if (_myLibraryOld == null)
             {
                 throw new Exception($"My library not assigned at ({name}) Make sure to scan behaviours from scene library in editor");
             }
+            
+           
         }
 
         #endregion

@@ -14,7 +14,7 @@ namespace YondaimeFramework
         #endregion
 
         #region UNITY_CALLBACKS
-        private void OnEnable()
+        private void Awake()
         {
             GenerateSingleton();
         }

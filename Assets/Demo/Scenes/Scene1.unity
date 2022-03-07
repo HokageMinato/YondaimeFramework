@@ -166,21 +166,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 383738082}
-  _myLibraryy: {fileID: 383738080}
+  _myLibraryOld: {fileID: 383738082}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 14968
+    _goInsId: 15856
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
+--- !u!1 &248162042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 248162044}
+  - component: {fileID: 248162043}
+  m_Layer: 0
+  m_Name: RootLibrary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &248162043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248162042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96fc43b8d65fb8547bcbb94ac62d9cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myLibraryOld: {fileID: 0}
+  _mySceneLibraryy: {fileID: 0}
+  _sceneLibrary: {fileID: 0}
+  _pooledLibrary: {fileID: 0}
+  PoolState: 0
+  id:
+    objBt: 0
+    _goInsId: 0
+    stringId: None
+--- !u!4 &248162044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248162042}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &251739645
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,21 +274,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 1843215940}
-  _myLibraryy: {fileID: 1843215938}
+  _myLibraryOld: {fileID: 1843215940}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 14974
+    _goInsId: 15862
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &349952632
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,8 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7500d56b722ab4dbc534c0be51e005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _myLibraryy: {fileID: 0}
+  _myLibraryOld: {fileID: 349952633}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
@@ -338,9 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9eeeb168218dc745a72a90a3eded195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _libraries: []
-  _behaviours: []
-  componentAllocationMap: 84d969596f6e6461696d654672616d65776f726b2e5363656e654c6962726172794f6c642c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c01d94b4361722c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c17d94c494361722c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c17d972596f6e6461696d654672616d65776f726b2e5374616e646172644265686176696f75724c6962726172792c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c03
+  car: {fileID: 0}
 --- !u!1 &383738078
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +395,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 383738079}
-  - component: {fileID: 383738080}
   - component: {fileID: 383738081}
   - component: {fileID: 383738082}
   m_Layer: 0
@@ -381,20 +425,6 @@ Transform:
   m_Father: {fileID: 349952634}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &383738080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383738078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f6d8b93a612bdb48a630ff769c868c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _behaviours: []
-  _childLibs: []
 --- !u!114 &383738081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,21 +437,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 383738082}
-  _myLibraryy: {fileID: 383738080}
+  _myLibraryOld: {fileID: 383738082}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 14990
+    _goInsId: 15878
     stringId: None
   othercars: []
   carIds: {fileID: 0}
   itr: 0
   other: {fileID: 0}
-  lib: {fileID: 0}
 --- !u!114 &383738082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,15 +462,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8e3a252d999464387a824cc8c95b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 383738082}
-  _myLibraryy: {fileID: 383738080}
+  _myLibraryOld: {fileID: 383738082}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: 0
-    _goInsId: 14990
+    _goInsId: 15878
     stringId: None
   _behaviours:
   - {fileID: 383738081}
@@ -498,21 +525,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 383738082}
-  _myLibraryy: {fileID: 383738080}
+  _myLibraryOld: {fileID: 383738082}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 14998
+    _goInsId: 15888
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &449948363
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,21 +581,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 383738082}
-  _myLibraryy: {fileID: 383738080}
+  _myLibraryOld: {fileID: 383738082}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15004
+    _goInsId: 15894
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &456062069
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,21 +637,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 1843215940}
-  _myLibraryy: {fileID: 1843215938}
+  _myLibraryOld: {fileID: 1843215940}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15010
+    _goInsId: 15900
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &593246674
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +659,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 593246675}
-  - component: {fileID: 593246676}
   - component: {fileID: 593246677}
   - component: {fileID: 593246678}
   m_Layer: 0
@@ -667,20 +687,6 @@ Transform:
   m_Father: {fileID: 383738079}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &593246676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593246674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f6d8b93a612bdb48a630ff769c868c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _behaviours: []
-  _childLibs: []
 --- !u!114 &593246677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,21 +699,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 593246678}
-  _myLibraryy: {fileID: 593246676}
+  _myLibraryOld: {fileID: 593246678}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15016
+    _goInsId: 15906
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!114 &593246678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,16 +724,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8e3a252d999464387a824cc8c95b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 593246678}
-  _myLibraryy: {fileID: 593246676}
+  _myLibraryOld: {fileID: 593246678}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: 0
-    _goInsId: 15016
-    stringId: 
+    _goInsId: 15906
+    stringId: None
   _behaviours:
   - {fileID: 593246677}
   - {fileID: 593246678}
@@ -834,21 +837,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 593246678}
-  _myLibraryy: {fileID: 593246676}
+  _myLibraryOld: {fileID: 593246678}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15032
+    _goInsId: 15924
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!4 &847236123
 Transform:
   m_ObjectHideFlags: 0
@@ -906,21 +907,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 383738082}
-  _myLibraryy: {fileID: 383738080}
+  _myLibraryOld: {fileID: 383738082}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15038
+    _goInsId: 15930
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &987587162
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,21 +963,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 1843215940}
-  _myLibraryy: {fileID: 1843215938}
+  _myLibraryOld: {fileID: 1843215940}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15044
+    _goInsId: 15936
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &1091781509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,8 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _myLibraryy: {fileID: 0}
+  _myLibraryOld: {fileID: 349952633}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
@@ -1036,7 +1032,6 @@ MonoBehaviour:
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &1149300523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,21 +1061,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 593246678}
-  _myLibraryy: {fileID: 593246676}
+  _myLibraryOld: {fileID: 593246678}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15056
+    _goInsId: 15948
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!4 &1149300525
 Transform:
   m_ObjectHideFlags: 0
@@ -1138,8 +1131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _myLibraryy: {fileID: 0}
+  _myLibraryOld: {fileID: 349952633}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
@@ -1152,7 +1144,6 @@ MonoBehaviour:
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 349952636}
 --- !u!1 &1250919974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,21 +1187,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 593246678}
-  _myLibraryy: {fileID: 593246676}
+  _myLibraryOld: {fileID: 593246678}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15068
+    _goInsId: 15960
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &1352256585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,21 +1243,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 1843215940}
-  _myLibraryy: {fileID: 1843215938}
+  _myLibraryOld: {fileID: 1843215940}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15074
+    _goInsId: 15966
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &1561925739
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,21 +1299,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 383738082}
-  _myLibraryy: {fileID: 383738080}
+  _myLibraryOld: {fileID: 383738082}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15080
+    _goInsId: 15972
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &1623344539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,21 +1341,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 593246678}
-  _myLibraryy: {fileID: 593246676}
+  _myLibraryOld: {fileID: 593246678}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15086
+    _goInsId: 15978
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!4 &1623344541
 Transform:
   m_ObjectHideFlags: 0
@@ -1428,21 +1411,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 1843215940}
-  _myLibraryy: {fileID: 1843215938}
+  _myLibraryOld: {fileID: 1843215940}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15092
+    _goInsId: 15984
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &1843215936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,7 +1433,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1843215937}
-  - component: {fileID: 1843215938}
   - component: {fileID: 1843215939}
   - component: {fileID: 1843215940}
   m_Layer: 0
@@ -1481,20 +1461,6 @@ Transform:
   m_Father: {fileID: 383738079}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1843215938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1843215936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f6d8b93a612bdb48a630ff769c868c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _behaviours: []
-  _childLibs: []
 --- !u!114 &1843215939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1507,21 +1473,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 1843215940}
-  _myLibraryy: {fileID: 1843215938}
+  _myLibraryOld: {fileID: 1843215940}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15098
+    _goInsId: 15990
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!114 &1843215940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1534,16 +1498,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8e3a252d999464387a824cc8c95b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 1843215940}
-  _myLibraryy: {fileID: 1843215938}
+  _myLibraryOld: {fileID: 1843215940}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: 0
-    _goInsId: 15098
-    stringId: 
+    _goInsId: 15990
+    stringId: None
   _behaviours:
   - {fileID: 1843215939}
   - {fileID: 1843215940}
@@ -1596,8 +1559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _myLibraryy: {fileID: 0}
+  _myLibraryOld: {fileID: 349952633}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
@@ -1610,7 +1572,6 @@ MonoBehaviour:
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &1941080135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1640,21 +1601,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 593246678}
-  _myLibraryy: {fileID: 593246676}
+  _myLibraryOld: {fileID: 593246678}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
   PoolState: 0
   id:
     objBt: -899593636
-    _goInsId: 15112
+    _goInsId: 16006
     stringId: Some57
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!4 &1941080137
 Transform:
   m_ObjectHideFlags: 0
@@ -1712,8 +1671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _myLibraryy: {fileID: 0}
+  _myLibraryOld: {fileID: 349952633}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
@@ -1726,7 +1684,6 @@ MonoBehaviour:
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
 --- !u!1 &2047958946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,8 +1810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fb6361f5e477d4c8a0484fab3d0431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 349952633}
-  _myLibraryy: {fileID: 0}
+  _myLibraryOld: {fileID: 349952633}
   _mySceneLibraryy: {fileID: 349952636}
   _sceneLibrary: {fileID: 349952633}
   _pooledLibrary: {fileID: 0}
@@ -1867,57 +1823,3 @@ MonoBehaviour:
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   itr: 100000
   other: {fileID: 349952634}
-  lib: {fileID: 0}
---- !u!1 &1793893275944377383
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4383781573384392434}
-  - component: {fileID: 5848182474962827532}
-  m_Layer: 0
-  m_Name: RootLibrary
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4383781573384392434
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1793893275944377383}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5848182474962827532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1793893275944377383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96fc43b8d65fb8547bcbb94ac62d9cb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _myLibrary: {fileID: 0}
-  _myLibraryy: {fileID: 0}
-  _mySceneLibraryy: {fileID: 0}
-  _sceneLibrary: {fileID: 0}
-  _pooledLibrary: {fileID: 0}
-  PoolState: 0
-  id:
-    objBt: 0
-    _goInsId: 0
-    stringId: None
