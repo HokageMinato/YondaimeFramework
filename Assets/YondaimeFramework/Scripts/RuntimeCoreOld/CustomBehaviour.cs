@@ -14,8 +14,6 @@ namespace YondaimeFramework
         [SerializeField] private SceneLibrary _mySceneLibrary;
         #endregion
 
-
-
         #region IDS
         public int GOInstanceId { get { return id._goInsId; } }
 
@@ -23,8 +21,6 @@ namespace YondaimeFramework
 
         public int PoolState;
         #endregion
-
-
 
         #region LIBRARY_HANDLES
         public void RefreshIds()
@@ -42,7 +38,6 @@ namespace YondaimeFramework
             id = newId;
         }
         #endregion
-
 
         #region COMPONENT_GETTERS
         /// <summary>
@@ -133,61 +128,78 @@ namespace YondaimeFramework
             return behaviours;
         }
         #endregion
-
-
-
        
         #region INSTANTIATORS_DESTRUCTORS
         private void _Instantiate<T>(T newObject) where T : CustomBehaviour
-        {   
+        {
             _mySceneLibrary.AddBehaviour(newObject);
         }
 
         public void OnDestroy()
         {
-            Debug.Log($"{gameObject.name} __");
-            _mySceneLibrary.CleanReferencesFor(this);
+            Debug.Log("GONE");
+        }
+
+        private void SetSelfInLib() 
+        {
+            transform.SetParent(_mySceneLibrary.transform);
         }
         #endregion
 
         #region STATIC_CONSTRUCT_DESTRUCT_HANDLES
 
-        public static new T Instantiate<T>(T original) where T : CustomBehaviour
+        
+
+        public void Destroy<T>(T original,bool destoryGameObject=false) where T : CustomBehaviour 
         {
+            GameObject go = original.gameObject;
+            DestroyImmediate(original);
+
+            if (destoryGameObject)
+                DestroyImmediate(go);
+
+            _mySceneLibrary.CleanReferencesFor(original);
+        } 
+        
+
+        public new T Instantiate<T>(T original) where T : CustomBehaviour
+        {
+            _Instantiate(original);
             T newBehaviour = MonoInstantiate(original);
-            newBehaviour._Instantiate(newBehaviour);
+            newBehaviour.SetSelfInLib();
             return newBehaviour;
         }
 
-        public static new T Instantiate<T>(T original, Transform parent) where T : CustomBehaviour
+        public new T Instantiate<T>(T original, Transform parent) where T : CustomBehaviour
         {
+            _Instantiate(original);
             T newBehaviour = MonoInstantiate(original, parent);
-            newBehaviour._Instantiate(newBehaviour);
             return newBehaviour;
         }
 
-        public static new T Instantiate<T>(T original, Transform parent, bool instantiateInWorldSpace) where T : CustomBehaviour
+        public new T Instantiate<T>(T original, Transform parent, bool instantiateInWorldSpace) where T : CustomBehaviour
         {
+            _Instantiate(original);
             T newBehaviour = MonoInstantiate(original, parent,instantiateInWorldSpace);
-            newBehaviour._Instantiate(newBehaviour);
             return newBehaviour;
         }
 
-        public static new T Instantiate<T>(T original, Vector3 position, Quaternion rotation) where T : CustomBehaviour
+        public new T Instantiate<T>(T original, Vector3 position, Quaternion rotation) where T : CustomBehaviour
         {
+            _Instantiate(original);
             T newBehaviour = MonoInstantiate(original, position, rotation);
-            newBehaviour._Instantiate(newBehaviour);
+            newBehaviour.SetSelfInLib();
             return newBehaviour;
         }
         
-        public static new T Instantiate<T>(T original, Vector3 position, Quaternion rotation, Transform parent) where T : CustomBehaviour
+        public new T Instantiate<T>(T original, Vector3 position, Quaternion rotation, Transform parent) where T : CustomBehaviour
         {
+            _Instantiate(original);
             T newBehaviour = MonoInstantiate(original, position, rotation,parent);
-            newBehaviour._Instantiate(newBehaviour);
+            newBehaviour.SetSelfInLib();
             return newBehaviour;
         }
         #endregion
-
 
         #region MONO_WRAPPERS
 
@@ -217,25 +229,21 @@ namespace YondaimeFramework
         }
         #endregion
 
-
-        
-        
-
-
-
-
-
-
-
-        #region PRIVATE_METHODS
-
-        void CheckForSystemLibNull() 
+        #region EXCEPTIONS
+        void CheckForSystemLibNull()
         {
             if (_mySceneLibrary == null)
             {
                 throw new Exception($"Scene library not assigned at ({name}) Make sure to scan behaviours from scene library in editor");
             }
         }
+        #endregion
+
+
+    #if UNITY_EDITOR
+        #region EDITOR
+
+        public SceneLibrary ml => _mySceneLibrary;
 
         public static int GenerateHashCode(string val)
         {
@@ -245,5 +253,5 @@ namespace YondaimeFramework
 
 
     }
-
+    #endif
 }

@@ -191,7 +191,7 @@ namespace YondaimeFramework
 
         public void CleanReferencesFor(CustomBehaviour customBehaviour)
         {
-          _standardBehaviourLibrary?.CleanReferencesFor(customBehaviour);
+          _standardBehaviourLibrary.CleanReferencesFor(customBehaviour);
         }
 
         private void SetLibraryToBehaviour(CustomBehaviour behaviour) 
@@ -207,6 +207,8 @@ namespace YondaimeFramework
         { 
             _behaviours = behaviours;
         }
+
+        public void LogLookup() => _standardBehaviourLibrary.LogLookup();
         #endregion
     }
 

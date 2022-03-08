@@ -46,12 +46,17 @@ namespace YondaimeFramework
         public T GetBehaviourFromLibrary<T>()
         {
             Type reqeuestedType = typeof(T);
+
+            CheckForKey(reqeuestedType);
+
             return (T)(object)_behaviourLookup[reqeuestedType][0];
         }
 
         public  T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
             Type reqeuestedType = typeof(T);
+
+            CheckForKey(reqeuestedType);
 
             List<CustomBehaviour> behaviours = _behaviourLookup[reqeuestedType];
             int total = behaviours.Count;
@@ -69,6 +74,8 @@ namespace YondaimeFramework
 
         public  T GetBehaviourFromLibraryById<T>(int behaviourId)
         {
+            CheckForKey(behaviourId);
+
             List<CustomBehaviour> behv = _idLookup[behaviourId];
             int count = behv.Count;
 
@@ -84,6 +91,8 @@ namespace YondaimeFramework
         public List<T> GetBehavioursFromLibrary<T>()
         {
             Type reqeuestedType = typeof(T);
+
+            CheckForKey(reqeuestedType);
 
             List<CustomBehaviour> behavioursInLookUp = _behaviourLookup[reqeuestedType];
             int totalObjectCount = behavioursInLookUp.Count;
@@ -101,6 +110,8 @@ namespace YondaimeFramework
         public List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
             Type reqeuestedType = typeof(T);
+
+            CheckForKey(reqeuestedType);
 
             List<CustomBehaviour> behavioursInLookUp = _behaviourLookup[reqeuestedType];
             int objectCount = behavioursInLookUp.Count;
@@ -121,7 +132,7 @@ namespace YondaimeFramework
 
         public void AddBehaviour<T>(T newBehaviour)
         {
-            LogLookup();
+           // LogLookup();
 
             Type t = typeof(T);
             if (_behaviourLookup.ContainsKey(t))
@@ -148,7 +159,7 @@ namespace YondaimeFramework
                 }
             }
 
-            LogLookup();
+          //  LogLookup();
         }
 
         public void AddBehaviours<T>(List<T> customBehaviour) 
@@ -213,17 +224,18 @@ namespace YondaimeFramework
 
         public void CleanReferencesFor(CustomBehaviour customBehaviour) 
         {
-            LogLookup();
+           // LogLookup();
             Type t = customBehaviour.GetType();
 
-             CleanReferencesFor(t);
+             CleanReferencesOf(t);
 
             Type[] itypes = t.GetInterfaces();
             for (int i = 0; i < itypes.Length; i++) 
-            { 
-                CleanReferencesFor(itypes[i]);
+            {
+                Debug.Log($"Cleaning for {itypes[i]}");
+                CleanReferencesOf(itypes[i]);
             }
-            LogLookup();
+           // LogLookup();
         }
 
         #endregion
@@ -235,19 +247,23 @@ namespace YondaimeFramework
             _behaviourLookup[t].Add((CustomBehaviour)(object)newBehaviour); ;
         }
 
-        private void CleanReferencesFor(Type t)
+        private void CleanReferencesOf(Type t)
         {
-
             if (_behaviourLookup.ContainsKey(t))
             {
                List<CustomBehaviour> behaviours = _behaviourLookup[t];
 
                 for (int i = 0; i < behaviours.Count; i++)
                 {
-                    if(behaviours[i]==null)
+                    
+                     //   Debug.Log($"{behaviours[i].gameObject.name} --- {behaviours[i] == null}");
+
+                    if (UnityEngine.Object.ReferenceEquals(behaviours[i], null))
+                    {
                         behaviours.RemoveAt(i);
+                    }
                 }
-              
+
             }
         }
 
@@ -296,10 +312,23 @@ namespace YondaimeFramework
 
             _behaviourLookup.Add(t, components);
         }
-        
+
 
 
         #endregion
 
+
+        #region EXCEPTIONS
+        private void CheckForKey(Type key) 
+        {
+            if (!_behaviourLookup.ContainsKey(key))
+                throw new Exception("No such type in scene, Scan library from editor incase your forgot to or check your code");
+        }
+        private void CheckForKey(int key) 
+        { 
+            if(!_idLookup.ContainsKey(key))
+                throw new Exception("No such component with such id in scene, Scan library from editor incase your forgot to or check the component to ensure proper id is set, or check the code for proper query");
+        }
+        #endregion
     }
 }

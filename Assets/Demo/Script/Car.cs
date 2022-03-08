@@ -1,89 +1,73 @@
 using UnityEngine;
 using YondaimeFramework;
 using Debug = UnityEngine.Debug;
-using System.Diagnostics;
-using System.Collections.Generic;
 
 public class Car : CustomBehaviour, ICar
 {
 
     public Car[] othercars;
     public RuntimeIdContainer carIds;
-    private const string tid = "Finish";
-    public int itr;
-    public Transform other;
-
-    private void Start()
-    {
-        //Debug.Log("===============================");
-        //Debug.Log($"{GetComponentFromLibrary<SportsCar>() == null} -- {gameObject.name}");
-        //Debug.Log($"{GetComponentFromLibraryById<SportsCar>(idToSearch)?.gameObject.name} -- {gameObject.name}");
-        //Debug.Log($"{GetComponentFromLibraryById<ICar>(idToSearch)==null} -- {gameObject.name}");
-        //Debug.Log($"{GetComponentFromLibraryById<Car>(idToSearch)==null} -- {gameObject.name}");
-        //Debug.Log($"{GetComponentFromLibraryById<Truck>(idToSearch)==null} -- {gameObject.name}");
-        //Debug.Log($"{GetComponentFromMyGameObject<SportsCar>() == null} -- {gameObject.name}");
-        //Debug.Log($"{GetComponentsFromLibrary<Car>()?.Count} -- {gameObject.name}" );
-        //Debug.Log($"{GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}");
-        //Debug.Log("===============================");
-
-    }
+    public SportsCar sports;
+    
 
 
-    [ContextMenu("Test")]
+    [ContextMenu("Test Instantiate")]
     public void Test()
     {
-        Instantiate(this);
+        ml.LogLookup();
+        sports = Instantiate(sports);
+        ml.LogLookup();
     }
 
-    [ContextMenu("Test2")]
+    [ContextMenu("Test Destroy")]
     public void Test2()
     {
-
-        //Stopwatch st = new Stopwatch();
-
-        //st.Start();
-
-        //for (int i = 0; i < itr; i++)
-        //{
-        //    RefreshHierarchyOld();
-        //}
-        //st.Stop();
-        //Debug.Log(st.ElapsedMilliseconds);
-
-
+        ml.LogLookup();
+        Destroy(sports);
+        ml.LogLookup();
     }
 
     #region BEHAVIOUR_LIBRARY_TESTS
 
-    //[ContextMenu("Test")]
-    //void Test()
-    //{
-    //    _behaviourLibrary.AddBehaviour(Instantiate(car));
-    //    _behaviourLibrary.LogLookup();
-    //}
+    [ContextMenu("Test Find")]
+    void TestFind()
+    {
+        Debug.Log($"Class : {GetComponentFromLibrary<SportsCar>() == null} -- {gameObject.name}");
+        Debug.Log($"Interface : {GetComponentFromLibrary<ICar>() == null} -- {gameObject.name}");
+    }
+    
+    [ContextMenu("Test Find By Tag")]
+    void TestFindByTag()
+    {
+        Debug.Log($"Class : {GetComponentFromLibraryById<SportsCar>(carIds.GetIds()[0]).gameObject.name} -- {gameObject.name}");
+        Debug.Log($"Interface : {GetComponentFromLibraryById<ICar>(carIds.GetIds()[0]) == null} -- {gameObject.name}");
+    }
+    
+    [ContextMenu("Test GetComponent")]
+    void TestGetComponent()
+    {
+        Debug.Log($"Class : {GetComponentFromMyGameObject<SportsCar>().gameObject.name} -- {gameObject.name}");
+        Debug.Log($"Interface : {GetComponentFromMyGameObject<ICar>() == null} -- {gameObject.name}");
+    }
+    
+    [ContextMenu("Test FindObjects")]
+    void TestFindObjects()
+    {
+        Debug.Log($"Class : {GetComponentsFromLibrary<Car>()?.Count} -- {gameObject.name}");
+        Debug.Log($"Interface : {GetComponentsFromLibrary<ICar>()?.Count} -- {gameObject.name}");
+    }
+    
+
+    [ContextMenu("Test GetComponents")]
+    void TestGetComponents()
+    {
+        Debug.Log($"Class : {GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}");
+        Debug.Log($"Interface : {GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}");
+    }
 
 
-    //[ContextMenu("Test2")]
-    //void Test2()
-    //{
-    //    List<Car> cars = new List<Car>();
-    //    cars.Add(Instantiate(car));
-    //    cars.Add(Instantiate(car));
-    //    cars.Add(Instantiate(car));
-    //    cars.Add(Instantiate(car));
 
-    //    _behaviourLibrary.AddBehaviours(cars);
-    //    _behaviourLibrary.LogLookup();
-    //}
 
-    //[ContextMenu("Test3")]
-    //void Test3()
-    //{
-    //    _behaviourLibrary.LogLookup();
-    //    Destroy(car);
-    //    _behaviourLibrary.CleanReferencesFor<Car>();
-    //    _behaviourLibrary.LogLookup();
-    //}
 
     #endregion
 
