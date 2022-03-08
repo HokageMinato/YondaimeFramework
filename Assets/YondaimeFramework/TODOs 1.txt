@@ -1,4 +1,4 @@
 Benchmark old refresh
     ms old  ms new       iterations
       2255  2868         100000
-    
+      4968  41000

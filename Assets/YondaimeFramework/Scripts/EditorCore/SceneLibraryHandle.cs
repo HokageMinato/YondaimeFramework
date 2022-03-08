@@ -3,27 +3,40 @@ using UnityEngine;
 using UnityEditor.SceneManagement;
 using System.Collections.Generic;
 using System;
+using MessagePack;
 
 namespace YondaimeFramework.EditorHandles
 {
-    [RequireComponent(typeof(SceneLibraryOld))]
+    [RequireComponent(typeof(SceneLibrary))]
     public class SceneLibraryHandle : MonoBehaviour
     {
-        [SerializeField] SceneLibraryOld sceneLibrary;
-        [SerializeField] SceneLibrary sceneLibraryNew;
+        [SerializeField] SceneLibrary sceneLibrary;
 
         
 
         [ContextMenu("Scan")]
-        public void ScanBehaviours() 
+        public void ScanBehaviours()
         {
-            sceneLibrary = FindObjectOfType<SceneLibraryOld>();
-            sceneLibrary.ScanBehaviours();
-            
-            //sceneLibraryNew.SetRootBehaviourLibrary(sceneLibraryNew.GetComponent<BehaviourLibrary>());
+            FindSceneLibrary();
+            SetSceneLibrary();
             SetSceneDirty();
-        } 
-        
+        }
+
+        private void FindSceneLibrary() 
+        { 
+            sceneLibrary = GameObject.FindObjectOfType<SceneLibrary>();
+        }
+
+        private void SetSceneLibrary()
+        {
+            CustomBehaviour[] bhvs = GetComponentsInChildren<CustomBehaviour>();
+            sceneLibrary.SetBehaviours(bhvs);
+            foreach (var item in bhvs)
+            {
+                item.SetLibrary(sceneLibrary);
+            }
+        }
+
         public void SetSceneDirty()
         {
             if (!Application.isPlaying)
@@ -33,7 +46,7 @@ namespace YondaimeFramework.EditorHandles
 
         #region SCENE_LIB_EDITOR_COUNTERPART
 
-       
+        
 
       
 

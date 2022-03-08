@@ -6,97 +6,54 @@ using Random = UnityEngine.Random;
 
 namespace YondaimeFramework
 {
-    
+
 
     public abstract class CustomBehaviour : MonoBehaviour
     {
-        #region PRIVATE_VARIABLES
-        [HideInInspector][SerializeField] private BehaviourLibraryOld _myLibraryOld;
-        [SerializeField] private SceneLibrary _mySceneLibraryy;
-        [HideInInspector][SerializeField] private SceneLibraryOld _sceneLibrary;
-        [SerializeField] private PooledBehaviourLibrary _pooledLibrary;
+        #region LIBRARIES
+        [SerializeField] private SceneLibrary _mySceneLibrary;
         #endregion
 
-        #region PUBLIC_VARIABLES
+
+
+        #region IDS
         public int GOInstanceId { get { return id._goInsId; } }
 
-        public BehaviourLibraryOld MyLibraryOld
-        {
-            get
-            {
-                CheckForMyLibNull();
-                return _myLibraryOld;
-            }
-        } 
-        
-        
-
-        public SceneLibraryOld MySceneLibraryOld
-        {
-            get {
-                CheckForSystemLibNull();
-                return _sceneLibrary;
-            }
-        }
-        
-        public SceneLibrary MySceneLibrary
-        {
-            get {
-                
-                return _mySceneLibraryy;
-            }
-        }
-
-        public PooledBehaviourLibrary LibraryPool
-        {
-            get
-            {
-                return _pooledLibrary;
-            }
-        }
-        
-        public int PoolState;
-
         public ComponentId id;
+
+        public int PoolState;
         #endregion
 
-        #region PUBLIC_METHODS
-        public void RefreshIds() 
+
+
+        #region LIBRARY_HANDLES
+        public void RefreshIds()
         {
-           id._goInsId = gameObject.GetInstanceID();
+            id._goInsId = gameObject.GetInstanceID();
         }
 
-        public void SetLibrary(BehaviourLibraryOld library)
+        public void SetLibrary(SceneLibrary sceneLibrary)
         {
-            _myLibraryOld = library;
+            _mySceneLibrary = sceneLibrary;
         }
 
-        
-
-        public void SetLibrary(SceneLibrary sceneLibrary) 
+        public void SetComponentIdExplicity(ComponentId newId)
         {
-            _mySceneLibraryy = sceneLibrary;
+            id = newId;
         }
+        #endregion
 
-        public void SetLibrary(SceneLibraryOld library)
-        {
-            _sceneLibrary = library;
-        }
 
-        public void SetLibrary(PooledBehaviourLibrary libraryPool)
-        {
-            _pooledLibrary = libraryPool;
-        }
-
+        #region COMPONENT_GETTERS
         /// <summary>
         /// GetComponent<T> Performance Alternative
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public T GetComponentFromMyGameObject<T>() 
+        public T GetComponentFromMyGameObject<T>()
         {
             int instanceId = gameObject.GetInstanceID();
-            return MySceneLibraryOld.GetBehaviourOfGameObject<T>(instanceId);
+            return _mySceneLibrary.GetBehaviourOfGameObject<T>(instanceId);
         }
 
         /// <summary>
@@ -105,12 +62,10 @@ namespace YondaimeFramework
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
 
-        public List<T> GetComponentsFromMyGameObject<T>() 
+        public List<T> GetComponentsFromMyGameObject<T>()
         {
-            List<T> behaviours = new List<T>();
             int instanceId = gameObject.GetInstanceID();
-            MySceneLibraryOld.GetBehavioursOfGameObject<T>(instanceId,behaviours);
-            return behaviours;
+            return _mySceneLibrary.GetBehavioursOfGameObject<T>(instanceId);
         }
 
         /// <summary>
@@ -120,7 +75,7 @@ namespace YondaimeFramework
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public T GetComponentFromLibrary<T>()
         {
-            return MySceneLibraryOld.GetBehaviourFromLibrary<T>();
+            return _mySceneLibrary.GetBehaviourFromLibrary<T>();
         }
 
         /// <summary>
@@ -130,9 +85,7 @@ namespace YondaimeFramework
         /// <returns>List<typeparamref name="T"/> of Requested BehaviourType </returns>
         public List<T> GetComponentsFromLibrary<T>()
         {
-            List<T> behaviours = new List<T>();
-            MySceneLibraryOld.GetBehavioursFromLibrary<T>(behaviours);
-            return behaviours;
+            return _mySceneLibrary.GetBehavioursFromLibrary<T>();
         }
 
         /// <summary>
@@ -140,9 +93,9 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public T GetComponentFromLibraryById<T>(ComponentId behaviourId) 
+        public T GetComponentFromLibraryById<T>(ComponentId behaviourId)
         {
-            return MySceneLibraryOld.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
+            return _mySceneLibrary.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
         }
 
 
@@ -151,9 +104,9 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public T GetComponentFromOtherSceneLibrary<T>(string sceneId) 
+        public T GetComponentFromOtherSceneLibrary<T>(string sceneId)
         {
-            return MySceneLibraryOld.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibrary<T>();
+            return _mySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibrary<T>();
         }
 
 
@@ -162,9 +115,9 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId,string sceneId) 
+        public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId, string sceneId)
         {
-            return MySceneLibraryOld.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId.objBt);
+            return _mySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId.objBt);
         }
 
 
@@ -176,63 +129,120 @@ namespace YondaimeFramework
         public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
         {
             List<T> behaviours = new List<T>();
-             MySceneLibraryOld.GetSceneLibraryFromRootLibraryById(sceneId).GetBehavioursFromLibrary<T>(behaviours);
+            _mySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehavioursFromLibrary<T>(behaviours);
             return behaviours;
         }
+        #endregion
 
 
-        public virtual void RefreshHierarchyOld()
-        {
-            MyLibraryOld.ScanBehaviours();
-            MyLibraryOld.InitializeLibrary();
-        }
 
        
+        #region INSTANTIATORS_DESTRUCTORS
+        private void _Instantiate<T>(T newObject) where T : CustomBehaviour
+        {   
+            _mySceneLibrary.AddBehaviour(newObject);
+        }
 
-        public void DestorySelf()
+        public void OnDestroy()
         {
-            DestroyImmediate(gameObject);
+            Debug.Log($"{gameObject.name} __");
+            _mySceneLibrary.CleanReferencesFor(this);
+        }
+        #endregion
+
+        #region STATIC_CONSTRUCT_DESTRUCT_HANDLES
+
+        public static new T Instantiate<T>(T original) where T : CustomBehaviour
+        {
+            T newBehaviour = MonoInstantiate(original);
+            newBehaviour._Instantiate(newBehaviour);
+            return newBehaviour;
+        }
+
+        public static new T Instantiate<T>(T original, Transform parent) where T : CustomBehaviour
+        {
+            T newBehaviour = MonoInstantiate(original, parent);
+            newBehaviour._Instantiate(newBehaviour);
+            return newBehaviour;
+        }
+
+        public static new T Instantiate<T>(T original, Transform parent, bool instantiateInWorldSpace) where T : CustomBehaviour
+        {
+            T newBehaviour = MonoInstantiate(original, parent,instantiateInWorldSpace);
+            newBehaviour._Instantiate(newBehaviour);
+            return newBehaviour;
+        }
+
+        public static new T Instantiate<T>(T original, Vector3 position, Quaternion rotation) where T : CustomBehaviour
+        {
+            T newBehaviour = MonoInstantiate(original, position, rotation);
+            newBehaviour._Instantiate(newBehaviour);
+            return newBehaviour;
+        }
+        
+        public static new T Instantiate<T>(T original, Vector3 position, Quaternion rotation, Transform parent) where T : CustomBehaviour
+        {
+            T newBehaviour = MonoInstantiate(original, position, rotation,parent);
+            newBehaviour._Instantiate(newBehaviour);
+            return newBehaviour;
+        }
+        #endregion
+
+
+        #region MONO_WRAPPERS
+
+        public static T MonoInstantiate<T>(T original) where T : UnityEngine.Object
+        {
+            return UnityEngine.Object.Instantiate(original);
+        }
+
+        public static T MonoInstantiate<T>(T original, Transform parent) where T : UnityEngine.Object
+        {
+           return UnityEngine.Object.Instantiate(original, parent);
+        }
+
+        public static T MonoInstantiate<T>(T original, Transform parent, bool instantiateInWorldSpace) where T : UnityEngine.Object
+        {
+            return UnityEngine.Object.Instantiate(original, parent,instantiateInWorldSpace);
+        }
+
+        public static T MonoInstantiate<T>(T original, Vector3 position, Quaternion rotation) where T : UnityEngine.Object
+        {
+            return UnityEngine.Object.Instantiate(original, position, rotation);
+        }
+        
+        public static T MonoInstantiate<T>(T original, Vector3 position, Quaternion rotation, Transform parent) where T : UnityEngine.Object
+        {
+            return UnityEngine.Object.Instantiate(original, position, rotation,parent);
+        }
+        #endregion
+
+
+        
+        
+
+
+
+
+
+
+
+        #region PRIVATE_METHODS
+
+        void CheckForSystemLibNull() 
+        {
+            if (_mySceneLibrary == null)
+            {
+                throw new Exception($"Scene library not assigned at ({name}) Make sure to scan behaviours from scene library in editor");
+            }
         }
 
         public static int GenerateHashCode(string val)
         {
             return val.GetHashCode() * 92821;  // PRIME = 92821 or another prime number.
         }
-
-        public void SetComponentIdExplicity(ComponentId newId) 
-        { 
-            id = newId;
-        }
-
-
-       
-
         #endregion
 
-        #region PRIVATE_METHODS
-
-        void CheckForSystemLibNull() 
-        {
-            if (_sceneLibrary == null)
-            {
-                throw new Exception($"Scene library not assigned at ({name}) Make sure to scan behaviours from scene library in editor");
-            }
-        }
-
-        private void CheckForMyLibNull()
-        {
-            if (_myLibraryOld == null)
-            {
-                throw new Exception($"My library not assigned at ({name}) Make sure to scan behaviours from scene library in editor");
-            }
-            
-           
-        }
-
-        #endregion
-
-        #region COROUTINES
-        #endregion
 
     }
 

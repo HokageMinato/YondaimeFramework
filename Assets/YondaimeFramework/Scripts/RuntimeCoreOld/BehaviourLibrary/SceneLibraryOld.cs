@@ -305,7 +305,7 @@ namespace YondaimeFramework
         {
             for (int i = 0; i < _behaviours.Count; i++)
             {
-                _behaviours[i].SetLibrary(this);
+               // _behaviours[i].SetLibrary(this);
             }
         }
        
