@@ -20,23 +20,17 @@ namespace YondaimeFramework
         {
             FrameworkLogger.Log($"Init Scenen library {_systemId.id}");
             InitializeLibrary();
-            RegisterSelfInRootLibrary();
+           // RegisterSelfInRootLibrary();
         }
 
         private void OnDestroy()
         {
-            DeregisterSelfFromRootLibrary();
+          //  DeregisterSelfFromRootLibrary();
         }
         #endregion
 
         #region PUBLIC_VARS
-        public string SystemId
-        {
-            get
-            {
-                return _systemId.id;
-            }
-        }
+       
         #endregion
 
 
@@ -284,7 +278,7 @@ namespace YondaimeFramework
 
         public SceneLibraryOld GetSceneLibraryFromRootLibraryById(string systemId)
         {
-            return _rootLibrary.GetSceneLibraryById(systemId);
+            return null;// _rootLibrary.GetSceneLibraryById(systemId);
         }
 
         public override void PreRedundantCheck()
@@ -309,24 +303,8 @@ namespace YondaimeFramework
             }
         }
        
-        private void RegisterSelfInRootLibrary() 
-        {
-
-            RootLibraryNonExistanceCheck();
-            _rootLibrary = RootLibrary.Instance;
-            _rootLibrary.AddSceneLibrary(this);
-        }
+       
         
-        private void DeregisterSelfFromRootLibrary() 
-        {
-            _rootLibrary.RemoveFromLibrary(SystemId);
-        }
-
-        private void RootLibraryNonExistanceCheck() 
-        {
-            if (RootLibrary.Instance == null)
-                throw new Exception("RootLibrary instance not found, either create one or check script execution order for Root Library to execute before scene library");
-        }
         #endregion
     }
 }

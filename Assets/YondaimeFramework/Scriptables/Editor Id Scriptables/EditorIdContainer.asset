@@ -16,7 +16,6 @@ MonoBehaviour:
   - stringIdVal: Some56
     intValue: -899593636
   - stringIdVal: Some57
-    intValue: -899593636
+    intValue: -1117357366
   myRuntimeIdContainers:
   - {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
-  - {fileID: 11400000, guid: 2277556c9e67bbb469d77574525cc410, type: 2}

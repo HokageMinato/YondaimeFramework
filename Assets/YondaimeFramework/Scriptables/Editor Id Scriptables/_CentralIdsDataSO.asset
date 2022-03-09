@@ -15,5 +15,3 @@ MonoBehaviour:
   idsData:
   - _systemName: Head
     sourceSos: {fileID: 11400000, guid: cea417ab3dff74446a19fe94dbee19a8, type: 2}
-  - _systemName: Fullset
-    sourceSos: {fileID: 11400000, guid: cea417ab3dff74446a19fe94dbee19a8, type: 2}
