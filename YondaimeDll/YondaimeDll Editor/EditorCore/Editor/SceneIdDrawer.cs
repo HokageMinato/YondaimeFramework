@@ -15,8 +15,7 @@ namespace YondaimeFramework.EditorHandles
 
             if (systemIds != null)
             {
-                float h = position.height / 2;
-                Rect rect2 = new Rect(position.x, position.y + h, position.width, h);
+                Rect rect2 = new Rect(position.x, position.y, position.width, position.height);
 
                 string[] choices = systemIds;
                 int index = ArrayUtility.IndexOf(choices, property.FindPropertyRelative("id").stringValue);

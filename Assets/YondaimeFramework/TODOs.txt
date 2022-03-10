@@ -1,23 +1,12 @@
 TODO:
 
-	-> Binary serialized dictionaries during runtime for better load times
-	-> Remove nested libraries for standard behaviour since single get component handles stuff pretty well
-	-> Native binary Serialization callbacks
-	-> Pooler library structure remains intact
-
-=> Create a CustomPooledBehaviour extending CustomBehaviour (4h)
-		-> Add two methods GetPooled<T>() and PoolSelf();
-		-> those two will call PooledLibrary's GetPooled<T>() and Pool(T behv)
-		-> Add a virtual cleanup() method in CustomPooledBehaviour to perform custom cleanup (if any required) 
-		
-
-
 => Pooled Behaviour Library Working:
-		-> All methods will work as they are supposed to be.
-		-> Every GComponent method variant will have a boolean for including pooled object list.
-		-> GetComponent variants will return every instance,(including pooled) when queried
-		-> In library, two HPerformanceList will be present, One to hold pooled, one to hold inUse components.
-		-> We will not depend on gameobjects' activeStatus state, but on last method called i.e. Pooled or depooled.
-		-> 'Including pooled' parameter on will just pull everything from both list while decluding pool will only pool from active list.
-		-> GetComponent alternatives should have an WithActive counterparts, which scans both lists and returns them
-		
+		-> Implement ILibrary interface and make all methods work as they do.
+		-> By default you should only be able to work with unpooled elements.
+		-> Add A GetLib() to library interface and implement everywhere to get native library handle.
+		    to have access to use unpooled elements incase any operation require such intervene.
+		-> Implementations of instantiate and destory would depool and pool.
+		-> Implementation of init would parse type safely distributed values to HighPerfPooler Lookups
+		-> A slide bar based pool size editor (dynamic,Show a list of all types added,shows only if sceneLibrary is of PoolerType)
+	
+

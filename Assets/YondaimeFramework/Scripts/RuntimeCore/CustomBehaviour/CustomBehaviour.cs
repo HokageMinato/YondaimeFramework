@@ -15,11 +15,7 @@ namespace YondaimeFramework
         #endregion
 
         #region IDS
-        public int GOInstanceId { get { return id._goInsId; } }
-
         public ComponentId id;
-
-        public int PoolState;
         #endregion
 
         #region LIBRARY_HANDLES

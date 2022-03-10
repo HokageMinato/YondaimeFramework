@@ -120,7 +120,6 @@ namespace YondaimeFramework
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
         {
-            
             return _mySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehavioursFromLibrary<T>();
         }
         #endregion
@@ -136,7 +135,6 @@ namespace YondaimeFramework
             newObject.id=id;
         }
         #endregion
-
 
         #region STATIC_CONSTRUCT_DESTRUCT_HANDLES
         public void DestroyCustom<T>(T original,bool destoryGameObject=false) where T : CustomBehaviour 

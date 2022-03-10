@@ -9,7 +9,9 @@ using System.Diagnostics;
 public class Car : CustomBehaviour, ICar
 {
 
-    private CustomBehaviour[] _behaviours;
+    public CustomBehaviour[] _behaviours;
+    public List<CustomBehaviour> _behaviourss;
+
     public Car[] othercars;
     public RuntimeIdContainer carIds;
     public SportsCar sports;
@@ -17,37 +19,10 @@ public class Car : CustomBehaviour, ICar
     public int itr;
     public Car otherCar;
 
-    private Action ocAction;
-
-    [ContextMenu("Call")]
-    public void InvocationTest() 
-    {
-        Stopwatch st = new Stopwatch();
-        st.Start();
-        for (int i = 0; i < itr; i++)
-        {
-            otherCar.SomeMethod();
-        }
-        st.Stop();
-        Debug.Log(st.ElapsedMilliseconds);
-
-        ocAction = otherCar.SomeMethod;
-
-
-        st.Reset();
-        for (int i = 0; i < itr; i++)
-        {
-            ocAction();
-        }
-        st.Stop();
-        
-        Debug.Log(st.ElapsedMilliseconds);
-
+    //private Func<int> ocAction;
+    private ICar ocAction;
     
-    }
-
-
-
+  
     #region BEHAVIOUR_LIBRARY_TESTS
 
     [ContextMenu("Test Instantiate")]
@@ -85,6 +60,7 @@ public class Car : CustomBehaviour, ICar
     [ContextMenu("Test GetComponent")]
     void TestGetComponent()
     {
+        ml.LogBehvLookup();
         Debug.Log($"Class : {GetComponentFromMyGameObject<SportsCar>() == null} -- {gameObject.name}");
         Debug.Log($"Interface : {GetComponentFromMyGameObject<ICar>() == null} -- {gameObject.name}");
     }
@@ -114,8 +90,64 @@ public class Car : CustomBehaviour, ICar
 
 
 
-    public void SomeMethod() 
-    { 
+    [ContextMenu("Call")]
+    public void InvocationTest()
+    {
+        Stopwatch st = new Stopwatch();
+        st.Start();
+
+        for (int i = 0; i < itr; i++)
+        {
+            GetBehavioursFromLibraryTT<Car>();
+        }
+
+        st.Stop();
+        Debug.Log(st.ElapsedMilliseconds);
+
+        st.Reset();
+        st.Start();
+        
+
+        for (int i = 0; i < itr; i++)
+        {
+            GetBehavioursFromLibraryTTF<Car>();
+        }
+       
+        st.Stop();
+
+        Debug.Log(st.ElapsedMilliseconds);
+
+
+    }
+
+
+    public List<T> GetBehavioursFromLibraryTT<T>()
+    {
+        List<CustomBehaviour> behavioursInLookUp = _behaviourss;
+        int totalObjectCount = behavioursInLookUp.Count;
+
+
+        List<T> returnList = new List<T>(totalObjectCount);
+        for (int i = 0; i < totalObjectCount; i++)
+            returnList.Add((T)(object)behavioursInLookUp[i]);
+
+
+
+        return returnList;
+    }
+
+    public T[] GetBehavioursFromLibraryTTF<T>()
+    {
+
+        CustomBehaviour[] behavioursInLookUp = _behaviours;
+        int totalObjectCount = behavioursInLookUp.Length;
+
+
+        T[] returnList = new T[totalObjectCount];
+        for (int i = 0; i < totalObjectCount; i++)
+            returnList[i]=((T)(object)behavioursInLookUp[i]);
+
+        return returnList;
     }
 
 }

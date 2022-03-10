@@ -7,9 +7,10 @@ namespace YondaimeFramework
     public class SceneLibrary : MonoBehaviour
     {
         #region PUBLIC_VARS
-        [SerializeField] private CustomBehaviour[] _behaviours;
+        [SerializeField] private LibraryType _libraryType;
         [SerializeField] private SceneId _systemId;
-        public string SystemId
+        [SerializeField] public CustomBehaviour[] _behaviours;
+        public string SceneId
         {
             get
             {
@@ -19,47 +20,37 @@ namespace YondaimeFramework
         #endregion
 
 
-
         #region LIBRARY_REFERENCES
-        private StandardBehaviourLibrary _standardBehaviourLibrary = new StandardBehaviourLibrary();
+        private ILibrary _library;
         private RootLibrary _rootLibrary;
         #endregion
 
 
-
-
-        #region UNITY_CALLBACKS
-        private void Start()
-        {
-            GenerateBehaviourLookups(_standardBehaviourLibrary.InitLibrary);
-        }
-
+        #region INITIALIZERS
         private void Awake()
         {
-            FrameworkLogger.Log($"Init Scenen library {_systemId.id}");
+            _library = LibraryFactory.ConstructLibrary(_libraryType);
             RegisterSelfInRootLibrary();
+            GenerateBehaviourLookups();
         }
 
         private void OnDestroy()
         {
             DeregisterSelfFromRootLibrary();
         }
-
         #endregion
 
 
-
         #region LOOKUP_GENERATION
-        public void GenerateBehaviourLookups(Action<Dictionary<Type, List<CustomBehaviour>>,Dictionary<int, List<CustomBehaviour>>> OnGenerated)
+        public void GenerateBehaviourLookups()
         {
             CustomBehaviour[] behaviours  = _behaviours;
 
             Dictionary<Type, List<CustomBehaviour>> _behaviourLookup = new Dictionary<Type, List<CustomBehaviour>>();
             Dictionary<int, List<CustomBehaviour>> _idLookup = new Dictionary<int, List<CustomBehaviour>>();
             CheckForEmptyBehaviours();
-            SetSceneLibraryReference();
             GenerateBehaviourLookUp();
-            OnGenerated(_behaviourLookup,_idLookup);
+            _library.InitLibrary(_behaviourLookup, _idLookup);
 
             void CheckForEmptyBehaviours()
             {
@@ -88,14 +79,6 @@ namespace YondaimeFramework
             {
                 behaviour.RefreshIds();
                 return behaviour.id.objBt != ComponentId.None;
-            }
-            void SetSceneLibraryReference() 
-            {
-
-                for (int i = 0; i < behaviours.Length; i++)
-                {
-                    behaviours[i].SetLibrary(this);
-                }
             }
             void AddBehaviourInterfacesInLookup(CustomBehaviour behaviour, Type t)
             {
@@ -132,77 +115,69 @@ namespace YondaimeFramework
         #endregion
 
 
-
         #region COMPONENT_GETTER_HANDLES
 
         public T GetBehaviourFromLibrary<T>()
         {
-           return _standardBehaviourLibrary.GetBehaviourFromLibrary<T>();
+           return _library.GetBehaviourFromLibrary<T>();
         }
 
         public  T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
-           return _standardBehaviourLibrary.GetBehaviourOfGameObject<T>(requesteeGameObjectInstanceId);
+           return _library.GetBehaviourOfGameObject<T>(requesteeGameObjectInstanceId);
         }
 
         public  T GetBehaviourFromLibraryById<T>(int behaviourId)
         {
-           return _standardBehaviourLibrary.GetBehaviourFromLibraryById<T>(behaviourId);
+           return _library.GetBehaviourFromLibraryById<T>(behaviourId);
         }
 
         public List<T> GetBehavioursFromLibrary<T>()
         {
-          return _standardBehaviourLibrary.GetBehavioursFromLibrary<T>();
+           return _library.GetBehavioursFromLibrary<T>();
         }
 
         public List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
-           return _standardBehaviourLibrary.GetBehavioursOfGameObject<T>(requesteeGameObjectInstanceId);
+           return _library.GetBehavioursOfGameObject<T>(requesteeGameObjectInstanceId);
         }
 
-        public SceneLibrary GetSceneLibraryFromRootLibraryById(string systemId)
-        {
-           return _rootLibrary.GetSceneLibraryById(systemId);
-        }
-
-
+      
         #endregion
-
-
 
 
         #region ALLOCATORS
         public void AddBehaviour<T>(T newBehaviour) where T:CustomBehaviour
         {
             newBehaviour.SetLibrary(this);
-            _standardBehaviourLibrary.AddBehaviour(newBehaviour);
+            _library.AddBehaviour(newBehaviour);
+        }
+
+        
+        public void CleanReferencesFor(CustomBehaviour customBehaviour)
+        {
+           _library.CleanReferencesFor(customBehaviour);
         }
 
         public void AddBehaviours<T>(List<T> newBehaviours) where T : CustomBehaviour
         {
-            for (int i = 0; i < newBehaviours.Count; i++)
-                SetLibraryToBehaviour(newBehaviours[i]);
+            int count = newBehaviours.Count;
+            for (int i = 0; i < count; i++)
+                newBehaviours[i].SetLibrary(this);
 
-           _standardBehaviourLibrary.AddBehaviours(newBehaviours);
+            _library.AddBehaviours(newBehaviours);
         }
 
         public void AddBehaviours<T>(T[] newBehaviours) where T : CustomBehaviour
         {
-            for (int i = 0; i < newBehaviours.Length; i++)
-                SetLibraryToBehaviour(newBehaviours[i]);
+            int count = newBehaviours.Length;
+            for (int i = 0; i < count; i++)
+                newBehaviours[i].SetLibrary(this);
 
-            _standardBehaviourLibrary.AddBehaviours<T>(newBehaviours);    
+            _library.AddBehaviours<T>(newBehaviours);
         }
 
-        public void CleanReferencesFor(CustomBehaviour customBehaviour)
-        {
-          _standardBehaviourLibrary.CleanReferencesFor(customBehaviour);
-        }
 
-        private void SetLibraryToBehaviour(CustomBehaviour behaviour) 
-        { 
-            behaviour.SetLibrary(this);
-        }
         #endregion
 
 
@@ -217,7 +192,12 @@ namespace YondaimeFramework
 
         private void DeregisterSelfFromRootLibrary()
         {
-            _rootLibrary.RemoveFromLibrary(SystemId);
+            _rootLibrary.RemoveFromLibrary(SceneId);
+        }
+
+        public SceneLibrary GetSceneLibraryFromRootLibraryById(string systemId)
+        {
+            return _rootLibrary.GetSceneLibraryById(systemId);
         }
 
         #endregion
@@ -232,17 +212,54 @@ namespace YondaimeFramework
 
         #endregion
 
+
         #region EDITOR_HELPERS
         public void SetBehaviours(CustomBehaviour[] behaviours) 
         { 
             _behaviours = behaviours;
         }
-
-        public void LogBehvLookup() => _standardBehaviourLibrary.LogLookup();
-        public void LogIdLookuip() => _standardBehaviourLibrary.LogIdLookup();
+        public void LogBehvLookup() => _library.LogLookup();
+        public void LogIdLookuip() => _library.LogIdLookup();
         #endregion
+
+
+       
+
     }
 
+    public enum LibraryType
+    {
+        Standard,
+        HighPerformance,
+        Pooled
+    }
 
+    public static class LibraryFactory
+    {
+        public static ILibrary ConstructLibrary(LibraryType libraryType)
+        {
+            switch (libraryType)
+            {
+                case LibraryType.Standard:
+                    return ConstructStandardLibrary();
+
+                 // case LibraryType.STATIC_PERFORMANT:
+                 // case LibraryType.POOLED:
+            }
+            return default;
+        }
+
+        private static StandardBehaviourLibrary ConstructStandardLibrary()
+        {
+            return new StandardBehaviourLibrary();
+        }
+        
+        //private static PooledBehaviourLibrary ConstructPooledLibrary()
+        //{
+        //    return new PooledBehaviourLibrary();
+        //}
+
+
+    }
 
 }

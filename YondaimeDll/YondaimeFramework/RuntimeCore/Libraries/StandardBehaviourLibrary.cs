@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-    public class StandardBehaviourLibrary 
+    public class StandardBehaviourLibrary : ILibrary
     {
 
         #region LOOKUPS
@@ -19,7 +19,8 @@ namespace YondaimeFramework
                                 Dictionary<int, List<CustomBehaviour>> idLookup) 
         {
             _behaviourLookup = behaviourLookup;
-            _idLookup = idLookup;   
+            _idLookup = idLookup;  
+            
         }
 
         
@@ -258,12 +259,12 @@ namespace YondaimeFramework
             CleanIdLibReferencesFor(customBehaviour.id.objBt);
         }
 
-        internal void LogIdLookup()
+        public void LogIdLookup()
         {
            // LogLookup(_idLookup,"Idlookup");
         }
 
-        internal void LogLookup()
+        public void LogLookup()
         {
            // LogLookup(_behaviourLookup,"Behv Lookup");
         }

@@ -4,8 +4,7 @@ using UnityEngine;
 using YondaimeFramework;
 
 public interface ICar 
-{ 
-    
+{
 }
 
 public class SportsCar : Car,ICar
@@ -23,9 +22,6 @@ public class SportsCar : Car,ICar
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
 }

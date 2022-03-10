@@ -46,7 +46,7 @@ namespace YondaimeFramework
 
         public void AddSceneLibrary(SceneLibrary newSceneLibrary) 
         {
-            _sceneLibLookUp.Add(newSceneLibrary.SystemId, newSceneLibrary);
+            _sceneLibLookUp.Add(newSceneLibrary.SceneId, newSceneLibrary);
         }
 
         public void RemoveFromLibrary(string sceneId) {

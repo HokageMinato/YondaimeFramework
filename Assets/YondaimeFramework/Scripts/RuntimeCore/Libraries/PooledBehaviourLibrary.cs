@@ -54,10 +54,10 @@ namespace YondaimeFramework
                         tempLookup.Add(currentBehaviourType, new PerformancePool<CustomBehaviour>());
                     }
 
-                    if (_behaviours[i].PoolState == PoolConstants.Active)
-                        tempLookup[currentBehaviourType].AddAsDePooledState(_behaviours[i]);
-                    else
-                        tempLookup[currentBehaviourType].AddAsPooledState(_behaviours[i]);
+                  //  if (_behaviours[i].PoolState == PoolConstants.Active)
+                //        tempLookup[currentBehaviourType].AddAsDePooledState(_behaviours[i]);
+                  ///  else
+                    //    tempLookup[currentBehaviourType].AddAsPooledState(_behaviours[i]);
                 }
             }
             void FillInterfaceLookup()
@@ -166,10 +166,10 @@ namespace YondaimeFramework
 
                 for (int i = 0; i < behaviours.Count; i++)
                 {
-                    if (behaviours[i].GOInstanceId == requesteeGameObjectInstanceId)
-                    {
-                        return (T)(object)behaviours[i];
-                    }
+                    //if (behaviours[i].GOInstanceId == requesteeGameObjectInstanceId)
+                    //{
+                    //    return (T)(object)behaviours[i];
+                    //}
                 }
             }
 

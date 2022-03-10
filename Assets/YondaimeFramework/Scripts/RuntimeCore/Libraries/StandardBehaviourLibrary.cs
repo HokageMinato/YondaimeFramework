@@ -5,13 +5,12 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-    public class StandardBehaviourLibrary 
+    public class StandardBehaviourLibrary : ILibrary
     {
 
         #region LOOKUPS
         private Dictionary<Type, List<CustomBehaviour>> _behaviourLookup;
         private Dictionary<int, List<CustomBehaviour>> _idLookup;
-        private Dictionary<Type, ArrayList> _testlkp;
         #endregion
 
         #region INITIALIZERS
@@ -19,7 +18,8 @@ namespace YondaimeFramework
                                 Dictionary<int, List<CustomBehaviour>> idLookup) 
         {
             _behaviourLookup = behaviourLookup;
-            _idLookup = idLookup;   
+            _idLookup = idLookup;  
+            
         }
 
         
@@ -69,10 +69,10 @@ namespace YondaimeFramework
 
             for (int i = 0; i < total; i++)
             {
-                 if (behaviours[i].GOInstanceId == requesteeGameObjectInstanceId)
-                 {
-                     return (T)(object)behaviours[i];
-                 }
+                 CustomBehaviour behaviour = behaviours[i];
+                 if (behaviour.id._goInsId == requesteeGameObjectInstanceId)
+                     return (T)(object)behaviour;
+                
             }
             
             return default;
@@ -88,8 +88,9 @@ namespace YondaimeFramework
 
             for (int i = 0; i < count; i++)
             {
-                    if (behv[i] is T)
-                        return (T)(object)behv[i];
+                CustomBehaviour behaviour = behv[i];    
+                    if (behaviour is T)
+                        return (T)(object)behaviour;
             }
 
             return default;
@@ -108,6 +109,7 @@ namespace YondaimeFramework
             for (int i = 0; i < totalObjectCount; i++)
                 returnList.Add((T)(object)behavioursInLookUp[i]);
 
+           
 
             return returnList;
         }
@@ -120,9 +122,13 @@ namespace YondaimeFramework
             int objectCount = behavioursInLookUp.Count;
 
             List<T> returnList= new List<T>(objectCount);
-            for (int i = 0; i < objectCount && behavioursInLookUp[i].GOInstanceId == requesteeGameObjectInstanceId; i++)
+
+            for (int i = 0; i < objectCount; i++)
             {
-                returnList.Add((T)(object)behavioursInLookUp[i]);
+                CustomBehaviour behaviour = behavioursInLookUp[i];
+                
+                if(behaviour.id._goInsId == requesteeGameObjectInstanceId)
+                    returnList.Add((T)(object)behaviour);
             }
 
             return returnList;
@@ -258,12 +264,12 @@ namespace YondaimeFramework
             CleanIdLibReferencesFor(customBehaviour.id.objBt);
         }
 
-        internal void LogIdLookup()
+        public void LogIdLookup()
         {
            // LogLookup(_idLookup,"Idlookup");
         }
 
-        internal void LogLookup()
+        public void LogLookup()
         {
            // LogLookup(_behaviourLookup,"Behv Lookup");
         }

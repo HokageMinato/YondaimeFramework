@@ -183,10 +183,10 @@ namespace YondaimeFramework
 
                 for (int i = 0; i < behaviours.Length; i++)
                 {
-                    if (behaviours[i].GOInstanceId == requesteeGameObjectInstanceId)
-                    {
-                        return (T)(object)behaviours[i];
-                    }
+                    //if (behaviours[i].GOInstanceId == requesteeGameObjectInstanceId)
+                    //{
+                    //    return (T)(object)behaviours[i];
+                    //}
                 }
             }
 
@@ -261,10 +261,10 @@ namespace YondaimeFramework
                 CustomBehaviour[] behavioursInLookUp = _behaviourLookup[reqeuestedType];
                 behaviourListToBeFilled.Capacity += behavioursInLookUp.Length;
 
-                for (int i = 0; i < behavioursInLookUp.Length && behavioursInLookUp[i].GOInstanceId == requesteeGameObjectInstanceId; i++)
-                {
-                    behaviourListToBeFilled.Add((T)(object)behavioursInLookUp[i]);
-                }
+                //for (int i = 0; i < behavioursInLookUp.Length && behavioursInLookUp[i].GOInstanceId == requesteeGameObjectInstanceId; i++)
+                //{
+                //    behaviourListToBeFilled.Add((T)(object)behavioursInLookUp[i]);
+                //}
 
             }
 
