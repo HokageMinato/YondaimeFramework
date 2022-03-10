@@ -146,7 +146,7 @@ namespace YondaimeFramework
 
         public T GetPooled<T>() 
         { 
-            _mySceneLibrary.
+          return  _mySceneLibrary.GetPooled<T>();
         }
 
         public new T Instantiate<T>(T original) where T : CustomBehaviour
