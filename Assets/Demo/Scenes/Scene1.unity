@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mySceneLibrary: {fileID: 1814873074880561082}
   id:
-    objBt: -899593636
+    objBt: -1117357366
     _goInsId: 15856
     stringId: Some57
   _behaviours: []
@@ -337,6 +337,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1814873075194222236, guid: 73c8714b35c80a44f857e93030e3bf78, type: 3}
+      propertyPath: _libraryType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814873075194222236, guid: 73c8714b35c80a44f857e93030e3bf78, type: 3}
+      propertyPath: _systemId.id
+      value: FrameworkProfileScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814873075194222236, guid: 73c8714b35c80a44f857e93030e3bf78, type: 3}
       propertyPath: _behaviours.Array.size
       value: 27
       objectReference: {fileID: 0}
@@ -452,6 +460,10 @@ PrefabInstance:
       propertyPath: _behaviours.Array.data[27]
       value: 
       objectReference: {fileID: 2126974522}
+    - target: {fileID: 1814873075194222236, guid: 73c8714b35c80a44f857e93030e3bf78, type: 3}
+      propertyPath: poolParamters.parameters.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73c8714b35c80a44f857e93030e3bf78, type: 3}
 --- !u!1 &383738078
@@ -590,7 +602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mySceneLibrary: {fileID: 1814873074880561082}
   id:
-    objBt: -899593636
+    objBt: -1117357366
     _goInsId: 15888
     stringId: Some57
   _behaviours: []
@@ -725,7 +737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mySceneLibrary: {fileID: 1814873074880561082}
   id:
-    objBt: -899593636
+    objBt: -1117357366
     _goInsId: 15894
     stringId: Some57
   _behaviours: []
@@ -974,7 +986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mySceneLibrary: {fileID: 1814873074880561082}
   id:
-    objBt: -899593636
+    objBt: -1117357366
     _goInsId: 15924
     stringId: Some57
   _behaviours: []
@@ -1098,7 +1110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mySceneLibrary: {fileID: 1814873074880561082}
   id:
-    objBt: -899593636
+    objBt: -1117357366
     _goInsId: 15936
     stringId: Some57
   _behaviours: []
@@ -1373,7 +1385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mySceneLibrary: {fileID: 1814873074880561082}
   id:
-    objBt: -899593636
+    objBt: -1117357366
     _goInsId: 15972
     stringId: Some57
   _behaviours: []
@@ -1544,7 +1556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mySceneLibrary: {fileID: 1814873074880561082}
   id:
-    objBt: -899593636
+    objBt: -1117357366
     _goInsId: 15990
     stringId: Some57
   _behaviours: []
@@ -1789,7 +1801,7 @@ MonoBehaviour:
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 4687846422457583818, guid: 4b514de1515a6844ca58d39ee0ea13ff, type: 3}
-  itr: 1000000
+  itr: 100000
   otherCar: {fileID: 2126974522}
 --- !u!1 &2047958946
 GameObject:
@@ -1934,9 +1946,29 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1814873075194222236, guid: 73c8714b35c80a44f857e93030e3bf78, type: 3}
   m_PrefabInstance: {fileID: 334653734}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1814873074880561086}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9eeeb168218dc745a72a90a3eded195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1814873074880561086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1814873075194222232, guid: 73c8714b35c80a44f857e93030e3bf78, type: 3}
+  m_PrefabInstance: {fileID: 334653734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1814873074880561087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814873074880561086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb63e6a2ce36747448847f8b2be060ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameters:
+  - Prefab: {fileID: 0}
+    Count: 0

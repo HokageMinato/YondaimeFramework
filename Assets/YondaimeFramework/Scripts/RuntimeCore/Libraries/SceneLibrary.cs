@@ -159,7 +159,17 @@ namespace YondaimeFramework
         {
            _library.CleanReferencesFor(customBehaviour);
         }
-      
+
+        public T GetPooled<T>() 
+        { 
+            return _library.GetPooled<T>();
+        }
+
+        public void Pool<T>(T behaviour) 
+        { 
+            _library.Pool<T>(behaviour);
+        }
+
         #endregion
 
 

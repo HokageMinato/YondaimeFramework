@@ -23,6 +23,10 @@ namespace YondaimeFramework
 
         public void CleanReferencesFor(CustomBehaviour customBehaviour);
 
+        public T GetPooled<T>();
+
+        public void Pool<T>(T behaviour);
+
         public void LogIdLookup();
 
         public void LogLookup();

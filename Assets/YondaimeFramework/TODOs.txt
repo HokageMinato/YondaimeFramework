@@ -2,11 +2,9 @@ TODO:
 
 => Pooled Behaviour Library Working:
 		-> Implement ILibrary interface and make all methods work as they do.
-		-> By default you should only be able to work with unpooled elements.
-		-> Add A GetLib() to library interface and implement everywhere to get native library handle.
-		    to have access to use unpooled elements incase any operation require such intervene.
-		-> Implementations of instantiate and destory would depool and pool.
-		-> Implementation of init would parse type safely distributed values to HighPerfPooler Lookups
+		-> Elements will reside in cache and pool. in cache elements will only have state changed, pool meanwhile will contain free ones.
+		-> All Pooled objects would have state pooled, every get method will ignore them.
+		-> Pool and Depool operations would throw exceptions except pooledLibrary
 		-> A slide bar based pool size editor (dynamic,Show a list of all types added,shows only if sceneLibrary is of PoolerType)
 	
 

@@ -140,12 +140,14 @@ namespace YondaimeFramework
 
             if (destoryGameObject)
                 DestroyImmediate(go);
-
-
             
             _mySceneLibrary.CleanReferencesFor(original);
-        } 
-        
+        }
+
+        public T GetPooled<T>() 
+        { 
+            _mySceneLibrary.
+        }
 
         public new T Instantiate<T>(T original) where T : CustomBehaviour
         {

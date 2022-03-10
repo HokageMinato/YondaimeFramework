@@ -262,7 +262,17 @@ namespace YondaimeFramework
             }
         }
 
+        public T GetPooled<T>()
+        {
+            throw new Exception("No components are pooled natively in Standard Library");
+        }
+
+        public void Pool<T>(T behaviour)
+        {
+            throw new Exception("Pooling components natively in Standard Library is Not Allowed");
+        }
+
         #endregion
-       
+
     }
 }
