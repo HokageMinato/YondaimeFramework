@@ -9,7 +9,8 @@ namespace YondaimeFramework
         #region PUBLIC_VARS
         [SerializeField] private LibraryType _libraryType;
         [SerializeField] private SceneId _systemId;
-        [SerializeField] public CustomBehaviour[] _behaviours;
+        [SerializeField] private CustomBehaviour[] _behaviours;
+        [HideInInspector][SerializeField] public PoolParameters poolParameters;
         public string SceneId
         {
             get
@@ -158,26 +159,7 @@ namespace YondaimeFramework
         {
            _library.CleanReferencesFor(customBehaviour);
         }
-
-        public void AddBehaviours<T>(List<T> newBehaviours) where T : CustomBehaviour
-        {
-            int count = newBehaviours.Count;
-            for (int i = 0; i < count; i++)
-                newBehaviours[i].SetLibrary(this);
-
-            _library.AddBehaviours(newBehaviours);
-        }
-
-        public void AddBehaviours<T>(T[] newBehaviours) where T : CustomBehaviour
-        {
-            int count = newBehaviours.Length;
-            for (int i = 0; i < count; i++)
-                newBehaviours[i].SetLibrary(this);
-
-            _library.AddBehaviours<T>(newBehaviours);
-        }
-
-
+      
         #endregion
 
 
@@ -220,10 +202,8 @@ namespace YondaimeFramework
         }
         public void LogBehvLookup() => _library.LogLookup();
         public void LogIdLookuip() => _library.LogIdLookup();
+        public LibraryType LibType => _libraryType;
         #endregion
-
-
-       
 
     }
 

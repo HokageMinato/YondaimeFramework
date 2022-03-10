@@ -15,18 +15,13 @@ namespace YondaimeFramework.EditorHandles
 
             if (systemIds != null)
             {
-                Rect rect2 = new Rect(position.x, position.y, position.width, position.height);
-
                 string[] choices = systemIds;
                 int index = ArrayUtility.IndexOf(choices, property.FindPropertyRelative("id").stringValue);
-                index = EditorGUI.Popup(rect2, "SceneId", index, choices);
-
-
+                index = EditorGUI.Popup(position, "SceneId", index, choices);
               
                 if (index != -1)
                     property.FindPropertyRelative("id").stringValue = choices[index];
             }
-
 
             EditorGUI.EndProperty();
         }

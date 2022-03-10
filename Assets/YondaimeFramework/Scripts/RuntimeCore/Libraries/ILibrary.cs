@@ -23,10 +23,6 @@ namespace YondaimeFramework
 
         public void CleanReferencesFor(CustomBehaviour customBehaviour);
 
-        public void AddBehaviours<T>(List<T> customBehaviour);
-
-        public void AddBehaviours<T>(T[] customBehaviour);
-
         public void LogIdLookup();
 
         public void LogLookup();

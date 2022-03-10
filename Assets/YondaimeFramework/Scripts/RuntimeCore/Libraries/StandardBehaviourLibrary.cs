@@ -188,66 +188,7 @@ namespace YondaimeFramework
             _idLookup[id].Add(newBehaviour);
         }
 
-        public void AddBehaviours<T>(List<T> customBehaviour) 
-        {
-            Type t = typeof(T);
-
-            if (_behaviourLookup.ContainsKey(t))
-            {
-                
-                AppendBehavioursListInternal(customBehaviour, t);
-            }
-            else
-            {
-                AddListInternal(customBehaviour, t);
-            }
-
-            Type[] itypes = t.GetInterfaces();
-            for (int i = 0; i < itypes.Length; i++)
-            {
-                t = itypes[i];  
-                if (_behaviourLookup.ContainsKey(t))
-                {
-                    AppendBehavioursListInternal(customBehaviour, t);
-                }
-                else
-                {
-                    AddListInternal(customBehaviour, t);
-                }
-            }
-
-
-        }
-
-        public void AddBehaviours<T>(T[] customBehaviour) 
-        {
-            Type t = typeof(T);
-            
-            if (_behaviourLookup.ContainsKey(t))
-            {
-                AppendBehavioursArrayInternal(customBehaviour, t);
-            }
-            else
-            {
-                AddArrayInternal(customBehaviour, t);
-            }
-
-
-            Type[] itypes = t.GetInterfaces();
-            for (int i = 0; i < itypes.Length; i++)
-            {
-                t = itypes[i];
-                if (_behaviourLookup.ContainsKey(t))
-                {
-                    AppendBehavioursArrayInternal(customBehaviour,t);
-                }
-                else
-                {
-                    AddArrayInternal<T>(customBehaviour, t);
-                }
-            }
-
-        }
+       
 
         public void CleanReferencesFor(CustomBehaviour customBehaviour) 
         {
@@ -320,62 +261,6 @@ namespace YondaimeFramework
 
             }
         }
-
-        private void AppendBehavioursListInternal<T>(List<T> customBehaviours, Type t)
-        {
-            List<CustomBehaviour> oldComponents = _behaviourLookup[t];
-            oldComponents.Capacity += customBehaviours.Count;
-
-            for (int j = 0; j < customBehaviours.Count; j++)
-            {
-                CustomBehaviour newBehaviour = (CustomBehaviour)(object)customBehaviours[j];
-                CheckAndAddToIdLookup(newBehaviour);
-                oldComponents.Add(newBehaviour);
-            }
-        }
-
-        private void AppendBehavioursArrayInternal<T>(T[] customBehaviours, Type t)
-        {
-            List<CustomBehaviour> oldComponents = _behaviourLookup[t];
-            oldComponents.Capacity += customBehaviours.Length;
-
-            for (int j = 0; j < customBehaviours.Length; j++)
-            {
-                CustomBehaviour behaviour = (CustomBehaviour)(object)customBehaviours[j];
-                oldComponents.Add(behaviour);
-                CheckAndAddToIdLookup(behaviour);
-            }
-        }
-
-        private void AddListInternal<T>(List<T> customBehaviour, Type t)
-        {
-           List<CustomBehaviour> components = new List<CustomBehaviour>(customBehaviour.Count);
-            
-            for (int i = 0; i < customBehaviour.Count; i++)
-            {
-                CustomBehaviour behaviour = (CustomBehaviour)(object)customBehaviour[i];
-                components[i] = behaviour;
-                CheckAndAddToIdLookup(behaviour);
-            }
-
-            _behaviourLookup.Add(t, components);
-        }
-        
-        private void AddArrayInternal<T>(T[] customBehaviour, Type t)
-        {
-            List<CustomBehaviour> components = new List<CustomBehaviour>(customBehaviour.Length);
-
-            for (int i = 0; i < customBehaviour.Length; i++)
-            {
-                CustomBehaviour behaviour = (CustomBehaviour)(object)customBehaviour[i];
-                components[i] = behaviour;
-                CheckAndAddToIdLookup(behaviour);
-            }
-
-            _behaviourLookup.Add(t, components);
-        }
-
-
 
         #endregion
        
