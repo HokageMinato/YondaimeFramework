@@ -6,8 +6,7 @@ namespace YondaimeFramework
 {
     public interface ILibrary
     {
-        public void InitLibrary(Dictionary<Type, List<CustomBehaviour>> behaviourLookup,
-                                Dictionary<int, List<CustomBehaviour>> idLookup);
+        public SceneId SceneId { get; }
 
         public T GetBehaviourFromLibrary<T>();
 
@@ -23,6 +22,12 @@ namespace YondaimeFramework
 
         public void CleanReferencesFor(CustomBehaviour customBehaviour);
 
+        public T GetComponentFromOtherSceneLibrary<T>(string sceneId);
+
+        public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId, string sceneId);
+
+        public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId);
+
         public T GetPooled<T>();
 
         public void Pool<T>(T behaviour);
@@ -30,6 +35,8 @@ namespace YondaimeFramework
         public void LogIdLookup();
 
         public void LogLookup();
+
+        public void SetBehaviours(CustomBehaviour[] behv);
 
     }
 }

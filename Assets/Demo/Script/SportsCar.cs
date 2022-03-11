@@ -10,6 +10,7 @@ public interface ICar
 public class SportsCar : Car,ICar
 {
 
+    public string ffari;
 
     // Start is called before the first frame update
     [ContextMenu("Get")]

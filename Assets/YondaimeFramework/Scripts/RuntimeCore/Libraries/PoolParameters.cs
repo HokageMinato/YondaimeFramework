@@ -7,10 +7,6 @@ namespace YondaimeFramework
     {
         public PoolParameter[] parameters;
 
-        
-        
-
-
         [System.Serializable]
         public class PoolParameter
         {

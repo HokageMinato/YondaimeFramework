@@ -11,7 +11,8 @@ namespace YondaimeFramework
     public abstract class CustomBehaviour : MonoBehaviour
     {
         #region LIBRARIES
-        [SerializeField] private SceneLibrary _mySceneLibrary;
+        //[SerializeField] private SceneLibrary _mySceneLibrary;
+        private ILibrary _myLibrary;
         #endregion
 
         #region IDS
@@ -24,12 +25,15 @@ namespace YondaimeFramework
             id._goInsId = gameObject.GetInstanceID();
         }
 
-        public void SetLibrary(SceneLibrary sceneLibrary)
+        public void SetLibrary(ILibrary library)
         {
-            _mySceneLibrary = sceneLibrary;
+            //_mySceneLibrary = library;
+            _myLibrary = library;
         }
+        #endregion
 
-        
+        #region POOL_CALLBACKS
+        public virtual void OnPooled() { }
         #endregion
 
         #region COMPONENT_GETTERS
@@ -41,7 +45,7 @@ namespace YondaimeFramework
         public T GetComponentFromMyGameObject<T>()
         {
             int instanceId = id._goInsId;
-            return _mySceneLibrary.GetBehaviourOfGameObject<T>(instanceId);
+            return _myLibrary.GetBehaviourOfGameObject<T>(instanceId);
         }
 
         /// <summary>
@@ -53,7 +57,7 @@ namespace YondaimeFramework
         public List<T> GetComponentsFromMyGameObject<T>()
         {
             int instanceId = id._goInsId;
-            return _mySceneLibrary.GetBehavioursOfGameObject<T>(instanceId);
+            return _myLibrary.GetBehavioursOfGameObject<T>(instanceId);
         }
 
         /// <summary>
@@ -63,7 +67,7 @@ namespace YondaimeFramework
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public T GetComponentFromLibrary<T>()
         {
-            return _mySceneLibrary.GetBehaviourFromLibrary<T>();
+            return _myLibrary.GetBehaviourFromLibrary<T>();
         }
 
         /// <summary>
@@ -73,7 +77,7 @@ namespace YondaimeFramework
         /// <returns>List<typeparamref name="T"/> of Requested BehaviourType </returns>
         public List<T> GetComponentsFromLibrary<T>()
         {
-            return _mySceneLibrary.GetBehavioursFromLibrary<T>();
+            return _myLibrary.GetBehavioursFromLibrary<T>();
         }
 
         /// <summary>
@@ -83,7 +87,7 @@ namespace YondaimeFramework
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public T GetComponentFromLibraryById<T>(ComponentId behaviourId)
         {
-            return _mySceneLibrary.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
+            return _myLibrary.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
         }
 
 
@@ -94,7 +98,7 @@ namespace YondaimeFramework
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public T GetComponentFromOtherSceneLibrary<T>(string sceneId)
         {
-            return _mySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibrary<T>();
+            return _myLibrary.GetComponentFromOtherSceneLibrary<T>(sceneId);
         }
 
 
@@ -105,7 +109,7 @@ namespace YondaimeFramework
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId, string sceneId)
         {
-            return _mySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId.objBt);
+            return _myLibrary.GetComponentFromOtherSceneLibraryById<T>(behaviourId, sceneId);
         }
 
 
@@ -116,14 +120,14 @@ namespace YondaimeFramework
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
         {
-            return _mySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehavioursFromLibrary<T>();
+            return _myLibrary.GetComponentsFromOtherSceneLibrary<T>(sceneId);
         }
         #endregion
        
         #region INSTANTIATORS_DESTRUCTORS
         private void _Instantiate<T>(T newObject) where T : CustomBehaviour
         {
-            _mySceneLibrary.AddBehaviour(newObject);
+            _myLibrary.AddBehaviour(newObject);
         }
 
         private void _SetId<T>(T newObject,ComponentId id) where T : CustomBehaviour 
@@ -133,7 +137,7 @@ namespace YondaimeFramework
         #endregion
 
         #region STATIC_CONSTRUCT_DESTRUCT_HANDLES
-        public void DestroyCustom<T>(T original,bool destoryGameObject=false) where T : CustomBehaviour 
+        public void Destroy<T>(T original,bool destoryGameObject=false) where T : CustomBehaviour 
         {
             GameObject go = original.gameObject;
             DestroyImmediate(original);
@@ -141,12 +145,12 @@ namespace YondaimeFramework
             if (destoryGameObject)
                 DestroyImmediate(go);
             
-            _mySceneLibrary.CleanReferencesFor(original);
+            _myLibrary.CleanReferencesFor(original);
         }
 
         public T GetPooled<T>() 
         { 
-          return  _mySceneLibrary.GetPooled<T>();
+          return  _myLibrary.GetPooled<T>();
         }
 
         public new T Instantiate<T>(T original) where T : CustomBehaviour
@@ -224,7 +228,7 @@ namespace YondaimeFramework
         #region EXCEPTIONS
         void CheckForSystemLibNull()
         {
-            if (_mySceneLibrary == null)
+            if (_myLibrary == null)
             {
                 throw new Exception($"Scene library not assigned at ({name}) Make sure to scan behaviours from scene library in editor");
             }
@@ -235,7 +239,7 @@ namespace YondaimeFramework
     #if UNITY_EDITOR
         #region EDITOR
 
-        public SceneLibrary ml => _mySceneLibrary;
+        public ILibrary ml => _myLibrary;
 
         public static int GenerateHashCode(string val)
         {

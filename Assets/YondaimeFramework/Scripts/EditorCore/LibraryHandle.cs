@@ -7,40 +7,41 @@ using UnityEditor;
 
 namespace YondaimeFramework.EditorHandles
 {
-    [RequireComponent(typeof(SceneLibrary))]
-    public class SceneLibraryHandle : MonoBehaviour
+    [RequireComponent(typeof(ILibrary))]
+    public class LibraryHandle : MonoBehaviour
     {
-        [SerializeField] SceneLibrary sceneLibrary;
-
+        ILibrary sceneLibrary;
         
 
         [ContextMenu("Scan")]
         public void ScanBehaviours()
         {
             FindSceneLibrary();
-            SetSceneLibrary();
+            ScanCustomBehaviours();
             CheckSceneLibraryForPrefab();
             SetSceneDirty();
         }
 
-       
+        private void ScanCustomBehaviours()
+        {
+            sceneLibrary.SetBehaviours(FindObjectsOfType<CustomBehaviour>());
+        }
 
         private void FindSceneLibrary() 
         { 
-            sceneLibrary = FindObjectOfType<SceneLibrary>();
-        }
-
-        private void SetSceneLibrary()
-        {
-            CustomBehaviour[] bhvs =FindObjectsOfType<CustomBehaviour>();
-            sceneLibrary.SetBehaviours(bhvs);
-            foreach (var item in bhvs)
+            MonoBehaviour[] behv = FindObjectsOfType<MonoBehaviour>();
+            foreach (MonoBehaviour b in behv) 
             {
-                item.SetLibrary(sceneLibrary);
-                CheckForPrefabModifications(item);
+                if (b is ILibrary)
+                {
+                    sceneLibrary = (ILibrary)b;
+                    return;
+                }
             }
+
         }
 
+        
         public void SetSceneDirty()
         {
             if (!Application.isPlaying)
@@ -67,8 +68,8 @@ namespace YondaimeFramework.EditorHandles
         
         private void CheckSceneLibraryForPrefab() 
         {
-            if(IsPrefab(sceneLibrary))
-             PrefabUtility.RecordPrefabInstancePropertyModifications(sceneLibrary);
+           // if(IsPrefab(sceneLibrary))
+            // PrefabUtility.RecordPrefabInstancePropertyModifications(sceneLibrary);
         }
 
     }

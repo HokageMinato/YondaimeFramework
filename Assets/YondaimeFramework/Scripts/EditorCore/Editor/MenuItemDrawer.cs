@@ -20,13 +20,22 @@ namespace YondaimeFramework.EditorHandles
             Generate<RootLibrary>(LOAD_PATH, LIB_ASSET_NAME);
         }
 
-        [MenuItem(("YondaimeFramework/Create/SceneLibrary"))]
-        public static void CreateSceneLibrary() 
+        [MenuItem(("YondaimeFramework/Create/StandardLibrary"))]
+        public static void CreateStandardLibrary() 
         {
-            const string LOAD_PATH = "Assets/YondaimeFramework/Templates/SceneLibrary.prefab";
-            const string LIB_ASSET_NAME = "SceneLibrary";
+            const string LOAD_PATH = "Assets/YondaimeFramework/Templates/StandardBehaviourLibrary.prefab";
+            const string LIB_ASSET_NAME = "StandardBehaviourLibrary";
 
-            Generate<SceneLibrary>(LOAD_PATH, LIB_ASSET_NAME);
+            Generate<StandardBehaviourLibrary>(LOAD_PATH, LIB_ASSET_NAME);
+        }
+        
+        [MenuItem(("YondaimeFramework/Create/PooledLibrary"))]
+        public static void CreatePooledLibrary() 
+        {
+            const string LOAD_PATH = "Assets/YondaimeFramework/Templates/PooledBehaviourLibrary.prefab";
+            const string LIB_ASSET_NAME = "PooledBehaviourLibrary";
+
+            Generate<PooledBehaviourLibrary>(LOAD_PATH, LIB_ASSET_NAME);
         }
 
         [MenuItem(("YondaimeFramework/Create/CentralIdContainer"))]

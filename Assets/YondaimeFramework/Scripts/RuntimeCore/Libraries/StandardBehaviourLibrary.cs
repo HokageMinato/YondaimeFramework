@@ -5,43 +5,147 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-    public class StandardBehaviourLibrary : ILibrary
+    public class StandardBehaviourLibrary :MonoBehaviour, ILibrary
     {
+
+        #region COMPONENTS
+        [SerializeField] private SceneId sceneId;
+        [SerializeField] private CustomBehaviour[] behaviours;
+        #endregion
 
         #region LOOKUPS
         private Dictionary<Type, List<CustomBehaviour>> _behaviourLookup;
         private Dictionary<int, List<CustomBehaviour>> _idLookup;
+        RootLibrary _rootLibrary;
+
+        public SceneId SceneId => sceneId;
         #endregion
 
         #region INITIALIZERS
-        public void InitLibrary(Dictionary<Type, List<CustomBehaviour>> behaviourLookup, 
-                                Dictionary<int, List<CustomBehaviour>> idLookup) 
+
+        public void Awake()
         {
-            _behaviourLookup = behaviourLookup;
-            _idLookup = idLookup;  
-            
+            _rootLibrary = RootLibrary.Instance;
+            RootLibraryExistanceCheck();
+            RegisterSelfInRootLibrary();
+            GenerateBehaviourLookups();
         }
 
-        
+        public void OnDestroy()
+        {
+            DeregisterSelfFromRootLibrary();
+        }
 
+        private void RegisterSelfInRootLibrary()
+        {
+            _rootLibrary = RootLibrary.Instance;
+            _rootLibrary.AddSceneLibrary(this);
+        }
+
+        private void DeregisterSelfFromRootLibrary()
+        {
+            _rootLibrary.RemoveFromLibrary(SceneId);
+        }
+        private void RootLibraryExistanceCheck()
+        {
+            if (RootLibrary.Instance == null)
+                throw new Exception("RootLibrary instance not found, either create one or check script execution order for Root Library to execute before scene library");
+        }
         internal void LogLookup<T,K>(Dictionary<T,K> dict,string name) where K: List<CustomBehaviour>
         {
             
 
-            string val = $"Showinggg => {name}<=  ";
+            string val = $"Showinggg => {name} <=  ";
             foreach (KeyValuePair<T, K> item in dict)
             {
-                string v = $"Type {item.Key}, TotalInstances {item.Value.Count}  GOS=>[";
+                string v = "";
                 for (int i = 0; i < item.Value.Count; i++)
                 {
-                    if(item.Value[i]!=null)
+                    if (item.Value[i] == null)
+                    {
+                        Debug.LogError("UNCLEAN REF");
+                    }
                     v += $" {item.Value[i].gameObject.name} -- {item.Value[i].id.objBt} --- {item.Value[i].GetInstanceID()}. \n"; 
                 }
-                val += $" {v} ] \n\n\n";
+
+                
+                val += $"Type { item.Key}, TotalInstances { item.Value.Count} GOS =>[ {v} ] \n\n\n";
             }
             Debug.Log(val);
         }
+        private void GenerateBehaviourLookups()
+        {
 
+            Dictionary<Type, List<CustomBehaviour>> behaviourLookup = new Dictionary<Type, List<CustomBehaviour>>();
+            Dictionary<int, List<CustomBehaviour>> idLookup = new Dictionary<int, List<CustomBehaviour>>();
+            CheckForEmptyBehaviours();
+            GenerateBehaviourLookUp();
+            _behaviourLookup = behaviourLookup;
+            _idLookup = idLookup;
+
+
+            void CheckForEmptyBehaviours()
+            {
+                for (int i = 0; i < behaviours.Length; i++)
+                {
+                    if (behaviours[i] == null)
+                        throw new Exception("Null object detected,Make sure to Scan library after making all scene edits");
+
+                    behaviours[i].SetLibrary(this);
+                    behaviours[i].RefreshIds();
+                }
+            }
+            void GenerateBehaviourLookUp()
+            {
+                for (int i = 0; i < behaviours.Length; i++)
+                {
+                    CustomBehaviour currentBehaviour = behaviours[i];
+                    Type currentBehaviourType = currentBehaviour.GetType();
+                    AddToBehaviourLookup(currentBehaviour, currentBehaviourType);
+                    AddBehaviourInterfacesInLookup(currentBehaviour, currentBehaviourType);
+                    if (HasCustomId(currentBehaviour))
+                    {
+                        AddToIdLookup(currentBehaviour);
+                    }
+                }
+            }
+            bool HasCustomId(CustomBehaviour behaviour)
+            {
+                behaviour.RefreshIds();
+                return behaviour.id.objBt != ComponentId.None;
+            }
+            void AddBehaviourInterfacesInLookup(CustomBehaviour behaviour, Type t)
+            {
+                Type[] itypes = t.GetInterfaces();
+                for (int i = 0; i < itypes.Length; i++)
+                {
+                    AddToBehaviourLookup(behaviour, itypes[i]);
+                }
+            }
+            void AddToBehaviourLookup(CustomBehaviour behaviour, Type t)
+            {
+                if (!behaviourLookup.ContainsKey(t))
+                {
+                    behaviourLookup.Add(t, new List<CustomBehaviour>() { behaviour });
+                    return;
+                }
+
+                behaviourLookup[t].Add(behaviour);
+            }
+            void AddToIdLookup(CustomBehaviour behaviour)
+            {
+                int id = behaviour.id.objBt;
+
+                if (!idLookup.ContainsKey(id))
+                {
+                    idLookup.Add(id, new List<CustomBehaviour>() { behaviour });
+                    return;
+                }
+
+                idLookup[id].Add(behaviour);
+            }
+
+        }
         
         #endregion
 
@@ -134,6 +238,20 @@ namespace YondaimeFramework
             return returnList;
         }
 
+        public T GetComponentFromOtherSceneLibrary<T>(string sceneId)
+        {
+            return _rootLibrary.GetSceneLibraryById(sceneId).GetBehaviourFromLibrary<T>();
+        }
+
+        public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId, string sceneId)
+        {
+            return _rootLibrary.GetSceneLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId.objBt);
+        }
+
+        public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
+        {
+            return _rootLibrary.GetSceneLibraryById(sceneId).GetBehavioursFromLibrary<T>();
+        }
 
         #endregion
 
@@ -207,12 +325,12 @@ namespace YondaimeFramework
 
         public void LogIdLookup()
         {
-           // LogLookup(_idLookup,"Idlookup");
+            LogLookup(_idLookup,"Idlookup");
         }
 
         public void LogLookup()
         {
-           // LogLookup(_behaviourLookup,"Behv Lookup");
+            LogLookup(_behaviourLookup,"Behv Lookup");
         }
 
         #endregion
@@ -248,9 +366,10 @@ namespace YondaimeFramework
             {
                List<CustomBehaviour> behaviours = _behaviourLookup[t];
 
+
                 for (int i = 0; i < behaviours.Count;)
                 {
-                    if (ReferenceEquals(behaviours[i], null))
+                    if (behaviours[i]==null)
                     {
                         behaviours.RemoveAt(i);
                         continue;
@@ -271,6 +390,12 @@ namespace YondaimeFramework
         {
             throw new Exception("Pooling components natively in Standard Library is Not Allowed");
         }
+
+        public void SetBehaviours(CustomBehaviour[] behv)
+        {
+            behaviours = behv;
+        }
+        
 
         #endregion
 
