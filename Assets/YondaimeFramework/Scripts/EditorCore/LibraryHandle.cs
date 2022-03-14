@@ -18,8 +18,27 @@ namespace YondaimeFramework.EditorHandles
         {
             FindSceneLibrary();
             ScanCustomBehaviours();
-            CheckSceneLibraryForPrefab();
+            if (IsPooledLibrary())
+                SetPooledLibraryParams();
             SetSceneDirty();
+        }
+
+        private void SetPooledLibraryParams()
+        {
+            PooledBehaviourLibrary lib = sceneLibrary as PooledBehaviourLibrary;
+            PoolParameters pparams = lib.GetComponent<PoolParameters>();
+            if (!pparams)
+            {
+               pparams = lib.gameObject.AddComponent<PoolParameters>();
+            }
+            
+            lib.SetPoolParameters(pparams);
+
+        }
+
+        private bool IsPooledLibrary()
+        {
+            return sceneLibrary is PooledBehaviourLibrary;
         }
 
         private void ScanCustomBehaviours()
@@ -41,19 +60,10 @@ namespace YondaimeFramework.EditorHandles
 
         }
 
-        
         public void SetSceneDirty()
         {
             if (!Application.isPlaying)
                 EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-        }
-
-        private void CheckForPrefabModifications(CustomBehaviour item)
-        {
-            if (IsPrefab(item)) 
-            {
-                ApplyModificationsAsOverrideToPrefab(item);
-            }
         }
 
         private bool IsPrefab(MonoBehaviour behaviour) 
@@ -66,11 +76,5 @@ namespace YondaimeFramework.EditorHandles
             PrefabUtility.RecordPrefabInstancePropertyModifications(customBehaviour);
         } 
         
-        private void CheckSceneLibraryForPrefab() 
-        {
-           // if(IsPrefab(sceneLibrary))
-            // PrefabUtility.RecordPrefabInstancePropertyModifications(sceneLibrary);
-        }
-
     }
 }

@@ -308,7 +308,7 @@ namespace YondaimeFramework
 
        
 
-        public void CleanReferencesFor(CustomBehaviour customBehaviour) 
+        public void CleanNullReferencesFor(CustomBehaviour customBehaviour) 
         {
             Type t = customBehaviour.GetType();
 
@@ -386,7 +386,7 @@ namespace YondaimeFramework
             throw new Exception("No components are pooled natively in Standard Library");
         }
 
-        public void Pool<T>(T behaviour)
+        public void Pool(CustomBehaviour behaviour)
         {
             throw new Exception("Pooling components natively in Standard Library is Not Allowed");
         }

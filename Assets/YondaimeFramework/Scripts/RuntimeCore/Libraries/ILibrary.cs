@@ -1,6 +1,7 @@
 using YondaimeFramework;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace YondaimeFramework
 {
@@ -20,7 +21,7 @@ namespace YondaimeFramework
 
         public void AddBehaviour<T>(T newBehaviour);
 
-        public void CleanReferencesFor(CustomBehaviour customBehaviour);
+        public void CleanNullReferencesFor(CustomBehaviour customBehaviour);
 
         public T GetComponentFromOtherSceneLibrary<T>(string sceneId);
 
@@ -30,13 +31,14 @@ namespace YondaimeFramework
 
         public T GetPooled<T>();
 
-        public void Pool<T>(T behaviour);
+        public void Pool(CustomBehaviour behaviour);
 
         public void LogIdLookup();
 
         public void LogLookup();
 
         public void SetBehaviours(CustomBehaviour[] behv);
+
 
     }
 }

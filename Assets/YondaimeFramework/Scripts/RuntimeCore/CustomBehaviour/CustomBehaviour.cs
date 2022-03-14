@@ -33,7 +33,10 @@ namespace YondaimeFramework
         #endregion
 
         #region POOL_CALLBACKS
-        public virtual void OnPooled() { }
+        public virtual void OnPooled() 
+        {
+            gameObject.SetActive(false);
+        }
         #endregion
 
         #region COMPONENT_GETTERS
@@ -145,12 +148,17 @@ namespace YondaimeFramework
             if (destoryGameObject)
                 DestroyImmediate(go);
             
-            _myLibrary.CleanReferencesFor(original);
+            _myLibrary.CleanNullReferencesFor(original);
         }
 
         public T GetPooled<T>() 
         { 
           return  _myLibrary.GetPooled<T>();
+        }
+
+        public void Pool(CustomBehaviour behaviour) 
+        { 
+            _myLibrary.Pool(behaviour);
         }
 
         public new T Instantiate<T>(T original) where T : CustomBehaviour
