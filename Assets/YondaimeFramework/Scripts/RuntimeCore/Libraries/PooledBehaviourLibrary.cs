@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-    [RequireComponent(typeof(PoolParameters))]
     public class PooledBehaviourLibrary : MonoBehaviour,ILibrary
     {
         private const int Pooled = 1,UnPooled=0;
@@ -12,14 +11,13 @@ namespace YondaimeFramework
         #region COMPONENTS
         [SerializeField] private SceneId sceneId;
         [SerializeField] private CustomBehaviour[] behaviours;
-        [SerializeField] [HideInInspector] PoolParameters _poolParameters;
         #endregion
 
 
         #region LOOKUPS
         private Dictionary<Type, List<CustomBehaviour>> _behaviourLookup;
         private Dictionary<int, List<CustomBehaviour>> _idLookup;
-        private Dictionary<Type,PerformancePool<CustomBehaviour>> _pool;
+        private Dictionary<Type,PerformancePool<CustomBehaviour>> _pool = new Dictionary<Type, PerformancePool<CustomBehaviour>>();
         RootLibrary _rootLibrary;
         
 
@@ -35,7 +33,6 @@ namespace YondaimeFramework
             RootLibraryExistanceCheck();
             RegisterSelfInRootLibrary();
             GenerateBehaviourLookups();
-            GeneratePool();
         }
 
        
@@ -77,6 +74,12 @@ namespace YondaimeFramework
             }
             Debug.Log(val);
         }
+
+        internal void LogPool() 
+        { 
+        
+        }
+
         private void GenerateBehaviourLookups()
         {
 
@@ -151,11 +154,6 @@ namespace YondaimeFramework
 
         }
 
-        private void GeneratePool() 
-        { 
-          _pool = new Dictionary<Type, PerformancePool<CustomBehaviour>>();
-          _poolParameters.GenerateInstances();
-        }
         #endregion
 
 
@@ -271,7 +269,6 @@ namespace YondaimeFramework
 
         public void AddBehaviour<T>(T newBehaviour)
         {
-            // LogLookup();
             Type t = typeof(T);
             CustomBehaviour behaviour = (CustomBehaviour)(object)newBehaviour;
 
@@ -341,8 +338,9 @@ namespace YondaimeFramework
             Type[] itypes = t.GetInterfaces();
             for (int i = 0; i < itypes.Length; i++)
             {
-                CleanPooledBehaviourLibReferencesOf(t);
+                CleanPooledBehaviourLibReferencesOf(itypes[i]);
             }
+
             int id = customBehaviour.id.objBt;
             if (id!=ComponentId.None)
                 CleanPooledIdLibReferencesFor(id);
@@ -351,13 +349,14 @@ namespace YondaimeFramework
 
         public void LogIdLookup()
         {
-            // LogLookup(_idLookup,"Idlookup");
+             LogLookup(_idLookup,"Idlookup");
         }
 
         public void LogLookup()
         {
-            // LogLookup(_behaviourLookup,"Behv Lookup");
+             LogLookup(_behaviourLookup,"Behv Lookup");
         }
+
 
         #endregion
 
@@ -449,12 +448,19 @@ namespace YondaimeFramework
             if(!_pool.ContainsKey(type))
                 return default;
 
-            CustomBehaviour customBehaviour=_pool[type].GetPooled();
-            customBehaviour.id.poolState = UnPooled;
-            AddBehaviour(customBehaviour);
+            CustomBehaviour obj=_pool[type].GetPooled();
 
-            return (T)(object) customBehaviour;
+            if (obj == null)
+            {
+                return default;
+            }
 
+            obj.id.poolState = UnPooled;
+            obj.gameObject.SetActive(true);
+
+            T pooledObj = (T)(object)obj;
+            AddBehaviour(pooledObj);
+            return pooledObj;
 
         }
         public void Pool(CustomBehaviour behaviour)
@@ -466,12 +472,10 @@ namespace YondaimeFramework
 
             CustomBehaviour obj = (CustomBehaviour)(object)behaviour;
             obj.id.poolState = Pooled;
-            CleanPooledReferencesFor(obj);
-            obj.transform.SetParent(transform);
-            obj.OnPooled();
-
+            obj.gameObject.SetActive(true);
             _pool[type].Pool(obj);
-            
+            CleanPooledReferencesFor(obj);
+            obj.OnPooled();
         }
 
         
@@ -480,10 +484,6 @@ namespace YondaimeFramework
             behaviours = behv;
         }
 
-        internal void SetPoolParameters(PoolParameters pparams)
-        {
-            _poolParameters = pparams;
-        }
     }
 
 

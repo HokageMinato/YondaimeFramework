@@ -27,10 +27,7 @@ public class Car : CustomBehaviour, ICar
     public void Test()
     {
         ml.LogLookup();
-        Debug.Log($"before {sports.GetInstanceID()}");
         sports = Instantiate(sports, carIds.GetIds()[0]);
-
-        Debug.Log($"After {sports.GetInstanceID()} > {sports.id.objBt}");
         ml.LogLookup();
     }
 
@@ -84,6 +81,28 @@ public class Car : CustomBehaviour, ICar
         Debug.Log($"Interface : {GetComponentsFromLibrary<ICar>()?.Count} -- {gameObject.name}");
     }
 
+
+    [ContextMenu("Test Pool")]
+    public void TestPool()
+    {
+        ml.LogLookup();
+        Pool(sports);
+        sports = null;
+        ml.LogLookup();
+    }
+
+
+    [ContextMenu("Test Get Pooled")]
+    public void TestGetPool()
+    {
+        ml.LogLookup();
+        sports = GetPooled<SportsCar>();
+        ml.LogLookup();
+    }
+
+
+
+    
     #endregion
 
 

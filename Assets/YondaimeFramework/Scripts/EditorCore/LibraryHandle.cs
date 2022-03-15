@@ -18,29 +18,10 @@ namespace YondaimeFramework.EditorHandles
         {
             FindSceneLibrary();
             ScanCustomBehaviours();
-            if (IsPooledLibrary())
-                SetPooledLibraryParams();
             SetSceneDirty();
         }
 
-        private void SetPooledLibraryParams()
-        {
-            PooledBehaviourLibrary lib = sceneLibrary as PooledBehaviourLibrary;
-            PoolParameters pparams = lib.GetComponent<PoolParameters>();
-            if (!pparams)
-            {
-               pparams = lib.gameObject.AddComponent<PoolParameters>();
-            }
-            
-            lib.SetPoolParameters(pparams);
-
-        }
-
-        private bool IsPooledLibrary()
-        {
-            return sceneLibrary is PooledBehaviourLibrary;
-        }
-
+        
         private void ScanCustomBehaviours()
         {
             sceneLibrary.SetBehaviours(FindObjectsOfType<CustomBehaviour>());
