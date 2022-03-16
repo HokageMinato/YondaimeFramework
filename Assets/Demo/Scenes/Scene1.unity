@@ -616,6 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId:
     id: 
+  executionMode: 0
   behaviours:
   - {fileID: 24847680}
   - {fileID: 24847681}

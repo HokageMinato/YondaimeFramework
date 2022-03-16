@@ -1,10 +1,5 @@
 TODO:
 
 => Pooled Behaviour Library Working:
-		-> Implement ILibrary interface and make all methods work as they do.
-		-> Elements will reside in cache and pool. in cache elements will only have state changed, pool meanwhile will contain free ones.
-		-> All Pooled objects would have state pooled, every get method will ignore them.
-		-> Pool and Depool operations would throw exceptions except pooledLibrary
-		-> A slide bar based pool size editor (dynamic,Show a list of all types added,shows only if sceneLibrary is of PoolerType)
-	
-
+		-> Upon Destorying an object make sure pool references are cleaned up only when pool is set to managed references
+		

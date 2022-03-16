@@ -21,7 +21,7 @@ namespace YondaimeFramework
 
         public void AddBehaviour<T>(T newBehaviour);
 
-        public void CleanNullReferencesFor(CustomBehaviour customBehaviour);
+        public void CleanNullReferencesFor<T>(int id);
 
         public T GetComponentFromOtherSceneLibrary<T>(string sceneId);
 

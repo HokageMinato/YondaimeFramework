@@ -154,9 +154,7 @@ namespace YondaimeFramework
         public T GetBehaviourFromLibrary<T>()
         {
             Type reqeuestedType = typeof(T);
-
-            if (!_behaviourLookup.ContainsKey(reqeuestedType))
-                return default;
+            MissingTypeExceptionCheck(reqeuestedType);
 
             return (T)(object)_behaviourLookup[reqeuestedType][0];
         }
@@ -165,8 +163,7 @@ namespace YondaimeFramework
         {
             Type reqeuestedType = typeof(T);
 
-            if (!_behaviourLookup.ContainsKey(reqeuestedType))
-                return default;
+            MissingTypeExceptionCheck(reqeuestedType);
 
             List<CustomBehaviour> behaviours = _behaviourLookup[reqeuestedType];
             int total = behaviours.Count;
@@ -184,8 +181,7 @@ namespace YondaimeFramework
 
         public  T GetBehaviourFromLibraryById<T>(int behaviourId)
         {
-            if(!_idLookup.ContainsKey(behaviourId))
-                return default;
+            MissingIdExceptionCheck(behaviourId);
 
             List<CustomBehaviour> behv = _idLookup[behaviourId];
             int count = behv.Count;
@@ -204,6 +200,7 @@ namespace YondaimeFramework
         {
             Type reqeuestedType = typeof(T);
 
+            MissingTypeExceptionCheck(reqeuestedType);
 
             List<CustomBehaviour> behavioursInLookUp = _behaviourLookup[reqeuestedType];
             int totalObjectCount = behavioursInLookUp.Count;
@@ -221,6 +218,8 @@ namespace YondaimeFramework
         public List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
             Type reqeuestedType = typeof(T);
+
+            MissingTypeExceptionCheck(reqeuestedType);
 
             List<CustomBehaviour> behavioursInLookUp = _behaviourLookup[reqeuestedType];
             int objectCount = behavioursInLookUp.Count;
@@ -306,11 +305,9 @@ namespace YondaimeFramework
             _idLookup[id].Add(newBehaviour);
         }
 
-       
-
-        public void CleanNullReferencesFor(CustomBehaviour customBehaviour) 
+        public void CleanNullReferencesFor<T>(int id) 
         {
-            Type t = customBehaviour.GetType();
+            Type t = typeof(T);
 
              CleanBehaviourLibReferencesOf(t);
 
@@ -320,7 +317,8 @@ namespace YondaimeFramework
                 CleanBehaviourLibReferencesOf(itypes[i]);
             }
 
-            CleanIdLibReferencesFor(customBehaviour.id.objBt);
+            if(id != ComponentId.None)
+                CleanIdLibReferencesFor(id);
         }
 
         public void LogIdLookup()
@@ -399,7 +397,23 @@ namespace YondaimeFramework
         {
             behaviours = behv;
         }
+
+
+        #endregion
+
+        #region EXCEPTIONS
+
+        void MissingTypeExceptionCheck(Type t) 
+        {
+            if (!_behaviourLookup.ContainsKey(t))
+                throw new Exception($"No component of type {t} present in lookup, Make sure to scan library once or instantiate via CustomBehaviour");
+        }
         
+        void MissingIdExceptionCheck(int t) 
+        {
+            if (!_idLookup.ContainsKey(t) || _idLookup[t].Count <=0)
+                throw new Exception($"No component of id {t} present in lookup, Make sure to scan library once or instantiate via CustomBehaviour");
+        }
 
         #endregion
 

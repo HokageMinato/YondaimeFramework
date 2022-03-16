@@ -151,13 +151,16 @@ namespace YondaimeFramework
         #region STATIC_CONSTRUCT_DESTRUCT_HANDLES
         public void Destroy<T>(T original,bool destoryGameObject=false) where T : CustomBehaviour 
         {
+            CheckForNullObjDestory(original);
+
             GameObject go = original.gameObject;
+            int id = original.id.objBt;
             DestroyImmediate(original);
 
             if (destoryGameObject)
                 DestroyImmediate(go);
             
-            _myLibrary.CleanNullReferencesFor(original);
+            _myLibrary.CleanNullReferencesFor<T>(id);
         }
 
         public T GetPooled<T>() 
@@ -252,6 +255,13 @@ namespace YondaimeFramework
                 throw new Exception($"Scene library not assigned at ({name}) Make sure to scan behaviours from scene library in editor or isntantiate from CustomBehaviour");
             }
         }
+
+        void CheckForNullObjDestory<T>(T obj) 
+        {
+            if (obj == null)
+                throw new Exception("Object you want to destory is null");
+        }
+
         #endregion
 
 

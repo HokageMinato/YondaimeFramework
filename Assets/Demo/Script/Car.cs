@@ -87,7 +87,7 @@ public class Car : CustomBehaviour, ICar
     {
         ml.LogLookup();
         Pool(sports);
-        sports = null;
+       // sports = null;
         ml.LogLookup();
     }
 
@@ -122,7 +122,11 @@ public class Car : CustomBehaviour, ICar
 
         st.Stop();
         data += $"Instantiate {st.ElapsedMilliseconds} - ";
-
+        
+     //   ml.LogLookup();
+      //  ml.LogIdLookup();
+        
+        
         st.Reset();
         st.Start();
         
@@ -133,6 +137,10 @@ public class Car : CustomBehaviour, ICar
         }
        
         st.Stop();
+
+       // ml.LogLookup();
+       // ml.LogIdLookup();
+
 
         data += $" Destroy {st.ElapsedMilliseconds}";
         Debug.Log(data);
@@ -148,8 +156,10 @@ public class Car : CustomBehaviour, ICar
             cars[i]=Instantiate(sports);
         }
 
-        string data = string.Empty;
 
+        
+
+        string data = string.Empty;
         Stopwatch st = new Stopwatch();
         st.Start();
         for (int i = 0; i < itr; i++)
@@ -161,6 +171,11 @@ public class Car : CustomBehaviour, ICar
         data += $"Destory {st.ElapsedMilliseconds} - ";
 
         st.Reset();
+
+    //    ml.LogLookup();
+     //   ml.LogIdLookup();
+
+
         st.Start();
         
 
@@ -171,8 +186,10 @@ public class Car : CustomBehaviour, ICar
        
         st.Stop();
 
-        data += $" Instantiate {st.ElapsedMilliseconds}";
-        Debug.Log(data);
+       // ml.LogLookup();
+       // ml.LogIdLookup();
+
+        Debug.Log($" Instantiate {st.ElapsedMilliseconds} {data}");
 
     }
 
