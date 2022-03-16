@@ -107,18 +107,21 @@ public class Car : CustomBehaviour, ICar
 
 
 
-    [ContextMenu("Call")]
+    [ContextMenu("Test Instantiate Destory")]
     public void InvocationTest()
     {
+        SportsCar[] cars = new SportsCar[itr];
+        string data = string.Empty;
+
         Stopwatch st = new Stopwatch();
         st.Start();
-
         for (int i = 0; i < itr; i++)
         {
+            cars[i]=Instantiate(sports);
         }
 
         st.Stop();
-        Debug.Log(st.ElapsedMilliseconds);
+        data += $"Instantiate {st.ElapsedMilliseconds} - ";
 
         st.Reset();
         st.Start();
@@ -126,12 +129,50 @@ public class Car : CustomBehaviour, ICar
 
         for (int i = 0; i < itr; i++)
         {
+            Destroy(cars[i]);
         }
        
         st.Stop();
 
-        Debug.Log(st.ElapsedMilliseconds);
+        data += $" Destroy {st.ElapsedMilliseconds}";
+        Debug.Log(data);
 
+    }
+    
+    [ContextMenu("Test GetPooled Pool")]
+    public void InvocationTestPooled()
+    {
+        SportsCar[] cars = new SportsCar[itr];
+        for (int i = 0; i < itr; i++)
+        {
+            cars[i]=Instantiate(sports);
+        }
+
+        string data = string.Empty;
+
+        Stopwatch st = new Stopwatch();
+        st.Start();
+        for (int i = 0; i < itr; i++)
+        {
+            Pool(cars[i]);
+        }
+
+        st.Stop();
+        data += $"Destory {st.ElapsedMilliseconds} - ";
+
+        st.Reset();
+        st.Start();
+        
+
+        for (int i = 0; i < itr; i++)
+        {
+            GetPooled<SportsCar>();
+        }
+       
+        st.Stop();
+
+        data += $" Instantiate {st.ElapsedMilliseconds}";
+        Debug.Log(data);
 
     }
 

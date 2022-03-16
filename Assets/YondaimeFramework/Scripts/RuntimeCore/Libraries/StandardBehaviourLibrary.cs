@@ -350,6 +350,10 @@ namespace YondaimeFramework
 
         private void CleanIdLibReferencesFor(int id) 
         {
+
+            if (!_idLookup.ContainsKey(id))
+                return;
+
             List<CustomBehaviour> items = _idLookup[id];
             for (int i = 0; i < items.Count;) 
             {
@@ -362,10 +366,10 @@ namespace YondaimeFramework
 
         private void CleanBehaviourLibReferencesOf(Type t)
         {
-            if (_behaviourLookup.ContainsKey(t))
-            {
-               List<CustomBehaviour> behaviours = _behaviourLookup[t];
+            if (!_behaviourLookup.ContainsKey(t))
+                return; 
 
+               List<CustomBehaviour> behaviours = _behaviourLookup[t];
 
                 for (int i = 0; i < behaviours.Count;)
                 {
@@ -378,7 +382,7 @@ namespace YondaimeFramework
                     i++;
                 }
 
-            }
+
         }
 
         public T GetPooled<T>()

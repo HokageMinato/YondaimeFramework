@@ -4,26 +4,24 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-    public class PooledBehaviourLibrary : MonoBehaviour,ILibrary
+    public class PooledBehaviourLibrary : MonoBehaviour, ILibrary
     {
-        private const int Pooled = 1,UnPooled=0;
+        private const int Pooled = 1, UnPooled = 0;
 
         #region COMPONENTS
         [SerializeField] private SceneId sceneId;
         [SerializeField] private CustomBehaviour[] behaviours;
         #endregion
 
-
         #region LOOKUPS
         private Dictionary<Type, List<CustomBehaviour>> _behaviourLookup;
         private Dictionary<int, List<CustomBehaviour>> _idLookup;
-        private Dictionary<Type,PerformancePool<CustomBehaviour>> _pool = new Dictionary<Type, PerformancePool<CustomBehaviour>>();
+        private Dictionary<Type, PerformancePool<CustomBehaviour>> _pool = new Dictionary<Type, PerformancePool<CustomBehaviour>>();
         RootLibrary _rootLibrary;
-        
+
 
         public SceneId SceneId => sceneId;
         #endregion
-
 
         #region INITIALIZERS
 
@@ -35,7 +33,7 @@ namespace YondaimeFramework
             GenerateBehaviourLookups();
         }
 
-       
+
 
         public void OnDestroy()
         {
@@ -52,11 +50,9 @@ namespace YondaimeFramework
         {
             _rootLibrary.RemoveFromLibrary(SceneId);
         }
-        private void RootLibraryExistanceCheck()
-        {
-            if (RootLibrary.Instance == null)
-                throw new Exception("RootLibrary instance not found, either create one or check script execution order for Root Library to execute before scene library");
-        }
+
+        
+
         internal void LogLookup<T, K>(Dictionary<T, K> dict, string name) where K : List<CustomBehaviour>
         {
 
@@ -155,9 +151,6 @@ namespace YondaimeFramework
         }
 
         #endregion
-
-
-
 
         #region COMPONENT_GETTERS
 
@@ -297,7 +290,6 @@ namespace YondaimeFramework
 
             CheckAndAddToIdLookup(behaviour);
         }
-
         private void CheckAndAddToIdLookup(CustomBehaviour newBehaviour)
         {
             int id = newBehaviour.id.objBt;
@@ -312,8 +304,6 @@ namespace YondaimeFramework
 
             _idLookup[id].Add(newBehaviour);
         }
-
-
         public void CleanNullReferencesFor(CustomBehaviour customBehaviour)
         {
             Type t = customBehaviour.GetType();
@@ -328,7 +318,6 @@ namespace YondaimeFramework
 
             CleanIdLibReferencesFor(customBehaviour.id.objBt);
         }
-        
         public void CleanPooledReferencesFor(CustomBehaviour customBehaviour)
         {
             Type t = customBehaviour.GetType();
@@ -345,13 +334,10 @@ namespace YondaimeFramework
             if (id!=ComponentId.None)
                 CleanPooledIdLibReferencesFor(id);
         }
-
-
         public void LogIdLookup()
         {
              LogLookup(_idLookup,"Idlookup");
         }
-
         public void LogLookup()
         {
              LogLookup(_behaviourLookup,"Behv Lookup");
@@ -366,15 +352,16 @@ namespace YondaimeFramework
         {
             _behaviourLookup.Add(t, new List<CustomBehaviour>() { newBehaviour });
         }
-
         private void AppendBehaviour(CustomBehaviour newBehaviour, Type t)
         {
             _behaviourLookup[t].Add(newBehaviour);
 
         }
-
         private void CleanIdLibReferencesFor(int id)
         {
+            if (!_idLookup.ContainsKey(id))
+                return;
+
             List<CustomBehaviour> items = _idLookup[id];
             for (int i = 0; i < items.Count;)
             {
@@ -403,7 +390,6 @@ namespace YondaimeFramework
 
             }
         }
-        
         private void CleanPooledIdLibReferencesFor(int id)
         {
 
@@ -436,24 +422,16 @@ namespace YondaimeFramework
 
             }
         }
-        
-
-        #endregion
-
-
         public T GetPooled<T>()
         {
             Type type = typeof(T);
 
-            if(!_pool.ContainsKey(type))
+            if (!_pool.ContainsKey(type))
                 return default;
 
-            CustomBehaviour obj=_pool[type].GetPooled();
-
+            CustomBehaviour obj = _pool[type].GetPooled();
             if (obj == null)
-            {
                 return default;
-            }
 
             obj.id.poolState = UnPooled;
             obj.gameObject.SetActive(true);
@@ -465,20 +443,35 @@ namespace YondaimeFramework
         }
         public void Pool(CustomBehaviour behaviour)
         {
-            Type type = behaviour.GetType();
+            NullElementPoolCheck(behaviour);
 
+            Type type = behaviour.GetType();
             if (!_pool.ContainsKey(type))
                 _pool.Add(type, new PerformancePool<CustomBehaviour>());
-
-            CustomBehaviour obj = (CustomBehaviour)(object)behaviour;
-            obj.id.poolState = Pooled;
-            obj.gameObject.SetActive(true);
-            _pool[type].Pool(obj);
-            CleanPooledReferencesFor(obj);
-            obj.OnPooled();
+            
+            behaviour.id.poolState = Pooled;
+            behaviour.gameObject.SetActive(true);
+            _pool[type].Pool(behaviour);
+            CleanPooledReferencesFor(behaviour);
+            behaviour.OnPooled();
         }
 
-        
+        #endregion
+
+        #region EXCEPTIONS
+        private void RootLibraryExistanceCheck()
+        {
+            if (RootLibrary.Instance == null)
+                throw new Exception("RootLibrary instance not found, either create one or check script execution order for Root Library to execute before scene library");
+        }
+
+        private void NullElementPoolCheck(CustomBehaviour behaviour)
+        {
+            if (behaviour == null)
+                throw new Exception("Trying to pool null element is not allowed!");
+        }
+        #endregion
+
         public void SetBehaviours(CustomBehaviour[] behv)
         {
             behaviours = behv;
