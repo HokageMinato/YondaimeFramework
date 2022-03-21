@@ -63,18 +63,21 @@ namespace YondaimeFramework
 
         internal void LogLookup<T, K>(Dictionary<T, K> dict, string name) where K : List<CustomBehaviour>
         {
-
-
-            string val = $"Showinggg => {name}<=  ";
+            string val = $"Showinggg => {name} <=  ";
             foreach (KeyValuePair<T, K> item in dict)
             {
-                string v = $"Type {item.Key}, TotalInstances {item.Value.Count}  GOS=>[";
+                string v = "";
                 for (int i = 0; i < item.Value.Count; i++)
                 {
-                    if (item.Value[i] != null)
-                        v += $" {item.Value[i].gameObject.name} -- {item.Value[i].id.objBt} --- {item.Value[i].GetInstanceID()}. \n";
+                    if (item.Value[i] == null)
+                    {
+                        Debug.LogError("UNCLEAN REF");
+                    }
+                    v += $" {item.Value[i].gameObject.name} -- {item.Value[i].id.objBt} --- {item.Value[i].GetInstanceID()}. \n";
                 }
-                val += $" {v} ] \n\n\n";
+
+
+                val += $"Type { item.Key}, TotalInstances { item.Value.Count} GOS =>[ {v} ] \n\n\n";
             }
             Debug.Log(val);
         }
@@ -275,7 +278,7 @@ namespace YondaimeFramework
             MissingPoolExceptionCheck(type);
 
             CustomBehaviour obj = _pool[type].GetPooled();
-            obj.id.poolState = UnPooled;
+            obj.poolState = UnPooled;
             obj.gameObject.SetActive(true);
 
             T pooledObj = (T)(object)obj;
@@ -295,7 +298,7 @@ namespace YondaimeFramework
             if (!_pool.ContainsKey(type))
                 _pool.Add(type, new PerformancePool<CustomBehaviour>());
 
-            behaviour.id.poolState = Pooled;
+            behaviour.poolState = Pooled;
             behaviour.gameObject.SetActive(false);
             _pool[type].Pool(behaviour);
 
@@ -389,6 +392,11 @@ namespace YondaimeFramework
             if (id!=ComponentId.None)
                 CleanPooledStateIdLibReferencesFor(id);
         }
+
+        public void SetComponentId(CustomBehaviour behaviour, ComponentId newId)
+        {
+            ChangeIdRefFor(behaviour, newId);
+        }
         public void LogIdLookup()
         {
              LogLookup(_idLookup,"Idlookup");
@@ -450,7 +458,7 @@ namespace YondaimeFramework
             List<CustomBehaviour> items = _idLookup[id];
             for (int i = 0; i < items.Count;)
             {
-                if (items[i].id.poolState == Pooled)
+                if (items[i].poolState == Pooled)
                     items.RemoveAt(i);
                 else
                     i++;
@@ -464,7 +472,7 @@ namespace YondaimeFramework
 
                 for (int i = 0; i < behaviours.Count;)
                 {
-                    if ((behaviours[i].id.poolState == Pooled))
+                    if ((behaviours[i].poolState == Pooled))
                     {
                         behaviours.RemoveAt(i);
                         continue;
@@ -485,6 +493,36 @@ namespace YondaimeFramework
                 _pool[t].CleanNullReferences();
             }
         }
+
+        private void ChangeIdRefFor(CustomBehaviour behaviour, ComponentId newId)
+        {
+            int oldId = behaviour.id.objBt;
+            if (oldId == ComponentId.None)
+            {
+                behaviour.id = newId;
+                CheckAndAddToIdLookup(behaviour);
+            }
+            else
+            {
+                List<CustomBehaviour> behv = _idLookup[oldId];
+
+                for (int i = 0; i < behv.Count;)
+                {
+                    if (behv[i] == behaviour)
+                    {
+                        behv.RemoveAt(i);
+                        continue;
+                    }
+
+                    i++;
+                }
+
+                
+                behaviour.id = newId;
+                CheckAndAddToIdLookup(behaviour);
+            }
+        }
+
         #endregion
 
         #region EXCEPTIONS
@@ -536,7 +574,7 @@ namespace YondaimeFramework
     }
 
 
-    public class PerformancePool<T>
+    public class PerformancePool<T> where T: UnityEngine.Object
     {
         private List<T> objects = new List<T>();
 
@@ -565,7 +603,7 @@ namespace YondaimeFramework
         {
             for (int i = 0; i < objects.Count;)
             {
-                if (objects[i] == null)
+                if (objects[i]==null)
                 {
                     objects.RemoveAt(i);
                     continue;

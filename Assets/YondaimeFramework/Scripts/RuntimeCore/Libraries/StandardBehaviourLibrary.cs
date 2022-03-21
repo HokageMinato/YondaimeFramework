@@ -299,6 +299,7 @@ namespace YondaimeFramework
             if (id == ComponentId.None)
                 return;
 
+
             if(!_idLookup.ContainsKey(id))   
                 _idLookup.Add(id, new List<CustomBehaviour>());
 
@@ -319,8 +320,10 @@ namespace YondaimeFramework
 
             if(id != ComponentId.None)
                 CleanIdLibReferencesFor(id);
-        }
 
+            
+        }
+        
         public void LogIdLookup()
         {
             LogLookup(_idLookup,"Idlookup");
@@ -329,6 +332,11 @@ namespace YondaimeFramework
         public void LogLookup()
         {
             LogLookup(_behaviourLookup,"Behv Lookup");
+        }
+
+        public void SetComponentId(CustomBehaviour behaviour, ComponentId newId) 
+        { 
+            ChangeIdRefFor(behaviour,newId);
         }
 
         #endregion
@@ -379,9 +387,35 @@ namespace YondaimeFramework
                     
                     i++;
                 }
-
-
         }
+
+        private void ChangeIdRefFor(CustomBehaviour behaviour, ComponentId newId) 
+        {
+            int oldId = behaviour.id.objBt;
+            if (oldId == ComponentId.None)
+            {
+                behaviour.id = newId;
+                CheckAndAddToIdLookup(behaviour);
+            }
+            else 
+            {
+                List<CustomBehaviour> behv = _idLookup[oldId];
+                for (int i = 0; i < behv.Count;)
+                {
+                    if (behv[i] == behaviour)
+                    {
+                        behv.RemoveAt(i);
+                        continue;
+                    }
+
+                    i++;
+                }
+
+                behaviour.id = newId;
+                CheckAndAddToIdLookup(behaviour);
+            }
+        }
+
 
         public T GetPooled<T>()
         {

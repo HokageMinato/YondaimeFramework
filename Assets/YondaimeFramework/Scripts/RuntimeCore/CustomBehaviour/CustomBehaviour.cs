@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 namespace YondaimeFramework
 {
 
-
     public abstract class CustomBehaviour : MonoBehaviour
     {
         #region LIBRARIES
@@ -17,6 +16,7 @@ namespace YondaimeFramework
 
         #region IDS
         public ComponentId id;
+        public int poolState;
         #endregion
 
         #region LIBRARY_HANDLES
@@ -142,9 +142,11 @@ namespace YondaimeFramework
             _myLibrary.AddBehaviour(newObject);
         }
 
-        private void _SetId<T>(T newObject,ComponentId id) where T : CustomBehaviour 
-        { 
-            newObject.id=id;
+        public void SetId(ComponentId id)
+        {
+            CheckForSystemLibNull();
+            _myLibrary.SetComponentId(this, id);
+
         }
         #endregion
 
@@ -157,10 +159,12 @@ namespace YondaimeFramework
             int id = original.id.objBt;
             DestroyImmediate(original);
 
+            Debug.Log($"GONE {original == null}");
+            _myLibrary.CleanNullReferencesFor<T>(id);
+
+
             if (destoryGameObject)
                 DestroyImmediate(go);
-            
-            _myLibrary.CleanNullReferencesFor<T>(id);
         }
 
         public T GetPooled<T>() 
@@ -185,7 +189,7 @@ namespace YondaimeFramework
         public T Instantiate<T>(T original,ComponentId id) where T : CustomBehaviour
         {
             T newBehaviour = MonoInstantiate(original);
-            _SetId(newBehaviour,id);
+             original.id = id;
             _Instantiate(newBehaviour);
             return newBehaviour;
         }

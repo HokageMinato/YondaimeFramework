@@ -39,6 +39,7 @@ namespace YondaimeFramework
 
         public void SetBehaviours(CustomBehaviour[] behv);
 
+        public void SetComponentId(CustomBehaviour behaviour,ComponentId newId);
 
     }
 }

@@ -32,6 +32,14 @@ public class Car : CustomBehaviour, ICar
     }
 
 
+    [ContextMenu("Test SetId")]
+    public void TestSetId() 
+    { 
+        ml.LogIdLookup();
+        SetId(carIds.GetIds()[1]);
+        ml.LogIdLookup();
+    }
+
 
     [ContextMenu("Test Destroy")]
     public void Test2()
