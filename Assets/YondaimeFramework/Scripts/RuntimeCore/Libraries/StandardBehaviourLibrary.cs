@@ -14,8 +14,10 @@ namespace YondaimeFramework
         #endregion
 
         #region LOOKUPS
-        TypeLookUp typeLookUp = new TypeLookUp();
-        private Dictionary<int, TypeLookUp> _idMap = new Dictionary<int, TypeLookUp>();
+        TypeLookUp _typeLookUp = new TypeLookUp();
+        private Dictionary<int, TypeLookUp> _idLookup = new Dictionary<int, TypeLookUp>();
+        private Dictionary<int, TypeLookUp> _goLookup = new Dictionary<int, TypeLookUp>();
+
         RootLibrary _rootLibrary;
 
         public SceneId SceneId => sceneId;
@@ -54,7 +56,6 @@ namespace YondaimeFramework
         internal void LogLookup<T,K>(Dictionary<T,K> dict,string name) where K: List<CustomBehaviour>
         {
             
-
             string val = $"Showinggg => {name} <=  ";
             foreach (KeyValuePair<T, K> item in dict)
             {
@@ -79,6 +80,7 @@ namespace YondaimeFramework
             PrepareBehaviours();
             GenerateBehaviourLookup();
             GenerateIdLookup();
+           
 
             void PrepareBehaviours()
             {
@@ -91,7 +93,7 @@ namespace YondaimeFramework
             }
             void GenerateBehaviourLookup()
             {
-                typeLookUp.GenerateLookUp(behaviours);
+                _typeLookUp.GenerateLookUp(behaviours);
             }
             void GenerateIdLookup()
             {
@@ -99,6 +101,8 @@ namespace YondaimeFramework
                 for (int i = 0; i < behaviours.Length; i++)
                 {
                     CustomBehaviour behaviour = behaviours[i];
+                    behaviour.RefreshIds();
+                    AddToGoLookup(behaviour);
                     if(HasCustomId(behaviour))
                         AddToIdLookup(behaviour);
                 } 
@@ -106,17 +110,25 @@ namespace YondaimeFramework
             }
             bool HasCustomId(CustomBehaviour behaviour)
             {
-                behaviour.RefreshIds();
                 return behaviour.id.objBt != ComponentId.None;
             }
             void AddToIdLookup(CustomBehaviour behaviour)
             {
                 int id = behaviour.id.objBt;
 
-                if (!_idMap.ContainsKey(id))
-                    _idMap.Add(id, new TypeLookUp());
+                if (!_idLookup.ContainsKey(id))
+                    _idLookup.Add(id, new TypeLookUp());
 
-                _idMap[id].AddBehaviour(behaviour);
+                _idLookup[id].AddBehaviour(behaviour);
+            }
+            void AddToGoLookup(CustomBehaviour behaviour) 
+            {
+                int id = behaviour.id._goInsId;
+
+                if (!_goLookup.ContainsKey(id))
+                    _goLookup.Add(id, new TypeLookUp());
+
+                _goLookup[id].AddBehaviour(behaviour);
             }
         }
 
@@ -126,28 +138,28 @@ namespace YondaimeFramework
 
         public T GetBehaviourFromLibrary<T>()
         {
-            return typeLookUp.GetBehaviour<T>();
+            return _typeLookUp.GetBehaviour<T>();
         }
 
         public  T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
-            return typeLookUp.GetBehaviourOfGameObject<T>(requesteeGameObjectInstanceId);
+            return _goLookup[requesteeGameObjectInstanceId].GetBehaviour<T>();
         }
 
         public  T GetBehaviourFromLibraryById<T>(int behaviourId)
         {
             MissingIdExceptionCheck(behaviourId);
-            return _idMap[behaviourId].GetBehaviour<T>();
+            return _idLookup[behaviourId].GetBehaviour<T>();
         }
 
         public List<T> GetBehavioursFromLibrary<T>()
         {
-            return typeLookUp.GetBehavioursFromLibrary<T>();
+            return _typeLookUp.GetBehavioursFromContainer<T>();
         }
 
         public List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
-            return typeLookUp.GetBehavioursOfGameObject<T>(requesteeGameObjectInstanceId);
+            return _goLookup[requesteeGameObjectInstanceId].GetBehavioursFromContainer<T>();
         }
 
         public T GetComponentFromOtherSceneLibrary<T>(string sceneId)
@@ -171,46 +183,70 @@ namespace YondaimeFramework
 
         public void AddBehaviour<T>(T newBehaviour)
         {
-            typeLookUp.AddBehaviour(newBehaviour);
-            CheckAndAddToIdLookup(newBehaviour);
+            CustomBehaviour behv = (CustomBehaviour)(object)newBehaviour;
+            _typeLookUp.AddBehaviour(behv);
+            AddToGoLookup(behv);
+            CheckAndAddToIdLookup(behv);
         }
 
-        private void CheckAndAddToIdLookup<T>(T newBehaviour)
+        private void AddToGoLookup(CustomBehaviour newBehaviour) 
         {
-            CustomBehaviour behv = (CustomBehaviour)(object)newBehaviour;
-            behv.RefreshIds();
-            int id = behv.id.objBt;
+           
+            int id = newBehaviour.id._goInsId;
+
+            if (!_idLookup.ContainsKey(id))
+                _idLookup.Add(id, new TypeLookUp());
+
+            _idLookup[id].AddBehaviour(newBehaviour);
+        }
+
+        private void CheckAndAddToIdLookup(CustomBehaviour newBehaviour)
+        {
+            newBehaviour.RefreshIds();
+            int id = newBehaviour.id.objBt;
 
             if (id == ComponentId.None)
                 return;
 
-            if(!_idMap.ContainsKey(id))   
-                _idMap.Add(id, new TypeLookUp());
+            if(!_idLookup.ContainsKey(id))   
+                _idLookup.Add(id, new TypeLookUp());
 
-            _idMap[id].AddBehaviour(newBehaviour);
+            _idLookup[id].AddBehaviour(newBehaviour);
         }
 
-        public void CleanNullReferencesFor<T>(int id) 
+        public void CleanNullReferencesFor(ComponentId id,Type t) 
         {
-            typeLookUp.CleanNullReferencesFor<T>();
+            _typeLookUp.CleanNullReferencesFor(t);
+            _goLookup[id._goInsId].CleanNullReferencesFor(t);
 
-            if(id != ComponentId.None)
-                _idMap[id].CleanNullReferencesFor<T>();
+            int cid = id.objBt;
+            if(cid != ComponentId.None)
+                _idLookup[cid].CleanNullReferencesFor(t);
 
         }
-        
+               
         public void LogIdLookup()
         {
-            foreach (var item in _idMap)
+            foreach (var item in _idLookup)
             {
-                LogLookup(item.Value.lookup, $"Id: {item.Key}");
+                LogLookup(item.Value.lookup, $"Id Lookup {item.Key}");
+            }
+        }
+        
+        public void LogGOLookup()
+        {
+            foreach (var item in _goLookup)
+            {
+                LogLookup(item.Value.lookup, $"GO Lookup {item.Key}");
             }
         }
 
         public void LogLookup()
         {
-            LogLookup(typeLookUp.lookup,"Behv Lookup");
+            LogLookup(_typeLookUp.lookup,"Behv Lookup");
         }
+
+
 
         public void SetComponentId(CustomBehaviour behaviour, ComponentId newId) 
         { 
@@ -232,7 +268,7 @@ namespace YondaimeFramework
             }
             else 
             {
-                _idMap[oldId].CleanNullReferencesFor(behaviour.GetType());
+                _idLookup[oldId].CleanNullReferencesFor(behaviour.GetType());
                 behaviour.id = newId;
                 CheckAndAddToIdLookup(behaviour);
             }
@@ -260,7 +296,7 @@ namespace YondaimeFramework
         #region EXCEPTIONS
         void MissingIdExceptionCheck(int t) 
         {
-            if (!_idMap.ContainsKey(t))
+            if (!_idLookup.ContainsKey(t))
                 throw new Exception($"No component of id {t} present in lookup, Make sure to scan library once or instantiate via CustomBehaviour");
         }
 

@@ -357,9 +357,9 @@ namespace YondaimeFramework
 
             _idLookup[id].Add(newBehaviour);
         }
-        public void CleanNullReferencesFor<T>(int id)
+        public void CleanNullReferencesFor(ComponentId id,Type t)
         {
-            Type t = typeof(T);
+            int cid = id.objBt;
 
             CleanBehaviourLibReferencesOf(t);
             CleanBehaviourReferencesFromPoolOf(t);
@@ -371,8 +371,8 @@ namespace YondaimeFramework
                 CleanBehaviourReferencesFromPoolOf(t);
             }
 
-            if(id != ComponentId.None)
-            CleanIdLibReferencesFor(id);
+            if(cid != ComponentId.None)
+            CleanIdLibReferencesFor(cid);
 
             
         }
@@ -564,6 +564,10 @@ namespace YondaimeFramework
             behaviours = behv;
         }
 
+        public void LogGOLookup()
+        {
+            throw new NotImplementedException();
+        }
 
         public enum ExecutionMode 
         { 

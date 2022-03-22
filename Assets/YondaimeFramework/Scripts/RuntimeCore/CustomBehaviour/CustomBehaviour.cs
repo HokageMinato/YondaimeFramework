@@ -156,11 +156,12 @@ namespace YondaimeFramework
             CheckForNullObjDestory(original);
 
             GameObject go = original.gameObject;
-            int id = original.id.objBt;
+            ComponentId id = original.id;
+            Type t = original.GetType();
             DestroyImmediate(original);
 
             Debug.Log($"GONE {original == null}");
-            _myLibrary.CleanNullReferencesFor<T>(id);
+            _myLibrary.CleanNullReferencesFor(id,t);
 
 
             if (destoryGameObject)

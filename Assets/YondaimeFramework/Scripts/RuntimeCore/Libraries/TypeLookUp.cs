@@ -70,31 +70,11 @@ namespace YondaimeFramework
         {
             Type reqeuestedType = typeof(T);
             MissingTypeExceptionCheck(reqeuestedType);
-
             return (T)(object)_behaviourLookup[reqeuestedType][0];
         }
 
-        public T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId)
-        {
-            Type reqeuestedType = typeof(T);
 
-            MissingTypeExceptionCheck(reqeuestedType);
-
-            List<CustomBehaviour> behaviours = _behaviourLookup[reqeuestedType];
-            int total = behaviours.Count;
-
-            for (int i = 0; i < total; i++)
-            {
-                CustomBehaviour behaviour = behaviours[i];
-                if (behaviour.id._goInsId == requesteeGameObjectInstanceId)
-                    return (T)(object)behaviour;
-
-            }
-
-            return default;
-        }
-
-        public List<T> GetBehavioursFromLibrary<T>()
+        public List<T> GetBehavioursFromContainer<T>()
         {
             Type reqeuestedType = typeof(T);
 
@@ -112,38 +92,15 @@ namespace YondaimeFramework
 
             return returnList;
         }
-
-        public List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
-        {
-            Type reqeuestedType = typeof(T);
-
-            MissingTypeExceptionCheck(reqeuestedType);
-
-            List<CustomBehaviour> behavioursInLookUp = _behaviourLookup[reqeuestedType];
-            int objectCount = behavioursInLookUp.Count;
-
-            List<T> returnList = new List<T>(objectCount);
-
-            for (int i = 0; i < objectCount; i++)
-            {
-                CustomBehaviour behaviour = behavioursInLookUp[i];
-
-                if (behaviour.id._goInsId == requesteeGameObjectInstanceId)
-                    returnList.Add((T)(object)behaviour);
-            }
-
-            return returnList;
-        }
+        
         #endregion
 
 
         #region OBJECT_ALLOCATORS
 
-        public void AddBehaviour<T>(T newBehaviour)
+        public void AddBehaviour(CustomBehaviour newBehaviour)
         {
-            // LogLookup();
-
-            Type t = typeof(T);
+            Type t = newBehaviour.GetType();
 
             CustomBehaviour behaviour = (CustomBehaviour)(object)newBehaviour;
 
@@ -172,11 +129,6 @@ namespace YondaimeFramework
 
         }
 
-        public void CleanNullReferencesFor<T>()
-        {
-            Type t = typeof(T);
-            CleanNullReferencesFor(t);
-        }
         
         public void CleanNullReferencesFor(Type t)
         {
