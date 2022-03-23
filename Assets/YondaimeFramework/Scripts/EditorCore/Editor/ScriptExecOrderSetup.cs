@@ -6,7 +6,7 @@ using YondaimeFramework;
 namespace YondaimeFramework.EditorHandles
 {
     [InitializeOnLoad]
-    public static class ScriptExecOrderSetup
+    public class ScriptExecOrderSetup : CustomBehaviour
     {
         const string INIT_STATE = "FirstInitDone";
         

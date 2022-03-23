@@ -132,17 +132,17 @@ namespace YondaimeFramework
         
         public void CleanNullReferencesFor(Type t)
         {
-            CleanBehaviourLibReferencesOf(t);
+            CleanNullReferencesOf(t);
 
             Type[] itypes = t.GetInterfaces();
             for (int i = 0; i < itypes.Length; i++)
             {
-                CleanBehaviourLibReferencesOf(itypes[i]);
+                CleanNullReferencesOf(itypes[i]);
             }
 
         }
 
-        private void CleanBehaviourLibReferencesOf(Type t)
+        private void CleanNullReferencesOf(Type t)
         {
             if (!_behaviourLookup.ContainsKey(t))
                 return;
@@ -160,6 +160,37 @@ namespace YondaimeFramework
                 i++;
             }
         }
+
+        public void CleanReferencesExplicitlyOf(CustomBehaviour behaviour,Type t) 
+        {
+            CleanReferenceExplicitlyOf(behaviour,t);
+
+            Type[] itypes = t.GetInterfaces();
+            for (int i = 0; i < itypes.Length; i++)
+            {
+                CleanReferenceExplicitlyOf(behaviour,itypes[i]);
+            }
+
+        }
+
+        private void CleanReferenceExplicitlyOf(CustomBehaviour behaviour,Type t) 
+        {
+            if (!_behaviourLookup.ContainsKey(t))
+                return;
+
+            List<CustomBehaviour> behaviours = _behaviourLookup[t];
+
+            for (int i = 0; i < behaviours.Count;)
+            {
+                if (behaviours[i] == behaviour)
+                {
+                    behaviours.RemoveAt(i);
+                    continue;
+                }
+
+                i++;
+            }
+        }
         #endregion
 
 
@@ -169,11 +200,12 @@ namespace YondaimeFramework
             if (!_behaviourLookup.ContainsKey(t) || _behaviourLookup[t].Count <= 0)
                 throw new Exception($"No component of type {t} present in lookup, Make sure to scan library once or instantiate via CustomBehaviour");
         }
+
         #endregion
 
 
         #region DEBUG_ACCESSORS
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         public Dictionary<Type, List<CustomBehaviour>> lookup => _behaviourLookup;
         #endif
         #endregion

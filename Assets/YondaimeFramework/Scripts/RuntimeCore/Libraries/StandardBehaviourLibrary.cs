@@ -184,6 +184,7 @@ namespace YondaimeFramework
         public void AddBehaviour<T>(T newBehaviour)
         {
             CustomBehaviour behv = (CustomBehaviour)(object)newBehaviour;
+            behv.SetLibrary(this);
             _typeLookUp.AddBehaviour(behv);
             AddToGoLookup(behv);
             CheckAndAddToIdLookup(behv);
@@ -191,9 +192,7 @@ namespace YondaimeFramework
 
         private void AddToGoLookup(CustomBehaviour newBehaviour) 
         {
-           
             int id = newBehaviour.id._goInsId;
-
             if (!_idLookup.ContainsKey(id))
                 _idLookup.Add(id, new TypeLookUp());
 
@@ -255,7 +254,6 @@ namespace YondaimeFramework
 
         #endregion
 
-
         #region INTERNAL_ALLOCATION_WORKERS
 
         private void ChangeIdRefFor(CustomBehaviour behaviour, ComponentId newId) 
@@ -268,7 +266,7 @@ namespace YondaimeFramework
             }
             else 
             {
-                _idLookup[oldId].CleanNullReferencesFor(behaviour.GetType());
+                _idLookup[oldId].CleanReferencesExplicitlyOf(behaviour,behaviour.GetType());
                 behaviour.id = newId;
                 CheckAndAddToIdLookup(behaviour);
             }

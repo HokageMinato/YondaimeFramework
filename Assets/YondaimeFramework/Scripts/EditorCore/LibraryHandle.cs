@@ -24,7 +24,7 @@ namespace YondaimeFramework.EditorHandles
         
         private void ScanCustomBehaviours()
         {
-            sceneLibrary.SetBehaviours(FindObjectsOfType<CustomBehaviour>());
+            sceneLibrary.SetBehaviours(FindObjectsOfType<CustomBehaviour>(true));
         }
 
         private void FindSceneLibrary() 
