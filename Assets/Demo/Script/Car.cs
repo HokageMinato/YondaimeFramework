@@ -45,7 +45,7 @@ public class Car : CustomBehaviour, ICar
     public void Test2()
     {
         ml.LogLookup();
-        Destroy(sports);
+        Destroy(sports,true);
         ml.LogLookup();
     }
 
@@ -53,7 +53,6 @@ public class Car : CustomBehaviour, ICar
     [ContextMenu("Test Find By Tag")]
     void TestFindByTag()
     {
-
         ml.LogIdLookup();
         Debug.Log($"Class : {GetComponentFromLibraryById<SportsCar>(carIds.GetIds()[1]) == null} -- {gameObject.name}");
         Debug.Log($"Interface : {GetComponentFromLibraryById<ICar>(carIds.GetIds()[0]) == null} -- {gameObject.name}");
@@ -63,8 +62,7 @@ public class Car : CustomBehaviour, ICar
     [ContextMenu("Test GetComponent")]
     void TestGetComponent()
     {
-        ml.LogLookup();
-        Debug.Log($"Class : {GetComponentFromMyGameObject<SportsCar>() == null} -- {gameObject.name}");
+        Debug.Log($"Class :  {GetComponentFromMyGameObject<SportsCar>() == null} -- {gameObject.name}");
         Debug.Log($"Interface : {GetComponentFromMyGameObject<ICar>() == null} -- {gameObject.name}");
     }
 
@@ -72,7 +70,7 @@ public class Car : CustomBehaviour, ICar
     void TestGetComponents()
     {
         Debug.Log($"Class : {GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}");
-        Debug.Log($"Interface : {GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}");
+        Debug.Log($"Interface : {GetComponentsFromMyGameObject<ICar>()?.Count} -- {gameObject.name}");
     }
 
     [ContextMenu("Test Find Object")]
@@ -198,6 +196,44 @@ public class Car : CustomBehaviour, ICar
        // ml.LogIdLookup();
 
         Debug.Log($" Instantiate {st.ElapsedMilliseconds} {data}");
+
+    }
+
+     [ContextMenu("Test GetComponents Performance")]
+    public void InvocationTestGetComponents()
+    {
+       
+        string data = string.Empty;
+        Stopwatch st = new Stopwatch();
+        st.Start();
+        for (int i = 0; i < itr; i++)
+        {
+            GetComponent<SportsCar>();
+        }
+
+        st.Stop();
+        data += $"Traditional {st.ElapsedMilliseconds} - ";
+
+        st.Reset();
+
+    //    ml.LogLookup();
+     //   ml.LogIdLookup();
+
+
+        st.Start();
+       
+        for (int i = 0; i < itr; i++)
+        {
+            GetComponentFromMyGameObject<SportsCar>();
+        }
+       
+        st.Stop();
+
+        data += st.ElapsedMilliseconds;
+       // ml.LogLookup();
+       // ml.LogIdLookup();
+
+        Debug.Log($" Custom {data}");
 
     }
 
