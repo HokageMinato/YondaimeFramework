@@ -16,7 +16,7 @@ namespace YondaimeFramework
 
         #region IDS
         public ComponentId id;
-        public int poolState;
+        [HideInInspector] public int poolState;
         #endregion
 
         #region LIBRARY_HANDLES

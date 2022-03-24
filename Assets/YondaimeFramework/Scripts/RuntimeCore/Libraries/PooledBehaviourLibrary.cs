@@ -243,6 +243,8 @@ namespace YondaimeFramework
         {
             CustomBehaviour behv = (CustomBehaviour)(object)newBehaviour;
             behv.SetLibrary(this);
+            behv.RefreshIds();
+
             _typeLookUp.AddBehaviour(behv);
             AddToGoLookup(behv);
             CheckAndAddToIdLookup(behv);
@@ -264,15 +266,17 @@ namespace YondaimeFramework
         private void AddToGoLookup(CustomBehaviour newBehaviour)
         {
             int id = newBehaviour.id._goInsId;
-            if (!_idLookup.ContainsKey(id))
-                _idLookup.Add(id, new TypeLookUp());
+            Debug.Log($"Adding go with id ->{id}");
+            if (!_goLookup.ContainsKey(id))
+                _goLookup.Add(id, new TypeLookUp());
 
-            _idLookup[id].AddBehaviour(newBehaviour);
+            _goLookup[id].AddBehaviour(newBehaviour);
         }
 
         public void CleanNullReferencesFor(ComponentId id,Type t)
         {
             _typeLookUp.CleanNullReferencesFor(t);
+            Debug.Log($"cleanig for {id._goInsId}");
             _goLookup[id._goInsId].CleanNullReferencesFor(t);
 
             int cid = id.objBt;
@@ -365,7 +369,7 @@ namespace YondaimeFramework
         }
 
         void MissingPoolExceptionCheck(Type t) 
-        { 
+        {
             if(!_pool.ContainsKey(t) || _pool[t].ObjectCount <=0)
                 throw new Exception($"Pool of  type {t} is empty, Make sure you pool elements before de-pooling elements");
         }

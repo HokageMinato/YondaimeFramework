@@ -185,20 +185,12 @@ namespace YondaimeFramework
         {
             CustomBehaviour behv = (CustomBehaviour)(object)newBehaviour;
             behv.SetLibrary(this);
+            behv.RefreshIds();
+
             _typeLookUp.AddBehaviour(behv);
             AddToGoLookup(behv);
             CheckAndAddToIdLookup(behv);
         }
-
-        private void AddToGoLookup(CustomBehaviour newBehaviour) 
-        {
-            int id = newBehaviour.id._goInsId;
-            if (!_idLookup.ContainsKey(id))
-                _idLookup.Add(id, new TypeLookUp());
-
-            _idLookup[id].AddBehaviour(newBehaviour);
-        }
-
         private void CheckAndAddToIdLookup(CustomBehaviour newBehaviour)
         {
             newBehaviour.RefreshIds();
@@ -212,6 +204,16 @@ namespace YondaimeFramework
 
             _idLookup[id].AddBehaviour(newBehaviour);
         }
+
+        private void AddToGoLookup(CustomBehaviour newBehaviour) 
+        {
+            int id = newBehaviour.id._goInsId;
+            if (!_goLookup.ContainsKey(id))
+                _goLookup.Add(id, new TypeLookUp());
+
+            _goLookup[id].AddBehaviour(newBehaviour);
+        }
+
 
         public void CleanNullReferencesFor(ComponentId id,Type t) 
         {
