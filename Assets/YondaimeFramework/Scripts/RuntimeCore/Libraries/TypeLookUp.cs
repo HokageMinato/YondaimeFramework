@@ -69,7 +69,9 @@ namespace YondaimeFramework
         public T GetBehaviour<T>() 
         {
             Type reqeuestedType = typeof(T);
-            MissingTypeExceptionCheck(reqeuestedType);
+            if (NoObjectsPresentOfType(reqeuestedType))
+                return default;
+
             return (T)(object)_behaviourLookup[reqeuestedType][0];
         }
 
@@ -78,16 +80,14 @@ namespace YondaimeFramework
         {
             Type reqeuestedType = typeof(T);
 
-            MissingTypeExceptionCheck(reqeuestedType);
+            if(NoObjectsPresentOfType(reqeuestedType))
+                return default;
 
             List<CustomBehaviour> behavioursInLookUp = _behaviourLookup[reqeuestedType];
             int totalObjectCount = behavioursInLookUp.Count;
-
-
             List<T> returnList = new List<T>(totalObjectCount);
             for (int i = 0; i < totalObjectCount; i++)
                 returnList.Add((T)(object)behavioursInLookUp[i]);
-
 
 
             return returnList;
@@ -195,10 +195,11 @@ namespace YondaimeFramework
 
 
         #region EXCEPTIONS
-        void MissingTypeExceptionCheck(Type t)
+        bool NoObjectsPresentOfType(Type t)
         {
-            if (!_behaviourLookup.ContainsKey(t) || _behaviourLookup[t].Count <= 0)
-                throw new Exception($"No component of type {t} present in lookup, Make sure to scan library once or instantiate via CustomBehaviour");
+            return (!_behaviourLookup.ContainsKey(t) || _behaviourLookup[t].Count <= 0);
+            //if (!_behaviourLookup.ContainsKey(t) || _behaviourLookup[t].Count <= 0)
+                //throw new Exception($"No component of type {t} present in lookup, Make sure to scan library once or instantiate via CustomBehaviour");
         }
 
         #endregion

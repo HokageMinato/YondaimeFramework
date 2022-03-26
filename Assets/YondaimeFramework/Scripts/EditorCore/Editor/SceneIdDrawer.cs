@@ -11,19 +11,18 @@ namespace YondaimeFramework.EditorHandles
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             string[] systemIds = GetId();
-            EditorGUI.BeginProperty(position, label, property);
-
+            
             if (systemIds != null)
             {
+                Rect fieldDrawPosition = new Rect(position);
+
                 string[] choices = systemIds;
                 int index = ArrayUtility.IndexOf(choices, property.FindPropertyRelative("id").stringValue);
-                index = EditorGUI.Popup(position, "SceneId", index, choices);
-              
+                index = EditorGUI.Popup(fieldDrawPosition, "SceneId", index, choices);
+
                 if (index != -1)
                     property.FindPropertyRelative("id").stringValue = choices[index];
             }
-
-            EditorGUI.EndProperty();
         }
 
         private static string[] GetId()
@@ -39,11 +38,6 @@ namespace YondaimeFramework.EditorHandles
             return ids;
         }
 
-
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return base.GetPropertyHeight(property, label) * 2;
-        }
 
         #endregion
     }
