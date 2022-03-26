@@ -11,9 +11,8 @@ namespace YondaimeFramework.EditorHandles
     public class LibraryHandle : MonoBehaviour
     {
         ILibrary sceneLibrary;
-        
 
-        [ContextMenu("Scan")]
+
         public void ScanBehaviours()
         {
             FindSceneLibrary();
