@@ -16,31 +16,25 @@ namespace YondaimeFramework.EditorHandles
         [MenuItem(("YondaimeFramework/Create/RootLibrary"))]
         public static void CreateRootLibrary() 
         {
-            const string LOAD_PATH = "Assets/YondaimeFramework/Templates/RootLibrary.prefab";
             const string LIB_ASSET_NAME = "RootLibrary";
-
             OverrideExistingLib<RootLibrary>(LIB_ASSET_NAME);
-            Generate<RootLibrary>(LOAD_PATH, LIB_ASSET_NAME,false);
+            Generate<RootLibrary>(LIB_ASSET_NAME,false);
         }
 
         [MenuItem(("YondaimeFramework/Create/StandardLibrary"))]
         public static void CreateStandardLibrary() 
         {
-            const string LOAD_PATH = "Assets/YondaimeFramework/Templates/StandardBehaviourLibrary.prefab";
             const string LIB_ASSET_NAME = "StandardBehaviourLibrary";
-
             OverrideExistingLib<ILibrary>(LIB_ASSET_NAME);
-            Generate<StandardBehaviourLibrary>(LOAD_PATH, LIB_ASSET_NAME,true);
+            Generate<StandardBehaviourLibrary>(LIB_ASSET_NAME,true);
         }
         
         [MenuItem(("YondaimeFramework/Create/PooledLibrary"))]
         public static void CreatePooledLibrary()
         {
-            const string LOAD_PATH = "Assets/YondaimeFramework/Templates/PooledBehaviourLibrary.prefab";
             const string LIB_ASSET_NAME = "PooledBehaviourLibrary";
-
             OverrideExistingLib<ILibrary>(LIB_ASSET_NAME);
-            Generate<PooledBehaviourLibrary>(LOAD_PATH, LIB_ASSET_NAME,true);
+            Generate<PooledBehaviourLibrary>(LIB_ASSET_NAME,true);
         }
 
       
@@ -101,7 +95,7 @@ namespace YondaimeFramework.EditorHandles
 
         }
 
-        private static void Generate<T>(string loadPath, string prefabName,bool hasHandle) where T : MonoBehaviour
+        private static void Generate<T>(string prefabName,bool hasHandle) where T : MonoBehaviour
         {
             //T prefab = AssetDatabase.LoadAssetAtPath<T>(loadPath);
             GameObject go = new GameObject(prefabName);
