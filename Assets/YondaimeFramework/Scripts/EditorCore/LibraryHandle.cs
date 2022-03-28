@@ -1,9 +1,11 @@
 using YondaimeFramework;
-using UnityEngine;
 using UnityEditor.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 using System;
+using UnityEngine;
 using UnityEditor;
+
 
 namespace YondaimeFramework.EditorHandles
 {
@@ -15,11 +17,20 @@ namespace YondaimeFramework.EditorHandles
 
         public void ScanBehaviours()
         {
-            FindSceneLibrary();
-            ScanCustomBehaviours();
-            SetSceneDirty();
+            StartCoroutine(DelayedCallback(() => 
+            {
+                FindSceneLibrary();
+                ScanCustomBehaviours();
+                SetSceneDirty();
+            }));
+            
         }
 
+        private IEnumerator DelayedCallback(Action invokee) 
+        {
+            yield return null;
+            invokee();
+        }
         
         private void ScanCustomBehaviours()
         {
@@ -27,7 +38,7 @@ namespace YondaimeFramework.EditorHandles
         }
 
         private void FindSceneLibrary() 
-        { 
+        {
             MonoBehaviour[] behv = FindObjectsOfType<MonoBehaviour>();
             foreach (MonoBehaviour b in behv) 
             {

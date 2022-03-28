@@ -15,44 +15,53 @@ namespace YondaimeFramework.EditorHandles{
         
         static SceneDirtyDetector()
         {
-            if (!IsOrderSetForThisSession())
-            {
-                EditorSceneManager.sceneDirtied += OnSceneDirtied;
-                MarkRegisteredTrue();
-            }
+            HookOnSceneDirtied();
+            HookOnUndo();
         }
 
-        static void OnSceneDirtied(Scene scene) 
+        private static void HookOnSceneDirtied()
         {
-            LibraryHandle handle = FindHandleFromScene(scene);
-            handle?.ScanBehaviours();
+            EditorSceneManager.sceneDirtied += OnSceneDirtied;
         }
 
-        static bool IsOrderSetForThisSession()
+        private static void HookOnUndo() 
         {
-            return SessionState.GetBool(INIT_STATE, false);
+            Undo.undoRedoPerformed += OnUndoFired;
         }
 
-        static void MarkRegisteredTrue()
+        static void OnSceneDirtied(Scene scene)
         {
-            SessionState.SetBool(INIT_STATE, true);
+            InvokeBehavioursScan();
         }
 
-        static LibraryHandle FindHandleFromScene(Scene scene) 
+        static void OnUndoFired()
         {
+            InvokeBehavioursScan();
+        }
+
+        private static void InvokeBehavioursScan()
+        {
+            LibraryHandle handle = FindHandleFromScene();
+
+            if (handle == null) 
+                MissingLibraryException();
             
-            GameObject[] objects = scene.GetRootGameObjects();
-            for (int i = 0; i < objects.Length; i++)
-            {
-                LibraryHandle handle= objects[i].GetComponentInChildren<LibraryHandle>(true);
-                if (handle)
-                    return handle;
-            }
+            handle.ScanBehaviours();
 
-            return null;
-
+           
         }
 
+
+        static LibraryHandle FindHandleFromScene() 
+        {
+            return GameObject.FindObjectOfType<LibraryHandle>();
+        }
+
+
+        static void MissingLibraryException()
+        {
+            throw new System.Exception("Please create a library or if already present please attach a library handle or framework functionalities wont work properly");
+        }
 
     }
 
