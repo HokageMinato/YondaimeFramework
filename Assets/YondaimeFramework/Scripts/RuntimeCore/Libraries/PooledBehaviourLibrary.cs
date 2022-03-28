@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-    
 
     public class PooledBehaviourLibrary : MonoBehaviour, ILibrary
     {

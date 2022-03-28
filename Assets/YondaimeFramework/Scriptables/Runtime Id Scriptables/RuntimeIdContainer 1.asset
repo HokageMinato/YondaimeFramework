@@ -13,33 +13,9 @@ MonoBehaviour:
   m_Name: RuntimeIdContainer 1
   m_EditorClassIdentifier: 
   _ids:
-  - objBt: -899593636
+  - objBt: 123
     _goInsId: 0
-    stringId: Some56
-  - objBt: -1117357366
+    stringId: abcd
+  - objBt: 23242525
     _goInsId: 0
-    stringId: Some57
-  - objBt: 769222491
-    _goInsId: 0
-    stringId: Some58
-  - objBt: 1524520909
-    _goInsId: 0
-    stringId: Some59
-  - objBt: 137346218
-    _goInsId: 0
-    stringId: Some60
-  - objBt: 2133363772
-    _goInsId: 0
-    stringId: Some61
-  - objBt: -433988218
-    _goInsId: 0
-    stringId: Some62
-  - objBt: -1859719920
-    _goInsId: 0
-    stringId: Some63
-  - objBt: 256014515
-    _goInsId: 0
-    stringId: Some64
-  - objBt: 2017806373
-    _goInsId: 0
-    stringId: Some65
+    stringId: xyzz

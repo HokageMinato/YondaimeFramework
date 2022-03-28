@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace YondaimeFramework.EditorHandles
 {
@@ -45,7 +47,8 @@ namespace YondaimeFramework.EditorHandles
 				if (duplicates.Contains(item.stringIdVal))
 					throw new System.Exception($"Duplicate id entry {item.stringIdVal} detected");	
 
-				duplicates.Add(item.stringIdVal);
+				if(item.stringIdVal != string.Empty)
+					duplicates.Add(item.stringIdVal);
             }
 		}
 		
@@ -61,7 +64,6 @@ namespace YondaimeFramework.EditorHandles
 			return componentId.ToArray();
 	
 		}
-
 
 		
 

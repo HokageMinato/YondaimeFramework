@@ -6,21 +6,37 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Diagnostics;
 
+[System.Serializable]
+public class CarData 
+{
+    public float speed;
+    public string name;
+}
+
+
 public class Car : CustomBehaviour, ICar
 {
+    const string key = "Test1";
+    const string key2 = "Test2";
+    const string key3 = "Test3";
+    const string key4 = "Test3";
 
+    public PersistantVariable<int> intValue = new PersistantVariable<int>(key);
+    public PersistantVariable<float> floatValue = new PersistantVariable<float>(key2);
+    public PersistantVariable<string> stringValue = new PersistantVariable<string>(key3);
+    public PersistantVariable<CarData> jsonValue = new PersistantVariable<CarData>(key4);
 
     public Car[] othercars;
     public RuntimeIdContainer carIds;
     public SportsCar sports;
-
     public int itr;
     public Car otherCar;
+    public CarData carData;
 
     //private Func<int> ocAction;
     private ICar ocAction;
-    
-  
+
+
     #region BEHAVIOUR_LIBRARY_TESTS
 
     [ContextMenu("Test Instantiate")]
@@ -33,8 +49,8 @@ public class Car : CustomBehaviour, ICar
 
 
     [ContextMenu("Test SetId")]
-    public void TestSetId() 
-    { 
+    public void TestSetId()
+    {
         ml.LogIdLookup();
         SetId(carIds.GetIds()[1]);
         ml.LogIdLookup();
@@ -45,7 +61,7 @@ public class Car : CustomBehaviour, ICar
     public void Test2()
     {
         ml.LogLookup();
-        Destroy(sports,true);
+        Destroy(sports, true);
         ml.LogLookup();
     }
 
@@ -56,9 +72,9 @@ public class Car : CustomBehaviour, ICar
         ml.LogIdLookup();
         Debug.Log($"Class : {GetComponentFromLibraryById<SportsCar>(carIds.GetIds()[1]) == null} -- {gameObject.name}");
         Debug.Log($"Interface : {GetComponentFromLibraryById<ICar>(carIds.GetIds()[0]) == null} -- {gameObject.name}");
-        
+
     }
-    
+
     [ContextMenu("Test GetComponent")]
     void TestGetComponent()
     {
@@ -93,7 +109,7 @@ public class Car : CustomBehaviour, ICar
     {
         ml.LogLookup();
         Pool(sports);
-       // sports = null;
+        // sports = null;
         ml.LogLookup();
     }
 
@@ -108,8 +124,10 @@ public class Car : CustomBehaviour, ICar
 
 
 
-    
+
     #endregion
+
+
 
 
 
@@ -123,34 +141,52 @@ public class Car : CustomBehaviour, ICar
         st.Start();
         for (int i = 0; i < itr; i++)
         {
-            cars[i]=Instantiate(sports);
+            cars[i] = Instantiate(sports);
         }
 
         st.Stop();
         data += $"Instantiate {st.ElapsedMilliseconds} - ";
-        
-     //   ml.LogLookup();
-      //  ml.LogIdLookup();
-        
-        
+
+        //   ml.LogLookup();
+        //  ml.LogIdLookup();
+
+
         st.Reset();
         st.Start();
-        
+
 
         for (int i = 0; i < itr; i++)
         {
             Destroy(cars[i]);
         }
-       
+
         st.Stop();
 
-       // ml.LogLookup();
-       // ml.LogIdLookup();
+        // ml.LogLookup();
+        // ml.LogIdLookup();
 
 
         data += $" Destroy {st.ElapsedMilliseconds}";
         Debug.Log(data);
 
+    }
+
+    [ContextMenu("SaveTest")]
+    public void SaveTest()
+    {
+        intValue.Value = 2;
+        floatValue.Value = 2;
+        stringValue.Value = "2";
+        jsonValue.Value = carData;
+    }
+    
+    [ContextMenu("LoadTest")]
+    public void LoadTest()
+    {
+        Debug.Log($"{intValue.Value}");
+        Debug.Log($"{floatValue.Value}");
+        Debug.Log($"{stringValue.Value}");
+        Debug.Log($"{jsonValue.Value}");
     }
     
     [ContextMenu("Test GetPooled Pool")]

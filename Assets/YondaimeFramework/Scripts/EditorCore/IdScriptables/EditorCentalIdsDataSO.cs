@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Events;
 
 namespace YondaimeFramework.EditorHandles
 {
@@ -17,6 +18,8 @@ namespace YondaimeFramework.EditorHandles
             }
         }
 
+
+
         [ContextMenu("Assign")]
         public void AssignId()
         {
@@ -29,17 +32,20 @@ namespace YondaimeFramework.EditorHandles
 
                 for (int j = 0; j < idSRCData.Length; j++)
                 {
-                    idSRCData[j].intValue = Animator.StringToHash(idSRCData[j].stringIdVal);
+                    idSRCData[j].intValue = GetDeterministicHash(idSRCData[j].stringIdVal);
                 }
+
 
                 data.UpdateRuntimeIdValues();
                 data.SetDirty();
             }
 
-            EditorUtility.SetDirty(this);
-            AssetDatabase.Refresh();
-            AssetDatabase.SaveAssets();
+            SearchForDuplicateHash();
+            
+           
         }
+
+        
 
         private void SearchForDuplicates()
         {
@@ -54,13 +60,48 @@ namespace YondaimeFramework.EditorHandles
 
                     if (idv.Contains(stringIdValue))
                     {
-                        throw new Exception($"Duplicate Id entry ({stringIdValue}) found at {idsData[i].SystemId}");
+                        
+                        idsData[i].GetIdSRCs()[j].stringIdVal = string.Empty;
+                        idsData[i].GetIdSRCs()[j].intValue = 0;
+                        throw new Exception($"Duplicate Id entry ({stringIdValue}) found at {idsData[i].SystemId}, Fixing");
                     }
 
+                    if(stringIdValue != string.Empty)
                     idv.Add(stringIdValue);
                 }                
 
             }
+        }  
+        
+        
+        private void SearchForDuplicateHash()
+        {
+            HashSet<int> idv = new HashSet<int>();
+
+            for (int i = 0; i < idsData.Length; i++)
+            {
+               
+                for (int j = 0; j < idsData[i].GetIdSRCs().Length; j++)
+                {
+                    int intIdValue = idsData[i].GetIdSRCs()[j].intValue;
+                    string stringIdValue = idsData[i].GetIdSRCs()[j].stringIdVal;
+
+                    if (idv.Contains(intIdValue))
+                    {
+                        throw new Exception($"Hash of id:{stringIdValue} at {idsData[i].SystemId} generates a collision, Please change it");
+                    }
+
+                    if(intIdValue!=0)
+                    idv.Add(intIdValue);
+                }                
+
+            }
+        }
+
+
+        private int GetDeterministicHash(string stringIdVal)
+        {
+            return DeterministicHashGenerator.GetHashOf(stringIdVal);
         }
     }
 
@@ -85,8 +126,6 @@ namespace YondaimeFramework.EditorHandles
     
 
 
-
-
     [System.Serializable]
     public class SystemIdsData
     {
@@ -106,7 +145,7 @@ namespace YondaimeFramework.EditorHandles
             sourceSos.UpdateRuntimeValues();
         }
 
-        
+       
 
         public void SetDirty()
         {
@@ -115,4 +154,9 @@ namespace YondaimeFramework.EditorHandles
 
 
     }
+
+
+
+    
+
 }

@@ -13,25 +13,12 @@ MonoBehaviour:
   m_Name: EditorIdContainer
   m_EditorClassIdentifier: 
   ids:
-  - stringIdVal: Some56
-    intValue: -899593636
-  - stringIdVal: Some57
-    intValue: -1117357366
-  - stringIdVal: Some58
-    intValue: 769222491
-  - stringIdVal: Some59
-    intValue: 1524520909
-  - stringIdVal: Some60
-    intValue: 137346218
-  - stringIdVal: Some61
-    intValue: 2133363772
-  - stringIdVal: Some62
-    intValue: -433988218
-  - stringIdVal: Some63
-    intValue: -1859719920
-  - stringIdVal: Some64
-    intValue: 256014515
-  - stringIdVal: Some65
-    intValue: 2017806373
-  myRuntimeIdContainers:
-  - {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
+  - stringIdVal: someid
+    intValue: -246812259
+  - stringIdVal: largeid
+    intValue: -840584070
+  - stringIdVal: ssso
+    intValue: -239142363
+  - stringIdVal: 
+    intValue: 0
+  myRuntimeIdContainers: []

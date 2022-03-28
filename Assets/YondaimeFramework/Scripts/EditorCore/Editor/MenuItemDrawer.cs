@@ -49,7 +49,7 @@ namespace YondaimeFramework.EditorHandles
         [MenuItem(("YondaimeFramework/Create/CentralIdContainer"))]
         public static void CreateIdContainer()
         {
-            const string ASSET_PATH = ComponentIdDrawer.ASSET_PATH;
+            const string ASSET_PATH = ASSET_PATHS.CentalIdContainerAssetPath;
             ValidateFolderHierarchy();
             CreateSOIfNotPresent(ASSET_PATH);
 

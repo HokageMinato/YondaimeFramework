@@ -18,7 +18,7 @@ namespace YondaimeFramework.EditorHandles
         private const string NoneStr = "None";
 
         //Make sure all path based operations are done via this, since this will decide the folder hierarcy
-        public const string ASSET_PATH = "Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/_CentralIdsDataSO.asset";
+        
         
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -66,7 +66,7 @@ namespace YondaimeFramework.EditorHandles
            
             void LoadIdSource()
             {
-                idSources = AssetDatabase.LoadAssetAtPath<EditorCentalIdsDataSO>(ASSET_PATH);
+                idSources = AssetDatabase.LoadAssetAtPath<EditorCentalIdsDataSO>(ASSET_PATHS.CentalIdContainerAssetPath);
             }
 
             void FillChoiceMenu()
