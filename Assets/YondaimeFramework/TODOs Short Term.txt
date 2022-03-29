@@ -1,0 +1,4 @@
+
+SHORT TERM IMPROVEMENTS:
+
+=> [DONE] Implement TypeLookup in Pooled Library 

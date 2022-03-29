@@ -5,11 +5,13 @@ namespace YondaimeFramework
 {
     public class PersistantVariable<T> 
     {
+        private ISerializationService serializationService = new UnityJsonSerializationService();
         private readonly string _key = string.Empty;
 
-        public PersistantVariable(string key)
+        public PersistantVariable(string key,ISerializationService service = null)
         {
             _key = key;
+            serializationService = service;
         }
 
         public T Value
@@ -26,7 +28,7 @@ namespace YondaimeFramework
                 if (IsString(t))
                     return (T)(object)PlayerPrefs.GetString(_key, default);
 
-                return JsonUtility.FromJson<T>(PlayerPrefs.GetString(_key, default));
+                return serializationService.Deserialize<T>(PlayerPrefs.GetString(_key, default));
             }
 
             set
@@ -50,7 +52,7 @@ namespace YondaimeFramework
                     return;
                 }
 
-                PlayerPrefs.SetString(_key, JsonUtility.ToJson(value));
+                PlayerPrefs.SetString(_key, serializationService.Serialize(value));
             }
         }
 
@@ -68,5 +70,11 @@ namespace YondaimeFramework
             return t == typeof(string);
         }
 
+    }
+
+    public interface ISerializationService 
+    { 
+        public string Serialize<T>(T obj);
+        public T Deserialize<T>(string json);
     }
 }
