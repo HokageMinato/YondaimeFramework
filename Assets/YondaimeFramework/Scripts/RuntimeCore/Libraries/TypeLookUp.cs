@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-    public class TypeLookUp 
+    public class TypeLookUp : MonoBehaviour
     {
 
         #region LOOKUP
@@ -15,7 +15,6 @@ namespace YondaimeFramework
 
 
         #region INITIALIZER
-
         public void GenerateLookUp(CustomBehaviour[] behaviours) 
         {
             Dictionary<Type, List<CustomBehaviour>> behaviourLookup = new Dictionary<Type, List<CustomBehaviour>>();
@@ -84,7 +83,14 @@ namespace YondaimeFramework
             if(NoObjectsPresentOfType(reqeuestedType))
                 return default;
 
-            return _behaviourLookup[reqeuestedType] as List<T>;
+            List<CustomBehaviour> behavioursInLookUp = _behaviourLookup[reqeuestedType];
+            int totalObjectCount = behavioursInLookUp.Count;
+            List<T> returnList = new List<T>(totalObjectCount);
+            for (int i = 0; i < totalObjectCount; i++)
+                returnList.Add((T)(object)behavioursInLookUp[i]);
+
+
+            return returnList;
         }
         
         #endregion
@@ -198,13 +204,6 @@ namespace YondaimeFramework
 
         #endregion
 
-
-        #region TYPE_CREATORS
-        private object GenerateListOfType(Type t) 
-        {
-            return Activator.CreateInstance(typeof(List<>).MakeGenericType(new[] { t }));
-        }
-        #endregion
 
         #region DEBUG_ACCESSORS
 #if UNITY_EDITOR
