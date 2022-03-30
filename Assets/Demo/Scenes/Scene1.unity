@@ -123,6 +123,55 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &122622384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 122622386}
+  - component: {fileID: 122622385}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &122622385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122622384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881886598026f544989e5ce07d085049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id:
+    objBt: 0
+    _goInsId: 0
+    stringId: None
+  poolState: 0
+  itr: 0
+--- !u!4 &122622386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122622384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &153120950
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,6 +205,7 @@ MonoBehaviour:
   sceneId:
     id: 
   behaviours:
+  - {fileID: 122622385}
   - {fileID: 251739647}
   - {fileID: 383738081}
   - {fileID: 416535713}
@@ -942,7 +992,7 @@ MonoBehaviour:
   poolState: 0
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
-  sports: {fileID: 0}
+  sports: {fileID: 4687846422457583818, guid: 4b514de1515a6844ca58d39ee0ea13ff, type: 3}
   itr: 0
   otherCar: {fileID: 0}
   carData:

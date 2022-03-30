@@ -6,21 +6,23 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-    public class TypeLookUp : MonoBehaviour
+    public class TypeLookUp 
     {
 
         #region LOOKUP
-        private Dictionary<Type, List<CustomBehaviour>> _behaviourLookup = new Dictionary<Type, List<CustomBehaviour>>();
+        private Dictionary<Type, IList> _behaviourLookup = new Dictionary<Type, IList>();
         #endregion
 
 
         #region INITIALIZER
         public void GenerateLookUp(CustomBehaviour[] behaviours) 
         {
-            Dictionary<Type, List<CustomBehaviour>> behaviourLookup = new Dictionary<Type, List<CustomBehaviour>>();
+            Dictionary<Type, IList> behaviourLookup = new Dictionary<Type, IList>();
             CheckForEmptyBehaviours();
             GenerateBehaviourLookUp();
             _behaviourLookup = behaviourLookup;
+
+            Debug.Log(_behaviourLookup == null);
 
             void CheckForEmptyBehaviours()
             {
@@ -54,8 +56,7 @@ namespace YondaimeFramework
             {
                 if (!behaviourLookup.ContainsKey(t))
                 {
-                    behaviourLookup.Add(t, new List<CustomBehaviour>() { behaviour });
-                    return;
+                    behaviourLookup.Add(t, GenerateListOfType(t));
                 }
 
                 behaviourLookup[t].Add(behaviour);
@@ -72,27 +73,22 @@ namespace YondaimeFramework
             if (NoObjectsPresentOfType(reqeuestedType))
                 return default;
 
-            return (T)(object)_behaviourLookup[reqeuestedType][0];
+            return (T)_behaviourLookup[reqeuestedType][0];
         }
 
 
-        public List<T> GetBehavioursFromContainer<T>()
+        public IReadOnlyList<T> GetBehavioursFromContainer<T>()
         {
             Type reqeuestedType = typeof(T);
 
-            if(NoObjectsPresentOfType(reqeuestedType))
+            if (NoObjectsPresentOfType(reqeuestedType))
                 return default;
 
-            List<CustomBehaviour> behavioursInLookUp = _behaviourLookup[reqeuestedType];
-            int totalObjectCount = behavioursInLookUp.Count;
-            List<T> returnList = new List<T>(totalObjectCount);
-            for (int i = 0; i < totalObjectCount; i++)
-                returnList.Add((T)(object)behavioursInLookUp[i]);
 
-
-            return returnList;
+            return (IReadOnlyList<T>)_behaviourLookup[reqeuestedType];
         }
-        
+       
+
         #endregion
 
 
@@ -102,15 +98,14 @@ namespace YondaimeFramework
         {
             Type t = newBehaviour.GetType();
 
-            CustomBehaviour behaviour = (CustomBehaviour)(object)newBehaviour;
 
             if (_behaviourLookup.ContainsKey(t))
             {
-                _behaviourLookup[t].Add(behaviour);
+                _behaviourLookup[t].Add(newBehaviour);
             }
             else
             {
-                _behaviourLookup.Add(t, new List<CustomBehaviour>() { behaviour });
+                _behaviourLookup.Add(t, GenerateListOfType(t));
             }
 
             Type[] itypes = t.GetInterfaces();
@@ -119,11 +114,11 @@ namespace YondaimeFramework
                 t = itypes[i];
                 if (_behaviourLookup.ContainsKey(t))
                 {
-                    _behaviourLookup[t].Add(behaviour);
+                    _behaviourLookup[t].Add(newBehaviour);
                 }
                 else
                 {
-                    _behaviourLookup.Add(t, new List<CustomBehaviour>() { behaviour });
+                    _behaviourLookup.Add(t, GenerateListOfType(t));
                 }
             }
 
@@ -147,11 +142,12 @@ namespace YondaimeFramework
             if (!_behaviourLookup.ContainsKey(t))
                 return;
 
-            List<CustomBehaviour> behaviours = _behaviourLookup[t];
+            IList behaviours = _behaviourLookup[t];
+
 
             for (int i = 0; i < behaviours.Count;)
             {
-                if (behaviours[i] == null)
+                if (((CustomBehaviour)behaviours[i]) == null)
                 {
                     behaviours.RemoveAt(i);
                     continue;
@@ -178,11 +174,11 @@ namespace YondaimeFramework
             if (!_behaviourLookup.ContainsKey(t))
                 return;
 
-            List<CustomBehaviour> behaviours = _behaviourLookup[t];
+            IList behaviours = _behaviourLookup[t];
 
             for (int i = 0; i < behaviours.Count;)
             {
-                if (behaviours[i] == behaviour)
+                if (((CustomBehaviour)behaviours[i]) == behaviour)
                 {
                     behaviours.RemoveAt(i);
                     continue;
@@ -190,6 +186,15 @@ namespace YondaimeFramework
 
                 i++;
             }
+        }
+
+
+        private IList GenerateListOfType(Type t)
+        {
+            var listType = typeof(List<>);
+            var constructedListType = listType.MakeGenericType(t);
+
+            return (IList)Activator.CreateInstance(constructedListType);
         }
         #endregion
 
@@ -207,7 +212,7 @@ namespace YondaimeFramework
 
         #region DEBUG_ACCESSORS
 #if UNITY_EDITOR
-        public Dictionary<Type, List<CustomBehaviour>> lookup => _behaviourLookup;
+        public Dictionary<Type, IList> lookup => _behaviourLookup;
         #endif
         #endregion
 

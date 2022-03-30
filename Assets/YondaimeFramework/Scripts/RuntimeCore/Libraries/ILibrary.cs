@@ -15,9 +15,9 @@ namespace YondaimeFramework
 
         public T GetBehaviourFromLibraryById<T>(int behaviourId);
 
-        public List<T> GetBehavioursFromLibrary<T>();
+        public IReadOnlyList<T> GetBehavioursFromLibrary<T>();
 
-        public List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId);
+        public IReadOnlyList<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId);
 
         public void AddBehaviour<T>(T newBehaviour);
 
@@ -27,7 +27,7 @@ namespace YondaimeFramework
 
         public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId, string sceneId);
 
-        public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId);
+        public IReadOnlyList<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId);
 
         public T GetPooled<T>();
 

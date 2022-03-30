@@ -53,7 +53,7 @@ namespace YondaimeFramework
             if (RootLibrary.Instance == null)
                 throw new Exception("RootLibrary instance not found, either create one or check script execution order for Root Library to execute before scene library");
         }
-        internal void LogLookup<T,K>(Dictionary<T,K> dict,string name) where K: List<CustomBehaviour>
+        internal void LogLookup<T,K>(Dictionary<T,K> dict,string name) where K: IList
         {
             
             string val = $"Showinggg => {name} <=  ";
@@ -66,7 +66,7 @@ namespace YondaimeFramework
                     {
                         Debug.LogError("UNCLEAN REF");
                     }
-                    v += $" {item.Value[i].gameObject.name} -- {item.Value[i].id.objBt} --- {item.Value[i].GetInstanceID()}. \n"; 
+                    v += $" {((CustomBehaviour)item.Value[i]).gameObject.name} -- {((CustomBehaviour)item.Value[i]).id.objBt}. \n"; 
                 }
 
                 
@@ -152,12 +152,12 @@ namespace YondaimeFramework
             return _idLookup[behaviourId].GetBehaviour<T>();
         }
 
-        public List<T> GetBehavioursFromLibrary<T>()
+        public IReadOnlyList<T> GetBehavioursFromLibrary<T>()
         {
             return _typeLookUp.GetBehavioursFromContainer<T>();
         }
 
-        public List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
+        public IReadOnlyList<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
             return _goLookup[requesteeGameObjectInstanceId].GetBehavioursFromContainer<T>();
         }
@@ -172,7 +172,7 @@ namespace YondaimeFramework
             return _rootLibrary.GetSceneLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId.objBt);
         }
 
-        public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
+        public IReadOnlyList<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
         {
             return _rootLibrary.GetSceneLibraryById(sceneId).GetBehavioursFromLibrary<T>();
         }

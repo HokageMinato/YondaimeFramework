@@ -171,12 +171,12 @@ namespace YondaimeFramework
             return _idLookup[behaviourId].GetBehaviour<T>();
         }
 
-        public List<T> GetBehavioursFromLibrary<T>()
+        public IReadOnlyList<T> GetBehavioursFromLibrary<T>()
         {
             return _typeLookUp.GetBehavioursFromContainer<T>();
         }
 
-        public List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
+        public IReadOnlyList<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
             return _goLookup[requesteeGameObjectInstanceId].GetBehavioursFromContainer<T>();
         }
@@ -191,7 +191,7 @@ namespace YondaimeFramework
             return _rootLibrary.GetSceneLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId.objBt);
         }
 
-        public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
+        public IReadOnlyList<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
         {
             return _rootLibrary.GetSceneLibraryById(sceneId).GetBehavioursFromLibrary<T>();
         }
@@ -265,7 +265,6 @@ namespace YondaimeFramework
         private void AddToGoLookup(CustomBehaviour newBehaviour)
         {
             int id = newBehaviour.id._goInsId;
-            Debug.Log($"Adding go with id ->{id}");
             if (!_goLookup.ContainsKey(id))
                 _goLookup.Add(id, new TypeLookUp());
 
@@ -275,7 +274,6 @@ namespace YondaimeFramework
         public void CleanNullReferencesFor(ComponentId id,Type t)
         {
             _typeLookUp.CleanNullReferencesFor(t);
-            Debug.Log($"cleanig for {id._goInsId}");
             _goLookup[id._goInsId].CleanNullReferencesFor(t);
 
             int cid = id.objBt;

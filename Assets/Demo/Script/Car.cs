@@ -78,6 +78,7 @@ public class Car : CustomBehaviour, ICar
     [ContextMenu("Test GetComponent")]
     void TestGetComponent()
     {
+
         Debug.Log($"Class :  {GetComponentFromMyGameObject<SportsCar>() == null} -- {gameObject.name}");
         Debug.Log($"Interface : {GetComponentFromMyGameObject<ICar>() == null} -- {gameObject.name}");
     }
@@ -85,6 +86,7 @@ public class Car : CustomBehaviour, ICar
     [ContextMenu("Test GetComponents")]
     void TestGetComponents()
     {
+        ml.LogLookup();
         Debug.Log($"Class : {GetComponentsFromMyGameObject<SportsCar>()?.Count} -- {gameObject.name}");
         Debug.Log($"Interface : {GetComponentsFromMyGameObject<ICar>()?.Count} -- {gameObject.name}");
     }
@@ -131,43 +133,11 @@ public class Car : CustomBehaviour, ICar
 
 
 
-    [ContextMenu("Test Instantiate Destory")]
+    [ContextMenu("ref test")]
     public void InvocationTest()
     {
-        SportsCar[] cars = new SportsCar[itr];
-        string data = string.Empty;
-
-        Stopwatch st = new Stopwatch();
-        st.Start();
-        for (int i = 0; i < itr; i++)
-        {
-            cars[i] = Instantiate(sports);
-        }
-
-        st.Stop();
-        data += $"Instantiate {st.ElapsedMilliseconds} - ";
-
-        //   ml.LogLookup();
-        //  ml.LogIdLookup();
-
-
-        st.Reset();
-        st.Start();
-
-
-        for (int i = 0; i < itr; i++)
-        {
-            Destroy(cars[i]);
-        }
-
-        st.Stop();
-
-        // ml.LogLookup();
-        // ml.LogIdLookup();
-
-
-        data += $" Destroy {st.ElapsedMilliseconds}";
-        Debug.Log(data);
+        
+        Debug.Log(GetComponentsFromLibrary<Car>().Count);
 
     }
 
@@ -179,7 +149,7 @@ public class Car : CustomBehaviour, ICar
         stringValue.Value = "2";
         jsonValue.Value = carData;
     }
-    
+
     [ContextMenu("LoadTest")]
     public void LoadTest()
     {
@@ -188,18 +158,18 @@ public class Car : CustomBehaviour, ICar
         Debug.Log($"{stringValue.Value}");
         Debug.Log($"{jsonValue.Value}");
     }
-    
+
     [ContextMenu("Test GetPooled Pool")]
     public void InvocationTestPooled()
     {
         SportsCar[] cars = new SportsCar[itr];
         for (int i = 0; i < itr; i++)
         {
-            cars[i]=Instantiate(sports);
+            cars[i] = Instantiate(sports);
         }
 
 
-        
+
 
         string data = string.Empty;
         Stopwatch st = new Stopwatch();
@@ -214,31 +184,31 @@ public class Car : CustomBehaviour, ICar
 
         st.Reset();
 
-    //    ml.LogLookup();
-     //   ml.LogIdLookup();
+        //    ml.LogLookup();
+        //   ml.LogIdLookup();
 
 
         st.Start();
-        
+
 
         for (int i = 0; i < itr; i++)
         {
             GetPooled<SportsCar>();
         }
-       
+
         st.Stop();
 
-       // ml.LogLookup();
-       // ml.LogIdLookup();
+        // ml.LogLookup();
+        // ml.LogIdLookup();
 
         Debug.Log($" Instantiate {st.ElapsedMilliseconds} {data}");
 
     }
 
-     [ContextMenu("Test GetComponents Performance")]
+    [ContextMenu("Test GetComponents Performance")]
     public void InvocationTestGetComponents()
     {
-       
+
         string data = string.Empty;
         Stopwatch st = new Stopwatch();
         st.Start();
@@ -252,28 +222,29 @@ public class Car : CustomBehaviour, ICar
 
         st.Reset();
 
-    //    ml.LogLookup();
-     //   ml.LogIdLookup();
+        //    ml.LogLookup();
+        //   ml.LogIdLookup();
 
 
         st.Start();
-       
+
         for (int i = 0; i < itr; i++)
         {
             GetComponentFromMyGameObject<SportsCar>();
         }
-       
+
         st.Stop();
 
         data += st.ElapsedMilliseconds;
-       // ml.LogLookup();
-       // ml.LogIdLookup();
+        // ml.LogLookup();
+        // ml.LogIdLookup();
 
         Debug.Log($" Custom {data}");
 
     }
 
 
+    
 
 }
 

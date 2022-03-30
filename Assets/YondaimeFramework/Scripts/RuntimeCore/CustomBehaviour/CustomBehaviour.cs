@@ -58,7 +58,7 @@ namespace YondaimeFramework
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
 
-        public List<T> GetComponentsFromMyGameObject<T>()
+        public IReadOnlyList<T> GetComponentsFromMyGameObject<T>()
         {
             CheckForSystemLibNull();
             int instanceId = id._goInsId;
@@ -81,7 +81,7 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T"> Class, Interface </typeparam>
         /// <returns>List<typeparamref name="T"/> of Requested BehaviourType </returns>
-        public List<T> GetComponentsFromLibrary<T>()
+        public IReadOnlyList<T> GetComponentsFromLibrary<T>()
         {
             CheckForSystemLibNull();
             return _myLibrary.GetBehavioursFromLibrary<T>();
@@ -128,7 +128,7 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
+        public IReadOnlyList<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
         {
             CheckForSystemLibNull();
             return _myLibrary.GetComponentsFromOtherSceneLibrary<T>(sceneId);
