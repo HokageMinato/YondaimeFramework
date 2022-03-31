@@ -156,7 +156,6 @@ namespace YondaimeFramework
 
         public T GetBehaviourFromLibrary<T>()
         {
-            Type reqeuestedType = typeof(T);
             return _typeLookUp.GetBehaviour<T>();
         }
 

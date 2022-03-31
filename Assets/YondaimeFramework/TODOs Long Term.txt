@@ -1,8 +1,4 @@
 
 LONG TERM IMPROVEMENTS:
 
-=> [DONE] Automate scan behaviours, Trigger upon scene dirty detect
-=> [DONE] Automate AssignId and Hash Generation on CentralIDDataSO
-=> [DONE] Upon Creating a new library, givve a prompt to replace old type, or dont allow operation if one already exists
-=> [?] Rather than using Templates, Instantiate object directly
 => Give flexibility to swap out JSON for persistant behaviours

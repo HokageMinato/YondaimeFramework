@@ -17,12 +17,8 @@ namespace YondaimeFramework
         #region INITIALIZER
         public void GenerateLookUp(CustomBehaviour[] behaviours) 
         {
-            Dictionary<Type, IList> behaviourLookup = new Dictionary<Type, IList>();
             CheckForEmptyBehaviours();
-            GenerateBehaviourLookUp();
-            _behaviourLookup = behaviourLookup;
-
-            Debug.Log(_behaviourLookup == null);
+            FillLookUp();
 
             void CheckForEmptyBehaviours()
             {
@@ -34,33 +30,15 @@ namespace YondaimeFramework
                     behaviours[i].RefreshIds();
                 }
             }
-            void GenerateBehaviourLookUp()
+            void FillLookUp()
             {
                 for (int i = 0; i < behaviours.Length; i++)
                 {
                     CustomBehaviour currentBehaviour = behaviours[i];
-                    Type currentBehaviourType = currentBehaviour.GetType();
-                    AddToBehaviourLookup(currentBehaviour, currentBehaviourType);
-                    AddBehaviourInterfacesInLookup(currentBehaviour, currentBehaviourType);
+                    AddBehaviour(currentBehaviour);
                 }
             }
-            void AddBehaviourInterfacesInLookup(CustomBehaviour behaviour, Type t)
-            {
-                Type[] itypes = t.GetInterfaces();
-                for (int i = 0; i < itypes.Length; i++)
-                {
-                    AddToBehaviourLookup(behaviour, itypes[i]);
-                }
-            }
-            void AddToBehaviourLookup(CustomBehaviour behaviour, Type t)
-            {
-                if (!behaviourLookup.ContainsKey(t))
-                {
-                    behaviourLookup.Add(t, GenerateListOfType(t));
-                }
-
-                behaviourLookup[t].Add(behaviour);
-            }
+            
         }
         #endregion
 
@@ -71,7 +49,7 @@ namespace YondaimeFramework
         {
             Type reqeuestedType = typeof(T);
             if (NoObjectsPresentOfType(reqeuestedType))
-                return default;
+              return default;
 
             return (T)_behaviourLookup[reqeuestedType][0];
         }
@@ -98,30 +76,26 @@ namespace YondaimeFramework
         {
             Type t = newBehaviour.GetType();
 
-
-            if (_behaviourLookup.ContainsKey(t))
-            {
-                _behaviourLookup[t].Add(newBehaviour);
-            }
-            else
+            if (!_behaviourLookup.ContainsKey(t))
             {
                 _behaviourLookup.Add(t, GenerateListOfType(t));
             }
+            
+           _behaviourLookup[t].Add(newBehaviour);
 
             Type[] itypes = t.GetInterfaces();
             for (int i = 0; i < itypes.Length; i++)
             {
                 t = itypes[i];
-                if (_behaviourLookup.ContainsKey(t))
-                {
-                    _behaviourLookup[t].Add(newBehaviour);
-                }
-                else
+                if (!_behaviourLookup.ContainsKey(t))
                 {
                     _behaviourLookup.Add(t, GenerateListOfType(t));
                 }
+               
+                _behaviourLookup[t].Add(newBehaviour);
             }
 
+          
         }
 
         
