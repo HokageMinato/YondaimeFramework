@@ -70,7 +70,7 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public T GetComponentFromLibrary<T>()
+        public T FindObjectFromLibrary<T>()
         {
             CheckForSystemLibNull();
             return _myLibrary.GetBehaviourFromLibrary<T>();
@@ -81,7 +81,7 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T"> Class, Interface </typeparam>
         /// <returns>List<typeparamref name="T"/> of Requested BehaviourType </returns>
-        public IReadOnlyList<T> GetComponentsFromLibrary<T>()
+        public IReadOnlyList<T> FindObjectsFromLibrary<T>()
         {
             CheckForSystemLibNull();
             return _myLibrary.GetBehavioursFromLibrary<T>();
@@ -92,7 +92,7 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public T GetComponentFromLibraryById<T>(ComponentId behaviourId)
+        public T FindObjectFromLibraryById<T>(ComponentId behaviourId)
         {
             CheckForSystemLibNull();
             return _myLibrary.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
@@ -104,7 +104,7 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public T GetComponentFromOtherSceneLibrary<T>(string sceneId)
+        public T FindObjectFromOtherSceneLibrary<T>(string sceneId)
         {
             CheckForSystemLibNull();
             return _myLibrary.GetComponentFromOtherSceneLibrary<T>(sceneId);
@@ -116,7 +116,7 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId, string sceneId)
+        public T FindObjectFromOtherSceneLibraryById<T>(ComponentId behaviourId, string sceneId)
         {
             CheckForSystemLibNull();
             return _myLibrary.GetComponentFromOtherSceneLibraryById<T>(behaviourId, sceneId);
@@ -128,7 +128,7 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public IReadOnlyList<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
+        public IReadOnlyList<T> FindObjectsFromOtherSceneLibrary<T>(string sceneId)
         {
             CheckForSystemLibNull();
             return _myLibrary.GetComponentsFromOtherSceneLibrary<T>(sceneId);
@@ -280,8 +280,6 @@ namespace YondaimeFramework
             return val.GetHashCode() * 92821;  // PRIME = 92821 or another prime number.
         }
         #endregion
-
-
     }
     #endif
 }

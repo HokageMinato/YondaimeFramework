@@ -22,7 +22,6 @@ namespace YondaimeFramework.EditorHandles
             {
                 FindSceneLibrary();
                 ScanCustomBehaviours();
-                SetSceneDirty();
             }));
             
         }
@@ -52,21 +51,6 @@ namespace YondaimeFramework.EditorHandles
 
         }
 
-        public void SetSceneDirty()
-        {
-            if (!Application.isPlaying)
-                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-        }
-
-        private bool IsPrefab(MonoBehaviour behaviour) 
-        { 
-            return PrefabUtility.IsPartOfAnyPrefab(behaviour);
-        }
-
-        private void ApplyModificationsAsOverrideToPrefab(CustomBehaviour customBehaviour) 
-        { 
-            PrefabUtility.RecordPrefabInstancePropertyModifications(customBehaviour);
-        } 
         
     }
 }

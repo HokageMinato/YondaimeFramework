@@ -1,43 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using YondaimeFramework;
-using UnityEngine.SceneManagement;
 
 namespace YondaimeFramework.EditorHandles{
 
     [InitializeOnLoad]
     public class SceneDirtyDetector : CustomBehaviour
     {
-        const string INIT_STATE = "SceneDirtyRegistered";
-        
         static SceneDirtyDetector()
         {
-            HookOnSceneDirtied();
-            HookOnUndo();
+            EditorApplication.update += () =>
+            {
+                if (EditorSceneManager.GetActiveScene().isDirty)
+                {
+                    InvokeBehavioursScan();
+                }
+            };
         }
 
-        private static void HookOnSceneDirtied()
-        {
-            EditorSceneManager.sceneDirtied += OnSceneDirtied;
-        }
-
-        private static void HookOnUndo() 
-        {
-            Undo.undoRedoPerformed += OnUndoFired;
-        }
-
-        static void OnSceneDirtied(Scene scene)
-        {
-            InvokeBehavioursScan();
-        }
-
-        static void OnUndoFired()
-        {
-            InvokeBehavioursScan();
-        }
 
         private static void InvokeBehavioursScan()
         {
@@ -47,14 +26,12 @@ namespace YondaimeFramework.EditorHandles{
                 MissingLibraryException();
             
             handle.ScanBehaviours();
-
-           
         }
 
 
         static LibraryHandle FindHandleFromScene() 
         {
-            return GameObject.FindObjectOfType<LibraryHandle>();
+            return FindObjectOfType<LibraryHandle>();
         }
 
 
