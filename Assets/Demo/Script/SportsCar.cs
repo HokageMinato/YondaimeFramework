@@ -10,16 +10,18 @@ public interface ICar
 public class SportsCar : Car,ICar
 {
 
-    public string ffari;
+    public void Copy() 
+    { 
+        Instantiate(this);
+    }
 
     // Start is called before the first frame update
     [ContextMenu("Get")]
     void St()
     {
                    
-        Debug.Log(typeof(ICar));
-        Debug.Log(typeof(Car));
-        Debug.Log(typeof(SportsCar));
+        Debug.Log(ml == null);
+        
     }
 
     // Update is called once per frame

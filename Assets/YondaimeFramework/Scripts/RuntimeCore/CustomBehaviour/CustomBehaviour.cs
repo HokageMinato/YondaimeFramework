@@ -10,7 +10,6 @@ namespace YondaimeFramework
     public abstract class CustomBehaviour : MonoBehaviour
     {
         #region LIBRARIES
-        //[SerializeField] private SceneLibrary _mySceneLibrary;
         private ILibrary _myLibrary;
         #endregion
 
@@ -139,7 +138,11 @@ namespace YondaimeFramework
         private void _Instantiate<T>(T newObject) where T : CustomBehaviour
         {
             CheckForSystemLibNull();
-            _myLibrary.AddBehaviour(newObject);
+            CustomBehaviour[] behaviours = newObject.GetComponentsInChildren<CustomBehaviour>();
+            foreach (CustomBehaviour behav in behaviours)
+            {
+                _myLibrary.AddBehaviour(behav);
+            }
         }
 
         public void SetId(ComponentId id)
@@ -160,9 +163,7 @@ namespace YondaimeFramework
             Type t = original.GetType();
             DestroyImmediate(original);
 
-            Debug.Log($"GONE {original == null}");
             _myLibrary.CleanNullReferencesFor(id,t);
-
 
             if (destoryGameObject)
                 DestroyImmediate(go);
@@ -171,7 +172,7 @@ namespace YondaimeFramework
         public T GetPooled<T>() 
         {
             CheckForSystemLibNull();
-            return  _myLibrary.GetPooled<T>();
+            return _myLibrary.GetPooled<T>();
         }
 
         public void Pool(CustomBehaviour behaviour) 

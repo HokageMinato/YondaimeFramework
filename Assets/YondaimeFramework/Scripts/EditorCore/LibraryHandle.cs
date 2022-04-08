@@ -9,46 +9,26 @@ using UnityEditor;
 
 namespace YondaimeFramework.EditorHandles
 {
-    [RequireComponent(typeof(ILibrary))]
     public class LibraryHandle : MonoBehaviour
     {
-        ILibrary sceneLibrary;
-
-        
 
         public void ScanBehaviours()
         {
-            StartCoroutine(DelayedCallback(() => 
-            {
-                FindSceneLibrary();
-                ScanCustomBehaviours();
-            }));
-            
+            FindSceneLibrary().SetBehaviours(FindObjectsOfType<CustomBehaviour>(true)); 
         }
 
-        private IEnumerator DelayedCallback(Action invokee) 
-        {
-            yield return null;
-            invokee();
-        }
-        
-        private void ScanCustomBehaviours()
-        {
-            sceneLibrary.SetBehaviours(FindObjectsOfType<CustomBehaviour>(true));
-        }
-
-        private void FindSceneLibrary() 
+        private ILibrary FindSceneLibrary() 
         {
             MonoBehaviour[] behv = FindObjectsOfType<MonoBehaviour>();
             foreach (MonoBehaviour b in behv) 
             {
                 if (b is ILibrary)
                 {
-                    sceneLibrary = (ILibrary)b;
-                    return;
+                    return (ILibrary)b;
                 }
             }
 
+            return null;
         }
 
         

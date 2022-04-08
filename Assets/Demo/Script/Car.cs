@@ -26,14 +26,14 @@ public class Car : CustomBehaviour, ICar
     public PersistantVariable<string> stringValue = new PersistantVariable<string>(key3);
     public PersistantVariable<CarData> jsonValue = new PersistantVariable<CarData>(key4);
 
+    public SceneId sceneIdToGetFrom;
     public Car[] othercars;
     public RuntimeIdContainer carIds;
     public SportsCar sports;
     public int itr;
     public Car otherCar;
     public CarData carData;
-
-    //private Func<int> ocAction;
+    public ComponentId idToSet;
     private ICar ocAction;
 
 
@@ -43,7 +43,7 @@ public class Car : CustomBehaviour, ICar
     public void Test()
     {
         ml.LogLookup();
-        sports = Instantiate(sports, carIds.GetIds()[0]);
+        SportsCar c = Instantiate(sports);
         ml.LogLookup();
     }
 
@@ -52,7 +52,7 @@ public class Car : CustomBehaviour, ICar
     public void TestSetId()
     {
         ml.LogIdLookup();
-        SetId(carIds.GetIds()[1]);
+        sports.SetId(idToSet);
         ml.LogIdLookup();
     }
 
@@ -69,9 +69,12 @@ public class Car : CustomBehaviour, ICar
     [ContextMenu("Test Find By Tag")]
     void TestFindByTag()
     {
+        FindObjectFromOtherSceneLibrary<SportsCar>(sceneIdToGetFrom.id);
+        FindObjectFromOtherSceneLibraryById<SportsCar>(idToSet,sceneIdToGetFrom.id);
+
         ml.LogIdLookup();
-        Debug.Log($"Class : {GetComponentFromLibraryById<SportsCar>(carIds.GetIds()[1]) == null} -- {gameObject.name}");
-        Debug.Log($"Interface : {GetComponentFromLibraryById<ICar>(carIds.GetIds()[0]) == null} -- {gameObject.name}");
+        Debug.Log($"Class : {FindObjectFromLibraryById<SportsCar>(carIds.GetIds()[1]) == null} -- {gameObject.name}");
+        Debug.Log($"Interface : {FindObjectFromLibraryById<ICar>(carIds.GetIds()[0]) == null} -- {gameObject.name}");
 
     }
 
@@ -94,15 +97,15 @@ public class Car : CustomBehaviour, ICar
     [ContextMenu("Test Find Object")]
     void TestFind()
     {
-        Debug.Log($"Class : {GetComponentFromLibrary<SportsCar>() == null} -- {gameObject.name}");
-        Debug.Log($"Interface : {GetComponentFromLibrary<ICar>() == null} -- {gameObject.name}");
+        Debug.Log($"Class : {FindObjectFromLibrary<SportsCar>() == null} -- {gameObject.name}");
+        Debug.Log($"Interface : {FindObjectFromLibrary<ICar>() == null} -- {gameObject.name}");
     }
 
     [ContextMenu("Test Find Objects")]
     void TestFindObjects()
     {
-        Debug.Log($"Class : {GetComponentsFromLibrary<Car>()?.Count} -- {gameObject.name}");
-        Debug.Log($"Interface : {GetComponentsFromLibrary<ICar>()?.Count} -- {gameObject.name}");
+        Debug.Log($"Class : {FindObjectsFromLibrary<Car>()?.Count} -- {gameObject.name}");
+        Debug.Log($"Interface : {FindObjectsFromLibrary<ICar>()?.Count} -- {gameObject.name}");
     }
 
 
@@ -125,7 +128,27 @@ public class Car : CustomBehaviour, ICar
     }
 
 
-
+    [ContextMenu("Test GetComponentFromOtherScene ")]
+    void TestGetComponentFromOtherScene()
+    {
+        Debug.Log($"Class : {FindObjectFromOtherSceneLibrary<Car>(sceneIdToGetFrom.id)} -- {gameObject.name}");
+        Debug.Log($"Interface : {FindObjectFromOtherSceneLibrary<ICar>(sceneIdToGetFrom.id)} -- {gameObject.name}");
+    }
+    
+    [ContextMenu("Test GetComponentsFromOtherScene")]
+    void TestGetComponentsFromOtherScene()
+    {
+        Debug.Log($"Class : {FindObjectsFromOtherSceneLibrary<Car>(sceneIdToGetFrom.id)} -- {gameObject.name}");
+        Debug.Log($"Interface : {FindObjectsFromOtherSceneLibrary<ICar>(sceneIdToGetFrom.id)} -- {gameObject.name}");
+    }
+    
+    [ContextMenu("Test GetComponentFromOtherSceneById ")]
+    void TestGetComponentFromOtherSceneById()
+    {
+        ComponentId idToGet=null;
+        Debug.Log($"Class : {FindObjectFromOtherSceneLibraryById<Car>(idToGet,sceneIdToGetFrom.id)} -- {gameObject.name}");
+        Debug.Log($"Class : {FindObjectFromOtherSceneLibraryById<ICar>(idToGet,sceneIdToGetFrom.id)} -- {gameObject.name}");
+    }
 
     #endregion
 
@@ -136,9 +159,7 @@ public class Car : CustomBehaviour, ICar
     [ContextMenu("ref test")]
     public void InvocationTest()
     {
-        
-        Debug.Log(GetComponentsFromLibrary<Car>().Count);
-
+        Debug.Log(FindObjectsFromLibrary<Car>().Count);
     }
 
     [ContextMenu("SaveTest")]

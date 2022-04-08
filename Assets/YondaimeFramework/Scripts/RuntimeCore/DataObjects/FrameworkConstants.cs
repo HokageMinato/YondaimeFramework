@@ -11,7 +11,7 @@ namespace YondaimeFramework
         public string id;
     }
 
-
+  
     //-----------------{FrameworkConstants}---------------------------------
     public static class FrameworkConstants 
     {

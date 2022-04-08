@@ -287,7 +287,15 @@ namespace YondaimeFramework
 
         public void SetBehaviours(CustomBehaviour[] behv)
         {
-            behaviours = behv;
+            if (behaviours.Length == behv.Length)
+                return;
+
+             behaviours = behv;
+            _typeLookUp = new TypeLookUp();
+            _idLookup = new Dictionary<int, TypeLookUp>();
+            _goLookup = new Dictionary<int, TypeLookUp>();
+
+             GenerateLookups();
         }
 
 

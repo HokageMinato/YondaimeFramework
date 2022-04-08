@@ -20,7 +20,6 @@ namespace YondaimeFramework.EditorHandles
 
 
 
-        [ContextMenu("Assign")]
         public void AssignId()
         {
             SearchForDuplicates();
@@ -32,7 +31,11 @@ namespace YondaimeFramework.EditorHandles
 
                 for (int j = 0; j < idSRCData.Length; j++)
                 {
-                    idSRCData[j].intValue = GetDeterministicHash(idSRCData[j].stringIdVal);
+                    var strId = idSRCData[j].stringIdVal;
+                    strId = strId.Trim();
+
+                    idSRCData[j].intValue = GetDeterministicHash(strId);
+                    idSRCData[j].stringIdVal = (strId);
                 }
 
 
@@ -88,7 +91,8 @@ namespace YondaimeFramework.EditorHandles
 
                     if (idv.Contains(intIdValue))
                     {
-                        throw new Exception($"Hash of id:{stringIdValue} at {idsData[i].SystemId} generates a collision, Please change it");
+                        throw new Exception($"Hash of id:{stringIdValue} at {idsData[i].SystemId} generates a collision, This is a framework issue and will be solved in future. To overcome this you will have to" +
+                                            $"change the id:{stringIdValue} to something else.");
                     }
 
                     if(intIdValue!=0)

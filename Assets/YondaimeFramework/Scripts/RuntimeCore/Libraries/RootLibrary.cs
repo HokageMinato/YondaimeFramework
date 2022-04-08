@@ -51,7 +51,6 @@ namespace YondaimeFramework
 
         public void RemoveFromLibrary(SceneId sceneId) {
 
-
             _libLookUp.Remove(sceneId.id);
         }
         #endregion
