@@ -1,10 +1,4 @@
-using YondaimeFramework;
-using UnityEditor.SceneManagement;
-using System.Collections.Generic;
-using System.Collections;
-using System;
 using UnityEngine;
-using UnityEditor;
 
 
 namespace YondaimeFramework.EditorHandles

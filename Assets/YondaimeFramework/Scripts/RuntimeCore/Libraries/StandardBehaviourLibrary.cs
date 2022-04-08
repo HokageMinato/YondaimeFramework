@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-    public class StandardBehaviourLibrary :MonoBehaviour, ILibrary
+    public class StandardBehaviourLibrary : MonoBehaviour, ILibrary
     {
 
         #region COMPONENTS
-        [SerializeField] private SceneId sceneId;
+        [SerializeField] private SceneId _sceneId;
         [SerializeField] private CustomBehaviour[] behaviours;
         #endregion
 
@@ -20,7 +20,13 @@ namespace YondaimeFramework
 
         RootLibrary _rootLibrary;
 
-        public SceneId SceneId => sceneId;
+        public SceneId SceneId
+        {
+            get
+            {
+                return _sceneId;
+            }
+        }
         #endregion
 
         #region INITIALIZERS

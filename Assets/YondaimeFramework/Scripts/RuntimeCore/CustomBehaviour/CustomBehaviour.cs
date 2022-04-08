@@ -139,10 +139,8 @@ namespace YondaimeFramework
         {
             CheckForSystemLibNull();
             CustomBehaviour[] behaviours = newObject.GetComponentsInChildren<CustomBehaviour>();
-            foreach (CustomBehaviour behav in behaviours)
-            {
-                _myLibrary.AddBehaviour(behav);
-            }
+            for (int i = 0; i < behaviours.Length; i++)
+                _myLibrary.AddBehaviour(behaviours[i]);
         }
 
         public void SetId(ComponentId id)
@@ -159,14 +157,39 @@ namespace YondaimeFramework
             CheckForNullObjDestory(original);
 
             GameObject go = original.gameObject;
-            ComponentId id = original.id;
-            Type t = original.GetType();
-            DestroyImmediate(original);
-
-            _myLibrary.CleanNullReferencesFor(id,t);
+           
 
             if (destoryGameObject)
+            {
+                ComponentId[] ids;
+                Type[] types;
+
+                CustomBehaviour[] behaviours = original.GetComponentsInChildren<CustomBehaviour>();
+                ids = new ComponentId[behaviours.Length];
+                types = new Type[behaviours.Length];
+
+
+                for (int i = 0; i < behaviours.Length; i++)
+                {
+                    ids[i] = behaviours[i].id;
+                    types[i] = behaviours[i].GetType();
+                }
+
                 DestroyImmediate(go);
+
+                for (int i = 0; i < behaviours.Length; i++)
+                {
+                    _myLibrary.CleanNullReferencesFor(ids[i], types[i]);
+                }
+
+                return;
+            }
+
+            Type t = original.GetType();
+            ComponentId id = original.id;
+            DestroyImmediate(original);
+            _myLibrary.CleanNullReferencesFor(id,t);
+
         }
 
         public T GetPooled<T>() 
