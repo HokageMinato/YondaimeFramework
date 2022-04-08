@@ -1,4 +1,1 @@
 
-LONG TERM IMPROVEMENTS:
-
-=> Give flexibility to swap out JSON for persistant behaviours

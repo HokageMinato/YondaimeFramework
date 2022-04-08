@@ -2,3 +2,5 @@
 SHORT TERM IMPROVEMENTS:
 
 => [DONE] Implement TypeLookup in Pooled Library 
+=>		  Add Collider lookup support in StandardLibrary, Pooled Library
+=>		  Add extensibilty to add Ids as animatorHashes, (Make HashGenerator abstract, ontrol from editorIdScriptable, use deteministic or animatorHash)
