@@ -10,6 +10,5 @@ namespace YondaimeFramework
         public int objBt;
         public int _goInsId;
         public string stringId;
-        
     }
 }

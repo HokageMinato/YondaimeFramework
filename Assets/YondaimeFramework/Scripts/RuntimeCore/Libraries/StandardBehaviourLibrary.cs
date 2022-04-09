@@ -147,9 +147,17 @@ namespace YondaimeFramework
             return _typeLookUp.GetBehaviour<T>();
         }
 
-        public  T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId)
+        public T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
             return _goLookup[requesteeGameObjectInstanceId].GetBehaviour<T>();
+        }
+
+        public T GetBehaviourOfGameObjectSafe<T>(int requesteeGameObjectInstanceId) 
+        {
+            if (DoesIdExist(requesteeGameObjectInstanceId,_goLookup))
+                return _goLookup[requesteeGameObjectInstanceId].GetBehaviour<T>();
+
+            return default;
         }
 
         public  T GetBehaviourFromLibraryById<T>(int behaviourId)
@@ -226,9 +234,9 @@ namespace YondaimeFramework
             _typeLookUp.CleanNullReferencesFor(t);
             _goLookup[id._goInsId].CleanNullReferencesFor(t);
 
-            int cid = id.objBt;
-            if(cid != ComponentId.None)
-                _idLookup[cid].CleanNullReferencesFor(t);
+            int oid = id.objBt;
+            if(oid != ComponentId.None)
+                _idLookup[oid].CleanNullReferencesFor(t);
 
         }
                
@@ -314,6 +322,11 @@ namespace YondaimeFramework
                 throw new Exception($"No component of id {t} present in lookup, Make sure to scan library once or instantiate via CustomBehaviour");
         }
 
+        bool DoesIdExist(int t, Dictionary<int, TypeLookUp> targetDict)
+        {
+            return targetDict.ContainsKey(t);
+
+        }
         #endregion
 
     }

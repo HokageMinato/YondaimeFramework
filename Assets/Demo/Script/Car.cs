@@ -54,6 +54,7 @@ public class Car : CustomBehaviour, ICar
         ml.LogIdLookup();
         sports.SetId(idToSet);
         ml.LogIdLookup();
+        
     }
 
 
@@ -265,7 +266,10 @@ public class Car : CustomBehaviour, ICar
     }
 
 
-    
+    public void OnCollisionEnter(Collision collision)
+    {
+     
+    }
 
 }
 

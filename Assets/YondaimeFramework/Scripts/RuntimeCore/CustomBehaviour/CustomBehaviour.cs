@@ -22,11 +22,11 @@ namespace YondaimeFramework
         public void RefreshIds()
         {
             id._goInsId = gameObject.GetInstanceID();
+            
         }
 
         public void SetLibrary(ILibrary library)
         {
-            //_mySceneLibrary = library;
             _myLibrary = library;
         }
         #endregion
@@ -49,6 +49,14 @@ namespace YondaimeFramework
             CheckForSystemLibNull();
             int instanceId = id._goInsId;
             return _myLibrary.GetBehaviourOfGameObject<T>(instanceId);
+        }
+
+
+        public T GetComponentFromOtherGameObject<T>(GameObject otherGameObject) 
+        {
+            CheckForSystemLibNull();
+            int instanceId = otherGameObject.GetInstanceID();
+            return _myLibrary.GetBehaviourOfGameObjectSafe<T>(instanceId);  
         }
 
         /// <summary>

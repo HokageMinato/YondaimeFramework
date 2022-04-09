@@ -13,6 +13,8 @@ namespace YondaimeFramework
 
         public T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId);
 
+        public T GetBehaviourOfGameObjectSafe<T>(int requesteeGameObjectInstanceId);
+
         public T GetBehaviourFromLibraryById<T>(int behaviourId);
 
         public IReadOnlyList<T> GetBehavioursFromLibrary<T>();

@@ -164,6 +164,15 @@ namespace YondaimeFramework
             return _goLookup[requesteeGameObjectInstanceId].GetBehaviour<T>();
         }
 
+        public T GetBehaviourOfGameObjectSafe<T>(int requesteeGameObjectInstanceId)
+        {
+            if (DoesIdExist(requesteeGameObjectInstanceId, _goLookup))
+                return _goLookup[requesteeGameObjectInstanceId].GetBehaviour<T>();
+
+            return default;
+        }
+
+
         public T GetBehaviourFromLibraryById<T>(int behaviourId)
         {
             MissingIdExceptionCheck(behaviourId);
@@ -345,6 +354,12 @@ namespace YondaimeFramework
         #endregion
 
         #region EXCEPTIONS
+
+        bool DoesIdExist(int t, Dictionary<int, TypeLookUp> targetDict)
+        {
+            return targetDict.ContainsKey(t);
+        }
+
         private void RootLibraryMissingExceptionCheck()
         {
             if (RootLibrary.Instance == null)
