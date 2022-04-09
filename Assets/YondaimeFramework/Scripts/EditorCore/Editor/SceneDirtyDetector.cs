@@ -35,23 +35,13 @@ namespace YondaimeFramework.EditorHandles{
 
         private static void InvokeBehavioursScan()
         {
-            LibraryHandle handle = FindHandleFromScene();
-            if (handle == null) 
-                MissingLibraryException();
-            
-            handle.ScanBehaviours();
+            FindHandleFromScene()?.ScanBehaviours();
         }
 
 
         static LibraryHandle FindHandleFromScene() 
         {
             return FindObjectOfType<LibraryHandle>();
-        }
-
-
-        static void MissingLibraryException()
-        {
-            throw new System.Exception("Please create a library or if already present please attach a library handle or framework functionalities wont work properly");
         }
 
     }

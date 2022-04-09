@@ -42,7 +42,7 @@ Improvements:
  
  > See if Serialized class instances can anyhow be added to this, just for fun
  
- > ================ {FEATURE NOTE } ===================
+ > ================ {FEATURE NOTE [DONE]} ===================
    => Interface:
         -> A ComponentLibrary interface
 
@@ -67,5 +67,5 @@ Improvements:
 
 
 => [DONE] Implement TypeLookup in Pooled Library 
-=>		  Add Collider lookup support in StandardLibrary, Pooled Library
+=> [DONE] Add Collider lookup support in StandardLibrary, Pooled Library
 =>		  Add extensibilty to add Ids as animatorHashes, (Make HashGenerator abstract, ontrol from editorIdScriptable, use deteministic or animatorHash)

@@ -18,10 +18,8 @@ namespace YondaimeFramework.EditorHandles
 		}
 
 
-		[ContextMenu("UpdateRuntimeIds")]
 		public void UpdateRuntimeValues() 
 		{
-			CheckForDuplicates();
 
 			foreach (var id in myRuntimeIdContainers) 
 			{
@@ -39,18 +37,7 @@ namespace YondaimeFramework.EditorHandles
 			
 		}
 
-		private void CheckForDuplicates() 
-		{
-			HashSet<string> duplicates = new HashSet<string>();
-            foreach (var item in ids)
-            {
-				if (duplicates.Contains(item.stringIdVal))
-					throw new System.Exception($"Duplicate id entry {item.stringIdVal} detected");	
-
-				if(item.stringIdVal != string.Empty)
-					duplicates.Add(item.stringIdVal);
-            }
-		}
+		
 		
 		public ComponentId[] GenerateRuntimeIds() 
 		{
@@ -65,8 +52,8 @@ namespace YondaimeFramework.EditorHandles
 	
 		}
 
-		
 
+		
     }
 
 	
