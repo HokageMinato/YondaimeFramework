@@ -30,7 +30,22 @@
       "ProjectGuid": "344a2b46-9bf2-4119-8aa7-315310a44e6f",
       "DisplayName": "YondaimeClassLibrary",
       "ColorIndex": 4
+    },
+    "efd1a27c-9e39-450c-bb12-89faf48b5604": {
+      "ProjectGuid": "efd1a27c-9e39-450c-bb12-89faf48b5604",
+      "DisplayName": "YondaimeDll Editor",
+      "ColorIndex": 5
+    },
+    "59ff64d9-2e6d-483b-9beb-2ab35c59e1cb": {
+      "ProjectGuid": "59ff64d9-2e6d-483b-9beb-2ab35c59e1cb",
+      "DisplayName": "YondaimeFramework",
+      "ColorIndex": 6
+    },
+    "5d2e2dec-b5b6-5320-5a0e-f6944623d21c": {
+      "ProjectGuid": "5d2e2dec-b5b6-5320-5a0e-f6944623d21c",
+      "DisplayName": "UnityEngine.UI",
+      "ColorIndex": 7
     }
   },
-  "NextColorIndex": 5
+  "NextColorIndex": 8
 }

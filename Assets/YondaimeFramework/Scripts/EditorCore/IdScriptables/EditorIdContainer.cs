@@ -9,10 +9,10 @@ namespace YondaimeFramework.EditorHandles
 	[CreateAssetMenu(fileName = "EditorIdContainer", menuName = "YondaimeFramework/EditorIdContainer")]
 	public class EditorIdContainer : ScriptableObject
 	{
-		[SerializeField] private ComponentIdSRC[] ids;
+		[SerializeField] private List<ComponentIdSRC> ids;
 		[SerializeField] private RuntimeIdContainer[] myRuntimeIdContainers;
 
-		public ComponentIdSRC[] GetIdSRCs()
+		public List<ComponentIdSRC> GetIdSRCs()
 		{
 			return ids;
 		}

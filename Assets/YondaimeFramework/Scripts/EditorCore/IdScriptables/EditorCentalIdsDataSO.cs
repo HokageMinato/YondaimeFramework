@@ -9,8 +9,8 @@ namespace YondaimeFramework.EditorHandles
     public class EditorCentalIdsDataSO : ScriptableObject
     {
         
-        [SerializeField] private SystemIdsData[] idsData;
-        public SystemIdsData[] SystemIdsData
+        [SerializeField] private List<SystemIdsData> idsData;
+        public List<SystemIdsData> SystemIdsData
         {
             get
             {
@@ -18,11 +18,18 @@ namespace YondaimeFramework.EditorHandles
             }
         }
 
+        [ContextMenu("Check for Duplicates")]
+        public void SearchForDuplicates()
+        {
+            SearchForDuplicateScriptables();
+            SearchForDuplicateIds();
+            SearchForDuplicateHash();
+        }
 
 
         public void AssignId()
         {
-            for (int i = 0; i < idsData.Length; i++)
+            for (int i = 0; i < idsData.Count; i++)
             {
                 var data = idsData[i];
                 if (data.Container == null)
@@ -30,7 +37,7 @@ namespace YondaimeFramework.EditorHandles
 
                 var idSRCData = data.GetIdSRCs();
 
-                for (int j = 0; j < idSRCData.Length; j++)
+                for (int j = 0; j < idSRCData.Count; j++)
                 {
                     var strId = idSRCData[j].stringIdVal;
                     strId = strId.Trim();
@@ -53,24 +60,23 @@ namespace YondaimeFramework.EditorHandles
 
 
 
-        public void SearchForDuplicates() 
-        {
-            SearchForDuplicateScriptables();
-            SearchForDuplicateIds();
-            SearchForDuplicateHash();
-        }
+       
 
         private void SearchForDuplicateScriptables() 
         {
             HashSet<EditorIdContainer> container = new HashSet<EditorIdContainer>();
-            for (int i = 0; i < idsData.Length; i++)
+            for (int i = 0; i < idsData.Count;)
             {
                 EditorIdContainer id = idsData[i].Container;
                 if (!container.Contains(id))
-                    container.Add(id);
-                else 
                 {
-                    idsData[i].Container = null;
+                    container.Add(id);
+                    i++;
+                }
+                else
+                {
+                    Debug.LogError($"Duplicate Scriptable({id.name}) found , Deleting Duplicate");
+                    idsData.RemoveAt(i);
                 }
             }
         }
@@ -79,7 +85,7 @@ namespace YondaimeFramework.EditorHandles
         {
             HashSet<string> idv = new HashSet<string>();
 
-            for (int i = 0; i < idsData.Length; i++)
+            for (int i = 0; i < idsData.Count; i++)
             {
                 SystemIdsData systemIdsData = idsData[i];
 
@@ -89,21 +95,22 @@ namespace YondaimeFramework.EditorHandles
                 if (systemIdsData.hashAlgorithm == EditorHandles.SystemIdsData.HashAlgorithm.ANIMATION)
                     break;
 
-                ComponentIdSRC[] idSources = systemIdsData.GetIdSRCs();
+                List<ComponentIdSRC> idSources = systemIdsData.GetIdSRCs();
 
-                for (int j = 0; j < idSources.Length; j++)
+                for (int j = 0; j < idSources.Count;)
                 {
                     string stringIdValue = idSources[j].stringIdVal;
 
                     if (idv.Contains(stringIdValue))
                     {
-                        idSources[j].stringIdVal = string.Empty;
-                        idSources[j].intValue = 0;
-                        throw new Exception($"Duplicate Id entry ({stringIdValue}) found at {systemIdsData.SystemId}, Fixing");
+                        idSources.RemoveAt(j);
+                        Debug.LogError($"Duplicate Id entry ({stringIdValue}) found at {systemIdsData.SystemId}, Deleting Duplicate");
+                        continue;
                     }
 
                     if(stringIdValue != string.Empty)
                     idv.Add(stringIdValue);
+                    j++;
                 }                
 
             }
@@ -114,7 +121,7 @@ namespace YondaimeFramework.EditorHandles
         {
             HashSet<int> idv = new HashSet<int>();
 
-            for (int i = 0; i < idsData.Length; i++)
+            for (int i = 0; i < idsData.Count; i++)
             {
                 if (idsData[i].Container == null)
                     return;
@@ -122,7 +129,7 @@ namespace YondaimeFramework.EditorHandles
                 if (idsData[i].hashAlgorithm == EditorHandles.SystemIdsData.HashAlgorithm.ANIMATION)
                     return;
 
-                for (int j = 0; j < idsData[i].GetIdSRCs().Length; j++)
+                for (int j = 0; j < idsData[i].GetIdSRCs().Count; j++)
                 {
                     int intIdValue = idsData[i].GetIdSRCs()[j].intValue;
                     string stringIdValue = idsData[i].GetIdSRCs()[j].stringIdVal;
@@ -140,6 +147,7 @@ namespace YondaimeFramework.EditorHandles
             }
         }
 
+        
 
         private int GetDeterministicHash(string stringIdVal)
         {
@@ -194,7 +202,7 @@ namespace YondaimeFramework.EditorHandles
             }
         }
 
-        public ComponentIdSRC[] GetIdSRCs()
+        public List<ComponentIdSRC> GetIdSRCs()
         {
             return sourceSos.GetIdSRCs();
         }

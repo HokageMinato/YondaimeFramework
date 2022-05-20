@@ -10,7 +10,7 @@ namespace YondaimeFramework
     public abstract class CustomBehaviour : MonoBehaviour
     {
         #region LIBRARIES
-        private ILibrary _myLibrary;
+        private static ILibrary _myLibrary;
         #endregion
 
         #region IDS
@@ -141,12 +141,108 @@ namespace YondaimeFramework
             return _myLibrary.GetComponentsFromOtherSceneLibrary<T>(sceneId);
         }
         #endregion
-       
+
+        #region STATIC_COMPONENT_GETTERS
+        /// <summary>
+        /// GetComponent<T> Performance Alternative
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+        public static T GetComponentFromGameObjectOf<T>(CustomBehaviour targetBehaviour)
+        {
+            CheckForStaticSystemLibNull();
+            int instanceId = targetBehaviour.id._goInsId;
+            return _myLibrary.GetBehaviourOfGameObject<T>(instanceId);
+        }
+
+        /// <summary>
+        /// FindObjectOfType<T> Performance Alternative
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+
+        public static IReadOnlyList<T> GetComponentsFromGameObjectOf<T>(CustomBehaviour targetBehaviour)
+        {
+            CheckForStaticSystemLibNull();
+            int instanceId = targetBehaviour.id._goInsId;
+            return _myLibrary.GetBehavioursOfGameObject<T>(instanceId);
+        }
+
+        /// <summary>
+        /// FindObjectOfType<T> Performance Alternative
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+        public static T FindObjFromLibrary<T>()
+        {
+            CheckForStaticSystemLibNull();
+            return _myLibrary.GetBehaviourFromLibrary<T>();
+        }
+
+        /// <summary>
+        /// FindObjectsOfType Performance Alternative 
+        /// </summary>
+        /// <typeparam name="T"> Class, Interface </typeparam>
+        /// <returns>List<typeparamref name="T"/> of Requested BehaviourType </returns>
+        public static IReadOnlyList<T> FindObjsFromLibrary<T>()
+        {
+            CheckForStaticSystemLibNull();
+            return _myLibrary.GetBehavioursFromLibrary<T>();
+        }
+
+        /// <summary>
+        /// FindObectOfType<UnityObject> Alternative with Interface support
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+        public static T FindObjFromLibraryById<T>(ComponentId behaviourId)
+        {
+            CheckForStaticSystemLibNull();
+            return _myLibrary.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
+        }
+
+
+        /// <summary>
+        /// Singleton Alternative to fetch from other scene
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+        public static T FindObjFromOtherSceneLibrary<T>(string sceneId)
+        {
+            CheckForStaticSystemLibNull();
+            return _myLibrary.GetComponentFromOtherSceneLibrary<T>(sceneId);
+        }
+
+
+        /// <summary>
+        /// Singleton Alternative to fetch from other scene by ID
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+        public static T FindObjFromOtherSceneLibraryById<T>(ComponentId behaviourId, string sceneId)
+        {
+            CheckForStaticSystemLibNull();
+            return _myLibrary.GetComponentFromOtherSceneLibraryById<T>(behaviourId, sceneId);
+        }
+
+
+        /// <summary>
+        /// Singleton Alternative to fetch from other scene by ID
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+        public static IReadOnlyList<T> FindObjsFromOtherSceneLibrary<T>(string sceneId)
+        {
+            CheckForStaticSystemLibNull();
+            return _myLibrary.GetComponentsFromOtherSceneLibrary<T>(sceneId);
+        }
+        #endregion
+
         #region INSTANTIATORS_DESTRUCTORS
         private void _Instantiate<T>(T newObject) where T : CustomBehaviour
         {
             CheckForSystemLibNull();
-            CustomBehaviour[] behaviours = newObject.GetComponentsInChildren<CustomBehaviour>();
+            CustomBehaviour[] behaviours = newObject.GetComponentsInChildren<CustomBehaviour>(true);
             for (int i = 0; i < behaviours.Length; i++)
                 _myLibrary.AddBehaviour(behaviours[i]);
         }
@@ -292,6 +388,14 @@ namespace YondaimeFramework
                 throw new Exception($"Scene library not assigned at ({name}) Make sure to scan behaviours from scene library in editor or isntantiate from CustomBehaviour");
             }
         }
+        static void CheckForStaticSystemLibNull()
+        {
+            if (_myLibrary == null)
+            {
+                throw new Exception($"Scene library instance not found, Make sure to scan behaviours from scene library in editor or isntantiate from CustomBehaviour");
+            }
+        }
+
 
         void CheckForNullObjDestory<T>(T obj) 
         {

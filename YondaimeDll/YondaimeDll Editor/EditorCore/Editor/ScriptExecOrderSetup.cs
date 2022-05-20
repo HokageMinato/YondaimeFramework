@@ -6,7 +6,7 @@ using YondaimeFramework;
 namespace YondaimeFramework.EditorHandles
 {
     [InitializeOnLoad]
-    public static class ScriptExecOrderSetup
+    public class ScriptExecOrderSetup : CustomBehaviour
     {
         const string INIT_STATE = "FirstInitDone";
         
@@ -15,7 +15,8 @@ namespace YondaimeFramework.EditorHandles
             if (!IsOrderSetForThisSession())
             {
                 SetExecOrderOf(GetMonoSciptOf("RootLibrary"), -50);
-                SetExecOrderOf(GetMonoSciptOf("SceneLibrary"), -20);
+                SetExecOrderOf(GetMonoSciptOf("StandardBehaviourLibrary"), -21);
+                SetExecOrderOf(GetMonoSciptOf("PooledBehaviourLibrary"), -20);
                
                 SetOrderSetForThisSession();
             }

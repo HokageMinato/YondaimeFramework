@@ -21,10 +21,10 @@ public class Car : CustomBehaviour, ICar
     const string key3 = "Test3";
     const string key4 = "Test3";
 
-    public PersistantVariable<int> intValue = new PersistantVariable<int>(key);
+    public PersistantVariable<int> intValue = new PersistantVariable<int>(key,34);
     public PersistantVariable<float> floatValue = new PersistantVariable<float>(key2);
     public PersistantVariable<string> stringValue = new PersistantVariable<string>(key3);
-    public PersistantVariable<CarData> jsonValue = new PersistantVariable<CarData>(key4);
+    public PersistantVariable<CarData> jsonValue = new PersistantVariable<CarData>(key4,new CarData() {name="Some"});
 
     public SceneId sceneIdToGetFrom;
     public Car[] othercars;
@@ -33,7 +33,7 @@ public class Car : CustomBehaviour, ICar
     public int itr;
     public Car otherCar;
     public CarData carData;
-    public ComponentId idToSet;
+    public ComponentId idToGet;
     private ICar ocAction;
 
 
@@ -52,7 +52,7 @@ public class Car : CustomBehaviour, ICar
     public void TestSetId()
     {
         ml.LogIdLookup();
-        sports.SetId(idToSet);
+        sports.SetId(idToGet);
         ml.LogIdLookup();
         
     }
@@ -71,11 +71,11 @@ public class Car : CustomBehaviour, ICar
     void TestFindByTag()
     {
         FindObjectFromOtherSceneLibrary<SportsCar>(sceneIdToGetFrom.id);
-        FindObjectFromOtherSceneLibraryById<SportsCar>(idToSet,sceneIdToGetFrom.id);
+        FindObjectFromOtherSceneLibraryById<SportsCar>(idToGet,sceneIdToGetFrom.id);
 
         ml.LogIdLookup();
-        Debug.Log($"Class : {FindObjectFromLibraryById<SportsCar>(carIds.GetIds()[1]) == null} -- {gameObject.name}");
-        Debug.Log($"Interface : {FindObjectFromLibraryById<ICar>(carIds.GetIds()[0]) == null} -- {gameObject.name}");
+        Debug.Log($"Class : {FindObjectFromLibraryById<SportsCar>(idToGet) == null} -- {gameObject.name}");
+        Debug.Log($"Interface : {FindObjectFromLibraryById<ICar>(idToGet) == null} -- {gameObject.name}");
 
     }
 
@@ -178,7 +178,11 @@ public class Car : CustomBehaviour, ICar
         Debug.Log($"{intValue.Value}");
         Debug.Log($"{floatValue.Value}");
         Debug.Log($"{stringValue.Value}");
-        Debug.Log($"{jsonValue.Value}");
+        Debug.Log($"{jsonValue.Value.name}");
+        CarData data = jsonValue.Value;
+        data.name = "faffari";
+        jsonValue.Value = data;
+        Debug.Log($"{jsonValue.Value.name}");
     }
 
     [ContextMenu("Test GetPooled Pool")]

@@ -71,13 +71,13 @@ namespace YondaimeFramework.EditorHandles
 
             void FillChoiceMenu()
             {
-                SystemIdsData[] systemIdData = idSources.SystemIdsData;
+                List<SystemIdsData> systemIdData = idSources.SystemIdsData;
                 List<GUIContent> contentList = new List<GUIContent>();
                 List<ComponentId> choices = new List<ComponentId>();
 
                 AddNoneOption(contentList,choices);
 
-                for (int i = 0; i < systemIdData.Length; i++)
+                for (int i = 0; i < systemIdData.Count; i++)
                 {
                     AddSystemIdSubMenu(contentList, choices,systemIdData[i]);
                 }
@@ -101,14 +101,16 @@ namespace YondaimeFramework.EditorHandles
             void AddSystemIdSubMenu(List<GUIContent> contentList, List<ComponentId> choiceList, SystemIdsData idData)
             {
                 string systemId = idData.SystemId;
-                ComponentIdSRC[] componentIds = idData.GetIdSRCs();
+                List<ComponentIdSRC> componentIds = idData.GetIdSRCs();
 
-                for (int i = 0; i < componentIds.Length; i++)
+
+                for (int i = 0;  i < componentIds.Count; i++)
                 {
                     string choiceId = componentIds[i].stringIdVal;
                     contentList.Add(new GUIContent($"{systemId}/{choiceId}"));
                     choiceList.Add(componentIds[i].ParseToRuntimeId());
                 }
+
             }
             
             int GetIndexBasedOf(string presentValue) 

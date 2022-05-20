@@ -8,6 +8,10 @@ namespace YondaimeFramework
     public class StandardBehaviourLibrary : MonoBehaviour, ILibrary
     {
 
+        #region INSTANCE
+        
+        #endregion
+
         #region COMPONENTS
         [SerializeField] private SceneId _sceneId;
         [SerializeField] private CustomBehaviour[] behaviours;
@@ -17,7 +21,6 @@ namespace YondaimeFramework
         TypeLookUp _typeLookUp = new TypeLookUp();
         private Dictionary<int, TypeLookUp> _idLookup = new Dictionary<int, TypeLookUp>();
         private Dictionary<int, TypeLookUp> _goLookup = new Dictionary<int, TypeLookUp>();
-
         RootLibrary _rootLibrary;
 
         public SceneId SceneId

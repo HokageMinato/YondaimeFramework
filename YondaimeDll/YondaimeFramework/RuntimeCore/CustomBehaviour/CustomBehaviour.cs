@@ -7,33 +7,35 @@ using Random = UnityEngine.Random;
 namespace YondaimeFramework
 {
 
-
     public abstract class CustomBehaviour : MonoBehaviour
     {
         #region LIBRARIES
-        [SerializeField] private SceneLibrary _mySceneLibrary;
+        private static ILibrary _myLibrary;
         #endregion
 
         #region IDS
-        public int GOInstanceId { get { return id._goInsId; } }
-
         public ComponentId id;
-
-        public int PoolState;
+        [HideInInspector] public int poolState;
         #endregion
 
         #region LIBRARY_HANDLES
         public void RefreshIds()
         {
             id._goInsId = gameObject.GetInstanceID();
+            
         }
 
-        public void SetLibrary(SceneLibrary sceneLibrary)
+        public void SetLibrary(ILibrary library)
         {
-            _mySceneLibrary = sceneLibrary;
+            _myLibrary = library;
         }
+        #endregion
 
-        
+        #region POOL_CALLBACKS
+        public virtual void OnPooled() 
+        {
+            gameObject.SetActive(false);
+        }
         #endregion
 
         #region COMPONENT_GETTERS
@@ -44,8 +46,17 @@ namespace YondaimeFramework
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
         public T GetComponentFromMyGameObject<T>()
         {
+            CheckForSystemLibNull();
             int instanceId = id._goInsId;
-            return _mySceneLibrary.GetBehaviourOfGameObject<T>(instanceId);
+            return _myLibrary.GetBehaviourOfGameObject<T>(instanceId);
+        }
+
+
+        public T GetComponentFromOtherGameObject<T>(GameObject otherGameObject) 
+        {
+            CheckForSystemLibNull();
+            int instanceId = otherGameObject.GetInstanceID();
+            return _myLibrary.GetBehaviourOfGameObjectSafe<T>(instanceId);  
         }
 
         /// <summary>
@@ -54,10 +65,11 @@ namespace YondaimeFramework
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
 
-        public List<T> GetComponentsFromMyGameObject<T>()
+        public IReadOnlyList<T> GetComponentsFromMyGameObject<T>()
         {
+            CheckForSystemLibNull();
             int instanceId = id._goInsId;
-            return _mySceneLibrary.GetBehavioursOfGameObject<T>(instanceId);
+            return _myLibrary.GetBehavioursOfGameObject<T>(instanceId);
         }
 
         /// <summary>
@@ -65,9 +77,10 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public T GetComponentFromLibrary<T>()
+        public T FindObjectFromLibrary<T>()
         {
-            return _mySceneLibrary.GetBehaviourFromLibrary<T>();
+            CheckForSystemLibNull();
+            return _myLibrary.GetBehaviourFromLibrary<T>();
         }
 
         /// <summary>
@@ -75,9 +88,10 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T"> Class, Interface </typeparam>
         /// <returns>List<typeparamref name="T"/> of Requested BehaviourType </returns>
-        public List<T> GetComponentsFromLibrary<T>()
+        public IReadOnlyList<T> FindObjectsFromLibrary<T>()
         {
-            return _mySceneLibrary.GetBehavioursFromLibrary<T>();
+            CheckForSystemLibNull();
+            return _myLibrary.GetBehavioursFromLibrary<T>();
         }
 
         /// <summary>
@@ -85,9 +99,10 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public T GetComponentFromLibraryById<T>(ComponentId behaviourId)
+        public T FindObjectFromLibraryById<T>(ComponentId behaviourId)
         {
-            return _mySceneLibrary.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
+            CheckForSystemLibNull();
+            return _myLibrary.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
         }
 
 
@@ -96,9 +111,10 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public T GetComponentFromOtherSceneLibrary<T>(string sceneId)
+        public T FindObjectFromOtherSceneLibrary<T>(string sceneId)
         {
-            return _mySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibrary<T>();
+            CheckForSystemLibNull();
+            return _myLibrary.GetComponentFromOtherSceneLibrary<T>(sceneId);
         }
 
 
@@ -107,9 +123,10 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId, string sceneId)
+        public T FindObjectFromOtherSceneLibraryById<T>(ComponentId behaviourId, string sceneId)
         {
-            return _mySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId.objBt);
+            CheckForSystemLibNull();
+            return _myLibrary.GetComponentFromOtherSceneLibraryById<T>(behaviourId, sceneId);
         }
 
 
@@ -118,38 +135,178 @@ namespace YondaimeFramework
         /// </summary>
         /// <typeparam name="T">Class,Interface</typeparam>
         /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
-        public List<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
+        public IReadOnlyList<T> FindObjectsFromOtherSceneLibrary<T>(string sceneId)
         {
-            return _mySceneLibrary.GetSceneLibraryFromRootLibraryById(sceneId).GetBehavioursFromLibrary<T>();
+            CheckForSystemLibNull();
+            return _myLibrary.GetComponentsFromOtherSceneLibrary<T>(sceneId);
         }
         #endregion
-       
+
+        #region STATIC_COMPONENT_GETTERS
+        /// <summary>
+        /// GetComponent<T> Performance Alternative
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+        public static T GetComponentFromGameObjectOf<T>(CustomBehaviour targetBehaviour)
+        {
+            CheckForStaticSystemLibNull();
+            int instanceId = targetBehaviour.id._goInsId;
+            return _myLibrary.GetBehaviourOfGameObject<T>(instanceId);
+        }
+
+        /// <summary>
+        /// FindObjectOfType<T> Performance Alternative
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+
+        public static IReadOnlyList<T> GetComponentsFromGameObjectOf<T>(CustomBehaviour targetBehaviour)
+        {
+            CheckForStaticSystemLibNull();
+            int instanceId = targetBehaviour.id._goInsId;
+            return _myLibrary.GetBehavioursOfGameObject<T>(instanceId);
+        }
+
+        /// <summary>
+        /// FindObjectOfType<T> Performance Alternative
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+        public static T FindObjFromLibrary<T>()
+        {
+            CheckForStaticSystemLibNull();
+            return _myLibrary.GetBehaviourFromLibrary<T>();
+        }
+
+        /// <summary>
+        /// FindObjectsOfType Performance Alternative 
+        /// </summary>
+        /// <typeparam name="T"> Class, Interface </typeparam>
+        /// <returns>List<typeparamref name="T"/> of Requested BehaviourType </returns>
+        public static IReadOnlyList<T> FindObjsFromLibrary<T>()
+        {
+            CheckForStaticSystemLibNull();
+            return _myLibrary.GetBehavioursFromLibrary<T>();
+        }
+
+        /// <summary>
+        /// FindObectOfType<UnityObject> Alternative with Interface support
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+        public static T FindObjFromLibraryById<T>(ComponentId behaviourId)
+        {
+            CheckForStaticSystemLibNull();
+            return _myLibrary.GetBehaviourFromLibraryById<T>(behaviourId.objBt);
+        }
+
+
+        /// <summary>
+        /// Singleton Alternative to fetch from other scene
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+        public static T FindObjFromOtherSceneLibrary<T>(string sceneId)
+        {
+            CheckForStaticSystemLibNull();
+            return _myLibrary.GetComponentFromOtherSceneLibrary<T>(sceneId);
+        }
+
+
+        /// <summary>
+        /// Singleton Alternative to fetch from other scene by ID
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+        public static T FindObjFromOtherSceneLibraryById<T>(ComponentId behaviourId, string sceneId)
+        {
+            CheckForStaticSystemLibNull();
+            return _myLibrary.GetComponentFromOtherSceneLibraryById<T>(behaviourId, sceneId);
+        }
+
+
+        /// <summary>
+        /// Singleton Alternative to fetch from other scene by ID
+        /// </summary>
+        /// <typeparam name="T">Class,Interface</typeparam>
+        /// <returns>Requested BehaviourType <typeparamref name="T"/> </returns>
+        public static IReadOnlyList<T> FindObjsFromOtherSceneLibrary<T>(string sceneId)
+        {
+            CheckForStaticSystemLibNull();
+            return _myLibrary.GetComponentsFromOtherSceneLibrary<T>(sceneId);
+        }
+        #endregion
+
         #region INSTANTIATORS_DESTRUCTORS
         private void _Instantiate<T>(T newObject) where T : CustomBehaviour
         {
-            _mySceneLibrary.AddBehaviour(newObject);
+            CheckForSystemLibNull();
+            CustomBehaviour[] behaviours = newObject.GetComponentsInChildren<CustomBehaviour>(true);
+            for (int i = 0; i < behaviours.Length; i++)
+                _myLibrary.AddBehaviour(behaviours[i]);
         }
 
-        private void _SetId<T>(T newObject,ComponentId id) where T : CustomBehaviour 
-        { 
-            newObject.id=id;
+        public void SetId(ComponentId id)
+        {
+            CheckForSystemLibNull();
+            _myLibrary.SetComponentId(this, id);
+
         }
         #endregion
 
         #region STATIC_CONSTRUCT_DESTRUCT_HANDLES
-        public void DestroyCustom<T>(T original,bool destoryGameObject=false) where T : CustomBehaviour 
+        public void Destroy<T>(T original,bool destoryGameObject=false) where T : CustomBehaviour 
         {
+            CheckForNullObjDestory(original);
+
             GameObject go = original.gameObject;
-            DestroyImmediate(original);
+           
 
             if (destoryGameObject)
+            {
+                ComponentId[] ids;
+                Type[] types;
+
+                CustomBehaviour[] behaviours = original.GetComponentsInChildren<CustomBehaviour>();
+                ids = new ComponentId[behaviours.Length];
+                types = new Type[behaviours.Length];
+
+
+                for (int i = 0; i < behaviours.Length; i++)
+                {
+                    ids[i] = behaviours[i].id;
+                    types[i] = behaviours[i].GetType();
+                }
+
                 DestroyImmediate(go);
 
+                for (int i = 0; i < behaviours.Length; i++)
+                {
+                    _myLibrary.CleanNullReferencesFor(ids[i], types[i]);
+                }
 
-            
-            _mySceneLibrary.CleanReferencesFor(original);
-        } 
-        
+                return;
+            }
+
+            Type t = original.GetType();
+            ComponentId id = original.id;
+            DestroyImmediate(original);
+            _myLibrary.CleanNullReferencesFor(id,t);
+
+        }
+
+        public T GetPooled<T>() 
+        {
+            CheckForSystemLibNull();
+            return _myLibrary.GetPooled<T>();
+        }
+
+        public void Pool(CustomBehaviour behaviour) 
+        {
+            CheckForSystemLibNull();
+            _myLibrary.Pool(behaviour);
+        }
 
         public new T Instantiate<T>(T original) where T : CustomBehaviour
         {
@@ -161,7 +318,7 @@ namespace YondaimeFramework
         public T Instantiate<T>(T original,ComponentId id) where T : CustomBehaviour
         {
             T newBehaviour = MonoInstantiate(original);
-            _SetId(newBehaviour,id);
+             original.id = id;
             _Instantiate(newBehaviour);
             return newBehaviour;
         }
@@ -226,26 +383,39 @@ namespace YondaimeFramework
         #region EXCEPTIONS
         void CheckForSystemLibNull()
         {
-            if (_mySceneLibrary == null)
+            if (_myLibrary == null)
             {
-                throw new Exception($"Scene library not assigned at ({name}) Make sure to scan behaviours from scene library in editor");
+                throw new Exception($"Scene library not assigned at ({name}) Make sure to scan behaviours from scene library in editor or isntantiate from CustomBehaviour");
             }
         }
+        static void CheckForStaticSystemLibNull()
+        {
+            if (_myLibrary == null)
+            {
+                throw new Exception($"Scene library instance not found, Make sure to scan behaviours from scene library in editor or isntantiate from CustomBehaviour");
+            }
+        }
+
+
+        void CheckForNullObjDestory<T>(T obj) 
+        {
+            if (obj == null)
+                throw new Exception("Object you want to destory is null");
+        }
+
         #endregion
 
 
     #if UNITY_EDITOR
         #region EDITOR
 
-        public SceneLibrary ml => _mySceneLibrary;
+        public ILibrary ml => _myLibrary;
 
         public static int GenerateHashCode(string val)
         {
             return val.GetHashCode() * 92821;  // PRIME = 92821 or another prime number.
         }
         #endregion
-
-
     }
     #endif
 }

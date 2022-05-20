@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 0
+    _goInsId: 18072
     stringId: None
   poolState: 0
   itr: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f6d8b93a612bdb48a630ff769c868c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneId:
+  _sceneId:
     id: 
   behaviours:
   - {fileID: 122622385}
@@ -295,9 +295,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 14950
+    _goInsId: 18086
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -306,6 +308,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!1 &383738078
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +345,7 @@ Transform:
   - {fileID: 449948364}
   - {fileID: 1843215937}
   - {fileID: 593246675}
+  - {fileID: 1307777741}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -356,9 +363,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 14958
+    _goInsId: 18092
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 0}
   sports: {fileID: 0}
@@ -367,6 +376,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: None
 --- !u!1 &416535711
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,9 +425,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 14966
+    _goInsId: 18098
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -423,6 +438,10 @@ MonoBehaviour:
   carData:
     speed: 125
     name: MeriGaddi
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: None
 --- !u!1 &449948363
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,9 +487,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 14976
+    _goInsId: 18104
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -479,6 +500,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!1 &456062069
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,9 +549,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 14982
+    _goInsId: 18110
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -535,6 +562,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!1 &593246674
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,9 +616,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 14988
+    _goInsId: 18116
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -596,6 +629,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!1 &671792881
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,9 +730,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 15004
+    _goInsId: 18130
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -704,6 +743,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!4 &847236123
 Transform:
   m_ObjectHideFlags: 0
@@ -763,9 +806,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 15016
+    _goInsId: 18136
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -774,6 +819,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!1 &1149300523
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,9 +854,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 15022
+    _goInsId: 18142
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -816,6 +867,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!4 &1149300525
 Transform:
   m_ObjectHideFlags: 0
@@ -875,9 +930,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: -1117357366
-    _goInsId: 15034
+    _goInsId: 18148
     stringId: Some57
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -886,6 +943,60 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
+--- !u!1 &1307777740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1307777741}
+  - component: {fileID: 1307777742}
+  m_Layer: 0
+  m_Name: FerrariCar lv-2 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1307777741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307777740}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.19170529, y: -2.661391, z: 2.2586498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 383738079}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1307777742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307777740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382b19b3960d13041a81dde08726d79e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneIdToGetFrom:
+    id: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: None
+  otherObj: {fileID: 0}
 --- !u!1 &1352256585
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,9 +1042,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 15040
+    _goInsId: 18154
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -942,6 +1055,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!1 &1561925739
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,9 +1104,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 15046
+    _goInsId: 18160
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 4687846422457583818, guid: 4b514de1515a6844ca58d39ee0ea13ff, type: 3}
@@ -998,6 +1117,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!1 &1623344539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,9 +1152,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 15052
+    _goInsId: 18166
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -1040,6 +1165,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!4 &1623344541
 Transform:
   m_ObjectHideFlags: 0
@@ -1142,9 +1271,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 15058
+    _goInsId: 18178
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -1153,6 +1284,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!1 &1843215936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,9 +1338,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 15064
+    _goInsId: 18184
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -1214,6 +1351,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!1 &1941080135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,9 +1386,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 15078
+    _goInsId: 18190
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 0}
@@ -1256,6 +1399,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: 
 --- !u!4 &1941080137
 Transform:
   m_ObjectHideFlags: 0
@@ -1316,9 +1463,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 15084
+    _goInsId: 18196
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 11400000, guid: fd2acbcc00bc0e74995b0a26990744df, type: 2}
   sports: {fileID: 4687846422457583818, guid: 4b514de1515a6844ca58d39ee0ea13ff, type: 3}
@@ -1327,6 +1476,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: None
 --- !u!114 &1974084366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1341,9 +1494,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id:
     objBt: 0
-    _goInsId: 0
+    _goInsId: 18196
     stringId: None
   poolState: 0
+  sceneIdToGetFrom:
+    id: 
   othercars: []
   carIds: {fileID: 0}
   sports: {fileID: 0}
@@ -1352,7 +1507,10 @@ MonoBehaviour:
   carData:
     speed: 0
     name: 
-  ffari: 
+  idToGet:
+    objBt: 0
+    _goInsId: 0
+    stringId: None
 --- !u!1 &2047958946
 GameObject:
   m_ObjectHideFlags: 0

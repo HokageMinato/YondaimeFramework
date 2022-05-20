@@ -7,9 +7,7 @@ namespace YondaimeFramework
     public class RuntimeIdContainer : ScriptableObject
     {
         
-        [SerializeField] private ComponentId[] _ids;
-
-
+        [HideInInspector][SerializeField] private ComponentId[] _ids;
 
         public ComponentId[] GetIds() 
         {

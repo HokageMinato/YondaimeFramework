@@ -17,5 +17,5 @@ MonoBehaviour:
     sourceSos: {fileID: 11400000, guid: cea417ab3dff74446a19fe94dbee19a8, type: 2}
     _hashAlgorithm: 0
   - _systemName: SpinWheel
-    sourceSos: {fileID: 11400000, guid: ac6698f7bb39cbb45b2a0a84c83783be, type: 2}
-    _hashAlgorithm: 1
+    sourceSos: {fileID: 11400000, guid: 0c502e18d5dcf2c48ac499dc9b430b7a, type: 2}
+    _hashAlgorithm: 0

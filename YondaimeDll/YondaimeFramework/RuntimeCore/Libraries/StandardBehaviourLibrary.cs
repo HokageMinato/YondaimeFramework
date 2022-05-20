@@ -5,130 +5,194 @@ using UnityEngine;
 
 namespace YondaimeFramework
 {
-    public class StandardBehaviourLibrary : ILibrary
+    public class StandardBehaviourLibrary : MonoBehaviour, ILibrary
     {
 
+        #region INSTANCE
+        
+        #endregion
+
+        #region COMPONENTS
+        [SerializeField] private SceneId _sceneId;
+        [SerializeField] private CustomBehaviour[] behaviours;
+        #endregion
+
         #region LOOKUPS
-        private Dictionary<Type, List<CustomBehaviour>> _behaviourLookup;
-        private Dictionary<int, List<CustomBehaviour>> _idLookup;
-        private Dictionary<Type, ArrayList> _testlkp;
+        TypeLookUp _typeLookUp = new TypeLookUp();
+        private Dictionary<int, TypeLookUp> _idLookup = new Dictionary<int, TypeLookUp>();
+        private Dictionary<int, TypeLookUp> _goLookup = new Dictionary<int, TypeLookUp>();
+        RootLibrary _rootLibrary;
+
+        public SceneId SceneId
+        {
+            get
+            {
+                return _sceneId;
+            }
+        }
         #endregion
 
         #region INITIALIZERS
-        public void InitLibrary(Dictionary<Type, List<CustomBehaviour>> behaviourLookup, 
-                                Dictionary<int, List<CustomBehaviour>> idLookup) 
+
+        public void Awake()
         {
-            _behaviourLookup = behaviourLookup;
-            _idLookup = idLookup;  
-            
+            _rootLibrary = RootLibrary.Instance;
+            RootLibraryExistanceCheck();
+            RegisterSelfInRootLibrary();
+            GenerateLookups();
         }
 
-        
+        public void OnDestroy()
+        {
+            DeregisterSelfFromRootLibrary();
+        }
 
-        internal void LogLookup<T,K>(Dictionary<T,K> dict,string name) where K: List<CustomBehaviour>
+        private void RegisterSelfInRootLibrary()
+        {
+            _rootLibrary = RootLibrary.Instance;
+            _rootLibrary.AddSceneLibrary(this);
+        }
+
+        private void DeregisterSelfFromRootLibrary()
+        {
+            _rootLibrary.RemoveFromLibrary(SceneId);
+        }
+        private void RootLibraryExistanceCheck()
+        {
+            if (RootLibrary.Instance == null)
+                throw new Exception("RootLibrary instance not found, either create one or check script execution order for Root Library to execute before scene library");
+        }
+        internal void LogLookup<T,K>(Dictionary<T,K> dict,string name) where K: IList
         {
             
-
-            string val = $"Showinggg => {name}<=  ";
+            string val = $"Showinggg => {name} <=  ";
             foreach (KeyValuePair<T, K> item in dict)
             {
-                string v = $"Type {item.Key}, TotalInstances {item.Value.Count}  GOS=>[";
+                string v = "";
                 for (int i = 0; i < item.Value.Count; i++)
                 {
-                    if(item.Value[i]!=null)
-                    v += $" {item.Value[i].gameObject.name} -- {item.Value[i].id.objBt} --- {item.Value[i].GetInstanceID()}. \n"; 
+                    if (item.Value[i] == null)
+                    {
+                        Debug.LogError("UNCLEAN REF");
+                    }
+                    v += $" {((CustomBehaviour)item.Value[i]).gameObject.name} -- {((CustomBehaviour)item.Value[i]).id.objBt}. \n"; 
                 }
-                val += $" {v} ] \n\n\n";
+
+                
+                val += $"Type { item.Key}, TotalInstances { item.Value.Count} GOS =>[ {v} ] \n\n\n";
             }
             Debug.Log(val);
         }
 
-        
+        private void GenerateLookups()
+        {
+            PrepareBehaviours();
+            GenerateBehaviourLookup();
+            GenerateIdLookup();
+           
+
+            void PrepareBehaviours()
+            {
+                for (int i = 0; i < behaviours.Length; i++)
+                {
+                    CustomBehaviour customBehaviour = behaviours[i];
+                    customBehaviour.SetLibrary(this);
+                    customBehaviour.RefreshIds();
+                }
+            }
+            void GenerateBehaviourLookup()
+            {
+                _typeLookUp.GenerateLookUp(behaviours);
+            }
+            void GenerateIdLookup()
+            {
+            
+                for (int i = 0; i < behaviours.Length; i++)
+                {
+                    CustomBehaviour behaviour = behaviours[i];
+                    behaviour.RefreshIds();
+                    AddToGoLookup(behaviour);
+                    if(HasCustomId(behaviour))
+                        AddToIdLookup(behaviour);
+                } 
+            
+            }
+            bool HasCustomId(CustomBehaviour behaviour)
+            {
+                return behaviour.id.objBt != ComponentId.None;
+            }
+            void AddToIdLookup(CustomBehaviour behaviour)
+            {
+                int id = behaviour.id.objBt;
+
+                if (!_idLookup.ContainsKey(id))
+                    _idLookup.Add(id, new TypeLookUp());
+
+                _idLookup[id].AddBehaviour(behaviour);
+            }
+            void AddToGoLookup(CustomBehaviour behaviour) 
+            {
+                int id = behaviour.id._goInsId;
+
+                if (!_goLookup.ContainsKey(id))
+                    _goLookup.Add(id, new TypeLookUp());
+
+                _goLookup[id].AddBehaviour(behaviour);
+            }
+        }
+
         #endregion
 
         #region COMPONENT_GETTERS
 
         public T GetBehaviourFromLibrary<T>()
         {
-            Type reqeuestedType = typeof(T);
-
-            if (!_behaviourLookup.ContainsKey(reqeuestedType))
-                return default;
-
-            return (T)(object)_behaviourLookup[reqeuestedType][0];
+            return _typeLookUp.GetBehaviour<T>();
         }
 
-        public  T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId)
+        public T GetBehaviourOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
-            Type reqeuestedType = typeof(T);
+            return _goLookup[requesteeGameObjectInstanceId].GetBehaviour<T>();
+        }
 
-            if (!_behaviourLookup.ContainsKey(reqeuestedType))
-                return default;
+        public T GetBehaviourOfGameObjectSafe<T>(int requesteeGameObjectInstanceId) 
+        {
+            if (DoesIdExist(requesteeGameObjectInstanceId,_goLookup))
+                return _goLookup[requesteeGameObjectInstanceId].GetBehaviour<T>();
 
-            List<CustomBehaviour> behaviours = _behaviourLookup[reqeuestedType];
-            int total = behaviours.Count;
-
-            for (int i = 0; i < total; i++)
-            {
-                 if (behaviours[i].GOInstanceId == requesteeGameObjectInstanceId)
-                 {
-                     return (T)(object)behaviours[i];
-                 }
-            }
-            
             return default;
         }
 
         public  T GetBehaviourFromLibraryById<T>(int behaviourId)
         {
-            if(!_idLookup.ContainsKey(behaviourId))
-                return default;
-
-            List<CustomBehaviour> behv = _idLookup[behaviourId];
-            int count = behv.Count;
-
-            for (int i = 0; i < count; i++)
-            {
-                    if (behv[i] is T)
-                        return (T)(object)behv[i];
-            }
-
-            return default;
+            MissingIdExceptionCheck(behaviourId);
+            return _idLookup[behaviourId].GetBehaviour<T>();
         }
 
-        public List<T> GetBehavioursFromLibrary<T>()
+        public IReadOnlyList<T> GetBehavioursFromLibrary<T>()
         {
-            Type reqeuestedType = typeof(T);
-
-
-            List<CustomBehaviour> behavioursInLookUp = _behaviourLookup[reqeuestedType];
-            int totalObjectCount = behavioursInLookUp.Count;
-
-
-            List<T> returnList = new List<T>(totalObjectCount);
-            for (int i = 0; i < totalObjectCount; i++)
-                returnList.Add((T)(object)behavioursInLookUp[i]);
-
-
-            return returnList;
+            return _typeLookUp.GetBehavioursFromContainer<T>();
         }
 
-        public List<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
+        public IReadOnlyList<T> GetBehavioursOfGameObject<T>(int requesteeGameObjectInstanceId)
         {
-            Type reqeuestedType = typeof(T);
-
-            List<CustomBehaviour> behavioursInLookUp = _behaviourLookup[reqeuestedType];
-            int objectCount = behavioursInLookUp.Count;
-
-            List<T> returnList= new List<T>(objectCount);
-            for (int i = 0; i < objectCount && behavioursInLookUp[i].GOInstanceId == requesteeGameObjectInstanceId; i++)
-            {
-                returnList.Add((T)(object)behavioursInLookUp[i]);
-            }
-
-            return returnList;
+            return _goLookup[requesteeGameObjectInstanceId].GetBehavioursFromContainer<T>();
         }
 
+        public T GetComponentFromOtherSceneLibrary<T>(string sceneId)
+        {
+            return _rootLibrary.GetSceneLibraryById(sceneId).GetBehaviourFromLibrary<T>();
+        }
+
+        public T GetComponentFromOtherSceneLibraryById<T>(ComponentId behaviourId, string sceneId)
+        {
+            return _rootLibrary.GetSceneLibraryById(sceneId).GetBehaviourFromLibraryById<T>(behaviourId.objBt);
+        }
+
+        public IReadOnlyList<T> GetComponentsFromOtherSceneLibrary<T>(string sceneId)
+        {
+            return _rootLibrary.GetSceneLibraryById(sceneId).GetBehavioursFromLibrary<T>();
+        }
 
         #endregion
 
@@ -136,243 +200,137 @@ namespace YondaimeFramework
 
         public void AddBehaviour<T>(T newBehaviour)
         {
-            // LogLookup();
+            CustomBehaviour behv = (CustomBehaviour)(object)newBehaviour;
+            behv.SetLibrary(this);
+            behv.RefreshIds();
 
-            Type t = typeof(T);
-
-            CustomBehaviour behaviour = (CustomBehaviour)(object)newBehaviour;
-
-            if (_behaviourLookup.ContainsKey(t))
-            {
-                AppendBehaviour(behaviour, t);
-            }
-            else
-            {
-                GenerateBehaviourTable(behaviour, t);
-            }
-
-            Type[] itypes = t.GetInterfaces();
-            for (int i = 0; i < itypes.Length; i++)
-            {
-                t = itypes[i];
-                if (_behaviourLookup.ContainsKey(t))
-                {
-                    AppendBehaviour(behaviour, t);
-                }
-                else
-                {
-                    GenerateBehaviourTable(behaviour, t);
-                }
-            }
-
-            CheckAndAddToIdLookup(behaviour);
+            _typeLookUp.AddBehaviour(behv);
+            AddToGoLookup(behv);
+            CheckAndAddToIdLookup(behv);
         }
-
         private void CheckAndAddToIdLookup(CustomBehaviour newBehaviour)
         {
-            int id = newBehaviour.id.objBt;
-
             newBehaviour.RefreshIds();
+            int id = newBehaviour.id.objBt;
 
             if (id == ComponentId.None)
                 return;
 
             if(!_idLookup.ContainsKey(id))   
-                _idLookup.Add(id, new List<CustomBehaviour>());
+                _idLookup.Add(id, new TypeLookUp());
 
-            _idLookup[id].Add(newBehaviour);
+            _idLookup[id].AddBehaviour(newBehaviour);
         }
 
-        public void AddBehaviours<T>(List<T> customBehaviour) 
+        private void AddToGoLookup(CustomBehaviour newBehaviour) 
         {
-            Type t = typeof(T);
+            int id = newBehaviour.id._goInsId;
+            if (!_goLookup.ContainsKey(id))
+                _goLookup.Add(id, new TypeLookUp());
 
-            if (_behaviourLookup.ContainsKey(t))
-            {
-                
-                AppendBehavioursListInternal(customBehaviour, t);
-            }
-            else
-            {
-                AddListInternal(customBehaviour, t);
-            }
-
-            Type[] itypes = t.GetInterfaces();
-            for (int i = 0; i < itypes.Length; i++)
-            {
-                t = itypes[i];  
-                if (_behaviourLookup.ContainsKey(t))
-                {
-                    AppendBehavioursListInternal(customBehaviour, t);
-                }
-                else
-                {
-                    AddListInternal(customBehaviour, t);
-                }
-            }
-
-
+            _goLookup[id].AddBehaviour(newBehaviour);
         }
 
-        public void AddBehaviours<T>(T[] customBehaviour) 
+
+        public void CleanNullReferencesFor(ComponentId id,Type t) 
         {
-            Type t = typeof(T);
-            
-            if (_behaviourLookup.ContainsKey(t))
-            {
-                AppendBehavioursArrayInternal(customBehaviour, t);
-            }
-            else
-            {
-                AddArrayInternal(customBehaviour, t);
-            }
+            _typeLookUp.CleanNullReferencesFor(t);
+            _goLookup[id._goInsId].CleanNullReferencesFor(t);
 
-
-            Type[] itypes = t.GetInterfaces();
-            for (int i = 0; i < itypes.Length; i++)
-            {
-                t = itypes[i];
-                if (_behaviourLookup.ContainsKey(t))
-                {
-                    AppendBehavioursArrayInternal(customBehaviour,t);
-                }
-                else
-                {
-                    AddArrayInternal<T>(customBehaviour, t);
-                }
-            }
+            int oid = id.objBt;
+            if(oid != ComponentId.None)
+                _idLookup[oid].CleanNullReferencesFor(t);
 
         }
-
-        public void CleanReferencesFor(CustomBehaviour customBehaviour) 
-        {
-            Type t = customBehaviour.GetType();
-
-             CleanBehaviourLibReferencesOf(t);
-
-            Type[] itypes = t.GetInterfaces();
-            for (int i = 0; i < itypes.Length; i++) 
-            {
-                CleanBehaviourLibReferencesOf(itypes[i]);
-            }
-
-            CleanIdLibReferencesFor(customBehaviour.id.objBt);
-        }
-
+               
         public void LogIdLookup()
         {
-           // LogLookup(_idLookup,"Idlookup");
+            foreach (var item in _idLookup)
+            {
+                LogLookup(item.Value.lookup, $"Id Lookup {item.Key}");
+            }
+        }
+        
+        public void LogGOLookup()
+        {
+            foreach (var item in _goLookup)
+            {
+                LogLookup(item.Value.lookup, $"GO Lookup {item.Key}");
+            }
         }
 
         public void LogLookup()
         {
-           // LogLookup(_behaviourLookup,"Behv Lookup");
+            LogLookup(_typeLookUp.lookup,"Behv Lookup");
+        }
+
+
+
+        public void SetComponentId(CustomBehaviour behaviour, ComponentId newId) 
+        { 
+            ChangeIdRefFor(behaviour,newId);
         }
 
         #endregion
 
         #region INTERNAL_ALLOCATION_WORKERS
 
-        private void GenerateBehaviourTable(CustomBehaviour newBehaviour, Type t)
+        private void ChangeIdRefFor(CustomBehaviour behaviour, ComponentId newId) 
         {
-            _behaviourLookup.Add(t, new List<CustomBehaviour>() { newBehaviour });
-        }
-
-        private void AppendBehaviour(CustomBehaviour newBehaviour, Type t)
-        {
-            _behaviourLookup[t].Add(newBehaviour); 
-            
-        }
-
-        private void CleanIdLibReferencesFor(int id) 
-        {
-            List<CustomBehaviour> items = _idLookup[id];
-            for (int i = 0; i < items.Count;) 
+            int oldId = behaviour.id.objBt;
+            if (oldId == ComponentId.None)
             {
-                if (items[i] == null)
-                    items.RemoveAt(i);
-                else
-                    i++;
+                behaviour.id = newId;
+                CheckAndAddToIdLookup(behaviour);
             }
-        }
-
-        private void CleanBehaviourLibReferencesOf(Type t)
-        {
-            if (_behaviourLookup.ContainsKey(t))
+            else 
             {
-               List<CustomBehaviour> behaviours = _behaviourLookup[t];
-
-                for (int i = 0; i < behaviours.Count;)
-                {
-                    if (ReferenceEquals(behaviours[i], null))
-                    {
-                        behaviours.RemoveAt(i);
-                        continue;
-                    }
-                    
-                    i++;
-                }
-
-            }
-        }
-
-        private void AppendBehavioursListInternal<T>(List<T> customBehaviours, Type t)
-        {
-            List<CustomBehaviour> oldComponents = _behaviourLookup[t];
-            oldComponents.Capacity += customBehaviours.Count;
-
-            for (int j = 0; j < customBehaviours.Count; j++)
-            {
-                CustomBehaviour newBehaviour = (CustomBehaviour)(object)customBehaviours[j];
-                CheckAndAddToIdLookup(newBehaviour);
-                oldComponents.Add(newBehaviour);
-            }
-        }
-
-        private void AppendBehavioursArrayInternal<T>(T[] customBehaviours, Type t)
-        {
-            List<CustomBehaviour> oldComponents = _behaviourLookup[t];
-            oldComponents.Capacity += customBehaviours.Length;
-
-            for (int j = 0; j < customBehaviours.Length; j++)
-            {
-                CustomBehaviour behaviour = (CustomBehaviour)(object)customBehaviours[j];
-                oldComponents.Add(behaviour);
+                _idLookup[oldId].CleanReferencesExplicitlyOf(behaviour,behaviour.GetType());
+                behaviour.id = newId;
                 CheckAndAddToIdLookup(behaviour);
             }
         }
 
-        private void AddListInternal<T>(List<T> customBehaviour, Type t)
+
+        public T GetPooled<T>()
         {
-           List<CustomBehaviour> components = new List<CustomBehaviour>(customBehaviour.Count);
-            
-            for (int i = 0; i < customBehaviour.Count; i++)
-            {
-                CustomBehaviour behaviour = (CustomBehaviour)(object)customBehaviour[i];
-                components[i] = behaviour;
-                CheckAndAddToIdLookup(behaviour);
-            }
-
-            _behaviourLookup.Add(t, components);
-        }
-        
-        private void AddArrayInternal<T>(T[] customBehaviour, Type t)
-        {
-            List<CustomBehaviour> components = new List<CustomBehaviour>(customBehaviour.Length);
-
-            for (int i = 0; i < customBehaviour.Length; i++)
-            {
-                CustomBehaviour behaviour = (CustomBehaviour)(object)customBehaviour[i];
-                components[i] = behaviour;
-                CheckAndAddToIdLookup(behaviour);
-            }
-
-            _behaviourLookup.Add(t, components);
+            throw new Exception("No components are pooled natively in Standard Library");
         }
 
+        public void Pool(CustomBehaviour behaviour)
+        {
+            throw new Exception("Pooling components natively in Standard Library is Not Allowed");
+        }
+
+        public void SetBehaviours(CustomBehaviour[] behv)
+        {
+            if (behaviours.Length == behv.Length)
+                return;
+
+             behaviours = behv;
+            _typeLookUp = new TypeLookUp();
+            _idLookup = new Dictionary<int, TypeLookUp>();
+            _goLookup = new Dictionary<int, TypeLookUp>();
+
+             GenerateLookups();
+        }
 
 
         #endregion
-       
+
+        #region EXCEPTIONS
+        void MissingIdExceptionCheck(int t) 
+        {
+            if (!_idLookup.ContainsKey(t))
+                throw new Exception($"No component of id {t} present in lookup, Make sure to scan library once or instantiate via CustomBehaviour");
+        }
+
+        bool DoesIdExist(int t, Dictionary<int, TypeLookUp> targetDict)
+        {
+            return targetDict.ContainsKey(t);
+
+        }
+        #endregion
+
     }
 }

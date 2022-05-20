@@ -1,25 +1,25 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace YondaimeFramework.EditorHandles
 {
 	[CreateAssetMenu(fileName = "EditorIdContainer", menuName = "YondaimeFramework/EditorIdContainer")]
 	public class EditorIdContainer : ScriptableObject
 	{
-		[SerializeField] private ComponentIdSRC[] ids;
+		[SerializeField] private List<ComponentIdSRC> ids;
 		[SerializeField] private RuntimeIdContainer[] myRuntimeIdContainers;
 
-		public ComponentIdSRC[] GetIdSRCs()
+		public List<ComponentIdSRC> GetIdSRCs()
 		{
 			return ids;
 		}
 
 
-		[ContextMenu("UpdateRuntimeIds")]
 		public void UpdateRuntimeValues() 
 		{
-			CheckForDuplicates();
 
 			foreach (var id in myRuntimeIdContainers) 
 			{
@@ -37,17 +37,7 @@ namespace YondaimeFramework.EditorHandles
 			
 		}
 
-		private void CheckForDuplicates() 
-		{
-			HashSet<string> duplicates = new HashSet<string>();
-            foreach (var item in ids)
-            {
-				if (duplicates.Contains(item.stringIdVal))
-					throw new System.Exception($"Duplicate id entry {item.stringIdVal} detected");	
-
-				duplicates.Add(item.stringIdVal);
-            }
-		}
+		
 		
 		public ComponentId[] GenerateRuntimeIds() 
 		{
@@ -64,7 +54,6 @@ namespace YondaimeFramework.EditorHandles
 
 
 		
-
     }
 
 	

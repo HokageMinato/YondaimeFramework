@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace YondaimeFramework
 {
-    public sealed class RootLibrary : CustomBehaviour
+    public sealed class RootLibrary : MonoBehaviour
     {
 
         #region PRIVATE_VARS
-        private Dictionary<string, SceneLibrary> _sceneLibLookUp = new Dictionary<string, SceneLibrary>();
+        private Dictionary<string, ILibrary> _libLookUp = new Dictionary<string, ILibrary>();
         public static RootLibrary Instance;
         #endregion
 
@@ -38,20 +38,20 @@ namespace YondaimeFramework
         #region PUBLIC_METHODS
 
 
-        public SceneLibrary GetSceneLibraryById(string systemId)
+        public ILibrary GetSceneLibraryById(string systemId)
         {
-            return _sceneLibLookUp[systemId];
+            return _libLookUp[systemId];
         }
 
 
-        public void AddSceneLibrary(SceneLibrary newSceneLibrary) 
+        public void AddSceneLibrary(ILibrary newSceneLibrary) 
         {
-            _sceneLibLookUp.Add(newSceneLibrary.SceneId, newSceneLibrary);
+            _libLookUp.Add(newSceneLibrary.SceneId.id, newSceneLibrary);
         }
 
-        public void RemoveFromLibrary(string sceneId) {
+        public void RemoveFromLibrary(SceneId sceneId) {
 
-            _sceneLibLookUp.Remove(sceneId);
+            _libLookUp.Remove(sceneId.id);
         }
         #endregion
 
