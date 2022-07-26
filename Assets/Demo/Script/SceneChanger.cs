@@ -12,11 +12,11 @@ public class SceneChanger : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }    
         
         if (Input.GetKeyDown(KeyCode.LeftControl)) {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
         }    
     }
 

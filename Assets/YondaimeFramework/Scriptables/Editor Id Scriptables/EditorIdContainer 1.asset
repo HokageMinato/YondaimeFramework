@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EditorIdContainer 1
   m_EditorClassIdentifier: 
   ids:
-  - stringIdVal: sds
-    intValue: 989538
+  - stringIdVal: 454545
+    intValue: -846910
   myRuntimeIdContainers: []

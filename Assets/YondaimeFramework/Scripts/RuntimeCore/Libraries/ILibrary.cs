@@ -24,7 +24,7 @@ namespace YondaimeFramework
 
         public void AddBehaviour<T>(T newBehaviour);
 
-        public void CleanNullReferencesFor(ComponentId id,Type t);
+        public void CleanReferencesExplicitlyOf(CustomBehaviour behaviour);
 
         public T GetComponentFromOtherSceneLibrary<T>(string sceneId);
 
@@ -45,6 +45,12 @@ namespace YondaimeFramework
         public void SetBehaviours(CustomBehaviour[] behv);
 
         public void SetComponentId(CustomBehaviour behaviour,ComponentId newId);
+
+        public void SyncLibrary(CustomBehaviour[] behv);
+
+        public CustomBehaviour[] GetBehaviourSyncData();
+
+        public void PurgeLibrary();
 
     }
 }

@@ -10,7 +10,6 @@ namespace YondaimeFramework.EditorHandles
     [CustomEditor(typeof(EditorIdContainer))]
     public class EditorIdContainerHashCallback : Editor
     {
-        public const string ASSET_PATH = "Assets/YondaimeFramework/Scriptables/Editor Id Scriptables/_CentralIdsDataSO.asset";
         private static EditorCentalIdsDataSO dataSO;
 
         public override void OnInspectorGUI()
@@ -30,7 +29,7 @@ namespace YondaimeFramework.EditorHandles
         private static void RefreshIdHashValues()
         {
             if (dataSO == null)
-                dataSO = AssetDatabase.LoadAssetAtPath<EditorCentalIdsDataSO>(ASSET_PATH);
+                dataSO = AssetDatabase.LoadAssetAtPath<EditorCentalIdsDataSO>(ASSET_PATHS.CentalIdContainerAssetPath);
             
             dataSO.AssignId();
         }

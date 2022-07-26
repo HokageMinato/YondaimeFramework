@@ -99,11 +99,16 @@ namespace YondaimeFramework.EditorHandles
         {
             //T prefab = AssetDatabase.LoadAssetAtPath<T>(loadPath);
             GameObject go = new GameObject(prefabName);
-           
-            if(hasHandle)
-                go.AddComponent<LibraryHandle>();
+
             
-            go.AddComponent<T>();
+            T lib =  go.AddComponent<T>();
+            if (hasHandle)
+            {
+               //LibraryHandle handle = go.AddComponent<LibraryHandle>();
+               //handle.SetTarget(lib);
+
+            }
+
             go.transform.SetSiblingIndex(2);
         }
 
@@ -129,11 +134,13 @@ namespace YondaimeFramework.EditorHandles
                 if (overwrite)
                 {
                     GameObject go = lib.gameObject;
-                    DestroyImmediate(lib.GetComponent<LibraryHandle>());
+                    //DestroyImmediate(lib.GetComponent<LibraryHandle>());
                     DestroyImmediate(lib);
                     DestroyImmediate(go);
                 }
             }
+
+            SceneDirtyDetector.Refresh();
         }
 
     }

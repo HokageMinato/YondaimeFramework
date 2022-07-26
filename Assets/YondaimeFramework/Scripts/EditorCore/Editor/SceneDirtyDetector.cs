@@ -1,6 +1,5 @@
 using System;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace YondaimeFramework.EditorHandles{
@@ -8,24 +7,55 @@ namespace YondaimeFramework.EditorHandles{
     [InitializeOnLoad]
     public class SceneDirtyDetector : CustomBehaviour
     {
-        static float t;
-        private static LibraryHandle handle;
+        private static ILibrary targetLibrary;
+        private static ExecutionModeSO execModeSO;
+
         static SceneDirtyDetector()
         {
             EditorApplication.update += InvokeBehavioursScan;
-
         }
 
         private static void InvokeBehavioursScan()
         {
-            if (handle == null)
-                handle = FindObjectOfType<LibraryHandle>();
+            if (Application.isPlaying && IsExecutionSetToSimulatedMode())
+                return;
+            
+            if (targetLibrary == null)
+               ScanForLibrary();
+            
 
-            handle.ScanBehaviours();
+            (targetLibrary).SetBehaviours(FindObjectsOfType<CustomBehaviour>(true));
         }
 
+        private static bool IsExecutionSetToSimulatedMode()
+        {
+            if(execModeSO == null)
+                execModeSO = AssetDatabase.LoadAssetAtPath<ExecutionModeSO>(ASSET_PATHS.ExecutionSettings);
 
-        
+            return execModeSO.ExecutionMode == ExecutionModeSO.XecutionMode.SIMULATED;
+        }
+
+        private static void ScanForLibrary() 
+        {
+
+            MonoBehaviour[] behvs = FindObjectsOfType<MonoBehaviour>();
+            for (int i = 0; i < behvs.Length; i++) 
+            {
+                ILibrary library = behvs[i].GetComponent<ILibrary>();
+                if (library != null)
+                    targetLibrary = library;
+            }
+        }
+
+        public static void Refresh() 
+        {
+            targetLibrary = null;
+        }
+
+        void LoadIdSource()
+        {
+            execModeSO = AssetDatabase.LoadAssetAtPath<ExecutionModeSO>(ASSET_PATHS.CentalIdContainerAssetPath);
+        }
 
     }
 

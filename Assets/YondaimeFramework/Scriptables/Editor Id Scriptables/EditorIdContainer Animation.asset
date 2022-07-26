@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EditorIdContainer Animation
   m_EditorClassIdentifier: 
   ids:
-  - stringIdVal: some
+  - stringIdVal: ree
     intValue: -154215346
   myRuntimeIdContainers: []

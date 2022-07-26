@@ -44,7 +44,6 @@ namespace YondaimeFramework
 
 
         #region GETTERS
-
         public T GetBehaviour<T>() 
         {
             Type reqeuestedType = typeof(T);
@@ -78,50 +77,44 @@ namespace YondaimeFramework
         public void AddBehaviour(CustomBehaviour newBehaviour)
         {
             Type t = newBehaviour.GetType();
+            AddToLookup(newBehaviour, t);
 
+            Type[] itypes = t.GetInterfaces();
+            for (int i = 0; i < itypes.Length; i++)
+            {
+                AddToLookup(newBehaviour, itypes[i]);
+            }
+
+            List<Type> baseTypes = GetBaseTypes(t);
+            for (int i = 0; i < baseTypes.Count; i++)
+            {
+                AddToLookup(newBehaviour, baseTypes[i]);
+            }
+        }
+
+        private void AddToLookup(CustomBehaviour newBehaviour, Type t)
+        {
             if (!_behaviourLookup.ContainsKey(t))
             {
                 _behaviourLookup.Add(t, GenerateListOfType(t));
             }
-            
-            _behaviourLookup[t].Add(newBehaviour);
 
-            Type[] itypes = t.GetInterfaces();
-            for (int i = 0; i < itypes.Length; i++)
-            {
-                t = itypes[i];
-                if (!_behaviourLookup.ContainsKey(t))
-                {
-                    _behaviourLookup.Add(t, GenerateListOfType(t));
-                }
-               
+            if (!_behaviourLookup[t].Contains(newBehaviour))
                 _behaviourLookup[t].Add(newBehaviour);
-            }
+                
+        }
 
-          
+        public void CleanAllNullReferencesOnSceneChange() 
+        {
+            foreach (KeyValuePair<Type, IList> item in _behaviourLookup)
+            {
+                CleanNullReferencesFor(item.Value);
+            }
         }
 
         
-        public void CleanNullReferencesFor(Type t)
+        public void CleanNullReferencesFor(IList behaviours)
         {
-            CleanNullReferencesOf(t);
-
-            Type[] itypes = t.GetInterfaces();
-            for (int i = 0; i < itypes.Length; i++)
-            {
-                CleanNullReferencesOf(itypes[i]);
-            }
-
-        }
-
-        private void CleanNullReferencesOf(Type t)
-        {
-            if (!_behaviourLookup.ContainsKey(t))
-                return;
-
-            IList behaviours = _behaviourLookup[t];
-
-
             for (int i = 0; i < behaviours.Count;)
             {
                 if (((CustomBehaviour)behaviours[i]) == null)
@@ -132,16 +125,43 @@ namespace YondaimeFramework
 
                 i++;
             }
+
         }
 
-        public void CleanReferencesExplicitlyOf(CustomBehaviour behaviour,Type t) 
+
+        public void CleanReferencesExplicitlyOf(CustomBehaviour behaviour) 
         {
+            Type t = behaviour.GetType();
             CleanReferenceExplicitlyOf(behaviour,t);
 
             Type[] itypes = t.GetInterfaces();
             for (int i = 0; i < itypes.Length; i++)
             {
                 CleanReferenceExplicitlyOf(behaviour,itypes[i]);
+            }
+
+            List<Type> types = GetBaseTypes(t);
+            for (int i = 0; i < types.Count; i++)
+            {
+                CleanReferenceExplicitlyOf(behaviour,types[i]);
+            }
+
+        }
+
+        public void AppendLookUp(TypeLookUp otherLookup) 
+        {
+            Dictionary<Type, IList> newBehaviours = otherLookup._behaviourLookup;
+
+            foreach (var item in newBehaviours)
+            {
+                if (!_behaviourLookup.ContainsKey(item.Key))
+                {
+                    _behaviourLookup.Add(item.Key, item.Value);
+                }
+                else 
+                { 
+                    _behaviourLookup[item.Key].Add(item.Value);
+                }
             }
 
         }
@@ -172,6 +192,20 @@ namespace YondaimeFramework
             var constructedListType = listType.MakeGenericType(t);
 
             return (IList)Activator.CreateInstance(constructedListType);
+        }
+
+        
+        List<Type> GetBaseTypes(Type type)
+        {
+            List<Type> baseTypes = new List<Type>();
+            
+            while (type.BaseType != typeof(CustomBehaviour))
+            {
+                baseTypes.Add(type.BaseType);
+                type = type.BaseType;
+            }
+
+            return baseTypes;
         }
         #endregion
 

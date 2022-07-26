@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6590adf833c25a44b6b774af971a0bf, type: 3}
-  m_Name: EditorIdContainer
+  m_Script: {fileID: 11500000, guid: 4f90fcd82aeeb0c48b3701fddc2d3f9e, type: 3}
+  m_Name: ExecutionSettings
   m_EditorClassIdentifier: 
-  ids:
-  - stringIdVal: wwww
-    intValue: 840683
-  myRuntimeIdContainers: []
+  ExecutionMode: 1

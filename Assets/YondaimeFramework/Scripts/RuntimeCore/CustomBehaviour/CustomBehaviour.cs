@@ -21,8 +21,10 @@ namespace YondaimeFramework
         #region LIBRARY_HANDLES
         public void RefreshIds()
         {
+            if(id == null)
+                id= new ComponentId();
+
             id._goInsId = gameObject.GetInstanceID();
-            
         }
 
         public void SetLibrary(ILibrary library)
@@ -239,12 +241,37 @@ namespace YondaimeFramework
         #endregion
 
         #region INSTANTIATORS_DESTRUCTORS
-        private void _Instantiate<T>(T newObject) where T : CustomBehaviour
+       
+        public void CacheReference<T>(T newObject,bool cacheEntireHierarchy) where T : CustomBehaviour
         {
             CheckForSystemLibNull();
-            CustomBehaviour[] behaviours = newObject.GetComponentsInChildren<CustomBehaviour>(true);
-            for (int i = 0; i < behaviours.Length; i++)
-                _myLibrary.AddBehaviour(behaviours[i]);
+
+            if (cacheEntireHierarchy)
+            {
+                CustomBehaviour[] behaviours = newObject.GetComponentsInChildren<CustomBehaviour>(true);
+                for (int i = 0; i < behaviours.Length; i++)
+                    _myLibrary.AddBehaviour(behaviours[i]);
+
+                return;
+            }
+            
+            _myLibrary.AddBehaviour(newObject);
+        }
+
+        public void DeCacheReference<T>(T targetObject, bool deCacheEntireHierarchy) where T : CustomBehaviour 
+        {
+            if (deCacheEntireHierarchy)
+            {
+                CustomBehaviour[] behaviours = targetObject.GetComponentsInChildren<CustomBehaviour>(true);
+                for (int i = 0; i < behaviours.Length; i++)
+                {
+                    _myLibrary.CleanReferencesExplicitlyOf(behaviours[i]);
+                }
+                
+                return;
+            }
+
+            _myLibrary.CleanReferencesExplicitlyOf(targetObject);
         }
 
         public void SetId(ComponentId id)
@@ -261,38 +288,15 @@ namespace YondaimeFramework
             CheckForNullObjDestory(original);
 
             GameObject go = original.gameObject;
-           
-
             if (destoryGameObject)
             {
-                ComponentId[] ids;
-                Type[] types;
-
-                CustomBehaviour[] behaviours = original.GetComponentsInChildren<CustomBehaviour>();
-                ids = new ComponentId[behaviours.Length];
-                types = new Type[behaviours.Length];
-
-
-                for (int i = 0; i < behaviours.Length; i++)
-                {
-                    ids[i] = behaviours[i].id;
-                    types[i] = behaviours[i].GetType();
-                }
-
+                DeCacheReference(original, true);
                 DestroyImmediate(go);
-
-                for (int i = 0; i < behaviours.Length; i++)
-                {
-                    _myLibrary.CleanNullReferencesFor(ids[i], types[i]);
-                }
-
                 return;
             }
 
-            Type t = original.GetType();
-            ComponentId id = original.id;
             DestroyImmediate(original);
-            _myLibrary.CleanNullReferencesFor(id,t);
+            DeCacheReference(original, false);
 
         }
 
@@ -311,7 +315,7 @@ namespace YondaimeFramework
         public new T Instantiate<T>(T original) where T : CustomBehaviour
         {
             T newBehaviour = MonoInstantiate(original);
-            _Instantiate(newBehaviour);
+            CacheReference(newBehaviour,true);
             return newBehaviour;
         }
 
@@ -319,35 +323,35 @@ namespace YondaimeFramework
         {
             T newBehaviour = MonoInstantiate(original);
              original.id = id;
-            _Instantiate(newBehaviour);
+            CacheReference(newBehaviour,true);
             return newBehaviour;
         }
 
         public new T Instantiate<T>(T original, Transform parent) where T : CustomBehaviour
         {
             T newBehaviour = MonoInstantiate(original, parent);
-            _Instantiate(newBehaviour);
+            CacheReference(newBehaviour,true);
             return newBehaviour;
         }
 
         public new T Instantiate<T>(T original, Transform parent, bool instantiateInWorldSpace) where T : CustomBehaviour
         {
             T newBehaviour = MonoInstantiate(original, parent,instantiateInWorldSpace);
-            _Instantiate(newBehaviour);
+            CacheReference(newBehaviour,true);
             return newBehaviour;
         }
 
         public new T Instantiate<T>(T original, Vector3 position, Quaternion rotation) where T : CustomBehaviour
         {
             T newBehaviour = MonoInstantiate(original, position, rotation);
-            _Instantiate(newBehaviour);
+            CacheReference(newBehaviour,true);
             return newBehaviour;
         }
         
         public new T Instantiate<T>(T original, Vector3 position, Quaternion rotation, Transform parent) where T : CustomBehaviour
         {
             T newBehaviour = MonoInstantiate(original, position, rotation,parent);
-            _Instantiate(newBehaviour);
+            CacheReference(newBehaviour,true);
             return newBehaviour;
         }
         #endregion
@@ -406,7 +410,7 @@ namespace YondaimeFramework
         #endregion
 
 
-    #if UNITY_EDITOR
+        #if UNITY_EDITOR
         #region EDITOR
 
         public ILibrary ml => _myLibrary;

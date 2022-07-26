@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace YondaimeFramework
 {
@@ -39,12 +40,18 @@ namespace YondaimeFramework
             _rootLibrary = RootLibrary.Instance;
             RootLibraryExistanceCheck();
             RegisterSelfInRootLibrary();
-            GenerateLookups();
+            PurgeDDOLLibs();
+            GenerateLookups(behaviours);
         }
 
         public void OnDestroy()
         {
             DeregisterSelfFromRootLibrary();
+        }
+
+        private void PurgeDDOLLibs()
+        {
+            LibraryDDOLHandle.PurgeLibraries();
         }
 
         private void RegisterSelfInRootLibrary()
@@ -62,29 +69,18 @@ namespace YondaimeFramework
             if (RootLibrary.Instance == null)
                 throw new Exception("RootLibrary instance not found, either create one or check script execution order for Root Library to execute before scene library");
         }
-        internal void LogLookup<T,K>(Dictionary<T,K> dict,string name) where K: IList
-        {
-            
-            string val = $"Showinggg => {name} <=  ";
-            foreach (KeyValuePair<T, K> item in dict)
-            {
-                string v = "";
-                for (int i = 0; i < item.Value.Count; i++)
-                {
-                    if (item.Value[i] == null)
-                    {
-                        Debug.LogError("UNCLEAN REF");
-                    }
-                    v += $" {((CustomBehaviour)item.Value[i]).gameObject.name} -- {((CustomBehaviour)item.Value[i]).id.objBt}. \n"; 
-                }
 
-                
-                val += $"Type { item.Key}, TotalInstances { item.Value.Count} GOS =>[ {v} ] \n\n\n";
-            }
-            Debug.Log(val);
+        public void SyncLibrary(CustomBehaviour[] behv) 
+        {
+            GenerateLookups(behv);
         }
 
-        private void GenerateLookups()
+        public CustomBehaviour[] GetBehaviourSyncData()
+        {
+            return behaviours;
+        }
+
+        private void GenerateLookups(CustomBehaviour[] behaviourss)
         {
             PrepareBehaviours();
             GenerateBehaviourLookup();
@@ -93,23 +89,23 @@ namespace YondaimeFramework
 
             void PrepareBehaviours()
             {
-                for (int i = 0; i < behaviours.Length; i++)
+                for (int i = 0; i < behaviourss.Length; i++)
                 {
-                    CustomBehaviour customBehaviour = behaviours[i];
+                    CustomBehaviour customBehaviour = behaviourss[i];
                     customBehaviour.SetLibrary(this);
                     customBehaviour.RefreshIds();
                 }
             }
             void GenerateBehaviourLookup()
             {
-                _typeLookUp.GenerateLookUp(behaviours);
+                _typeLookUp.GenerateLookUp(behaviourss);
             }
             void GenerateIdLookup()
             {
             
-                for (int i = 0; i < behaviours.Length; i++)
+                for (int i = 0; i < behaviourss.Length; i++)
                 {
-                    CustomBehaviour behaviour = behaviours[i];
+                    CustomBehaviour behaviour = behaviourss[i];
                     behaviour.RefreshIds();
                     AddToGoLookup(behaviour);
                     if(HasCustomId(behaviour))
@@ -141,6 +137,23 @@ namespace YondaimeFramework
             }
         }
 
+        public void PurgeLibrary() 
+        {
+           PurgeLookups(_typeLookUp);
+
+           foreach (KeyValuePair<int, TypeLookUp> item in _goLookup)
+              PurgeLookups(item.Value);
+
+           foreach (KeyValuePair<int, TypeLookUp> item in _idLookup)
+              PurgeLookups(item.Value);
+        }
+
+        
+
+        private void PurgeLookups(TypeLookUp lookup) 
+        {
+            lookup.CleanAllNullReferencesOnSceneChange();
+        }
         #endregion
 
         #region COMPONENT_GETTERS
@@ -232,17 +245,18 @@ namespace YondaimeFramework
         }
 
 
-        public void CleanNullReferencesFor(ComponentId id,Type t) 
+
+        public void CleanReferencesExplicitlyOf(CustomBehaviour behaviour) 
         {
-            _typeLookUp.CleanNullReferencesFor(t);
-            _goLookup[id._goInsId].CleanNullReferencesFor(t);
+            ComponentId id = behaviour.id;
+            _typeLookUp.CleanReferencesExplicitlyOf(behaviour);
+            _goLookup[id._goInsId].CleanReferencesExplicitlyOf(behaviour);
 
             int oid = id.objBt;
-            if(oid != ComponentId.None)
-                _idLookup[oid].CleanNullReferencesFor(t);
-
+            if (oid != ComponentId.None)
+                _idLookup[oid].CleanReferencesExplicitlyOf(behaviour);
         }
-               
+
         public void LogIdLookup()
         {
             foreach (var item in _idLookup)
@@ -285,7 +299,7 @@ namespace YondaimeFramework
             }
             else 
             {
-                _idLookup[oldId].CleanReferencesExplicitlyOf(behaviour,behaviour.GetType());
+                _idLookup[oldId].CleanReferencesExplicitlyOf(behaviour);
                 behaviour.id = newId;
                 CheckAndAddToIdLookup(behaviour);
             }
@@ -304,15 +318,11 @@ namespace YondaimeFramework
 
         public void SetBehaviours(CustomBehaviour[] behv)
         {
-            if (behaviours.Length == behv.Length)
-                return;
-
              behaviours = behv;
             _typeLookUp = new TypeLookUp();
             _idLookup = new Dictionary<int, TypeLookUp>();
             _goLookup = new Dictionary<int, TypeLookUp>();
-
-             GenerateLookups();
+            GenerateLookups(behaviours);
         }
 
 
@@ -330,6 +340,30 @@ namespace YondaimeFramework
             return targetDict.ContainsKey(t);
 
         }
+
+        internal void LogLookup<T, K>(Dictionary<T, K> dict, string name) where K : IList
+        {
+
+            string val = $"Showinggg => {name} <=  ";
+            foreach (KeyValuePair<T, K> item in dict)
+            {
+                string v = "";
+                for (int i = 0; i < item.Value.Count; i++)
+                {
+                    if (item.Value[i] == null)
+                    {
+                        Debug.LogError("UNCLEAN REF");
+                    }
+                    v += $" {((CustomBehaviour)item.Value[i]).gameObject.name} -- {((CustomBehaviour)item.Value[i]).id.objBt}. \n";
+                }
+
+
+                val += $"Type { item.Key}, TotalInstances { item.Value.Count} GOS =>[ {v} ] \n\n\n";
+            }
+            Debug.Log(val);
+        }
+
+       
         #endregion
 
     }

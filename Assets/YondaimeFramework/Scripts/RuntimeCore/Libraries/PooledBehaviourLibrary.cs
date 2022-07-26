@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace YondaimeFramework
 {
@@ -37,7 +38,7 @@ namespace YondaimeFramework
             _rootLibrary = RootLibrary.Instance;
             RootLibraryMissingExceptionCheck();
             RegisterSelfInRootLibrary();
-            GenerateBehaviourLookups();
+            GenerateBehaviourLookups(behaviours);
             SetExecutionMode();
         }
 
@@ -82,12 +83,8 @@ namespace YondaimeFramework
             Debug.Log(val);
         }
 
-        internal void LogPool() 
-        { 
-        
-        }
 
-        private void GenerateBehaviourLookups()
+        private void GenerateBehaviourLookups(CustomBehaviour[] behaviourss)
         {
 
             PrepareBehaviours();
@@ -97,23 +94,23 @@ namespace YondaimeFramework
 
             void PrepareBehaviours()
             {
-                for (int i = 0; i < behaviours.Length; i++)
+                for (int i = 0; i < behaviourss.Length; i++)
                 {
-                    CustomBehaviour customBehaviour = behaviours[i];
+                    CustomBehaviour customBehaviour = behaviourss[i];
                     customBehaviour.SetLibrary(this);
                     customBehaviour.RefreshIds();
                 }
             }
             void GenerateBehaviourLookup()
             {
-                _typeLookUp.GenerateLookUp(behaviours);
+                _typeLookUp.GenerateLookUp(behaviourss);
             }
             void GenerateIdLookup()
             {
 
-                for (int i = 0; i < behaviours.Length; i++)
+                for (int i = 0; i < behaviourss.Length; i++)
                 {
-                    CustomBehaviour behaviour = behaviours[i];
+                    CustomBehaviour behaviour = behaviourss[i];
                     behaviour.RefreshIds();
                     AddToGoLookup(behaviour);
                     if (HasCustomId(behaviour))
@@ -150,6 +147,44 @@ namespace YondaimeFramework
             modeFlag = (executionMode == ExecutionMode.MANAGED_REFERENCES) ? Managed : UnManaged; 
         }
 
+        public void SyncLibrary(CustomBehaviour[] syncData)
+        {
+            GenerateBehaviourLookups(syncData);
+        }
+
+        public CustomBehaviour[] GetBehaviourSyncData()
+        {
+            return behaviours;
+        }
+
+        public void PurgeLibrary()
+        {
+            PurgeLookups(_typeLookUp);
+
+            foreach (KeyValuePair<int, TypeLookUp> item in _goLookup)
+                PurgeLookups(item.Value);
+
+            foreach (KeyValuePair<int, TypeLookUp> item in _idLookup)
+                PurgeLookups(item.Value);
+            
+            PurgePools();
+                            
+                Debug.Log("Purged");
+
+        }
+
+        private void PurgeLookups(TypeLookUp lookup)
+        {
+            lookup.CleanAllNullReferencesOnSceneChange();
+        }
+
+        private void PurgePools() 
+        {
+            foreach (KeyValuePair<Type, PerformancePool<CustomBehaviour>> item in _pool)
+            {
+                item.Value.CleanNullReferences();
+            }
+        }
         #endregion
 
         #region COMPONENT_GETTERS
@@ -210,7 +245,6 @@ namespace YondaimeFramework
 
             if (MissingPoolExceptionCheck(type)) 
             {
-                
                 Debug.Log($"Pool of  type {type} is empty, Make sure you pool elements before de-pooling elements");
                 return default;
             }
@@ -241,7 +275,7 @@ namespace YondaimeFramework
             _pool[type].Pool(behaviour);
 
             if (modeFlag == Managed)
-                CleanPooledStateReferencesFor(behaviour);
+                CleanPooledReferencesFor(behaviour);
 
             behaviour.OnPooled();
         }
@@ -284,32 +318,39 @@ namespace YondaimeFramework
             _goLookup[id].AddBehaviour(newBehaviour);
         }
 
-        public void CleanNullReferencesFor(ComponentId id,Type t)
+      
+
+        public void CleanPooledReferencesFor(CustomBehaviour customBehaviour)
         {
-            _typeLookUp.CleanNullReferencesFor(t);
-            _goLookup[id._goInsId].CleanNullReferencesFor(t);
-
-            int cid = id.objBt;
-            if (cid != ComponentId.None)
-                _idLookup[cid].CleanNullReferencesFor(t);
-
-
-            CleanNullReferencesFromPoolOf(t);
-        }
-        public void CleanPooledStateReferencesFor(CustomBehaviour customBehaviour)
-        {
-            Type t = customBehaviour.GetType();
             int go = customBehaviour.id._goInsId;
 
-            _typeLookUp.CleanReferencesExplicitlyOf(customBehaviour, t);
-            _goLookup[go].CleanReferencesExplicitlyOf(customBehaviour, t);
+            _typeLookUp.CleanReferencesExplicitlyOf(customBehaviour);
+            _goLookup[go].CleanReferencesExplicitlyOf(customBehaviour);
 
             int id = customBehaviour.id.objBt;
             if (id != ComponentId.None)
             {
-                _idLookup[id].CleanReferencesExplicitlyOf(customBehaviour, t);
+                _idLookup[id].CleanReferencesExplicitlyOf(customBehaviour);
             }
         }
+
+        public void CleanReferencesExplicitlyOf(CustomBehaviour behaviour)
+        {
+            ComponentId id = behaviour.id;
+            _typeLookUp.CleanReferencesExplicitlyOf(behaviour);
+            _goLookup[id._goInsId].CleanReferencesExplicitlyOf(behaviour);
+
+            int oid = id.objBt;
+            if (oid != ComponentId.None)
+                _idLookup[oid].CleanReferencesExplicitlyOf(behaviour);
+
+            Type t = behaviour.GetType();
+            if(_pool.ContainsKey(t))
+                _pool[t].CleanSpecificRefOf(behaviour);
+
+        }
+
+
         public void SetComponentId(CustomBehaviour behaviour, ComponentId newId)
         {
             ChangeIdRefFor(behaviour, newId);
@@ -325,20 +366,7 @@ namespace YondaimeFramework
         #endregion
 
         #region INTERNAL_ALLOCATION_WORKERS
-                 
-        private void CleanNullReferencesFromPoolOf(Type t)
-        {
-            if (modeFlag == UnManaged)
-                return;
-
-            if (_pool.ContainsKey(t))
-                _pool[t].CleanNullReferences();
-
-            Type[] itypes = t.GetInterfaces();
-            for (int i = 0; i < itypes.Length; i++)
-                if (_pool.ContainsKey(t))
-                    _pool[t].CleanNullReferences();
-        }
+        
 
         private void ChangeIdRefFor(CustomBehaviour behaviour, ComponentId newId)
         {
@@ -350,7 +378,7 @@ namespace YondaimeFramework
             }
             else
             {
-                _idLookup[oldId].CleanReferencesExplicitlyOf(behaviour, behaviour.GetType());
+                _idLookup[oldId].CleanReferencesExplicitlyOf(behaviour);
                 behaviour.id = newId;
                 CheckAndAddToIdLookup(behaviour);
             }
@@ -402,6 +430,8 @@ namespace YondaimeFramework
             throw new NotImplementedException();
         }
 
+        
+
         public enum ExecutionMode 
         { 
             MANAGED_REFERENCES,
@@ -411,7 +441,7 @@ namespace YondaimeFramework
     }
 
 
-    public class PerformancePool<T> where T: UnityEngine.Object
+    public class PerformancePool<T> where T: CustomBehaviour
     {
         private List<T> objects = new List<T>();
 
@@ -442,6 +472,20 @@ namespace YondaimeFramework
                     continue;
                 }
 
+                i++;
+            }
+        }
+
+        public void CleanSpecificRefOf(CustomBehaviour behaviour) 
+        {
+
+            for (int i = 0; i < objects.Count;)
+            {
+                if (objects[i] == behaviour)
+                {
+                    objects.RemoveAt(i);
+                    continue;
+                }
                 i++;
             }
         }

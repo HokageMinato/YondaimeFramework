@@ -30,6 +30,7 @@ namespace YondaimeFramework
                 DontDestroyOnLoad(this);
             }
             else {
+                DestroyImmediate(gameObject);
                 RaiseMultipleLibException();
             }
         }
@@ -59,7 +60,7 @@ namespace YondaimeFramework
         #region PRIVATE_METHODS
         private void RaiseMultipleLibException() 
         {
-            throw new Exception("A Root library already exists, There must be only one Root Library througout unity project");
+            Debug.Log("A Root library already exists, There must be only one Root Library througout unity project..deleting this");
         }
         #endregion
     }

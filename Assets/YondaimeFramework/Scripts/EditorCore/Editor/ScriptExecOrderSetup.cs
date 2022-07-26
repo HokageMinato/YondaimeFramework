@@ -15,6 +15,7 @@ namespace YondaimeFramework.EditorHandles
             if (!IsOrderSetForThisSession())
             {
                 SetExecOrderOf(GetMonoSciptOf("RootLibrary"), -50);
+                SetExecOrderOf(GetMonoSciptOf("LibraryDDOLHandle"), -25);
                 SetExecOrderOf(GetMonoSciptOf("StandardBehaviourLibrary"), -21);
                 SetExecOrderOf(GetMonoSciptOf("PooledBehaviourLibrary"), -20);
                

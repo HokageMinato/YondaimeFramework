@@ -21,15 +21,16 @@ public class Car : CustomBehaviour, ICar
     const string key3 = "Test3";
     const string key4 = "Test3";
 
-    public PersistantVariable<int> intValue = new PersistantVariable<int>(key,34);
+    public PersistantVariable<int> intValue = new PersistantVariable<int>(key, 34);
     public PersistantVariable<float> floatValue = new PersistantVariable<float>(key2);
     public PersistantVariable<string> stringValue = new PersistantVariable<string>(key3);
-    public PersistantVariable<CarData> jsonValue = new PersistantVariable<CarData>(key4,new CarData() {name="Some"});
+    public PersistantVariable<CarData> jsonValue = new PersistantVariable<CarData>(key4, new CarData() { name = "Some" });
 
     public SceneId sceneIdToGetFrom;
     public Car[] othercars;
     public RuntimeIdContainer carIds;
     public SportsCar sports;
+    public SportsCar sportsRef;
     public int itr;
     public Car otherCar;
     public CarData carData;
@@ -47,6 +48,14 @@ public class Car : CustomBehaviour, ICar
         ml.LogLookup();
     }
 
+    [ContextMenu("Test AddRef")]
+    public void TestAddRef()
+    {
+        ml.LogLookup();
+        sportsRef = MonoInstantiate(sports);
+        CacheReference(sportsRef, true);
+        ml.LogLookup();
+    }
 
     [ContextMenu("Test SetId")]
     public void TestSetId()
@@ -54,7 +63,7 @@ public class Car : CustomBehaviour, ICar
         ml.LogIdLookup();
         sports.SetId(idToGet);
         ml.LogIdLookup();
-        
+
     }
 
 
@@ -66,12 +75,20 @@ public class Car : CustomBehaviour, ICar
         ml.LogLookup();
     }
 
+    [ContextMenu("Test RemRef")]
+    public void TestRemRef()
+    {
+        ml.LogLookup();
+        DeCacheReference(sportsRef, true);
+        ml.LogLookup();
+    }
+
 
     [ContextMenu("Test Find By Tag")]
     void TestFindByTag()
     {
         FindObjectFromOtherSceneLibrary<SportsCar>(sceneIdToGetFrom.id);
-        FindObjectFromOtherSceneLibraryById<SportsCar>(idToGet,sceneIdToGetFrom.id);
+        FindObjectFromOtherSceneLibraryById<SportsCar>(idToGet, sceneIdToGetFrom.id);
 
         ml.LogIdLookup();
         Debug.Log($"Class : {FindObjectFromLibraryById<SportsCar>(idToGet) == null} -- {gameObject.name}");
@@ -135,20 +152,28 @@ public class Car : CustomBehaviour, ICar
         Debug.Log($"Class : {FindObjectFromOtherSceneLibrary<Car>(sceneIdToGetFrom.id)} -- {gameObject.name}");
         Debug.Log($"Interface : {FindObjectFromOtherSceneLibrary<ICar>(sceneIdToGetFrom.id)} -- {gameObject.name}");
     }
-    
+
     [ContextMenu("Test GetComponentsFromOtherScene")]
     void TestGetComponentsFromOtherScene()
     {
         Debug.Log($"Class : {FindObjectsFromOtherSceneLibrary<Car>(sceneIdToGetFrom.id)} -- {gameObject.name}");
         Debug.Log($"Interface : {FindObjectsFromOtherSceneLibrary<ICar>(sceneIdToGetFrom.id)} -- {gameObject.name}");
     }
-    
+
     [ContextMenu("Test GetComponentFromOtherSceneById ")]
     void TestGetComponentFromOtherSceneById()
     {
-        ComponentId idToGet=null;
-        Debug.Log($"Class : {FindObjectFromOtherSceneLibraryById<Car>(idToGet,sceneIdToGetFrom.id)} -- {gameObject.name}");
-        Debug.Log($"Class : {FindObjectFromOtherSceneLibraryById<ICar>(idToGet,sceneIdToGetFrom.id)} -- {gameObject.name}");
+        ComponentId idToGet = null;
+        Debug.Log($"Class : {FindObjectFromOtherSceneLibraryById<Car>(idToGet, sceneIdToGetFrom.id)} -- {gameObject.name}");
+        Debug.Log($"Class : {FindObjectFromOtherSceneLibraryById<ICar>(idToGet, sceneIdToGetFrom.id)} -- {gameObject.name}");
+    }
+
+    [ContextMenu("Log Library")]
+    void Log() 
+    {
+        ml.LogLookup();
+        ml.LogIdLookup();
+        ml.LogGOLookup();
     }
 
     #endregion
