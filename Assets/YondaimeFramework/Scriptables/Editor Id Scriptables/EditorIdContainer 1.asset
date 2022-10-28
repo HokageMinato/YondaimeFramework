@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6590adf833c25a44b6b774af971a0bf, type: 3}
-  m_Name: EditorIdContainer
+  m_Name: EditorIdContainer 1
   m_EditorClassIdentifier: 
   ids:
-  - stringIdVal: sdsdsdsfdfdfdfdfdfdf
-  - stringIdVal: fgfgfg
+  - stringIdVal: tytyty
+  - stringIdVal: uiuiuiui
   myRuntimeIdContainers:
   - {fileID: 11400000, guid: 3ee72d28dc5c6c645abb22e5b2ec35c3, type: 2}
