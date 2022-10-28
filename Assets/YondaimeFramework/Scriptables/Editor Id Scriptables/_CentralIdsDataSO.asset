@@ -13,9 +13,5 @@ MonoBehaviour:
   m_Name: _CentralIdsDataSO
   m_EditorClassIdentifier: 
   idsData:
-  - _systemName: SpinWheel
+  - _systemName: some
     sourceSos: {fileID: 11400000, guid: cea417ab3dff74446a19fe94dbee19a8, type: 2}
-    _hashAlgorithm: 0
-  - _systemName: SpinWheel
-    sourceSos: {fileID: 11400000, guid: 0c502e18d5dcf2c48ac499dc9b430b7a, type: 2}
-    _hashAlgorithm: 0

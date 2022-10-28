@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EditorIdContainer
   m_EditorClassIdentifier: 
   ids:
-  - stringIdVal: wwww
-    intValue: 840683
-  myRuntimeIdContainers: []
+  - stringIdVal: sdsdsdsfdfdfdfdfdfdf
+  myRuntimeIdContainers:
+  - {fileID: 11400000, guid: 3ee72d28dc5c6c645abb22e5b2ec35c3, type: 2}
